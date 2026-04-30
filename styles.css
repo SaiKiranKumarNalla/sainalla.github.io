@@ -715,12 +715,20 @@ body.leaping .page-content {
   flex-shrink: 0; /* Prevents the logo from squishing on mobile */
 }
 
-/* The logo itself with Samurai filters */
+/* The base logo style */
 .edu-logo {
-  width: 85%;
+  width: 82%;
   height: auto;
-  filter: grayscale(1) invert(1) brightness(1.2);
   transition: all 0.5s ease;
+  /* Default for dark/black logos: make them white and transparent */
+  filter: grayscale(1) invert(1) brightness(1.2);
+  mix-blend-mode: screen; 
+}
+
+/* Specific rule for logos that are ALREADY white (like IP Paris) */
+.edu-logo.logo-white {
+  filter: grayscale(1) brightness(1.2); /* Removes invert(1) */
+  mix-blend-mode: normal; /* No special blending needed */
 }
 
 /* --- Hover Effects --- */
@@ -733,8 +741,13 @@ body.leaping .page-content {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
-/* Returns color to the logo on hover */
+/* Returns color and brightness to the logo on hover */
 .edu-card:hover .edu-logo {
-  filter: grayscale(0) brightness(1);
+  filter: grayscale(0) invert(1) brightness(1.5);
   transform: scale(1.1);
+}
+
+/* Special hover state for white-only logos */
+.edu-card:hover .edu-logo.logo-white {
+  filter: grayscale(0) brightness(1.5); /* No invert on hover either */
 }
