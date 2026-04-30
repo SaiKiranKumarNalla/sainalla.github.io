@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Path — Sai Nalla</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--blood-dim),var(--blood-dim),transparent)}
+.timeline-dot{position:absolute;left:-4px;top:2.8rem;width:9px;height:9px;border:1.5px solid var(--blood);background:var(--ink);border-radius:0;transform:rotate(45deg);transition:background 0.3s}
+.exp-item:hover .timeline-dot{background:var(--blood)}
+.exp-item{position:relative;padding-left:2rem}
+.exp-bullets{margin-top:0.8rem;display:flex;flex-direction:column;gap:0.4rem}
+.exp-bullet{font-size:0.82rem;color:var(--mist);font-weight:300;line-height:1.6;padding-left:1rem;position:relative}
+.exp-bullet::before{content:'斬';position:absolute;left:0;color:var(--blood);font-size:0.55rem;opacity:0.5;top:0.15rem}
+</style>
+</head>
+<body>
+
+<!-- AC Transition Overlay -->
+<div class="ac-transition">
+  <div class="eagle-flash"></div>
+  <div class="animus-lines"></div>
+  <div class="ac-insignia">鷹</div>
+</div>
+
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <svg width="32" height="12" viewBox="0 0 32 12" fill="none"><rect y="3" width="32" height="6" fill="#0a0a0b" stroke="#8b1a1a" stroke-width="0.8"/><circle cx="16" cy="6" r="2.5" fill="none" stroke="#8b1a1a" stroke-width="0.6"/></svg>
+    <span class="nav-mark">NALLA<span>.</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a><span class="nav-divider"></span>
+    <a href="about.html">About</a>
+    <a href="experience.html" class="active">Path</a>
+    <a href="papers.html">Arsenal</a>
+    <a href="education.html">Dōjō</a>
+    <a href="contact.html">Reach</a>
+  </div>
+</nav>
+
+<div class="v-accent"></div>
+<!-- Background: single vertical katana -->
+<svg class="bg-katana" width="120" height="900" viewBox="0 0 120 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M55 50Q57 45 60 10L60 5Q60 2 60 5L58 10Q56 45 55 50Z" fill="#f0ebe3" opacity="0.6"/>
+  <path d="M55 50L54 800Q54 850 56 870L60 880L64 870Q66 850 66 800L65 50Z" fill="#f0ebe3"/>
+  <rect x="48" y="46" width="24" height="14" rx="2" fill="none" stroke="#f0ebe3" stroke-width="1.5"/>
+  <line x1="60" y1="46" x2="60" y2="60" stroke="#8b1a1a" stroke-width="0.6"/>
+  <rect x="52" y="62" width="16" height="6" rx="1" fill="none" stroke="#f0ebe3" stroke-width="0.5"/>
+  <path d="M54 880L52 895Q51 900 54 898L60 892L66 898Q69 900 68 895L66 880Z" fill="#c4bfb6"/>
+</svg>
+
+<div class="page-content">
+<section class="page-hero">
+  <div class="page-tag reveal">02 — Experience</div>
+  <div class="page-title-jp reveal">歩んだ道 — あゆんだみち</div>
+  <h1 class="page-title reveal">The Path Walked</h1>
+  <p class="page-subtitle reveal">Every battle leaves its mark — every mark becomes a lesson</p>
+</section>
+
+<section class="content-section">
+  <div class="timeline stagger">
+
+    <div class="exp-item">
+      <div class="timeline-dot"></div>
+      <div class="exp-date">Oct 2023 — Present</div>
+      <div class="exp-role">Doctoral Researcher</div>
+      <div class="exp-org">IUCT Oncopole (University Cancer Hospital) — Toulouse, France</div>
+      <div class="exp-bullets">
+        <div class="exp-bullet">Leading cross-functional projects with GE Healthcare, eMotion, and Mahindra University</div>
+        <div class="exp-bullet">Developed computational PET/CT simulation models and 3D-printed heterogeneous phantoms</div>
+        <div class="exp-bullet">Conducting retrospective clinical study on Dynamic PET with expanded data libraries</div>
+        <div class="exp-bullet">Engaged with Toulouse Tech Transfer on IP strategy and commercial valorisation</div>
+        <div class="exp-bullet">Contributed to project proposals, scientific production, and supervision of interns</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="timeline-dot"></div>
+      <div class="exp-date">Dec 2022 — Sep 2023</div>
+      <div class="exp-role">Researcher & Consultant</div>
+      <div class="exp-org">Hepta Medical (Deep-tech Startup) — Suresnes, France</div>
+      <div class="exp-bullets">
+        <div class="exp-bullet">Developed predictive models for a minimally invasive cancer treatment device</div>
+        <div class="exp-bullet">Built automated tools translating R&D data into clinical visualizations for investor demos</div>
+        <div class="exp-bullet">Directly supported pre-clinical validation and core R&D roadmap</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="timeline-dot"></div>
+      <div class="exp-date">May 2022 — Jul 2022</div>
+      <div class="exp-role">Preclinical Intern</div>
+      <div class="exp-org">Hospital Saint Joseph — Paris, France</div>
+      <div class="exp-bullets">
+        <div class="exp-bullet">Translated anatomical data into 3D-printed patient-specific simulation benches</div>
+        <div class="exp-bullet">Shadowed interventional cardiologists in live surgical procedures</div>
+        <div class="exp-bullet">Identified logistical bottlenecks and unmet clinical needs</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="timeline-dot"></div>
+      <div class="exp-date">Mar 2022 — May 2022</div>
+      <div class="exp-role">Research Intern</div>
+      <div class="exp-org">LadHyX, École Polytechnique — Palaiseau, France</div>
+      <div class="exp-bullets">
+        <div class="exp-bullet">Conducted experiments on soft gels and particle suspensions for drug delivery systems</div>
+        <div class="exp-bullet">Developed automated image tracking and analysis pipelines</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="timeline-dot"></div>
+      <div class="exp-date">Nov 2021 — Sep 2022</div>
+      <div class="exp-role">Design Project Associate</div>
+      <div class="exp-org">Manitty (Deep-tech Startup) — Palaiseau, France</div>
+      <div class="exp-bullets">
+        <div class="exp-bullet">Market mapping of electrode technologies with monthly CEO briefings</div>
+        <div class="exp-bullet">Designed and characterized polymer electrodes using advanced microscopy</div>
+        <div class="exp-bullet">Evaluated prototypes on scalability, manufacturing, and cost effectiveness</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="timeline-dot"></div>
+      <div class="exp-date">Oct 2021 — Jun 2023</div>
+      <div class="exp-role">Project Partner / Associate</div>
+      <div class="exp-org">École Polytechnique — Palaiseau, France</div>
+      <div class="exp-bullets">
+        <div class="exp-bullet">Translated clinical 4D MRI datasets into high-fidelity in-silico models</div>
+        <div class="exp-bullet">Pharmaceutical simulations on targeted drug delivery carriers</div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="timeline-dot"></div>
+      <div class="exp-date">Aug 2020 — Sep 2021</div>
+      <div class="exp-role">Research Associate</div>
+      <div class="exp-org">Mahindra University — Hyderabad, India</div>
+      <div class="exp-bullets">
+        <div class="exp-bullet">Computational simulations on embolism behaviour in blood flow</div>
+        <div class="exp-bullet">Supervised and mentored student groups within technical clubs</div>
+        <div class="exp-bullet">Drafted scientific articles and project proposals</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div>
+<footer>
+  <div class="footer-text">© 2026 Sai Kiran Kumar Nalla</div>
+  <div class="footer-text">道 — The Path</div>
+</footer>
+
+
+<script src="transitions.js"></script>
+</body>
+</html>

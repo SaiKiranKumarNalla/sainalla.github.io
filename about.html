@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Ronin — Sai Nalla</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+.about-intro{max-width:700px}
+.about-intro p{font-size:1.05rem;line-height:2;color:var(--mist);font-weight:300;margin-bottom:1.5rem}
+.about-intro p strong{color:var(--paper);font-weight:500}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;margin-top:2rem}
+.skill-card{padding:1.5rem;border:1px solid var(--ghost-line);background:var(--ghost);position:relative;overflow:hidden}
+.skill-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--blood);transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.skill-card:hover::after{transform:scaleX(1)}
+.skill-label{font-family:'Space Mono',monospace;font-size:0.58rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--blood-glow);margin-bottom:0.5rem}
+.skill-items{font-size:0.85rem;color:var(--mist);line-height:1.7;font-weight:300}
+.interests-row{display:flex;flex-wrap:wrap;gap:0.8rem;margin-top:2rem}
+.interest-tag{font-family:'Space Mono',monospace;font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;padding:0.5rem 1.2rem;border:1px solid var(--ghost-line);color:var(--mist);transition:all 0.3s}
+.interest-tag:hover{border-color:var(--blood);color:var(--paper);background:rgba(139,26,26,0.08)}
+.katana-inline{display:block;margin:3rem auto;opacity:0.12}
+</style>
+</head>
+<body>
+
+<!-- AC Transition Overlay -->
+<div class="ac-transition">
+  <div class="eagle-flash"></div>
+  <div class="animus-lines"></div>
+  <div class="ac-insignia">鷹</div>
+</div>
+
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <svg width="32" height="12" viewBox="0 0 32 12" fill="none"><rect y="3" width="32" height="6" fill="#0a0a0b" stroke="#8b1a1a" stroke-width="0.8"/><circle cx="16" cy="6" r="2.5" fill="none" stroke="#8b1a1a" stroke-width="0.6"/></svg>
+    <span class="nav-mark">NALLA<span>.</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a><span class="nav-divider"></span>
+    <a href="about.html" class="active">About</a>
+    <a href="experience.html">Path</a>
+    <a href="papers.html">Arsenal</a>
+    <a href="education.html">Dōjō</a>
+    <a href="contact.html">Reach</a>
+  </div>
+</nav>
+
+<div class="v-accent"></div>
+<div class="bg-kanji">浪人</div>
+
+<div class="page-content">
+<section class="page-hero">
+  <div class="page-tag reveal">01 — About</div>
+  <div class="page-title-jp reveal">浪人 — ろうにん</div>
+  <h1 class="page-title reveal">The Ronin</h1>
+  <p class="page-subtitle reveal">The Masterless Warrior — Bound to no lord, loyal only to the craft</p>
+</section>
+
+<section class="content-section">
+  <div class="grid-2">
+    <div class="about-intro reveal">
+      <p><strong>Medical technology specialist</strong> with over 2 years of translational R&D experience across med-tech startups and hospitals. I translate clinical needs into actionable solutions — from computational models and 3D-printed phantoms to predictive tools for cancer treatment devices.</p>
+      <p>Trained at <strong>École Polytechnique</strong>, now completing a PhD at the <strong>Université de Toulouse</strong>. My work sits at the crossroads of physics, engineering, and oncology — with one foot in the clinic and the other in the code.</p>
+      <p>Beyond the lab, I'm drawn to the strategy side — healthcare ventures, life sciences consulting, and the question of how deep-tech research becomes something that actually reaches patients.</p>
+      <p>McKinsey Forward alumnus. Venture capital curious. Always building.</p>
+    </div>
+    <div>
+      <div class="stats-row stagger" style="grid-template-columns:1fr 1fr">
+        <div class="stat"><div class="stat-num">6</div><div class="stat-label">Publications</div></div>
+        <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Years R&D</div></div>
+        <div class="stat"><div class="stat-num">4</div><div class="stat-label">Institutions</div></div>
+        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Countries</div></div>
+      </div>
+
+      <svg class="katana-inline" width="300" height="30" viewBox="0 0 300 30"><path d="M5 18Q10 16 22 15L270 12Q290 11 297 9L299 8Q300 7 299 7L270 8L22 11Q10 12 5 14Z" fill="#f0ebe3"/><path d="M2 17Q4 15 5 18L5 14Q4 12 2 14Z" fill="#c4bfb6"/><rect x="20" y="9" width="5" height="10" rx="1" fill="none" stroke="#f0ebe3" stroke-width="0.6"/></svg>
+    </div>
+  </div>
+</section>
+
+<section class="content-section bg-smoke">
+  <div class="section-header reveal">
+    <span class="section-num">技</span>
+    <h2 class="section-title">The Toolkit</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid stagger">
+    <div class="skill-card"><div class="skill-label">Imaging & Simulation</div><div class="skill-items">PET/CT, OSEM/BSREM Reconstruction, PETSTEP Framework, Monte Carlo Methods, 3D Phantom Design</div></div>
+    <div class="skill-card"><div class="skill-label">Computational</div><div class="skill-items">MATLAB, Python, Computational Fluid Dynamics, Finite Element Analysis, Image Processing</div></div>
+    <div class="skill-card"><div class="skill-label">Engineering</div><div class="skill-items">3D Printing, CAD (SolidWorks, Fusion 360), Rapid Prototyping, Microscopy, Spectroscopy</div></div>
+    <div class="skill-card"><div class="skill-label">Research</div><div class="skill-items">Clinical Trial Design, Data Analysis, Scientific Writing, IP Strategy, Technology Transfer</div></div>
+    <div class="skill-card"><div class="skill-label">Strategy</div><div class="skill-items">McKinsey Forward, Market Mapping, Venture Capital Fundamentals, Competitive Analysis, Financial Modelling</div></div>
+    <div class="skill-card"><div class="skill-label">Languages</div><div class="skill-items">English (Native), Hindi (Native), Telugu (Native), French (B2), Japanese (Learning)</div></div>
+  </div>
+</section>
+
+<section class="content-section">
+  <div class="section-header reveal">
+    <span class="section-num">興</span>
+    <h2 class="section-title">Beyond the Blade</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="interests-row stagger">
+    <span class="interest-tag">Healthcare Ventures</span>
+    <span class="interest-tag">Biotech VC</span>
+    <span class="interest-tag">Life Sciences Strategy</span>
+    <span class="interest-tag">Digital Health</span>
+    <span class="interest-tag">AI in Oncology</span>
+    <span class="interest-tag">Deep-Tech Startups</span>
+    <span class="interest-tag">Medtech Innovation</span>
+    <span class="interest-tag">Ghost of Tsushima</span>
+    <span class="interest-tag">Assassin's Creed</span>
+    <span class="interest-tag">Samurai Culture</span>
+  </div>
+</section>
+
+</div>
+<footer>
+  <div class="footer-text">© 2026 Sai Kiran Kumar Nalla</div>
+  <div class="footer-text">浪人 — The Ronin</div>
+</footer>
+
+
+<script src="transitions.js"></script>
+</body>
+</html>
