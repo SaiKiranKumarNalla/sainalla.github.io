@@ -702,8 +702,8 @@ body.leaping .page-content {
 
 /* Container for the logo to handle background and rounding */
 .logo-container {
-  width: 80px; /* Increased size for better visibility */
-  height: 80px;
+  width: 110px; /* Increased size for better visibility */
+  height: 110px;
   background: rgba(255, 255, 255, 0.05); /* Subtle backing to lift the logo */
   display: flex;
   align-items: center;
@@ -717,7 +717,7 @@ body.leaping .page-content {
 
 /* The logo itself with Samurai filters */
 .edu-logo {
-  width: 80%;
+  width: 85%;
   height: auto;
   filter: grayscale(1) invert(1) brightness(1.2);
   transition: all 0.5s ease;
