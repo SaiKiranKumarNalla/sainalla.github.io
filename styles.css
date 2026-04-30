@@ -695,3 +695,46 @@ body.leaping .page-content {
   .stats-row { grid-template-columns: 1fr; }
   .nav-links { gap: 0.6rem; }
 }
+
+/* ═══════════════════════════════════════════
+   EDUCATION & EXPERIENCE LOGO STYLES
+   ═══════════════════════════════════════════ */
+
+/* Container for the logo to handle background and rounding */
+.logo-container {
+  width: 80px; /* Increased size for better visibility */
+  height: 80px;
+  background: rgba(255, 255, 255, 0.05); /* Subtle backing to lift the logo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px; /* Softened rounded corners */
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* AC-inspired transition */
+  border: 1px solid var(--ghost-line);
+  flex-shrink: 0; /* Prevents the logo from squishing on mobile */
+}
+
+/* The logo itself with Samurai filters */
+.edu-logo {
+  width: 80%;
+  height: auto;
+  filter: grayscale(1) invert(1) brightness(1.2);
+  transition: all 0.5s ease;
+}
+
+/* --- Hover Effects --- */
+
+/* Lifts and glows the logo container when the card is hovered */
+.edu-card:hover .logo-container {
+  background: rgba(139, 26, 26, 0.15); /* Blood-red tint on hover */
+  transform: scale(1.08) translateY(-5px);
+  border-color: var(--blood);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Returns color to the logo on hover */
+.edu-card:hover .edu-logo {
+  filter: grayscale(0) brightness(1);
+  transform: scale(1.1);
+}
