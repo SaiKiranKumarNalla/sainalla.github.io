@@ -182,35 +182,3 @@ projects_html = dedent("""\
 <script src="transitions.js"></script>
 </body>
 </html>
-""")
-
-readme = dedent("""\
-# Portfolio Projects Page Patch
-
-Files included:
-- `projects.html` — new Projects page, themed as **The Forge**
-- `PATCH_NOTES.md` — exact edits to apply to existing files
-
-Recommended site order:
-Home → About → Experience → Education → Projects → Publications → Reach Out
-
-Main concept:
-Projects stay separate from Publications. Projects show what was built; Publications show formal research output.
-""")
-
-patch_notes = dedent("""\
-# Patch Notes: Add Projects Page
-
-## 1. Add this file to your repo
-Place `projects.html` beside your existing HTML files.
-
-## 2. Update every navbar
-In each HTML file, use this order:
-
-```html
-<a href="about.html">About</a>
-<a href="experience.html">Experience</a>
-<a href="education.html">Education</a>
-<a href="projects.html">Projects</a>
-<a href="papers.html">Publications</a>
-<a href="contact.html">Reach Out</a>
