@@ -1,1 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Path — Sai Nalla</title>
+<link rel="stylesheet" href="styles.css">
 
+<style>
+.path-board {
+  position: relative;
+  z-index: 1;
+}
+
+.path-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--ghost-line);
+}
+
+.path-item {
+  display: grid;
+  grid-template-columns: 70px 1.3fr 1fr 150px;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid var(--ghost-line);
+  transition: background 0.35s ease, border-color 0.35s ease;
+}
+
+.path-item:hover,
+.path-item.active {
+  background: rgba(139,26,26,0.035);
+  border-color: rgba(139,26,26,0.25);
+}
+
+.path-symbol {
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--ghost-line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 1.25rem;
+  color: rgba(139,26,26,0.6);
+  transform: rotate(45deg);
+  transition: all 0.35s ease;
+  margin-left: 0.4rem;
+}
+
+.path-symbol span {
+  transform: rotate(-45deg);
+}
+
+.path-item:hover .path-symbol,
+.path-item.active .path-symbol {
+  border-color: var(--blood);
+  color: var(--blood-glow);
+  box-shadow: 0 0 18px rgba(139,26,26,0.22);
+}
+
+.path-role {
+  font-family: 'Zen Antique', serif;
+  font-size: 1.08rem;
+  line-height: 1.35;
+}
+
+.path-org {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mist);
+  line-height: 1.6;
+}
+
+.path-date {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--steel);
+  text-align: right;
+  letter-spacing: 0.08em;
+}
+
+.chronicle {
+  margin-top: 4rem;
+  border: 1px solid var(--ghost-line);
+  background:
+    linear-gradient(135deg, rgba(139,26,26,0.08), transparent 28%),
+    var(--ghost);
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+  min-height: 320px;
+}
+
+.chronicle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  background: linear-gradient(to right, var(--blood), transparent);
+}
+
+.chronicle-kanji {
+  position: absolute;
+  right: 2rem;
+  bottom: -1.5rem;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 9rem;
+  font-weight: 900;
+  color: rgba(139,26,26,0.06);
+  pointer-events: none;
+}
+
+.chronicle-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--blood);
+  margin-bottom: 1.2rem;
+}
+
+.chronicle-title {
+  font-family: 'Zen Antique', serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+
+.chronicle-org {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--mist);
+  margin-bottom: 2rem;
+}
+
+.chronicle-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.chronicle-mission {
+  font-size: 0.96rem;
+  line-height: 1.8;
+  color: var(--mist);
+  font-weight: 300;
+  max-width: 680px;
+}
+
+.chronicle-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.chronicle-detail {
+  font-size: 0.82rem;
+  color: var(--mist);
+  line-height: 1.65;
+  padding-left: 1.1rem;
+  position: relative;
+}
+
+.chronicle-detail::before {
+  content: '斬';
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.55rem;
+  color: var(--blood);
+  opacity: 0.7;
+}
+
+.chronicle-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 2rem;
+}
+
+.chronicle-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--steel);
+  border: 1px solid var(--ghost-line);
+  padding: 0.4rem 0.7rem;
+}
+
+.path-note {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--steel);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-top: 1.5rem;
+}
+
+.bg-katana-path {
+  position: fixed;
+  right: 8%;
+  top: 50%;
+  transform: translateY(-50%) rotate(-12deg);
+  opacity: 0.035;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media(max-width:900px){
+  .path-item {
+    grid-template-columns: 50px 1fr;
+    gap: 1rem;
+  }
+
+  .path-org,
+  .path-date {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .chronicle {
+    padding: 2rem;
+  }
+
+  .chronicle-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .chronicle-kanji {
+    font-size: 6rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- AC Transition Overlay -->
+<div class="ac-transition">
+  <div class="eagle-flash"></div>
+  <div class="animus-lines"></div>
+  <div class="ac-insignia">鷹</div>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-brand">
+    <svg width="32" height="12" viewBox="0 0 32 12" fill="none">
+      <rect y="3" width="32" height="6" fill="#0a0a0b" stroke="#8b1a1a" stroke-width="0.8"/>
+      <circle cx="16" cy="6" r="2.5" fill="none" stroke="#8b1a1a" stroke-width="0.6"/>
+    </svg>
+    <span class="nav-mark">NALLA<span>.</span></span>
+  </a>
+
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <span class="nav-divider"></span>
+    <a href="about.html">About</a>
+    <a href="experience.html" class="active">Experience</a>
+    <a href="education.html">Education</a>
+    <a href="projects.html">Projects</a>
+    <a href="papers.html">Publications</a>
+    <a href="contact.html">Reach Out</a>
+  </div>
+</nav>
+
+<div class="v-accent"></div>
+
+<svg class="bg-katana-path" width="140" height="900" viewBox="0 0 140 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M65 50Q67 45 70 10L70 5Q70 2 70 5L68 10Q66 45 65 50Z" fill="#f0ebe3" opacity="0.6"/>
+  <path d="M65 50L64 800Q64 850 66 870L70 880L74 870Q76 850 76 800L75 50Z" fill="#f0ebe3"/>
+  <rect x="58" y="46" width="24" height="14" rx="2" fill="none" stroke="#f0ebe3" stroke-width="1.5"/>
+  <line x1="70" y1="46" x2="70" y2="60" stroke="#8b1a1a" stroke-width="0.6"/>
+  <rect x="62" y="62" width="16" height="6" rx="1" fill="none" stroke="#f0ebe3" stroke-width="0.5"/>
+  <path d="M64 880L62 895Q61 900 64 898L70 892L76 898Q79 900 78 895L76 880Z" fill="#c4bfb6"/>
+</svg>
+
+<div class="page-content">
+
+<section class="page-hero">
+  <div class="page-tag reveal">The Path Walked</div>
+  <div class="page-title-jp reveal">歩んだ道 — あゆんだみち</div>
+  <h1 class="page-title reveal">02 — Experience</h1>
+  <p class="page-subtitle reveal">Select a record — every chapter opens into a deeper trace</p>
+</section>
+
+<section class="content-section path-board">
+
+  <div class="section-header reveal">
+    <span class="section-num">道</span>
+    <h2 class="section-title">The Path</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="path-list stagger">
+
+    <div class="path-item active" data-key="phd">
+      <div class="path-symbol"><span>博</span></div>
+      <div class="path-role">Doctoral Researcher</div>
+      <div class="path-org">IUCT Oncopole — Toulouse</div>
+      <div class="path-date">2023 — Present</div>
+    </div>
+
+    <div class="path-item" data-key="hepta">
+      <div class="path-symbol"><span>医</span></div>
+      <div class="path-role">Researcher & Consultant</div>
+      <div class="path-org">Hepta Medical — Deep-Tech Startup</div>
+      <div class="path-date">2022 — 2023</div>
+    </div>
+
+    <div class="path-item" data-key="saintjoseph">
+      <div class="path-symbol"><span>臨</span></div>
+      <div class="path-role">Preclinical Intern</div>
+      <div class="path-org">Hospital Saint Joseph — Paris</div>
+      <div class="path-date">2022</div>
+    </div>
+
+    <div class="path-item" data-key="ladhyx">
+      <div class="path-symbol"><span>流</span></div>
+      <div class="path-role">Research Intern</div>
+      <div class="path-org">LadHyX — École Polytechnique</div>
+      <div class="path-date">2022</div>
+    </div>
+
+    <div class="path-item" data-key="manitty">
+      <div class="path-symbol"><span>創</span></div>
+      <div class="path-role">Design Project Associate</div>
+      <div class="path-org">Manitty — Deep-Tech Startup</div>
+      <div class="path-date">2021 — 2022</div>
+    </div>
+
+    <div class="path-item" data-key="polytechnique">
+      <div class="path-symbol"><span>工</span></div>
+      <div class="path-role">Project Partner / Associate</div>
+      <div class="path-org">École Polytechnique — Palaiseau</div>
+      <div class="path-date">2021 — 2023</div>
+    </div>
+
+    <div class="path-item" data-key="mahindra">
+      <div class="path-symbol"><span>血</span></div>
+      <div class="path-role">Research Associate</div>
+      <div class="path-org">Mahindra University — Hyderabad</div>
+      <div class="path-date">2020 — 2021</div>
+    </div>
+
+    <div class="path-item" data-key="auv">
+      <div class="path-symbol"><span>海</span></div>
+      <div class="path-role">Deputy Team Lead</div>
+      <div class="path-org">AUV MEC — Mahindra University</div>
+      <div class="path-date">2019 — 2020</div>
+    </div>
+
+    <div class="path-item" data-key="placement">
+      <div class="path-symbol"><span>縁</span></div>
+      <div class="path-role">Internship & Placement Cell Member</div>
+      <div class="path-org">Mahindra École Centrale</div>
+      <div class="path-date">2018 — 2020</div>
+    </div>
+
+  </div>
+
+  <div class="path-note reveal">Click a record to reveal the chronicle below</div>
+
+  <div class="chronicle reveal" id="chronicle">
+    <div class="chronicle-kanji" id="chronicleKanji">博</div>
+    <div class="chronicle-label">Selected Chronicle</div>
+    <h2 class="chronicle-title" id="chronicleTitle">Doctoral Researcher</h2>
+    <div class="chronicle-org" id="chronicleOrg">IUCT Oncopole — Toulouse, France · 2023 — Present</div>
+
+    <div class="chronicle-grid">
+      <p class="chronicle-mission" id="chronicleMission">
+        Leading translational PET/CT simulation work across clinical, industrial, and academic collaborators.
+      </p>
+
+      <div class="chronicle-details" id="chronicleDetails">
+        <div class="chronicle-detail">Built computational PET/CT simulation workflows and 3D-printed heterogeneous phantoms.</div>
+        <div class="chronicle-detail">Worked across GE Healthcare, eMotion, Mahindra University, and clinical teams.</div>
+        <div class="chronicle-detail">Contributed to Dynamic PET clinical studies, scientific production, supervision, and IP valorisation.</div>
+      </div>
+    </div>
+
+    <div class="chronicle-tags" id="chronicleTags">
+      <span class="chronicle-tag">PET/CT</span>
+      <span class="chronicle-tag">Medical Imaging</span>
+      <span class="chronicle-tag">Simulation</span>
+      <span class="chronicle-tag">Clinical Translation</span>
+    </div>
+  </div>
+
+</section>
+
+</div>
+
+<footer>
+  <div class="footer-text">© 2026 Sai Kiran Kumar Nalla</div>
+  <div class="footer-text">道 — The Path</div>
+</footer>
+
+<script src="transitions.js"></script>
+
+<script>
+const chronicles = {
+  phd: {
+    kanji: '博',
+    title: 'Doctoral Researcher',
+    org: 'IUCT Oncopole — Toulouse, France · 2023 — Present',
+    mission: 'Leading translational PET/CT simulation work across clinical, industrial, and academic collaborators.',
+    details: [
+      'Built computational PET/CT simulation workflows and 3D-printed heterogeneous phantoms.',
+      'Worked across GE Healthcare, eMotion, Mahindra University, and clinical teams.',
+      'Contributed to Dynamic PET clinical studies, scientific production, supervision, and IP valorisation.'
+    ],
+    tags: ['PET/CT', 'Medical Imaging', 'Simulation', 'Clinical Translation']
+  },
+
+  hepta: {
+    kanji: '医',
+    title: 'Researcher & Consultant',
+    org: 'Hepta Medical — Suresnes, France · 2022 — 2023',
+    mission: 'Supported a deep-tech medtech startup by translating R&D data into product-facing models and clinical visualizations.',
+    details: [
+      'Developed predictive models for a minimally invasive cancer treatment device.',
+      'Created automated tools for clinical visualization and investor-facing demonstrations.',
+      'Supported pre-clinical validation and product development decisions.'
+    ],
+    tags: ['MedTech', 'Predictive Modelling', 'Startup R&D', 'Clinical Visualization']
+  },
+
+  saintjoseph: {
+    kanji: '臨',
+    title: 'Preclinical Intern',
+    org: 'Hospital Saint Joseph — Paris, France · 2022',
+    mission: 'Worked at the interface of anatomical data, surgical workflows, and patient-specific prototyping.',
+    details: [
+      'Translated anatomical data into 3D-printed patient-specific simulation benches.',
+      'Observed interventional cardiology procedures in live clinical settings.',
+      'Mapped workflow constraints and unmet clinical needs.'
+    ],
+    tags: ['Clinical Prototyping', '3D Printing', 'Cardiology', 'Workflow Mapping']
+  },
+
+  ladhyx: {
+    kanji: '流',
+    title: 'Research Intern',
+    org: 'LadHyX — École Polytechnique · 2022',
+    mission: 'Built experimental and computational tools for soft matter systems with drug delivery relevance.',
+    details: [
+      'Conducted experiments on soft gels and particle suspensions.',
+      'Developed automated tracking and image-analysis pipelines.',
+      'Accelerated synthesis of experimental data through computational workflows.'
+    ],
+    tags: ['Soft Matter', 'Drug Delivery', 'Image Analysis', 'Python / MATLAB']
+  },
+
+  manitty: {
+    kanji: '創',
+    title: 'Design Project Associate',
+    org: 'Manitty — Palaiseau, France · 2021 — 2022',
+    mission: 'Combined technical prototyping and market intelligence for a deep-tech electrode startup.',
+    details: [
+      'Mapped electrode technologies and reported insights through CEO briefings.',
+      'Designed and characterized polymer electrode prototypes.',
+      'Assessed prototypes for scalability, manufacturing, and cost-effectiveness.'
+    ],
+    tags: ['Deep-Tech', 'Market Mapping', 'Electrodes', 'Prototype Assessment']
+  },
+
+  polytechnique: {
+    kanji: '工',
+    title: 'Project Partner / Associate',
+    org: 'École Polytechnique — Palaiseau, France · 2021 — 2023',
+    mission: 'Translated clinical imaging datasets into simulation-ready models for biomedical engineering studies.',
+    details: [
+      'Converted clinical 4D MRI datasets into high-fidelity in-silico models.',
+      'Worked on simulation studies linked to targeted therapeutic delivery.',
+      'Integrated clinical imaging, numerical modelling, and translational engineering.'
+    ],
+    tags: ['4D MRI', 'In-Silico Modelling', 'CFD', 'Biomedical Engineering']
+  },
+
+  mahindra: {
+    kanji: '血',
+    title: 'Research Associate',
+    org: 'Mahindra University — Hyderabad, India · 2020 — 2021',
+    mission: 'Worked on computational simulation of embolism behavior in vascular flow systems.',
+    details: [
+      'Performed simulations of gas embolism behavior in blood flow.',
+      'Contributed to scientific articles and project proposals.',
+      'Mentored student groups across technical clubs and engineering projects.'
+    ],
+    tags: ['Biomechanics', 'CFD', 'Blood Flow', 'Mentorship']
+  },
+
+  auv: {
+    kanji: '海',
+    title: 'Deputy Team Lead & Mechanical Subdivision Lead',
+    org: 'AUV MEC — Mahindra University · 2019 — 2020',
+    mission: 'Led technical and operational work for an autonomous underwater vehicle student club.',
+    details: [
+      'Managed team structure, finances, logistics, and outreach.',
+      'Mentored junior and associate members across mechanical design workflows.',
+      'Supported club creation, identity, technical planning, and public-facing communication.'
+    ],
+    tags: ['Volunteering', 'Leadership', 'Robotics', 'Team Operations']
+  },
+
+  placement: {
+    kanji: '縁',
+    title: 'Internship & Placement Cell Member',
+    org: 'Mahindra École Centrale · 2018 — 2020',
+    mission: 'Supported student-industry engagement through coordination, logistics, and institutional outreach.',
+    details: [
+      'Organized industrial collaborations, visits, and internship-related activities.',
+      'Handled resource planning, financial coordination, and event logistics.',
+      'Built exposure to stakeholder management and institutional communication.'
+    ],
+    tags: ['Volunteering', 'Stakeholder Management', 'Logistics', 'Industry Relations']
+  }
+};
+
+const items = document.querySelectorAll('.path-item');
+
+const title = document.getElementById('chronicleTitle');
+const org = document.getElementById('chronicleOrg');
+const mission = document.getElementById('chronicleMission');
+const details = document.getElementById('chronicleDetails');
+const tags = document.getElementById('chronicleTags');
+const kanji = document.getElementById('chronicleKanji');
+
+function renderChronicle(key) {
+  const data = chronicles[key];
+
+  title.textContent = data.title;
+  org.textContent = data.org;
+  mission.textContent = data.mission;
+  kanji.textContent = data.kanji;
+
+  details.innerHTML = data.details
+    .map(detail => `<div class="chronicle-detail">${detail}</div>`)
+    .join('');
+
+  tags.innerHTML = data.tags
+    .map(tag => `<span class="chronicle-tag">${tag}</span>`)
+    .join('');
+}
+
+items.forEach(item => {
+  item.addEventListener('click', () => {
+    items.forEach(i => i.classList.remove('active'));
+    item.classList.add('active');
+    renderChronicle(item.dataset.key);
+  });
+
+  item.addEventListener('mouseenter', () => {
+    renderChronicle(item.dataset.key);
+  });
+});
+</script>
+
+</body>
+</html>
