@@ -753,51 +753,61 @@ body.leaping .page-content {
    
 }
 
+
 /* --- Assassin's Creed Segmented Health Bar --- */
 .health-bar-container {
+  /* Positions the bar at the top-right corner of the card */
+  position: absolute;
+  top: 2.5rem;
+  right: 3rem;
   text-align: right;
   min-width: 180px;
-  margin-bottom: 0.5rem;
+  z-index: 10;
 }
 
 .health-segments {
   display: flex;
   gap: 4px;
   justify-content: flex-end;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .segment {
-  width: 12px;
-  height: 18px;
-  background: rgba(255, 255, 255, 0.05); /* Empty slot */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transform: skewX(-15deg); /* Angled like AC health bars */
-  transition: all 0.4s ease;
+  /* Dimensions are required for the bars to appear visually */
+  width: 10px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.1); /* Slightly more visible empty state */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transform: skewX(-15deg); /* Creates the tactical AC look */
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: block; /* Ensures it renders as a block element */
 }
 
-/* Filled health segments */
+/* Filled health segments using your theme colors */
 .segment.filled {
-  background: var(--blood);
-  box-shadow: 0 0 8px var(--blood-dim);
+  background: var(--blood); /* #8b1a1a */
+  box-shadow: 0 0 10px var(--blood-dim);
   border-color: var(--blood-glow);
 }
 
-/* Hover effect: Full Synchronization glow */
+/* Hover effect: Intense synchronization glow */
 .edu-card:hover .segment.filled {
   background: var(--blood-glow);
-  box-shadow: 0 0 15px var(--blood-glow);
-  filter: brightness(1.2);
+  box-shadow: 0 0 18px var(--blood-glow);
+  filter: brightness(1.3);
 }
 
-/* Glitch animation for the label */
+/* Animus Glitch animation for the SYNC text */
 .edu-card:hover .gpa-label {
-  animation: ac-glitch 0.2s infinite;
+  animation: ac-glitch 0.3s infinite;
   color: var(--paper);
+  text-shadow: 0 0 5px var(--blood-glow);
 }
 
 @keyframes ac-glitch {
   0% { transform: translate(0); opacity: 1; }
-  50% { transform: translate(-1px, 1px); opacity: 0.8; }
+  25% { transform: translate(-2px, 1px); opacity: 0.9; }
+  50% { transform: translate(1px, -1px); opacity: 0.8; }
+  75% { transform: translate(-1px, -1px); opacity: 0.9; }
   100% { transform: translate(0); opacity: 1; }
 }
