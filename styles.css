@@ -679,6 +679,30 @@ body.leaping .page-content {
   }
 }
 
+/* ── HOME NAV GRID: 6-CARD LAYOUT ── */
+.nav-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ghost-line);
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .nav-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 500px) {
+  .nav-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   nav { padding: 1rem 1.5rem; }
