@@ -750,4 +750,65 @@ body.leaping .page-content {
 /* Special hover state for white-only logos */
 .edu-card:hover .edu-logo.logo-white {
   filter: grayscale(0) brightness(1.5); /* No invert on hover either */
+   
+}
+
+/* GPA / SYNC GAUGE STYLES */
+.gpa-container {
+  margin: 1.5rem 0 1rem 0;
+  max-width: 400px; /* Adjust width to fit your preference */
+  position: relative;
+  z-index: 2;
+}
+
+.gpa-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--mist);
+  margin-bottom: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.gpa-value {
+  color: var(--blood-glow);
+  font-weight: 700;
+}
+
+/* The Animus-style Empty Bar */
+.sync-bar {
+  height: 3px;
+  background: rgba(240, 235, 223, 0.05); /* Very subtle paper-colored backing */
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+/* The Glowing Progress Fill */
+.sync-progress {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blood), var(--blood-glow));
+  box-shadow: 0 0 12px var(--blood-dim);
+  transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Moving Glitch Scanner */
+.sync-glitch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.15) 50%, 
+    transparent 100%);
+  animation: animusScan 4s infinite linear;
+}
+
+@keyframes animusScan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
