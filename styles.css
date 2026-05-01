@@ -821,3 +821,28 @@ body.leaping .page-content {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 0.8; }
 }
+
+/* Ensure the content boxes don't overlap the vertical timeline line */
+.exp-content {
+  margin-left: 3rem; /* Space for the timeline line and dots */
+  background: rgba(255, 255, 255, 0.02);
+  padding: 2rem;
+  border-radius: 8px;
+  border-left: 1px solid rgba(139, 26, 26, 0.3); /* Subtle blood-red border */
+  transition: all 0.3s ease;
+}
+
+.exp-content:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(10px); /* Subtle slide effect on hover */
+  box-shadow: -5px 0 20px rgba(139, 26, 26, 0.2);
+}
+
+.exp-org {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  color: var(--mist);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
