@@ -5,247 +5,326 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Path — Sai Nalla</title>
 <link rel="stylesheet" href="styles.css">
-
 <style>
-.path-board {
-  position: relative;
-  z-index: 1;
-}
 
-.path-list {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--ghost-line);
+/* ── ARCHIVE GRID ─────────────────────────────── */
+.archive-header {
+  padding: 7rem 4rem 3rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
-
-.path-item {
-  display: grid;
-  grid-template-columns: 70px 1.3fr 1fr 150px;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.4rem 0;
-  border-bottom: 1px solid var(--ghost-line);
-  transition: background 0.35s ease, border-color 0.35s ease;
-}
-
-.path-item:hover,
-.path-item.active {
-  background: rgba(139,26,26,0.035);
-  border-color: rgba(139,26,26,0.25);
-}
-
-.path-symbol {
-  width: 42px;
-  height: 42px;
-  border: 1px solid var(--ghost-line);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Noto Serif JP', serif;
-  font-size: 1.25rem;
-  color: rgba(139,26,26,0.6);
-  transform: rotate(45deg);
-  transition: all 0.35s ease;
-  margin-left: 0.4rem;
-}
-
-.path-symbol span {
-  transform: rotate(-45deg);
-}
-
-.path-item:hover .path-symbol,
-.path-item.active .path-symbol {
-  border-color: var(--blood);
-  color: var(--blood-glow);
-  box-shadow: 0 0 18px rgba(139,26,26,0.22);
-}
-
-.path-role {
-  font-family: 'Zen Antique', serif;
-  font-size: 1.08rem;
-  line-height: 1.35;
-}
-
-.path-org {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.62rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--mist);
-  line-height: 1.6;
-}
-
-.path-date {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.62rem;
-  color: var(--steel);
-  text-align: right;
-  letter-spacing: 0.08em;
-}
-
-.chronicle {
-  margin-top: 4rem;
-  border: 1px solid var(--ghost-line);
-  background:
-    linear-gradient(135deg, rgba(139,26,26,0.08), transparent 28%),
-    var(--ghost);
-  padding: 3rem;
-  position: relative;
-  overflow: hidden;
-  min-height: 320px;
-}
-
-.chronicle::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 3px;
-  width: 100%;
-  background: linear-gradient(to right, var(--blood), transparent);
-}
-
-.chronicle-kanji {
-  position: absolute;
-  right: 2rem;
-  bottom: -1.5rem;
-  font-family: 'Noto Serif JP', serif;
-  font-size: 9rem;
-  font-weight: 900;
-  color: rgba(139,26,26,0.06);
-  pointer-events: none;
-}
-
-.chronicle-label {
+.archive-eyebrow {
   font-family: 'Space Mono', monospace;
   font-size: 0.58rem;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--blood);
-  margin-bottom: 1.2rem;
-}
-
-.chronicle-title {
-  font-family: 'Zen Antique', serif;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 1.1;
+  letter-spacing: 0.3em;
+  color: var(--blood-glow);
   margin-bottom: 0.6rem;
 }
-
-.chronicle-org {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--mist);
-  margin-bottom: 2rem;
+.archive-title {
+  font-family: 'Zen Antique', serif;
+  font-size: clamp(2.2rem, 4vw, 3.5rem);
+  line-height: 1.1;
+  margin-bottom: 0.4rem;
 }
-
-.chronicle-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 3rem;
-  position: relative;
-  z-index: 2;
+.archive-title-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.85rem;
+  color: rgba(139,26,26,0.45);
+  letter-spacing: 0.2em;
+  margin-bottom: 0.8rem;
 }
-
-.chronicle-mission {
-  font-size: 0.96rem;
-  line-height: 1.8;
-  color: var(--mist);
+.archive-sub {
+  font-size: 0.88rem;
+  color: var(--steel);
   font-weight: 300;
-  max-width: 680px;
+  font-family: 'Space Mono', monospace;
+  letter-spacing: 0.05em;
 }
 
-.chronicle-details {
+/* ── POSITION CARDS GRID ─────────────────────── */
+.positions-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem 0;
+}
+.positions-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  border: 1px solid var(--ghost-line);
+  background: var(--ghost-line);
+}
+@media (max-width: 1000px) { .positions-grid { grid-template-columns: repeat(3,1fr); } }
+@media (max-width: 700px)  { .positions-grid { grid-template-columns: repeat(2,1fr); } }
+
+.pos-card {
+  background: var(--ink);
+  padding: 1.8rem 1.6rem 1.6rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.5rem;
+  user-select: none;
+  min-height: 150px;
 }
-
-.chronicle-detail {
-  font-size: 0.82rem;
-  color: var(--mist);
-  line-height: 1.65;
-  padding-left: 1.1rem;
-  position: relative;
-}
-
-.chronicle-detail::before {
-  content: '斬';
+.pos-card::after {
+  content: '';
   position: absolute;
-  left: 0;
-  top: 0.1rem;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--blood);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s ease;
+}
+.pos-card:hover::after,
+.pos-card.active::after { transform: scaleX(1); }
+.pos-card.active { background: rgba(139,26,26,0.07); }
+.pos-card:hover { background: rgba(139,26,26,0.04); }
+
+.pos-index {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.52rem;
+  color: rgba(139,26,26,0.35);
+  letter-spacing: 0.15em;
+  margin-bottom: 0.2rem;
+}
+.pos-card.active .pos-index { color: var(--blood-glow); }
+.pos-role {
+  font-family: 'Zen Antique', serif;
+  font-size: 0.95rem;
+  line-height: 1.35;
+  color: var(--paper);
+}
+.pos-org {
+  font-size: 0.72rem;
+  color: var(--steel);
+  line-height: 1.4;
+  font-weight: 300;
+  margin-top: auto;
+}
+.pos-dates {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.58rem;
+  color: rgba(139,26,26,0.5);
+  letter-spacing: 0.05em;
+}
+.pos-card.active .pos-dates { color: var(--blood-glow); }
+/* Active caret */
+.pos-caret {
+  position: absolute;
+  bottom: -1px; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--blood-dim);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.pos-card.active .pos-caret { opacity: 1; }
+
+/* ── DETAIL PANEL ─────────────────────────────── */
+.detail-panel {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem 5rem;
+  overflow: hidden;
+}
+.detail-inner {
+  border: 1px solid var(--ghost-line);
+  border-top: 2px solid var(--blood-dim);
+  background: var(--ghost);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-12px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+}
+.detail-inner.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* inner layout */
+.detail-body {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 0;
+  min-height: 300px;
+}
+@media (max-width: 760px) { .detail-body { grid-template-columns: 1fr; } }
+
+/* Left col */
+.detail-left {
+  padding: 3rem 2.5rem;
+  border-right: 1px solid var(--ghost-line);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.detail-role {
+  font-family: 'Zen Antique', serif;
+  font-size: 1.55rem;
+  line-height: 1.25;
+  margin-bottom: 0.6rem;
+}
+.detail-org {
+  font-size: 0.85rem;
+  color: var(--blood-glow);
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+.detail-dates {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--steel);
+  letter-spacing: 0.08em;
+}
+.detail-tag {
+  display: inline-block;
+  margin-top: 2rem;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  padding: 0.4rem 1rem;
+  border: 1px solid rgba(139,26,26,0.3);
+  color: var(--blood-glow);
+}
+.detail-kanji {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 5rem;
+  font-weight: 900;
+  color: rgba(139,26,26,0.06);
+  line-height: 1;
+  margin-top: auto;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Right col */
+.detail-right {
+  padding: 3rem 2.8rem;
+}
+.detail-bullets-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  color: rgba(139,26,26,0.5);
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.detail-bullets-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ghost-line);
+}
+.detail-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.detail-bullet {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.detail-inner.visible .detail-bullet {
+  opacity: 1;
+  transform: translateX(0);
+}
+.detail-inner.visible .detail-bullet:nth-child(1) { transition-delay: 0.1s; }
+.detail-inner.visible .detail-bullet:nth-child(2) { transition-delay: 0.17s; }
+.detail-inner.visible .detail-bullet:nth-child(3) { transition-delay: 0.24s; }
+.detail-inner.visible .detail-bullet:nth-child(4) { transition-delay: 0.31s; }
+.detail-inner.visible .detail-bullet:nth-child(5) { transition-delay: 0.38s; }
+
+.bullet-glyph {
   font-family: 'Noto Serif JP', serif;
   font-size: 0.55rem;
   color: var(--blood);
-  opacity: 0.7;
+  opacity: 0.5;
+  padding-top: 0.3rem;
+  flex-shrink: 0;
+}
+.bullet-text {
+  font-size: 0.85rem;
+  color: var(--mist);
+  line-height: 1.65;
+  font-weight: 300;
 }
 
-.chronicle-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.55rem;
-  margin-top: 2rem;
+/* Decorative top bar scan-line */
+.detail-scanline {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--blood), transparent);
+  animation: scanPulse 3s ease-in-out infinite;
+}
+@keyframes scanPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.9; }
 }
 
-.chronicle-tag {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.55rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--steel);
-  border: 1px solid var(--ghost-line);
-  padding: 0.4rem 0.7rem;
-}
-
-.path-note {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.58rem;
-  color: var(--steel);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  margin-top: 1.5rem;
-}
-
-.bg-katana-path {
-  position: fixed;
-  right: 8%;
-  top: 50%;
-  transform: translateY(-50%) rotate(-12deg);
-  opacity: 0.035;
+/* Corner decorations */
+.detail-corner {
+  position: absolute;
+  width: 16px; height: 16px;
+  border-color: rgba(139,26,26,0.25);
+  border-style: solid;
   pointer-events: none;
-  z-index: 0;
+}
+.detail-corner.tl { top: 8px; left: 8px; border-width: 1px 0 0 1px; }
+.detail-corner.tr { top: 8px; right: 8px; border-width: 1px 1px 0 0; }
+.detail-corner.bl { bottom: 8px; left: 8px; border-width: 0 0 1px 1px; }
+.detail-corner.br { bottom: 8px; right: 8px; border-width: 0 1px 1px 0; }
+
+/* Type indicator strip */
+.detail-type-strip {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--blood), transparent);
+  opacity: 0.4;
 }
 
-@media(max-width:900px){
-  .path-item {
-    grid-template-columns: 50px 1fr;
-    gap: 1rem;
-  }
-
-  .path-org,
-  .path-date {
-    grid-column: 2;
-    text-align: left;
-  }
-
-  .chronicle {
-    padding: 2rem;
-  }
-
-  .chronicle-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-
-  .chronicle-kanji {
-    font-size: 6rem;
-  }
+/* EMPTY STATE */
+.detail-empty {
+  padding: 3.5rem;
+  text-align: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  color: rgba(240,235,227,0.12);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
+
+/* divider between grid and panel */
+.grid-panel-gap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 4rem;
+  height: 1rem;
+}
+
 </style>
 </head>
-
 <body>
 
 <!-- AC Transition Overlay -->
@@ -257,20 +336,14 @@
 
 <nav>
   <a href="index.html" class="nav-brand">
-    <svg width="32" height="12" viewBox="0 0 32 12" fill="none">
-      <rect y="3" width="32" height="6" fill="#0a0a0b" stroke="#8b1a1a" stroke-width="0.8"/>
-      <circle cx="16" cy="6" r="2.5" fill="none" stroke="#8b1a1a" stroke-width="0.6"/>
-    </svg>
+    <svg width="32" height="12" viewBox="0 0 32 12" fill="none"><rect y="3" width="32" height="6" fill="#0a0a0b" stroke="#8b1a1a" stroke-width="0.8"/><circle cx="16" cy="6" r="2.5" fill="none" stroke="#8b1a1a" stroke-width="0.6"/></svg>
     <span class="nav-mark">NALLA<span>.</span></span>
   </a>
-
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <span class="nav-divider"></span>
+    <a href="index.html">Home</a><span class="nav-divider"></span>
     <a href="about.html">About</a>
     <a href="experience.html" class="active">Experience</a>
     <a href="education.html">Education</a>
-    <a href="projects.html">Projects</a>
     <a href="papers.html">Publications</a>
     <a href="contact.html">Reach Out</a>
   </div>
@@ -278,129 +351,92 @@
 
 <div class="v-accent"></div>
 
-<svg class="bg-katana-path" width="140" height="900" viewBox="0 0 140 900" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M65 50Q67 45 70 10L70 5Q70 2 70 5L68 10Q66 45 65 50Z" fill="#f0ebe3" opacity="0.6"/>
-  <path d="M65 50L64 800Q64 850 66 870L70 880L74 870Q76 850 76 800L75 50Z" fill="#f0ebe3"/>
-  <rect x="58" y="46" width="24" height="14" rx="2" fill="none" stroke="#f0ebe3" stroke-width="1.5"/>
-  <line x1="70" y1="46" x2="70" y2="60" stroke="#8b1a1a" stroke-width="0.6"/>
-  <rect x="62" y="62" width="16" height="6" rx="1" fill="none" stroke="#f0ebe3" stroke-width="0.5"/>
-  <path d="M64 880L62 895Q61 900 64 898L70 892L76 898Q79 900 78 895L76 880Z" fill="#c4bfb6"/>
-</svg>
+<div class="archive-header reveal">
+  <div class="archive-eyebrow">02 — The Path Walked</div>
+  <h1 class="archive-title">Experience</h1>
+  <div class="archive-title-jp">歩んだ道 — あゆんだみち</div>
+  <div class="archive-sub">Select a position to expand</div>
+</div>
 
-<div class="page-content">
+<!-- POSITION CARDS GRID -->
+<div class="positions-wrapper">
+  <div class="positions-grid" id="posGrid">
 
-<section class="page-hero">
-  <div class="page-tag reveal">The Path Walked</div>
-  <div class="page-title-jp reveal">歩んだ道 — あゆんだみち</div>
-  <h1 class="page-title reveal">02 — Experience</h1>
-  <p class="page-subtitle reveal">Select a record — every chapter opens into a deeper trace</p>
-</section>
-
-<section class="content-section path-board">
-
-  <div class="section-header reveal">
-    <span class="section-num">道</span>
-    <h2 class="section-title">The Path</h2>
-    <div class="section-line"></div>
-  </div>
-
-  <div class="path-list stagger">
-
-    <div class="path-item active" data-key="phd">
-      <div class="path-symbol"><span>博</span></div>
-      <div class="path-role">Doctoral Researcher</div>
-      <div class="path-org">IUCT Oncopole — Toulouse</div>
-      <div class="path-date">2023 — Present</div>
+    <div class="pos-card" data-id="0">
+      <div class="pos-caret"></div>
+      <div class="pos-index">01 · 2023–Present</div>
+      <div class="pos-role">Doctoral Researcher</div>
+      <div class="pos-org">IUCT Oncopole · Toulouse, France</div>
+      <div class="pos-dates">Oct 2023 — Present</div>
     </div>
 
-    <div class="path-item" data-key="hepta">
-      <div class="path-symbol"><span>医</span></div>
-      <div class="path-role">Researcher & Consultant</div>
-      <div class="path-org">Hepta Medical — Deep-Tech Startup</div>
-      <div class="path-date">2022 — 2023</div>
+    <div class="pos-card" data-id="1">
+      <div class="pos-caret"></div>
+      <div class="pos-index">02 · 2022–2023</div>
+      <div class="pos-role">Researcher & Consultant</div>
+      <div class="pos-org">Hepta Medical · Suresnes, France</div>
+      <div class="pos-dates">Dec 2022 — Sep 2023</div>
     </div>
 
-    <div class="path-item" data-key="saintjoseph">
-      <div class="path-symbol"><span>臨</span></div>
-      <div class="path-role">Preclinical Intern</div>
-      <div class="path-org">Hospital Saint Joseph — Paris</div>
-      <div class="path-date">2022</div>
+    <div class="pos-card" data-id="2">
+      <div class="pos-caret"></div>
+      <div class="pos-index">03 · 2022</div>
+      <div class="pos-role">Preclinical Intern</div>
+      <div class="pos-org">Hospital Saint Joseph · Paris, France</div>
+      <div class="pos-dates">May 2022 — Jul 2022</div>
     </div>
 
-    <div class="path-item" data-key="ladhyx">
-      <div class="path-symbol"><span>流</span></div>
-      <div class="path-role">Research Intern</div>
-      <div class="path-org">LadHyX — École Polytechnique</div>
-      <div class="path-date">2022</div>
+    <div class="pos-card" data-id="3">
+      <div class="pos-caret"></div>
+      <div class="pos-index">04 · 2022</div>
+      <div class="pos-role">Research Intern</div>
+      <div class="pos-org">LadHyX, École Polytechnique · Palaiseau</div>
+      <div class="pos-dates">Mar 2022 — May 2022</div>
     </div>
 
-    <div class="path-item" data-key="manitty">
-      <div class="path-symbol"><span>創</span></div>
-      <div class="path-role">Design Project Associate</div>
-      <div class="path-org">Manitty — Deep-Tech Startup</div>
-      <div class="path-date">2021 — 2022</div>
+    <div class="pos-card" data-id="4">
+      <div class="pos-caret"></div>
+      <div class="pos-index">05 · 2021–2022</div>
+      <div class="pos-role">Design Project Associate</div>
+      <div class="pos-org">Manitty (Deep-tech) · Palaiseau, France</div>
+      <div class="pos-dates">Nov 2021 — Sep 2022</div>
     </div>
 
-    <div class="path-item" data-key="polytechnique">
-      <div class="path-symbol"><span>工</span></div>
-      <div class="path-role">Project Partner / Associate</div>
-      <div class="path-org">École Polytechnique — Palaiseau</div>
-      <div class="path-date">2021 — 2023</div>
+    <div class="pos-card" data-id="5">
+      <div class="pos-caret"></div>
+      <div class="pos-index">06 · 2021–2023</div>
+      <div class="pos-role">Project Partner / Associate</div>
+      <div class="pos-org">École Polytechnique · Palaiseau, France</div>
+      <div class="pos-dates">Oct 2021 — Jun 2023</div>
     </div>
 
-    <div class="path-item" data-key="mahindra">
-      <div class="path-symbol"><span>血</span></div>
-      <div class="path-role">Research Associate</div>
-      <div class="path-org">Mahindra University — Hyderabad</div>
-      <div class="path-date">2020 — 2021</div>
-    </div>
-
-    <div class="path-item" data-key="auv">
-      <div class="path-symbol"><span>海</span></div>
-      <div class="path-role">Deputy Team Lead</div>
-      <div class="path-org">AUV MEC — Mahindra University</div>
-      <div class="path-date">2019 — 2020</div>
-    </div>
-
-    <div class="path-item" data-key="placement">
-      <div class="path-symbol"><span>縁</span></div>
-      <div class="path-role">Internship & Placement Cell Member</div>
-      <div class="path-org">Mahindra École Centrale</div>
-      <div class="path-date">2018 — 2020</div>
+    <div class="pos-card" data-id="6">
+      <div class="pos-caret"></div>
+      <div class="pos-index">07 · 2020–2021</div>
+      <div class="pos-role">Research Associate</div>
+      <div class="pos-org">Mahindra University · Hyderabad, India</div>
+      <div class="pos-dates">Aug 2020 — Sep 2021</div>
     </div>
 
   </div>
+</div>
 
-  <div class="path-note reveal">Click a record to reveal the chronicle below</div>
+<div class="grid-panel-gap"></div>
 
-  <div class="chronicle reveal" id="chronicle">
-    <div class="chronicle-kanji" id="chronicleKanji">博</div>
-    <div class="chronicle-label">Selected Chronicle</div>
-    <h2 class="chronicle-title" id="chronicleTitle">Doctoral Researcher</h2>
-    <div class="chronicle-org" id="chronicleOrg">IUCT Oncopole — Toulouse, France · 2023 — Present</div>
+<!-- DETAIL PANEL -->
+<div class="detail-panel">
+  <div class="detail-inner" id="detailInner">
+    <div class="detail-scanline"></div>
+    <div class="detail-corner tl"></div>
+    <div class="detail-corner tr"></div>
+    <div class="detail-corner bl"></div>
+    <div class="detail-corner br"></div>
+    <div class="detail-type-strip"></div>
 
-    <div class="chronicle-grid">
-      <p class="chronicle-mission" id="chronicleMission">
-        Leading translational PET/CT simulation work across clinical, industrial, and academic collaborators.
-      </p>
-
-      <div class="chronicle-details" id="chronicleDetails">
-        <div class="chronicle-detail">Built computational PET/CT simulation workflows and 3D-printed heterogeneous phantoms.</div>
-        <div class="chronicle-detail">Worked across GE Healthcare, eMotion, Mahindra University, and clinical teams.</div>
-        <div class="chronicle-detail">Contributed to Dynamic PET clinical studies, scientific production, supervision, and IP valorisation.</div>
-      </div>
-    </div>
-
-    <div class="chronicle-tags" id="chronicleTags">
-      <span class="chronicle-tag">PET/CT</span>
-      <span class="chronicle-tag">Medical Imaging</span>
-      <span class="chronicle-tag">Simulation</span>
-      <span class="chronicle-tag">Clinical Translation</span>
+    <div class="detail-body" id="detailBody">
+      <div class="detail-empty">— Select a position above —</div>
     </div>
   </div>
-
-</section>
-
 </div>
 
 <footer>
@@ -409,165 +445,167 @@
 </footer>
 
 <script src="transitions.js"></script>
-
 <script>
-const chronicles = {
-  phd: {
-    kanji: '博',
-    title: 'Doctoral Researcher',
-    org: 'IUCT Oncopole — Toulouse, France · 2023 — Present',
-    mission: 'Leading translational PET/CT simulation work across clinical, industrial, and academic collaborators.',
-    details: [
-      'Built computational PET/CT simulation workflows and 3D-printed heterogeneous phantoms.',
-      'Worked across GE Healthcare, eMotion, Mahindra University, and clinical teams.',
-      'Contributed to Dynamic PET clinical studies, scientific production, supervision, and IP valorisation.'
-    ],
-    tags: ['PET/CT', 'Medical Imaging', 'Simulation', 'Clinical Translation']
+const DATA = [
+  {
+    role: "Doctoral Researcher",
+    org: "IUCT Oncopole (University Cancer Hospital)",
+    location: "Toulouse, France",
+    dates: "Oct 2023 — Present",
+    tag: "Active · PhD Research",
+    kanji: "博",
+    bullets: [
+      "Leading cross-functional projects with GE Healthcare, eMotion, and Mahindra University",
+      "Developed computational PET/CT simulation models and 3D-printed heterogeneous phantoms",
+      "Conducting retrospective clinical study on Dynamic PET with expanded data libraries",
+      "Engaged with Toulouse Tech Transfer on IP strategy and commercial valorisation",
+      "Contributed to project proposals, scientific production, and supervision of interns"
+    ]
   },
-
-  hepta: {
-    kanji: '医',
-    title: 'Researcher & Consultant',
-    org: 'Hepta Medical — Suresnes, France · 2022 — 2023',
-    mission: 'Supported a deep-tech medtech startup by translating R&D data into product-facing models and clinical visualizations.',
-    details: [
-      'Developed predictive models for a minimally invasive cancer treatment device.',
-      'Created automated tools for clinical visualization and investor-facing demonstrations.',
-      'Supported pre-clinical validation and product development decisions.'
-    ],
-    tags: ['MedTech', 'Predictive Modelling', 'Startup R&D', 'Clinical Visualization']
+  {
+    role: "Researcher & Consultant",
+    org: "Hepta Medical (Deep-tech Startup)",
+    location: "Suresnes, France",
+    dates: "Dec 2022 — Sep 2023",
+    tag: "Deep-tech · Startup",
+    kanji: "技",
+    bullets: [
+      "Developed predictive models for a minimally invasive cancer treatment device",
+      "Built automated tools translating R&D data into clinical visualizations for investor demos",
+      "Directly supported pre-clinical validation and core R&D roadmap"
+    ]
   },
-
-  saintjoseph: {
-    kanji: '臨',
-    title: 'Preclinical Intern',
-    org: 'Hospital Saint Joseph — Paris, France · 2022',
-    mission: 'Worked at the interface of anatomical data, surgical workflows, and patient-specific prototyping.',
-    details: [
-      'Translated anatomical data into 3D-printed patient-specific simulation benches.',
-      'Observed interventional cardiology procedures in live clinical settings.',
-      'Mapped workflow constraints and unmet clinical needs.'
-    ],
-    tags: ['Clinical Prototyping', '3D Printing', 'Cardiology', 'Workflow Mapping']
+  {
+    role: "Preclinical Intern",
+    org: "Hospital Saint Joseph",
+    location: "Paris, France",
+    dates: "May 2022 — Jul 2022",
+    tag: "Clinical · Cardiology",
+    kanji: "心",
+    bullets: [
+      "Translated anatomical data into 3D-printed patient-specific simulation benches",
+      "Shadowed interventional cardiologists in live surgical procedures",
+      "Identified logistical bottlenecks and unmet clinical needs"
+    ]
   },
-
-  ladhyx: {
-    kanji: '流',
-    title: 'Research Intern',
-    org: 'LadHyX — École Polytechnique · 2022',
-    mission: 'Built experimental and computational tools for soft matter systems with drug delivery relevance.',
-    details: [
-      'Conducted experiments on soft gels and particle suspensions.',
-      'Developed automated tracking and image-analysis pipelines.',
-      'Accelerated synthesis of experimental data through computational workflows.'
-    ],
-    tags: ['Soft Matter', 'Drug Delivery', 'Image Analysis', 'Python / MATLAB']
+  {
+    role: "Research Intern",
+    org: "LadHyX, École Polytechnique",
+    location: "Palaiseau, France",
+    dates: "Mar 2022 — May 2022",
+    tag: "Fluid Mechanics · Research",
+    kanji: "流",
+    bullets: [
+      "Conducted experiments on soft gels and particle suspensions for drug delivery systems",
+      "Developed automated image tracking and analysis pipelines"
+    ]
   },
-
-  manitty: {
-    kanji: '創',
-    title: 'Design Project Associate',
-    org: 'Manitty — Palaiseau, France · 2021 — 2022',
-    mission: 'Combined technical prototyping and market intelligence for a deep-tech electrode startup.',
-    details: [
-      'Mapped electrode technologies and reported insights through CEO briefings.',
-      'Designed and characterized polymer electrode prototypes.',
-      'Assessed prototypes for scalability, manufacturing, and cost-effectiveness.'
-    ],
-    tags: ['Deep-Tech', 'Market Mapping', 'Electrodes', 'Prototype Assessment']
+  {
+    role: "Design Project Associate",
+    org: "Manitty (Deep-tech Startup)",
+    location: "Palaiseau, France",
+    dates: "Nov 2021 — Sep 2022",
+    tag: "Electrodes · Materials",
+    kanji: "設",
+    bullets: [
+      "Market mapping of electrode technologies with monthly CEO briefings",
+      "Designed and characterized polymer electrodes using advanced microscopy",
+      "Evaluated prototypes on scalability, manufacturing, and cost effectiveness"
+    ]
   },
-
-  polytechnique: {
-    kanji: '工',
-    title: 'Project Partner / Associate',
-    org: 'École Polytechnique — Palaiseau, France · 2021 — 2023',
-    mission: 'Translated clinical imaging datasets into simulation-ready models for biomedical engineering studies.',
-    details: [
-      'Converted clinical 4D MRI datasets into high-fidelity in-silico models.',
-      'Worked on simulation studies linked to targeted therapeutic delivery.',
-      'Integrated clinical imaging, numerical modelling, and translational engineering.'
-    ],
-    tags: ['4D MRI', 'In-Silico Modelling', 'CFD', 'Biomedical Engineering']
+  {
+    role: "Project Partner / Associate",
+    org: "École Polytechnique",
+    location: "Palaiseau, France",
+    dates: "Oct 2021 — Jun 2023",
+    tag: "In-Silico · Drug Delivery",
+    kanji: "学",
+    bullets: [
+      "Translated clinical 4D MRI datasets into high-fidelity in-silico models",
+      "Pharmaceutical simulations on targeted drug delivery carriers"
+    ]
   },
-
-  mahindra: {
-    kanji: '血',
-    title: 'Research Associate',
-    org: 'Mahindra University — Hyderabad, India · 2020 — 2021',
-    mission: 'Worked on computational simulation of embolism behavior in vascular flow systems.',
-    details: [
-      'Performed simulations of gas embolism behavior in blood flow.',
-      'Contributed to scientific articles and project proposals.',
-      'Mentored student groups across technical clubs and engineering projects.'
-    ],
-    tags: ['Biomechanics', 'CFD', 'Blood Flow', 'Mentorship']
-  },
-
-  auv: {
-    kanji: '海',
-    title: 'Deputy Team Lead & Mechanical Subdivision Lead',
-    org: 'AUV MEC — Mahindra University · 2019 — 2020',
-    mission: 'Led technical and operational work for an autonomous underwater vehicle student club.',
-    details: [
-      'Managed team structure, finances, logistics, and outreach.',
-      'Mentored junior and associate members across mechanical design workflows.',
-      'Supported club creation, identity, technical planning, and public-facing communication.'
-    ],
-    tags: ['Volunteering', 'Leadership', 'Robotics', 'Team Operations']
-  },
-
-  placement: {
-    kanji: '縁',
-    title: 'Internship & Placement Cell Member',
-    org: 'Mahindra École Centrale · 2018 — 2020',
-    mission: 'Supported student-industry engagement through coordination, logistics, and institutional outreach.',
-    details: [
-      'Organized industrial collaborations, visits, and internship-related activities.',
-      'Handled resource planning, financial coordination, and event logistics.',
-      'Built exposure to stakeholder management and institutional communication.'
-    ],
-    tags: ['Volunteering', 'Stakeholder Management', 'Logistics', 'Industry Relations']
+  {
+    role: "Research Associate",
+    org: "Mahindra University",
+    location: "Hyderabad, India",
+    dates: "Aug 2020 — Sep 2021",
+    tag: "Computational · Biomechanics",
+    kanji: "源",
+    bullets: [
+      "Computational simulations on embolism behaviour in blood flow",
+      "Supervised and mentored student groups within technical clubs",
+      "Drafted scientific articles and project proposals"
+    ]
   }
-};
+];
 
-const items = document.querySelectorAll('.path-item');
+let current = null;
 
-const title = document.getElementById('chronicleTitle');
-const org = document.getElementById('chronicleOrg');
-const mission = document.getElementById('chronicleMission');
-const details = document.getElementById('chronicleDetails');
-const tags = document.getElementById('chronicleTags');
-const kanji = document.getElementById('chronicleKanji');
+function renderDetail(id) {
+  const d = DATA[id];
+  const body = document.getElementById('detailBody');
+  const inner = document.getElementById('detailInner');
 
-function renderChronicle(key) {
-  const data = chronicles[key];
+  // Fade out → swap content → fade in
+  inner.classList.remove('visible');
 
-  title.textContent = data.title;
-  org.textContent = data.org;
-  mission.textContent = data.mission;
-  kanji.textContent = data.kanji;
-
-  details.innerHTML = data.details
-    .map(detail => `<div class="chronicle-detail">${detail}</div>`)
-    .join('');
-
-  tags.innerHTML = data.tags
-    .map(tag => `<span class="chronicle-tag">${tag}</span>`)
-    .join('');
+  setTimeout(() => {
+    body.innerHTML = `
+      <div class="detail-left">
+        <div>
+          <div class="detail-role">${d.role}</div>
+          <div class="detail-org">${d.org}</div>
+          <div class="detail-dates">${d.location} · ${d.dates}</div>
+          <div class="detail-tag">${d.tag}</div>
+        </div>
+        <div class="detail-kanji">${d.kanji}</div>
+      </div>
+      <div class="detail-right">
+        <div class="detail-bullets-title">Highlights</div>
+        <div class="detail-bullets">
+          ${d.bullets.map(b => `
+            <div class="detail-bullet">
+              <span class="bullet-glyph">斬</span>
+              <span class="bullet-text">${b}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+    // Small delay so CSS transition kicks in fresh
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        inner.classList.add('visible');
+      });
+    });
+  }, current === null ? 0 : 220);
 }
 
-items.forEach(item => {
-  item.addEventListener('click', () => {
-    items.forEach(i => i.classList.remove('active'));
-    item.classList.add('active');
-    renderChronicle(item.dataset.key);
-  });
+document.querySelectorAll('.pos-card').forEach(card => {
+  card.addEventListener('click', function() {
+    const id = parseInt(this.dataset.id);
+    if (current === id) return;
 
-  item.addEventListener('mouseenter', () => {
-    renderChronicle(item.dataset.key);
+    // Update active card
+    document.querySelectorAll('.pos-card').forEach(c => c.classList.remove('active'));
+    this.classList.add('active');
+
+    current = id;
+    renderDetail(id);
+
+    // Scroll detail panel into view smoothly
+    document.querySelector('.detail-panel').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   });
 });
-</script>
 
+// Auto-open first on load
+window.addEventListener('DOMContentLoaded', () => {
+  const first = document.querySelector('.pos-card[data-id="0"]');
+  first.classList.add('active');
+  current = 0;
+  renderDetail(0);
+});
+</script>
 </body>
 </html>
