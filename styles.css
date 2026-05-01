@@ -623,19 +623,19 @@ footer {
 
 /* Leap of Faith — exit animation */
 body.leaping .ac-transition .eagle-flash {
-  animation: eagleFlash 0.6s ease-out forwards;
+  animation: eagleFlash 10s ease-out forwards;
 }
 
 body.leaping .ac-transition .animus-lines {
-  animation: animusScan 0.6s ease-out forwards;
+  animation: animusScan 5s ease-out forwards;
 }
 
 body.leaping .ac-transition .ac-insignia {
-  animation: insigniaFlash 0.6s ease-out forwards;
+  animation: insigniaFlash 5s ease-out forwards;
 }
 
 body.leaping .page-content {
-  animation: leapFall 0.5s ease-in forwards;
+  animation: leapFall 5s ease-in forwards;
 }
 
 @keyframes eagleFlash {
