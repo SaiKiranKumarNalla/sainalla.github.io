@@ -575,27 +575,27 @@ footer {
   );
 }
 
-/* ── AC PAGE TRANSITIONS: CINEMATIC LEAP ── */
+/* ── AC PAGE TRANSITIONS: HIGH-VISIBILITY SNAPPY LEAP ── */
 
 .ac-transition {
   position: fixed;
   inset: 0;
-  z-index: 9998;
+  z-index: 9999; /* Boosted above all elements */
   pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Eagle Vision flash: Slow build to a blinding stutter */
+/* Eagle Vision flash: Brighter gold and higher opacity */
 .ac-transition .eagle-flash {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at center, rgba(212,175,55,0.2), var(--ink) 75%);
+  background: radial-gradient(circle at center, rgba(212,175,55,0.4), var(--ink) 85%);
   opacity: 0;
 }
 
-/* Animus scan lines: Set to step-based animation for "glitchy" movement */
+/* Animus scan lines: Increased opacity for visibility on dark theme */
 .ac-transition .animus-lines {
   position: absolute;
   inset: 0;
@@ -603,107 +603,79 @@ footer {
     0deg,
     transparent,
     transparent 2px,
-    rgba(212,175,55,0.05) 2px,
-    rgba(212,175,55,0.05) 4px
+    rgba(212,175,55,0.2) 2px, 
+    rgba(212,175,55,0.2) 4px
   );
   opacity: 0;
 }
 
 .ac-transition .ac-insignia {
   font-family: 'Noto Serif JP', serif;
-  font-size: clamp(3rem, 10vw, 6rem);
-  color: rgba(212,175,55,0.5);
+  font-size: clamp(4rem, 12vw, 8rem); /* Larger presence */
+  color: rgba(212,175,55,0.9); /* Sharp visibility */
+  text-shadow: 0 0 30px rgba(212,175,55,0.6), 0 0 10px rgba(212,175,55,0.4);
   opacity: 0;
-  transform: scale(0.7);
-  z-index: 1;
-  filter: drop-shadow(0 0 20px rgba(212,175,55,0.2));
+  transform: scale(0.8);
+  z-index: 2;
 }
 
-/* ── THE LEAP: SLOW-MO TO ACCELERATION ── */
+/* ── ADJUSTED TIMING (2.5s Total Duration) ── */
 
 body.leaping .ac-transition .eagle-flash {
-  /* 6 seconds total: 4s of slow-mo build, 2s of fast flash */
-  animation: eagleFlash 6s cubic-bezier(0.8, 0, 0.2, 1) forwards;
+  animation: eagleFlash 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 body.leaping .ac-transition .animus-lines {
-  /* Using steps(30) to create a digital stutter/lag effect */
-  animation: animusScan 5s steps(30) forwards;
+  animation: animusScan 2.5s steps(20) forwards;
 }
 
 body.leaping .ac-transition .ac-insignia {
-  animation: insigniaFlash 6s cubic-bezier(0.15, 0, 0.15, 1) forwards;
+  animation: insigniaFlash 2.5s cubic-bezier(0.2, 0, 0.2, 1) forwards;
 }
 
 body.leaping .page-content {
-  /* The "Peak of the Jump" physics: Stay still, then drop fast */
-  animation: leapFall 6s cubic-bezier(0.85, 0, 0.15, 1) forwards;
+  /* Cinematic Physics: Slight recoil up, then fast drop */
+  animation: leapFall 2.5s cubic-bezier(0.6, 0, 0.4, 1) forwards;
 }
 
-/* ── KEYFRAMES: THE PHYSICS OF THE FALL ── */
+/* ── REFINED KEYFRAMES ── */
 
 @keyframes eagleFlash {
   0% { opacity: 0; }
-  60% { opacity: 0.2; } /* Lingering slow-mo aura */
-  85% { opacity: 1; background: var(--paper); } /* Blinding glint at the fall's end */
+  20% { opacity: 1; } /* Flare up quickly */
+  80% { opacity: 1; background: rgba(212,175,55,0.2); }
   100% { opacity: 1; background: var(--ink); }
 }
 
-@keyframes animusScan {
-  0% { opacity: 0; transform: translateY(0); }
-  20%, 80% { opacity: 1; }
-  100% { opacity: 0; transform: translateY(100px); }
-}
-
 @keyframes insigniaFlash {
-  0% { opacity: 0; transform: scale(0.6) rotate(-5deg); filter: blur(10px); }
-  20% { opacity: 0.3; filter: blur(0px); }
-  70% { opacity: 0.6; transform: scale(1) rotate(0deg); }
-  100% { opacity: 0; transform: scale(3) rotate(5deg); filter: blur(20px); }
+  0% { opacity: 0; transform: scale(0.7) rotate(-5deg); filter: blur(10px); }
+  25% { opacity: 1; transform: scale(1) rotate(0deg); filter: blur(0); } /* Pop in early */
+  80% { opacity: 1; transform: scale(1.1); }
+  100% { opacity: 0; transform: scale(2); filter: blur(20px); }
 }
 
 @keyframes leapFall {
-  0% { 
-    opacity: 1; 
-    transform: translateY(0) scale(1); 
-    filter: blur(0) contrast(1);
-  }
-  /* The "Hang Time": Very little movement for the first 60% of the time */
-  60% { 
-    opacity: 0.9; 
-    transform: translateY(20px) scale(1.02); 
-    filter: blur(2px) contrast(1.2);
-  }
-  /* The "Impact": Rapid acceleration and fade out */
-  100% { 
-    opacity: 0; 
-    transform: translateY(400px) scale(1.2); 
-    filter: blur(25px) contrast(2);
-  }
+  0% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+  25% { opacity: 0.9; transform: translateY(-15px) scale(0.98); } /* Recoil "The Jump" */
+  100% { opacity: 0; transform: translateY(300px) scale(1.1); filter: blur(15px); }
 }
 
-/* ── ENTRANCE: WORLD SYNCHRONIZATION ── */
-
+/* Landing Synchronization (Snappy landing) */
 .page-content {
-  /* The new page builds in with a slow digital "rez-in" */
-  animation: syncRise 2.5s cubic-bezier(0.2, 1, 0.3, 1) both;
-  animation-delay: 0.5s; /* Slight delay to let the flash clear */
+  animation: syncRise 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.1s; 
 }
 
 @keyframes syncRise {
   0% { 
     opacity: 0; 
-    transform: scale(0.95) translateY(30px);
-    filter: brightness(0) grayscale(1) blur(15px);
-  }
-  50% {
-    opacity: 0.5;
-    filter: brightness(1.5) grayscale(0.5) blur(5px);
+    transform: scale(0.98) translateY(20px);
+    filter: brightness(2) contrast(1.5) blur(10px);
   }
   100% { 
     opacity: 1; 
     transform: scale(1) translateY(0);
-    filter: brightness(1) grayscale(0) blur(0);
+    filter: brightness(1) contrast(1) blur(0);
   }
 }
 
