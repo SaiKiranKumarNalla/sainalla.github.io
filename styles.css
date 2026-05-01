@@ -753,62 +753,51 @@ body.leaping .page-content {
    
 }
 
-/* GPA / SYNC GAUGE STYLES */
-.gpa-container {
-  margin: 1.5rem 0 1rem 0;
-  max-width: 400px; /* Adjust width to fit your preference */
-  position: relative;
-  z-index: 2;
+/* --- Assassin's Creed Segmented Health Bar --- */
+.health-bar-container {
+  text-align: right;
+  min-width: 180px;
+  margin-bottom: 0.5rem;
 }
 
-.gpa-label {
-  font-family: 'Space Mono', monospace;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--mist);
-  margin-bottom: 0.6rem;
+.health-segments {
   display: flex;
-  justify-content: space-between;
+  gap: 4px;
+  justify-content: flex-end;
+  margin-top: 5px;
 }
 
-.gpa-value {
-  color: var(--blood-glow);
-  font-weight: 700;
+.segment {
+  width: 12px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.05); /* Empty slot */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: skewX(-15deg); /* Angled like AC health bars */
+  transition: all 0.4s ease;
 }
 
-/* The Animus-style Empty Bar */
-.sync-bar {
-  height: 3px;
-  background: rgba(240, 235, 223, 0.05); /* Very subtle paper-colored backing */
-  position: relative;
-  overflow: hidden;
-  border-radius: 2px;
+/* Filled health segments */
+.segment.filled {
+  background: var(--blood);
+  box-shadow: 0 0 8px var(--blood-dim);
+  border-color: var(--blood-glow);
 }
 
-/* The Glowing Progress Fill */
-.sync-progress {
-  height: 100%;
-  background: linear-gradient(90deg, var(--blood), var(--blood-glow));
-  box-shadow: 0 0 12px var(--blood-dim);
-  transition: width 2s cubic-bezier(0.4, 0, 0.2, 1);
+/* Hover effect: Full Synchronization glow */
+.edu-card:hover .segment.filled {
+  background: var(--blood-glow);
+  box-shadow: 0 0 15px var(--blood-glow);
+  filter: brightness(1.2);
 }
 
-/* Moving Glitch Scanner */
-.sync-glitch {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, 
-    transparent, 
-    rgba(255, 255, 255, 0.15) 50%, 
-    transparent 100%);
-  animation: animusScan 4s infinite linear;
+/* Glitch animation for the label */
+.edu-card:hover .gpa-label {
+  animation: ac-glitch 0.2s infinite;
+  color: var(--paper);
 }
 
-@keyframes animusScan {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+@keyframes ac-glitch {
+  0% { transform: translate(0); opacity: 1; }
+  50% { transform: translate(-1px, 1px); opacity: 0.8; }
+  100% { transform: translate(0); opacity: 1; }
 }
