@@ -808,3 +808,16 @@ body.leaping .page-content {
   opacity: 0.7;
   letter-spacing: 0.05em;
 }
+
+/* Represents a partial synchronization (e.g., the .5 in 8.5) */
+.segment.filled-dim {
+  background: rgba(139, 26, 26, 0.4); /* Faded var(--blood) */
+  box-shadow: 0 0 4px var(--blood-dim);
+  border-color: rgba(194, 59, 59, 0.3);
+  animation: sync-pulse 2s infinite ease-in-out;
+}
+
+@keyframes sync-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
