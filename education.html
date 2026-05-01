@@ -94,8 +94,8 @@
     <div class="edu-card">
   <div class="edu-kanji">修</div>
   
-  <!-- Flex container to separate text and health bar -->
-  <div class="edu-main-content" style="display: flex; justify-content: space-between; align-items: flex-end;">
+  <!-- Main content flex container -->
+  <div style="display: flex; justify-content: space-between; align-items: flex-end;">
     
     <div class="edu-info">
       <div class="edu-top">
@@ -114,11 +114,10 @@
       <div class="edu-note" style="margin-top: 1rem;">Full Scholarship — Admitted to PhD Track · Palaiseau, France</div>
     </div>
 
-    <!-- Health Bar on the Right -->
+    <!-- Health Bar Section: Anchored Right -->
     <div class="health-bar-container">
       <div class="gpa-label mono">SYNC <span class="gpa-value">3.7/4.0</span></div>
       <div class="health-segments">
-        <!-- We use 10 segments; for 92%, fill 9 segments -->
         <div class="segment filled"></div>
         <div class="segment filled"></div>
         <div class="segment filled"></div>
@@ -132,19 +131,9 @@
       </div>
     </div>
 
-  </div>
-</div>
-
-  <div class="gpa-container">
-  <div class="gpa-label mono">Synchronization: <span class="gpa-value">3.7 / 4.0</span></div>
-  <div class="sync-bar">
-    <!-- The width % represents your actual GPA -->
-    <div class="sync-progress" style="width: 92%;"></div>
-    <div class="sync-glitch"></div>
-  </div>
-  </div>
-  <div class="edu-note">Full Scholarship — Admitted to PhD Track · Palaiseau, France</div>
-</div>
+  </div> <!-- End of flex container -->
+</div> <!-- End of edu-card -->
+   
 
     <!-- B.Tech Entry -->
 <div class="edu-card">
