@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Navigate after animation
       setTimeout(() => {
         window.location.href = href;
-      }, 500);
+      }, 2300);
     });
   });
 });
