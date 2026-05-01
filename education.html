@@ -93,47 +93,40 @@
 
     <div class="edu-card">
   <div class="edu-kanji">修</div>
-  
-  <!-- Main content flex container -->
-  <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-    
-    <div class="edu-info">
-      <div class="edu-top">
-        <div style="display: flex; align-items: center; gap: 2rem;">
-          <a href="https://www.polytechnique.edu/" target="_blank" rel="noopener noreferrer">
-            <div class="logo-container">
-              <img src="Assets/logo-ip-pari.png" alt="École Polytechnique" class="edu-logo logo-white">
-            </div>
-          </a>
-          <div>
-            <div class="edu-degree">MSc in Biomechanical & Biomedical Engineering</div>
-            <div class="edu-school">École Polytechnique — IP Paris</div>
-          </div>
+
+  <!-- Health Bar moved to the top-right via CSS absolute positioning -->
+  <div class="health-bar-container">
+    <div class="gpa-label mono" style="font-size: 0.65rem; color: var(--mist);">SYNC <span class="gpa-value" style="color: var(--blood-glow);">3.7/4.0</span></div>
+    <div class="health-segments">
+      <div class="segment filled"></div>
+      <div class="segment filled"></div>
+      <div class="segment filled"></div>
+      <div class="segment filled"></div>
+      <div class="segment filled"></div>
+      <div class="segment filled"></div>
+      <div class="segment filled"></div>
+      <div class="segment filled"></div>
+      <div class="segment filled"></div>
+      <div class="segment"></div>
+    </div>
+  </div>
+
+  <div class="edu-top">
+    <div style="display: flex; align-items: center; gap: 2rem;">
+      <a href="https://www.polytechnique.edu/" target="_blank" rel="noopener noreferrer">
+        <div class="logo-container">
+          <img src="Assets/logo-ip-pari.png" alt="École Polytechnique" class="edu-logo logo-white">
         </div>
-      </div>
-      <div class="edu-note" style="margin-top: 1rem;">Full Scholarship — Admitted to PhD Track · Palaiseau, France</div>
-    </div>
-
-    <!-- Health Bar Section: Anchored Right -->
-    <div class="health-bar-container">
-      <div class="gpa-label mono">SYNC <span class="gpa-value">3.7/4.0</span></div>
-      <div class="health-segments">
-        <div class="segment filled"></div>
-        <div class="segment filled"></div>
-        <div class="segment filled"></div>
-        <div class="segment filled"></div>
-        <div class="segment filled"></div>
-        <div class="segment filled"></div>
-        <div class="segment filled"></div>
-        <div class="segment filled"></div>
-        <div class="segment filled"></div>
-        <div class="segment"></div>
+      </a>
+      <div>
+        <div class="edu-degree">MSc in Biomechanical & Biomedical Engineering</div>
+        <div class="edu-school">École Polytechnique — IP Paris</div>
       </div>
     </div>
-
-  </div> <!-- End of flex container -->
-</div> <!-- End of edu-card -->
-   
+  </div>
+  
+  <div class="edu-note" style="margin-top: 1.5rem;">Full Scholarship — Admitted to PhD Track · Palaiseau, France</div>
+</div>
 
     <!-- B.Tech Entry -->
 <div class="edu-card">
