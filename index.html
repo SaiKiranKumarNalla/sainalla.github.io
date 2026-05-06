@@ -27,9 +27,9 @@
 .intro-stat-label{font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--mist)}
 
 /* ── NAV GRID ── */
-.nav-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ghost-line);position:relative;z-index:1}
+.nav-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--ghost-line);position:relative;z-index:1}
 .nav-card{padding:3rem 2rem;text-align:center;text-decoration:none;color:var(--paper);border-right:1px solid var(--ghost-line);border-bottom:1px solid var(--ghost-line);transition:all 0.4s;position:relative;overflow:hidden}
-.nav-card:nth-child(4n){border-right:none}
+.nav-card:nth-child(3n){border-right:none}
 .nav-card::before{content:'';position:absolute;inset:0;background:var(--blood);opacity:0;transition:opacity 0.4s}
 .nav-card:hover::before{opacity:0.08}
 .nav-card-kanji{font-family:'Noto Serif JP',serif;font-size:2.5rem;font-weight:900;color:rgba(139,26,26,0.25);margin-bottom:0.8rem;transition:color 0.4s;position:relative;z-index:1}
@@ -37,26 +37,12 @@
 .nav-card-label{font-family:'Zen Antique',serif;font-size:1rem;margin-bottom:0.2rem;position:relative;z-index:1}
 .nav-card-sub{font-family:'Space Mono',monospace;font-size:0.55rem;text-transform:uppercase;letter-spacing:0.15em;color:var(--steel);position:relative;z-index:1}
 
-/* ── CV DOWNLOAD TILE ── */
-.nav-card-cv{background:linear-gradient(135deg, rgba(139,26,26,0.08) 0%, transparent 60%);position:relative}
-.nav-card-cv .nav-card-kanji{color:rgba(212,175,55,0.35);transition:color 0.4s, text-shadow 0.4s}
-.nav-card-cv:hover .nav-card-kanji{color:rgba(212,175,55,0.7);text-shadow:0 0 20px rgba(212,175,55,0.3)}
-.nav-card-cv .nav-card-label{color:var(--paper)}
-.nav-card-cv .nav-card-sub{color:rgba(212,175,55,0.6)}
-/* animus corner brackets */
-.nav-card-cv .cv-corner{position:absolute;width:14px;height:14px;border-color:rgba(212,175,55,0.25);border-style:solid;pointer-events:none;transition:border-color 0.4s}
-.nav-card-cv .cv-corner.tl{top:10px;left:10px;border-width:1px 0 0 1px}
-.nav-card-cv .cv-corner.tr{top:10px;right:10px;border-width:1px 1px 0 0}
-.nav-card-cv .cv-corner.bl{bottom:10px;left:10px;border-width:0 0 1px 1px}
-.nav-card-cv .cv-corner.br{bottom:10px;right:10px;border-width:0 1px 1px 0}
-.nav-card-cv:hover .cv-corner{border-color:rgba(212,175,55,0.6)}
-/* eagle vision pulse on hover */
-.nav-card-cv::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at center, rgba(212,175,55,0.12), transparent 70%);opacity:0;transition:opacity 0.5s;pointer-events:none}
-.nav-card-cv:hover::after{opacity:1}
-/* scan line */
-.cv-scan{position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right, transparent, rgba(212,175,55,0.4), transparent);opacity:0;transition:opacity 0.4s}
-.nav-card-cv:hover .cv-scan{opacity:1;animation:cvScanPulse 2.5s ease-in-out infinite}
-@keyframes cvScanPulse{0%,100%{opacity:0.3}50%{opacity:0.8}}
+/* ── CV DOWNLOAD BUTTON (hero) ── */
+.btn-cv{border-color:rgba(212,175,55,0.5);color:var(--paper);position:relative}
+.btn-cv::before{background:rgba(212,175,55,0.2)}
+.btn-cv:hover{border-color:rgba(212,175,55,0.8)}
+.btn-cv .cv-glyph{font-family:'Noto Serif JP',serif;font-size:0.85rem;color:rgba(212,175,55,0.7);transition:color 0.3s}
+.btn-cv:hover .cv-glyph{color:rgba(212,175,55,1)}
 
 .quote-strip{overflow:hidden;white-space:nowrap;padding:1.2rem 0;border-top:1px solid var(--ghost-line);border-bottom:1px solid var(--ghost-line);position:relative;z-index:1}
 .quote-strip-inner{display:inline-block;animation:scrollQuote 45s linear infinite}
@@ -67,7 +53,7 @@
 .philosophy-kanji{font-family:'Noto Serif JP',serif;font-size:clamp(8rem,16vw,14rem);font-weight:900;color:rgba(139,26,26,0.08);text-align:center;line-height:1}
 .philosophy-text h3{font-family:'Zen Antique',serif;font-size:1.6rem;margin-bottom:1rem}
 .philosophy-text p{font-size:0.92rem;line-height:1.8;color:var(--mist);font-weight:300}
-@media(max-width:900px){.nav-grid{grid-template-columns:1fr 1fr}.philosophy{grid-template-columns:1fr;gap:2rem}.intro-inner{grid-template-columns:1fr;gap:2rem}}
+@media(max-width:900px){.nav-grid{grid-template-columns:1fr 1fr}.philosophy{grid-template-columns:1fr;gap:2rem}.intro-inner{grid-template-columns:1fr;gap:2rem}.hero-btns{flex-direction:column;align-items:center}}
 @media(max-width:500px){.nav-grid{grid-template-columns:1fr}}
 </style>
 </head>
@@ -140,6 +126,7 @@
     
     <div class="hero-btns">
       <a href="about.html" class="btn">Enter Animus<span class="arrow">→</span></a>
+      <a href="Assets/Sai_Nalla_CV.pdf" target="_blank" class="btn btn-cv"><span class="cv-glyph">伝</span>View CV<span class="arrow">→</span></a>
     </div>
   </div>
 </section>
@@ -187,16 +174,6 @@
   <a href="projects.html" class="nav-card"><div class="nav-card-kanji">鍛</div><div class="nav-card-label">The Forge</div><div class="nav-card-sub">Projects</div></a>
   <a href="papers.html" class="nav-card"><div class="nav-card-kanji">刀</div><div class="nav-card-label">The Scrolls</div><div class="nav-card-sub">Publications</div></a>
   <a href="contact.html" class="nav-card"><div class="nav-card-kanji">縁</div><div class="nav-card-label">Reach Out</div><div class="nav-card-sub">Contact</div></a>
-
-  <!-- ── CV DOWNLOAD TILE (AC Eagle Vision Theme) ── -->
-  <a href="Assets/Sai_Nalla_CV.pdf" download class="nav-card nav-card-cv" style="grid-column: span 2;">
-    <div class="cv-scan"></div>
-    <div class="cv-corner tl"></div><div class="cv-corner tr"></div>
-    <div class="cv-corner bl"></div><div class="cv-corner br"></div>
-    <div class="nav-card-kanji">鷹</div>
-    <div class="nav-card-label">Eagle Vision — Download CV</div>
-    <div class="nav-card-sub">Synchronize Memory · PDF</div>
-  </a>
 </div>
 
 <section class="philosophy bg-smoke">
