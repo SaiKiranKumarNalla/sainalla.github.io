@@ -129,74 +129,109 @@
 
 
 
-/* ── TOOLKIT / COMPETENCY MAP ───────────────── */
-.arsenal-wrap { margin-bottom: 4.5rem; }
-.arsenal-top { display:grid; grid-template-columns: 1.2fr 0.8fr; gap:1px; background:var(--ghost-line); border:1px solid var(--ghost-line); margin-bottom:1.15rem; }
-.arsenal-panel { background:var(--ink); padding:2rem 2rem 1.9rem; position:relative; overflow:hidden; }
-.arsenal-panel::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--blood); transform:scaleX(0); transform-origin:left; transition:transform 0.35s; }
-.arsenal-panel:hover::after { transform:scaleX(1); }
-.arsenal-kicker { font-family:'Space Mono',monospace; font-size:0.54rem; text-transform:uppercase; letter-spacing:0.22em; color:rgba(139,26,26,0.5); margin-bottom:1rem; }
-.arsenal-lead { font-size:1rem; line-height:1.85; color:var(--mist); font-weight:300; max-width:560px; }
-.arsenal-lead strong { color:var(--paper); font-weight:500; }
-.arsenal-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--ghost-line); }
-.arsenal-metric { background:var(--ink); padding:1.8rem 1rem; text-align:center; }
-.arsenal-metric-num { font-family:'Zen Antique',serif; font-size:clamp(2.5rem,4vw,3.6rem); color:var(--blood-glow); line-height:1; margin-bottom:0.35rem; }
-.arsenal-metric-label { font-family:'Space Mono',monospace; font-size:0.52rem; text-transform:uppercase; letter-spacing:0.18em; color:var(--mist); line-height:1.5; }
+/* ── HOVER TOOLKIT ─────────────────────────── */
+.toolkit-section { margin-bottom: 4.5rem; }
+.toolkit-intro {
+  border:1px solid var(--ghost-line);
+  background:linear-gradient(135deg, rgba(139,26,26,0.05) 0%, transparent 38%), var(--ghost);
+  padding:1.4rem 1.6rem;
+  margin-bottom:1.2rem;
+}
+.toolkit-kicker {
+  font-family:'Space Mono',monospace; font-size:0.52rem; text-transform:uppercase;
+  letter-spacing:0.22em; color:rgba(139,26,26,0.5); margin-bottom:0.65rem;
+}
+.toolkit-intro p { font-size:0.9rem; color:var(--mist); line-height:1.75; font-weight:300; max-width:760px; }
+.toolkit-intro strong { color:var(--paper); font-weight:500; }
 
-.tool-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.15rem; }
-.tool-card { border:1px solid var(--ghost-line); background:linear-gradient(135deg, rgba(139,26,26,0.05) 0%, transparent 40%), var(--ghost); padding:1.8rem 1.8rem 1.6rem; position:relative; overflow:hidden; }
-.tool-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, var(--blood), transparent); opacity:0.35; }
-.arsenal-corner { position:absolute; width:10px; height:10px; border-style:solid; border-color:rgba(139,26,26,0.18); pointer-events:none; }
-.arsenal-corner.tl{ top:8px; left:8px; border-width:1px 0 0 1px; }
-.arsenal-corner.tr{ top:8px; right:8px; border-width:1px 1px 0 0; }
-.arsenal-corner.bl{ bottom:8px; left:8px; border-width:0 0 1px 1px; }
-.arsenal-corner.br{ bottom:8px; right:8px; border-width:0 1px 1px 0; }
-.tool-head { display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; margin-bottom:1.1rem; }
-.tool-title-wrap { display:flex; flex-direction:column; gap:0.3rem; }
-.tool-title { font-family:'Zen Antique',serif; font-size:1.22rem; line-height:1.25; color:var(--paper); }
-.tool-subtitle { font-size:0.8rem; line-height:1.6; color:var(--steel); max-width:420px; }
-.tool-kanji { font-family:'Noto Serif JP',serif; font-size:2.1rem; color:rgba(139,26,26,0.25); line-height:1; flex-shrink:0; }
-.tool-subgroup { font-family:'Space Mono',monospace; font-size:0.48rem; letter-spacing:0.16em; text-transform:uppercase; color:rgba(139,26,26,0.45); margin:1rem 0 0.6rem; padding-top:0.9rem; border-top:1px solid var(--ghost-line); }
-.tool-subgroup:first-of-type { margin-top:0; padding-top:0; border-top:none; }
-.tool-row { margin-bottom:0.8rem; }
-.tool-row:last-child { margin-bottom:0; }
-.tool-row-top { display:flex; align-items:baseline; justify-content:space-between; gap:0.8rem; margin-bottom:0.34rem; }
-.tool-name { font-size:0.95rem; color:var(--paper); font-weight:500; }
-.tool-score { font-family:'Space Mono',monospace; font-size:0.55rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--blood-glow); white-space:nowrap; }
-.tool-bar { height:6px; background:rgba(240,235,227,0.06); position:relative; overflow:hidden; }
-.tool-fill { height:100%; background:linear-gradient(90deg, rgba(139,26,26,0.75), var(--blood-glow)); }
-.tool-meta { display:flex; justify-content:space-between; gap:0.8rem; margin-top:0.34rem; font-family:'Space Mono',monospace; font-size:0.47rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--steel); }
-.tool-note { font-size:0.72rem; line-height:1.55; color:var(--steel); margin-top:0.45rem; }
-.tool-tags { display:flex; flex-wrap:wrap; gap:0.38rem; margin-top:1rem; }
-.tool-tags span { font-family:'Space Mono',monospace; font-size:0.45rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--steel); border:1px solid var(--ghost-line); padding:0.22rem 0.45rem; }
+.workstream-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; overflow:visible; margin-bottom:1.8rem;
+}
+.workstream-card {
+  position:relative; border:1px solid var(--ghost-line); background:var(--ghost); min-height:150px;
+  padding:1.35rem 1.25rem 1.15rem; overflow:visible; cursor:pointer; transition:all 0.32s;
+}
+.workstream-card:hover, .workstream-card.active { border-color:rgba(139,26,26,0.25); background:rgba(139,26,26,0.04); z-index:10; }
+.workstream-card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--blood);
+  transform:scaleX(0); transform-origin:left; transition:transform 0.35s;
+}
+.workstream-card:hover::after, .workstream-card.active::after { transform:scaleX(1); }
+.ws-top { display:flex; align-items:flex-start; justify-content:space-between; gap:0.8rem; margin-bottom:0.9rem; }
+.ws-title { font-family:'Zen Antique',serif; font-size:1.02rem; line-height:1.3; }
+.ws-kanji { font-family:'Noto Serif JP',serif; font-size:1.6rem; line-height:1; color:rgba(139,26,26,0.26); }
+.ws-meta { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.65rem; }
+.ws-chip {
+  font-family:'Space Mono',monospace; font-size:0.46rem; text-transform:uppercase; letter-spacing:0.1em;
+  color:var(--steel); border:1px solid var(--ghost-line); padding:0.24rem 0.48rem;
+}
+.ws-hint { font-size:0.75rem; color:var(--steel); line-height:1.55; }
+.tool-pop {
+  position:absolute; left:0; right:0; top:calc(100% + 10px); z-index:20;
+  border:1px solid rgba(139,26,26,0.25); background:linear-gradient(135deg, rgba(139,26,26,0.07) 0%, transparent 34%), rgba(10,10,11,0.98);
+  box-shadow:0 18px 42px rgba(0,0,0,0.35); padding:1rem 1rem 0.95rem;
+  opacity:0; visibility:hidden; transform:translateY(8px) scale(0.98);
+  transition:opacity 0.22s, transform 0.22s, visibility 0.22s;
+  pointer-events:none;
+}
+.workstream-card:hover .tool-pop,
+.workstream-card:focus-within .tool-pop,
+.workstream-card.active .tool-pop {
+  opacity:1; visibility:visible; transform:translateY(0) scale(1); pointer-events:auto;
+}
+.tool-pop-label {
+  font-family:'Space Mono',monospace; font-size:0.46rem; text-transform:uppercase; letter-spacing:0.18em;
+  color:rgba(139,26,26,0.55); margin-bottom:0.75rem;
+}
+.tool-item { margin-bottom:0.72rem; }
+.tool-item:last-child { margin-bottom:0; }
+.tool-item-top { display:flex; justify-content:space-between; gap:0.7rem; align-items:baseline; margin-bottom:0.32rem; }
+.tool-item-name { font-size:0.84rem; color:var(--paper); font-weight:500; line-height:1.4; }
+.tool-item-score { font-family:'Space Mono',monospace; font-size:0.5rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--blood-glow); white-space:nowrap; }
+.tool-item-bar { height:5px; background:rgba(240,235,227,0.06); overflow:hidden; }
+.tool-item-fill { height:100%; background:linear-gradient(90deg, rgba(139,26,26,0.78), var(--blood-glow)); }
+.tool-item-meta { display:flex; justify-content:space-between; gap:0.7rem; margin-top:0.28rem; font-family:'Space Mono',monospace; font-size:0.44rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--steel); }
 
-.competency-map { margin-top:1.2rem; border:1px solid var(--ghost-line); background:linear-gradient(135deg, rgba(139,26,26,0.04) 0%, transparent 36%), var(--ghost); padding:1.8rem; position:relative; overflow:hidden; }
-.competency-map::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, var(--blood), transparent); opacity:0.4; }
-.comp-header { display:flex; justify-content:space-between; align-items:flex-end; gap:1rem; margin-bottom:1.4rem; }
-.comp-title { font-family:'Zen Antique',serif; font-size:1.2rem; }
-.comp-subtitle { font-size:0.8rem; color:var(--steel); max-width:520px; line-height:1.6; }
-.comp-orbit { display:grid; grid-template-columns: 1fr 1.2fr 1fr; gap:0.9rem; align-items:stretch; }
-.comp-col { display:grid; gap:0.9rem; }
-.comp-node { border:1px solid var(--ghost-line); background:rgba(10,10,11,0.55); padding:1rem 1rem 0.95rem; position:relative; min-height:108px; }
-.comp-node::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--blood); transform:scaleX(0); transform-origin:left; transition:transform 0.35s; }
-.comp-node:hover::after { transform:scaleX(1); }
-.comp-node.center { display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; min-height:228px; background:linear-gradient(135deg, rgba(139,26,26,0.08) 0%, transparent 42%), rgba(10,10,11,0.7); }
-.comp-label { font-family:'Space Mono',monospace; font-size:0.46rem; text-transform:uppercase; letter-spacing:0.16em; color:rgba(139,26,26,0.5); margin-bottom:0.45rem; }
-.comp-name { font-family:'Zen Antique',serif; font-size:0.98rem; line-height:1.3; color:var(--paper); margin-bottom:0.45rem; }
-.comp-strength { font-family:'Space Mono',monospace; font-size:0.5rem; text-transform:uppercase; letter-spacing:0.14em; color:var(--blood-glow); margin-bottom:0.4rem; }
-.comp-detail { font-size:0.76rem; line-height:1.6; color:var(--steel); }
-.comp-center-name { font-family:'Zen Antique',serif; font-size:1.35rem; line-height:1.25; margin-bottom:0.4rem; }
-.comp-center-note { font-size:0.82rem; line-height:1.7; color:var(--mist); max-width:230px; }
-.comp-center-badge { font-family:'Space Mono',monospace; font-size:0.5rem; text-transform:uppercase; letter-spacing:0.18em; color:var(--blood-glow); margin-bottom:0.6rem; }
+.competency-map-wrap {
+  border:1px solid var(--ghost-line); background:linear-gradient(135deg, rgba(139,26,26,0.05) 0%, transparent 42%), var(--ghost);
+  padding:1.4rem; position:relative; overflow:hidden;
+}
+.competency-map-wrap::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right, transparent, var(--blood), transparent); opacity:0.35;
+}
+.comp-map-title { font-family:'Zen Antique',serif; font-size:1.1rem; margin-bottom:1rem; }
+.comp-map {
+  display:grid; grid-template-columns:1fr 1.2fr 1fr; grid-template-areas:
+  "medtech core modeling"
+  "medical core design"
+  "experimental core defense";
+  gap:0.8rem; align-items:stretch;
+}
+.comp-card {
+  border:1px solid var(--ghost-line); background:rgba(10,10,11,0.58); padding:0.9rem 0.95rem; position:relative;
+}
+.comp-card.core {
+  grid-area:core; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+  background:linear-gradient(135deg, rgba(139,26,26,0.08) 0%, transparent 38%), rgba(10,10,11,0.78);
+}
+.comp-card.medtech{grid-area:medtech;} .comp-card.medical{grid-area:medical;} .comp-card.experimental{grid-area:experimental;}
+.comp-card.modeling{grid-area:modeling;} .comp-card.design{grid-area:design;} .comp-card.defense{grid-area:defense;}
+.comp-mini { font-family:'Space Mono',monospace; font-size:0.42rem; text-transform:uppercase; letter-spacing:0.16em; color:rgba(139,26,26,0.52); margin-bottom:0.35rem; }
+.comp-name { font-family:'Zen Antique',serif; font-size:0.95rem; line-height:1.3; margin-bottom:0.28rem; }
+.comp-level { font-family:'Space Mono',monospace; font-size:0.47rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--blood-glow); }
+.comp-core-title { font-family:'Zen Antique',serif; font-size:1.24rem; line-height:1.25; margin-bottom:0.42rem; }
+.comp-core-sub { font-size:0.78rem; color:var(--mist); line-height:1.6; max-width:220px; }
 
 @media(max-width:980px){
-  .arsenal-top { grid-template-columns:1fr; }
-  .tool-grid { grid-template-columns:1fr; }
-  .comp-orbit { grid-template-columns:1fr; }
-  .comp-node.center { min-height:160px; }
+  .workstream-grid { grid-template-columns:repeat(2,1fr); }
+  .comp-map { grid-template-columns:1fr; grid-template-areas:
+    "core" "medtech" "modeling" "medical" "design" "experimental" "defense"; }
 }
-@media(max-width:720px){
-  .arsenal-metrics { grid-template-columns:1fr; }
+@media(max-width:680px){
+  .workstream-grid { grid-template-columns:1fr; }
+  .tool-pop { position:relative; top:auto; left:auto; right:auto; margin-top:0.9rem; opacity:1; visibility:visible; transform:none; display:none; pointer-events:auto; }
+  .workstream-card.active .tool-pop { display:block; }
+  .workstream-card:hover .tool-pop { display:none; }
 }
 
 /* ── VOLUNTEERING ──────────────────────────── */
@@ -465,210 +500,88 @@
 
     <div class="exp-divider reveal">Toolkit &amp; Applied Competencies</div>
 
-    <section class="arsenal-wrap stagger">
-      <div class="arsenal-top">
-        <div class="arsenal-panel">
-          <div class="arsenal-kicker">The toolkit — now mapped to experience</div>
-          <p class="arsenal-lead">A more compact view of the <strong>tools, methods, and operating areas</strong> that repeatedly show up across my work — from modelling and prototyping to clinical imaging workflows and robotics-oriented systems work.</p>
+    <section class="toolkit-section stagger">
+      <div class="toolkit-intro">
+        <div class="toolkit-kicker">The toolkit — mapped to experience</div>
+        <p><strong>Hover a workstream</strong> to reveal the exact tools and approximate operating level. The goal is to keep the section visual, fast, and easy to scan.</p>
+      </div>
+
+      <div class="workstream-grid">
+        <div class="workstream-card" tabindex="0">
+          <div class="ws-top"><div class="ws-title">Computational Modelling</div><div class="ws-kanji">算</div></div>
+          <div class="ws-hint">Simulation, scientific computing, and engineering analysis.</div>
+          <div class="ws-meta"><span class="ws-chip">3 tools</span><span class="ws-chip">4+ yrs</span><span class="ws-chip">advanced</span></div>
+          <div class="tool-pop">
+            <div class="tool-pop-label">Tool stack</div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">COMSOL Multiphysics</div><div class="tool-item-score">7 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:70%"></div></div><div class="tool-item-meta"><span>3+ yrs</span><span>Multiphysics</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">MATLAB</div><div class="tool-item-score">8 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:80%"></div></div><div class="tool-item-meta"><span>5+ yrs</span><span>Numerical analysis</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">Python</div><div class="tool-item-score">8 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:80%"></div></div><div class="tool-item-meta"><span>4+ yrs</span><span>Automation &amp; data</span></div></div>
+          </div>
         </div>
-        <div class="arsenal-metrics">
-          <div class="arsenal-metric"><div class="arsenal-metric-num">6+</div><div class="arsenal-metric-label">Years CAD /<br>prototype work</div></div>
-          <div class="arsenal-metric"><div class="arsenal-metric-num">4+</div><div class="arsenal-metric-label">Years modelling &amp;<br>scientific computing</div></div>
-          <div class="arsenal-metric"><div class="arsenal-metric-num">3+</div><div class="arsenal-metric-label">Projects imaging<br>analysis / clinical R&amp;D</div></div>
+
+        <div class="workstream-card" tabindex="0">
+          <div class="ws-top"><div class="ws-title">Product Design</div><div class="ws-kanji">鍛</div></div>
+          <div class="ws-hint">CAD, fabrication, and making concepts testable in physical form.</div>
+          <div class="ws-meta"><span class="ws-chip">3 tools</span><span class="ws-chip">6+ yrs</span><span class="ws-chip">strong</span></div>
+          <div class="tool-pop">
+            <div class="tool-pop-label">Tool stack</div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">Autodesk Fusion 360</div><div class="tool-item-score">8 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:80%"></div></div><div class="tool-item-meta"><span>3+ yrs</span><span>CAD design</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">SolidWorks</div><div class="tool-item-score">5 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:50%"></div></div><div class="tool-item-meta"><span>working</span><span>Model editing</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">Ultimaker Cura</div><div class="tool-item-score">8 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:80%"></div></div><div class="tool-item-meta"><span>3+ yrs</span><span>Print preparation</span></div></div>
+          </div>
+        </div>
+
+        <div class="workstream-card" tabindex="0">
+          <div class="ws-top"><div class="ws-title">Experimental Method</div><div class="ws-kanji">試</div></div>
+          <div class="ws-hint">Study design, validation logic, and structured interpretation.</div>
+          <div class="ws-meta"><span class="ws-chip">3 methods</span><span class="ws-chip">4+ yrs</span><span class="ws-chip">strong</span></div>
+          <div class="tool-pop">
+            <div class="tool-pop-label">Method stack</div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">JASP</div><div class="tool-item-score">7 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:70%"></div></div><div class="tool-item-meta"><span>2+ yrs</span><span>Statistics</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">Experimental Design</div><div class="tool-item-score">8 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:80%"></div></div><div class="tool-item-meta"><span>4+ yrs</span><span>Protocol planning</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">Data Collection &amp; Analysis</div><div class="tool-item-score">8 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:80%"></div></div><div class="tool-item-meta"><span>4+ yrs</span><span>Validation</span></div></div>
+          </div>
+        </div>
+
+        <div class="workstream-card" tabindex="0">
+          <div class="ws-top"><div class="ws-title">Medical Imaging Analysis</div><div class="ws-kanji">診</div></div>
+          <div class="ws-hint">Imaging workflows, QC awareness, and retrospective clinical evaluation.</div>
+          <div class="ws-meta"><span class="ws-chip">3 areas</span><span class="ws-chip">3+ projects</span><span class="ws-chip">strong</span></div>
+          <div class="tool-pop">
+            <div class="tool-pop-label">Imaging stack</div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">ImageJ / Fiji</div><div class="tool-item-score">7 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:70%"></div></div><div class="tool-item-meta"><span>3+ yrs</span><span>Image processing</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">Imaging Quality Control</div><div class="tool-item-score">7 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:70%"></div></div><div class="tool-item-meta"><span>3+ projects</span><span>QC workflows</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">Retrospective Clinical Evaluation</div><div class="tool-item-score">7 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:70%"></div></div><div class="tool-item-meta"><span>2+ studies</span><span>Clinical review</span></div></div>
+          </div>
+        </div>
+
+        <div class="workstream-card" tabindex="0">
+          <div class="ws-top"><div class="ws-title">Defense / Robotics</div><div class="ws-kanji">海</div></div>
+          <div class="ws-hint">AUV-rooted systems work with mechanics, integration, and mission logic.</div>
+          <div class="ws-meta"><span class="ws-chip">3 areas</span><span class="ws-chip">2+ yrs</span><span class="ws-chip">emerging</span></div>
+          <div class="tool-pop">
+            <div class="tool-pop-label">Systems stack</div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">AUV Systems</div><div class="tool-item-score">7 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:70%"></div></div><div class="tool-item-meta"><span>2+ yrs</span><span>Systems integration</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">Mechanical Design</div><div class="tool-item-score">7 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:70%"></div></div><div class="tool-item-meta"><span>2+ yrs</span><span>Subsystem design</span></div></div>
+            <div class="tool-item"><div class="tool-item-top"><div class="tool-item-name">Mission Ops &amp; Team Execution</div><div class="tool-item-score">7 / 10</div></div><div class="tool-item-bar"><div class="tool-item-fill" style="width:70%"></div></div><div class="tool-item-meta"><span>2+ yrs</span><span>Team leadership</span></div></div>
+          </div>
         </div>
       </div>
 
-      <div class="tool-grid">
-        <div class="tool-card">
-          <div class="arsenal-corner tl"></div><div class="arsenal-corner tr"></div><div class="arsenal-corner bl"></div><div class="arsenal-corner br"></div>
-          <div class="tool-head">
-            <div class="tool-title-wrap">
-              <div class="tool-title">Numerical Modelling</div>
-              <div class="tool-subtitle">Simulation, scientific computing, and analysis pipelines for engineering and biomedical systems.</div>
-            </div>
-            <div class="tool-kanji">算</div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">COMSOL Multiphysics</div><div class="tool-score">7 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:70%"></div></div>
-            <div class="tool-meta"><span>3+ yrs</span><span>multiphysics modelling</span></div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">MATLAB</div><div class="tool-score">8 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:80%"></div></div>
-            <div class="tool-meta"><span>5+ yrs</span><span>numerical analysis</span></div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">Python</div><div class="tool-score">8 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:80%"></div></div>
-            <div class="tool-meta"><span>4+ yrs</span><span>automation &amp; data</span></div>
-          </div>
-          <div class="tool-tags"><span>CFD</span><span>Scientific Computing</span><span>Automation</span><span>Data Pipelines</span></div>
-        </div>
-
-        <div class="tool-card">
-          <div class="arsenal-corner tl"></div><div class="arsenal-corner tr"></div><div class="arsenal-corner bl"></div><div class="arsenal-corner br"></div>
-          <div class="tool-head">
-            <div class="tool-title-wrap">
-              <div class="tool-title">Product Design</div>
-              <div class="tool-subtitle">CAD and fabrication workflows for functional prototypes, physical test objects, and rapid iteration.</div>
-            </div>
-            <div class="tool-kanji">鍛</div>
-          </div>
-          <div class="tool-subgroup">CAD Design</div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">Autodesk Fusion 360</div><div class="tool-score">8 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:80%"></div></div>
-            <div class="tool-meta"><span>3+ yrs</span><span>CAD &amp; assemblies</span></div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">SolidWorks</div><div class="tool-score">5 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:50%"></div></div>
-            <div class="tool-meta"><span>working</span><span>model editing / review</span></div>
-          </div>
-          <div class="tool-subgroup">Fabrication</div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">Ultimaker Cura</div><div class="tool-score">8 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:80%"></div></div>
-            <div class="tool-meta"><span>3+ yrs</span><span>3D print preparation</span></div>
-          </div>
-          <div class="tool-tags"><span>Prototyping</span><span>3D Printing</span><span>Bench Objects</span></div>
-        </div>
-
-        <div class="tool-card">
-          <div class="arsenal-corner tl"></div><div class="arsenal-corner tr"></div><div class="arsenal-corner bl"></div><div class="arsenal-corner br"></div>
-          <div class="tool-head">
-            <div class="tool-title-wrap">
-              <div class="tool-title">Experimental Method</div>
-              <div class="tool-subtitle">Study design, evidence handling, and structured interpretation of experimental results.</div>
-            </div>
-            <div class="tool-kanji">試</div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">JASP</div><div class="tool-score">7 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:70%"></div></div>
-            <div class="tool-meta"><span>2+ yrs</span><span>statistical analysis</span></div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">Experimental Design</div><div class="tool-score">8 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:80%"></div></div>
-            <div class="tool-meta"><span>4+ yrs</span><span>protocol planning</span></div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">Data Collection &amp; Analysis</div><div class="tool-score">8 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:80%"></div></div>
-            <div class="tool-meta"><span>4+ yrs</span><span>validation &amp; interpretation</span></div>
-          </div>
-          <div class="tool-tags"><span>Statistics</span><span>Validation</span><span>Reproducibility</span></div>
-        </div>
-
-        <div class="tool-card">
-          <div class="arsenal-corner tl"></div><div class="arsenal-corner tr"></div><div class="arsenal-corner bl"></div><div class="arsenal-corner br"></div>
-          <div class="tool-head">
-            <div class="tool-title-wrap">
-              <div class="tool-title">Medical Imaging Analysis</div>
-              <div class="tool-subtitle">Image analysis and clinical workflow support for oncology-oriented retrospective studies and quality checks.</div>
-            </div>
-            <div class="tool-kanji">診</div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">ImageJ / Fiji</div><div class="tool-score">7 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:70%"></div></div>
-            <div class="tool-meta"><span>3+ yrs</span><span>image processing</span></div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">Imaging Quality Control</div><div class="tool-score">7 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:70%"></div></div>
-            <div class="tool-meta"><span>3+ projects</span><span>QC &amp; protocol consistency</span></div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">Retrospective Clinical Evaluation</div><div class="tool-score">7 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:70%"></div></div>
-            <div class="tool-meta"><span>2+ studies</span><span>dataset review</span></div>
-          </div>
-          <div class="tool-tags"><span>Oncology Imaging</span><span>Clinical Data</span><span>Quantitative Review</span></div>
-        </div>
-
-        <div class="tool-card">
-          <div class="arsenal-corner tl"></div><div class="arsenal-corner tr"></div><div class="arsenal-corner bl"></div><div class="arsenal-corner br"></div>
-          <div class="tool-head">
-            <div class="tool-title-wrap">
-              <div class="tool-title">Defense / Robotics</div>
-              <div class="tool-subtitle">AUV-rooted systems work bringing together mechanics, mission logic, and team-level technical execution.</div>
-            </div>
-            <div class="tool-kanji">海</div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">AUV Systems</div><div class="tool-score">7 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:70%"></div></div>
-            <div class="tool-meta"><span>2+ yrs</span><span>systems integration</span></div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">Mechanical Design</div><div class="tool-score">7 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:70%"></div></div>
-            <div class="tool-meta"><span>2+ yrs</span><span>subsystem design</span></div>
-          </div>
-          <div class="tool-row">
-            <div class="tool-row-top"><div class="tool-name">Mission Ops &amp; Team Execution</div><div class="tool-score">7 / 10</div></div>
-            <div class="tool-bar"><div class="tool-fill" style="width:70%"></div></div>
-            <div class="tool-meta"><span>2+ yrs</span><span>AUV team leadership</span></div>
-          </div>
-          <div class="tool-tags"><span>Autonomous Systems</span><span>Robotics</span><span>Dual-use Readiness</span></div>
-        </div>
-      </div>
-
-      <div class="competency-map">
-        <div class="comp-header">
-          <div>
-            <div class="arsenal-kicker">Field competencies — mapped</div>
-            <div class="comp-title">Applied Competency Map</div>
-          </div>
-          <div class="comp-subtitle">A broader view of where the toolkit compounds: translational healthcare work at the center, with adjacent strengths in modelling, product development, clinical analysis, experimentation, and robotics-oriented systems thinking.</div>
-        </div>
-        <div class="comp-orbit">
-          <div class="comp-col">
-            <div class="comp-node">
-              <div class="comp-label">Field</div>
-              <div class="comp-name">Medical Imaging Analysis</div>
-              <div class="comp-strength">Strong</div>
-              <div class="comp-detail">Image review, QC awareness, retrospective evaluation, and oncology-facing analysis workflows.</div>
-            </div>
-            <div class="comp-node">
-              <div class="comp-label">Field</div>
-              <div class="comp-name">Experimental Method</div>
-              <div class="comp-strength">Strong</div>
-              <div class="comp-detail">Protocol design, evidence interpretation, validation logic, and disciplined reporting.</div>
-            </div>
-          </div>
-          <div class="comp-node center">
-            <div class="comp-center-badge">Core Operating Zone</div>
-            <div class="comp-center-name">MedTech &amp; Translational R&amp;D</div>
-            <div class="comp-center-note">Where modelling, prototyping, imaging, and clinical context converge into tools and decisions with real-world healthcare relevance.</div>
-          </div>
-          <div class="comp-col">
-            <div class="comp-node">
-              <div class="comp-label">Field</div>
-              <div class="comp-name">Numerical Modelling</div>
-              <div class="comp-strength">Advanced</div>
-              <div class="comp-detail">Simulation-driven thinking across biomechanics, fluid systems, and engineering analysis.</div>
-            </div>
-            <div class="comp-node">
-              <div class="comp-label">Field</div>
-              <div class="comp-name">Product Design</div>
-              <div class="comp-strength">Strong</div>
-              <div class="comp-detail">CAD-to-prototype workflows, fabrication preparation, and making ideas testable in physical form.</div>
-            </div>
-            <div class="comp-node">
-              <div class="comp-label">Field</div>
-              <div class="comp-name">Defense / Robotics</div>
-              <div class="comp-strength">Emerging</div>
-              <div class="comp-detail">AUV-derived systems thinking with transfer potential toward mission-driven and dual-use technology contexts.</div>
-            </div>
-          </div>
+      <div class="competency-map-wrap">
+        <div class="toolkit-kicker">Field competencies</div>
+        <div class="comp-map-title">Applied Competency Map</div>
+        <div class="comp-map">
+          <div class="comp-card medtech"><div class="comp-mini">Field</div><div class="comp-name">MedTech Translation</div><div class="comp-level">Core</div></div>
+          <div class="comp-card medical"><div class="comp-mini">Field</div><div class="comp-name">Medical Imaging Analysis</div><div class="comp-level">Strong</div></div>
+          <div class="comp-card experimental"><div class="comp-mini">Field</div><div class="comp-name">Experimental Method</div><div class="comp-level">Strong</div></div>
+          <div class="comp-card core"><div class="comp-mini">Operating Zone</div><div class="comp-core-title">Translational R&amp;D</div><div class="comp-core-sub">Where modelling, prototyping, imaging, and clinical context meet.</div></div>
+          <div class="comp-card modeling"><div class="comp-mini">Field</div><div class="comp-name">Computational Modelling</div><div class="comp-level">Advanced</div></div>
+          <div class="comp-card design"><div class="comp-mini">Field</div><div class="comp-name">Product Design</div><div class="comp-level">Strong</div></div>
+          <div class="comp-card defense"><div class="comp-mini">Field</div><div class="comp-name">Defense / Robotics</div><div class="comp-level">Emerging</div></div>
         </div>
       </div>
     </section>
-
 
     <div class="exp-divider reveal">Volunteering &amp; Leadership</div>
 
@@ -698,6 +611,23 @@ document.querySelectorAll('.acc-header').forEach(header => {
       setTimeout(() => item.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
     }
   });
+});
+
+const workstreamCards = document.querySelectorAll('.workstream-card');
+workstreamCards.forEach(card => {
+  card.addEventListener('click', function() {
+    if (window.innerWidth > 680) return;
+    const wasActive = this.classList.contains('active');
+    workstreamCards.forEach(c => c.classList.remove('active'));
+    if (!wasActive) this.classList.add('active');
+  });
+});
+
+document.addEventListener('click', function(e) {
+  if (window.innerWidth > 680) return;
+  if (!e.target.closest('.workstream-card')) {
+    workstreamCards.forEach(c => c.classList.remove('active'));
+  }
 });
 </script>
 </body>
