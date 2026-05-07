@@ -58,7 +58,7 @@
 
 
 /* ═══════════════════════════════════════════
-   ANIMUS QUEST — PROFILE RECONSTRUCTION GAME
+   ANIMUS HUB QUEST — NON-LINEAR MINI GAME
    ═══════════════════════════════════════════ */
 .hero-game-note{
   margin-top:1rem;
@@ -80,21 +80,21 @@
   color:var(--blood-glow);
 }
 
-.animus-quest{
+.animus-hub-game{
   position:fixed;
   inset:0;
   z-index:5000;
   display:none;
   background:
-    radial-gradient(circle at 50% 38%, rgba(139,26,26,.18), transparent 34%),
-    radial-gradient(circle at 80% 15%, rgba(194,59,59,.06), transparent 24%),
-    linear-gradient(180deg, rgba(10,10,11,.98), rgba(10,10,11,1));
+    radial-gradient(circle at 50% 35%, rgba(139,26,26,.2), transparent 34%),
+    radial-gradient(circle at 82% 14%, rgba(194,59,59,.07), transparent 24%),
+    linear-gradient(180deg, rgba(10,10,11,.985), rgba(10,10,11,1));
   color:var(--paper);
-  padding:1.2rem;
+  padding:1.1rem;
   overflow:hidden;
 }
-.animus-quest.open{display:block}
-.animus-quest::before{
+.animus-hub-game.open{display:block}
+.animus-hub-game::before{
   content:'';
   position:absolute;
   inset:0;
@@ -104,34 +104,34 @@
   background-size:34px 34px;
   pointer-events:none;
 }
-.animus-quest::after{
+.animus-hub-game::after{
   content:'';
   position:absolute;
   left:0;right:0;top:0;height:1px;
   background:linear-gradient(to right, transparent, var(--blood), transparent);
-  animation:questScan 4.8s ease-in-out infinite;
+  animation:hubScan 5s ease-in-out infinite;
   opacity:.55;
 }
-@keyframes questScan{
+@keyframes hubScan{
   0%{top:0;opacity:.04}
   45%{opacity:.72}
   100%{top:100%;opacity:.04}
 }
-.quest-shell{
+
+.hub-shell{
   position:relative;
   z-index:2;
-  height:calc(100vh - 2.4rem);
-  max-width:1220px;
+  height:calc(100vh - 2.2rem);
+  max-width:1240px;
   margin:0 auto;
   border:1px solid rgba(240,235,227,.08);
-  background:linear-gradient(135deg, rgba(139,26,26,.065), transparent 44%), rgba(10,10,11,.86);
+  background:linear-gradient(135deg, rgba(139,26,26,.06), transparent 44%), rgba(10,10,11,.86);
   box-shadow:0 34px 100px rgba(0,0,0,.64);
   display:flex;
   flex-direction:column;
   overflow:hidden;
-  transform-style:preserve-3d;
 }
-.quest-corner{
+.hub-corner{
   position:absolute;
   width:18px;height:18px;
   border-style:solid;
@@ -139,61 +139,57 @@
   z-index:5;
   pointer-events:none;
 }
-.quest-corner.tl{top:12px;left:12px;border-width:1px 0 0 1px}
-.quest-corner.tr{top:12px;right:12px;border-width:1px 1px 0 0}
-.quest-corner.bl{bottom:12px;left:12px;border-width:0 0 1px 1px}
-.quest-corner.br{bottom:12px;right:12px;border-width:0 1px 1px 0}
+.hub-corner.tl{top:12px;left:12px;border-width:1px 0 0 1px}
+.hub-corner.tr{top:12px;right:12px;border-width:1px 1px 0 0}
+.hub-corner.bl{bottom:12px;left:12px;border-width:0 0 1px 1px}
+.hub-corner.br{bottom:12px;right:12px;border-width:0 1px 1px 0}
 
-.quest-topbar{
-  min-height:70px;
+.hub-topbar{
   flex:0 0 auto;
   display:grid;
   grid-template-columns:1fr auto auto;
   gap:1rem;
   align-items:center;
+  min-height:68px;
   padding:1rem 1.4rem;
   border-bottom:1px solid var(--ghost-line);
 }
-.quest-status{
+.hub-status{
   font-family:'Space Mono',monospace;
   font-size:.52rem;
   text-transform:uppercase;
   letter-spacing:.18em;
   color:var(--blood-glow);
 }
-.sync-wrap{
+.hub-sync{
+  min-width:265px;
   display:flex;
   align-items:center;
   gap:.65rem;
-  min-width:260px;
 }
-.sync-label{
+.hub-sync-label{
   font-family:'Space Mono',monospace;
   font-size:.48rem;
   text-transform:uppercase;
   letter-spacing:.14em;
   color:var(--steel);
 }
-.sync-track{
-  flex:1;
-  height:5px;
-  background:rgba(240,235,227,.06);
-  overflow:hidden;
+.hub-sync-track{
+  flex:1;height:5px;background:rgba(240,235,227,.06);overflow:hidden;
 }
-.sync-fill{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg, var(--blood), var(--blood-glow));
+.hub-sync-fill{
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--blood),var(--blood-glow));
   transition:width .5s cubic-bezier(.2,.8,.2,1);
 }
-.sync-score{
+.hub-sync-score{
+  width:38px;
+  text-align:right;
   font-family:'Space Mono',monospace;
   font-size:.52rem;
   color:var(--paper);
-  width:38px;
-  text-align:right;
 }
-.quest-exit{
+.hub-exit{
   font-family:'Space Mono',monospace;
   font-size:.5rem;
   text-transform:uppercase;
@@ -203,11 +199,10 @@
   border:1px solid var(--ghost-line);
   padding:.6rem .8rem;
   cursor:pointer;
-  transition:all .25s;
 }
-.quest-exit:hover{color:var(--paper);border-color:rgba(139,26,26,.45);background:rgba(139,26,26,.08)}
+.hub-exit:hover{color:var(--paper);border-color:rgba(139,26,26,.45);background:rgba(139,26,26,.08)}
 
-.fragment-bar{
+.hub-fragments{
   flex:0 0 auto;
   display:grid;
   grid-template-columns:repeat(6,1fr);
@@ -215,45 +210,43 @@
   background:var(--ghost-line);
   border-bottom:1px solid var(--ghost-line);
 }
-.fragment{
+.hub-frag{
   background:rgba(10,10,11,.86);
   padding:.65rem .5rem;
   display:flex;
-  align-items:center;
   justify-content:center;
+  align-items:center;
   gap:.45rem;
   color:var(--steel);
   font-family:'Space Mono',monospace;
-  font-size:.45rem;
+  font-size:.44rem;
   text-transform:uppercase;
-  letter-spacing:.12em;
+  letter-spacing:.1em;
   transition:all .3s;
 }
-.fragment span{
-  width:8px;height:8px;
-  border:1px solid rgba(139,26,26,.35);
-  transform:rotate(45deg);
+.hub-frag span{
+  width:8px;height:8px;border:1px solid rgba(139,26,26,.35);transform:rotate(45deg);
 }
-.fragment.unlocked{color:var(--mist);background:rgba(139,26,26,.055)}
-.fragment.unlocked span{background:var(--blood-glow);box-shadow:0 0 10px rgba(194,59,59,.45)}
+.hub-frag.unlocked{color:var(--mist);background:rgba(139,26,26,.055)}
+.hub-frag.unlocked span{background:var(--blood-glow);box-shadow:0 0 10px rgba(194,59,59,.45)}
 
-.quest-stage{
+.hub-screen{
   flex:1;
   display:none;
   overflow:auto;
-  padding:2.2rem;
+  padding:2rem;
 }
-.quest-stage.active{display:block}
+.hub-screen.active{display:block}
 
-.quest-layout{
+/* Start */
+.hub-start{
   min-height:100%;
   display:grid;
-  grid-template-columns:.82fr 1.18fr;
-  gap:2rem;
+  grid-template-columns:.9fr 1.1fr;
+  gap:2.2rem;
   align-items:center;
 }
-.quest-copy{max-width:450px}
-.quest-kicker{
+.hub-kicker{
   font-family:'Space Mono',monospace;
   font-size:.52rem;
   text-transform:uppercase;
@@ -261,39 +254,41 @@
   color:rgba(139,26,26,.65);
   margin-bottom:1rem;
 }
-.quest-title{
+.hub-title{
   font-family:'Zen Antique',serif;
-  font-size:clamp(2rem,3.8vw,3.4rem);
+  font-size:clamp(2.2rem,4vw,3.8rem);
   line-height:1.08;
   margin-bottom:1rem;
 }
-.quest-desc{
+.hub-desc{
   color:var(--mist);
   line-height:1.8;
   font-weight:300;
-  font-size:.94rem;
+  font-size:.95rem;
+  max-width:540px;
 }
-.guide-box{
+.hub-guide{
   margin-top:1.2rem;
   border:1px solid var(--ghost-line);
   background:rgba(10,10,11,.58);
   padding:1rem;
+  max-width:540px;
 }
-.guide-label{
+.hub-guide-label{
   font-family:'Space Mono',monospace;
   font-size:.45rem;
   text-transform:uppercase;
   letter-spacing:.16em;
   color:var(--blood-glow);
-  margin-bottom:.5rem;
+  margin-bottom:.45rem;
 }
-.guide-text{
+.hub-guide-text{
   font-size:.8rem;
   line-height:1.65;
   color:var(--mist);
   font-weight:300;
 }
-.quest-action{
+.hub-action{
   display:inline-flex;
   align-items:center;
   gap:.65rem;
@@ -309,19 +304,19 @@
   cursor:pointer;
   transition:all .3s;
 }
-.quest-action:hover{background:rgba(139,26,26,.1);transform:translateY(-2px)}
-.quest-action:disabled{opacity:.35;cursor:not-allowed;transform:none;background:transparent}
+.hub-action:hover{background:rgba(139,26,26,.1);transform:translateY(-2px)}
+.hub-action:disabled{opacity:.35;cursor:not-allowed;transform:none;background:transparent}
 
-.quest-panel{
-  min-height:440px;
+.holo-panel{
+  min-height:460px;
   border:1px solid var(--ghost-line);
   background:linear-gradient(135deg, rgba(139,26,26,.045), transparent 45%), rgba(240,235,227,.025);
   position:relative;
   overflow:hidden;
-  transform:perspective(1100px) rotateX(4deg) rotateY(-2deg);
+  transform:perspective(1100px) rotateX(6deg) rotateY(-4deg);
   transform-style:preserve-3d;
 }
-.quest-panel::before{
+.holo-panel::before{
   content:'';
   position:absolute;
   inset:0;
@@ -331,197 +326,300 @@
   background-size:28px 28px;
   pointer-events:none;
 }
-.panel-scan{
+.holo-scan{
   position:absolute;
   left:0;right:0;top:0;height:1px;
-  background:linear-gradient(to right, transparent, var(--blood), transparent);
-  animation:panelQuestScan 3.8s ease-in-out infinite;
+  background:linear-gradient(to right,transparent,var(--blood),transparent);
+  animation:holoScan 3.8s ease-in-out infinite;
   opacity:.55;
 }
-@keyframes panelQuestScan{
+@keyframes holoScan{
   0%{top:0;opacity:.06}
   52%{opacity:.68}
   100%{top:100%;opacity:.06}
 }
 
-/* Gate / quest map */
-.gate-grid{
+/* Isometric hub map */
+.iso-wrap{
   position:absolute;
-  inset:2rem;
+  inset:1.5rem;
+  perspective:1200px;
+}
+.iso-board{
+  position:absolute;
+  left:50%;
+  top:51%;
+  width:78%;
+  height:72%;
+  transform:translate(-50%,-50%) rotateX(58deg) rotateZ(-7deg);
+  transform-style:preserve-3d;
+  border:1px solid rgba(139,26,26,.24);
+  background:
+    linear-gradient(90deg, rgba(240,235,227,.035) 1px, transparent 1px),
+    linear-gradient(rgba(240,235,227,.035) 1px, transparent 1px),
+    rgba(10,10,11,.44);
+  background-size:44px 44px;
+  box-shadow:0 35px 70px rgba(0,0,0,.45);
+}
+.iso-tile{
+  position:absolute;
+  width:160px;
+  min-height:96px;
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.82);
+  padding:.85rem;
+  cursor:pointer;
+  transform:translateZ(28px);
+  transform-style:preserve-3d;
+  transition:all .3s;
+}
+.iso-tile::after{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-bottom:4px solid rgba(0,0,0,.35);
+  pointer-events:none;
+}
+.iso-tile.open:hover{
+  transform:translateZ(54px) translateY(-8px);
+  border-color:rgba(139,26,26,.5);
+  background:rgba(139,26,26,.09);
+  box-shadow:0 22px 45px rgba(0,0,0,.42);
+}
+.iso-tile.locked{
+  opacity:.45;
+  cursor:not-allowed;
+  filter:grayscale(.35);
+}
+.iso-tile.recovered{
+  border-color:rgba(194,59,59,.4);
+  background:rgba(139,26,26,.08);
+}
+.iso-tile.origin{left:10%;top:12%}
+.iso-tile.dojo{right:12%;top:10%}
+.iso-tile.arsenal{left:38%;top:37%}
+.iso-tile.forge{left:12%;bottom:12%}
+.iso-tile.scrolls{right:13%;bottom:15%}
+.iso-tile.crossroads{left:39%;bottom:-2%}
+.iso-title{
+  font-family:'Zen Antique',serif;
+  font-size:.95rem;
+  line-height:1.25;
+}
+.iso-state{
+  font-family:'Space Mono',monospace;
+  font-size:.43rem;
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  color:var(--blood-glow);
+  margin-top:.45rem;
+}
+.iso-clue{
+  font-size:.68rem;
+  line-height:1.45;
+  color:var(--steel);
+  margin-top:.5rem;
+}
+
+/* Chamber layout */
+.chamber-layout{
+  min-height:100%;
+  display:grid;
+  grid-template-columns:.82fr 1.18fr;
+  gap:2rem;
+  align-items:center;
+}
+.chamber-copy{max-width:460px}
+.chamber-title{
+  font-family:'Zen Antique',serif;
+  font-size:clamp(2rem,3.8vw,3.4rem);
+  line-height:1.08;
+  margin-bottom:1rem;
+}
+.chamber-desc{
+  color:var(--mist);
+  line-height:1.8;
+  font-weight:300;
+  font-size:.94rem;
+}
+.chamber-panel{
+  min-height:500px;
+  border:1px solid var(--ghost-line);
+  background:linear-gradient(135deg, rgba(139,26,26,.045), transparent 45%), rgba(240,235,227,.025);
+  position:relative;
+  overflow:hidden;
+  transform:perspective(1100px) rotateX(4deg) rotateY(-2deg);
+  transform-style:preserve-3d;
+}
+.chamber-panel::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(240,235,227,.025) 1px, transparent 1px),
+    linear-gradient(rgba(240,235,227,.025) 1px, transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;
+}
+
+/* Shared cards */
+.memory-card{
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.75);
+  padding:1rem;
+  cursor:pointer;
+  transition:all .3s;
+  transform:translateZ(24px);
+}
+.memory-card:hover,.memory-card.selected,.memory-card.decoded,.memory-card.placed{
+  border-color:rgba(139,26,26,.52);
+  background:rgba(139,26,26,.08);
+  transform:translateY(-5px) translateZ(38px);
+  box-shadow:0 18px 40px rgba(0,0,0,.32);
+}
+.card-title{font-family:'Zen Antique',serif;font-size:1rem;margin-bottom:.38rem;line-height:1.3}
+.card-sub{font-family:'Space Mono',monospace;font-size:.43rem;text-transform:uppercase;letter-spacing:.1em;color:var(--steel);line-height:1.55}
+.card-reveal{font-size:.78rem;line-height:1.55;color:var(--mist);margin-top:.55rem;display:none}
+.memory-card.decoded .card-reveal,.memory-card.placed .card-reveal,.memory-card.selected .card-reveal{display:block}
+
+/* Origin */
+.origin-clues{
+  position:absolute;
+  inset:1.4rem;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:1rem;
-  align-items:center;
+  align-content:start;
 }
-.gate-card{
-  min-height:210px;
-  border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.72);
+.route-slots{
+  position:absolute;
+  left:1.4rem;right:1.4rem;bottom:1.4rem;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
+}
+.route-slot{
+  min-height:92px;
+  border:1px dashed rgba(139,26,26,.35);
+  background:rgba(10,10,11,.45);
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
-  cursor:pointer;
-  transition:all .3s;
-  position:relative;
-  transform:translateZ(20px);
-}
-.gate-card::before{
-  content:'';
-  width:76px;height:76px;
-  border:1px solid rgba(139,26,26,.45);
-  transform:rotate(45deg);
-  margin-bottom:1.3rem;
-}
-.gate-card:hover,.gate-card.selected{border-color:rgba(139,26,26,.52);background:rgba(139,26,26,.08);transform:translateY(-6px) translateZ(32px)}
-.gate-card.selected::before{background:rgba(139,26,26,.24);box-shadow:0 0 24px rgba(139,26,26,.36)}
-.gate-title{font-family:'Zen Antique',serif;font-size:1.1rem;margin-bottom:.45rem}
-.gate-sub{font-family:'Space Mono',monospace;font-size:.46rem;text-transform:uppercase;letter-spacing:.12em;color:var(--steel);line-height:1.55}
-
-/* Origin */
-.route-line{
-  position:absolute;
-  left:11%;right:11%;top:52%;
-  height:1px;
-  background:linear-gradient(to right, transparent, rgba(139,26,26,.75), transparent);
-}
-.route-node{
-  position:absolute;
-  width:130px;
-  text-align:center;
-  cursor:pointer;
-  transform:translateZ(22px);
-}
-.route-node[data-order="1"]{left:8%;top:54%}
-.route-node[data-order="2"]{left:43%;top:30%}
-.route-node[data-order="3"]{right:8%;top:56%}
-.route-dot{
-  width:36px;height:36px;margin:0 auto .7rem;
-  border:1px solid rgba(139,26,26,.52);
-  background:var(--ink);
-  transform:rotate(45deg);
-  transition:all .3s;
-}
-.route-node:hover .route-dot,.route-node.unlocked .route-dot{background:rgba(139,26,26,.34);box-shadow:0 0 22px rgba(139,26,26,.4)}
-.route-label{font-family:'Space Mono',monospace;font-size:.52rem;text-transform:uppercase;letter-spacing:.12em;color:var(--mist)}
-.route-sub{font-size:.72rem;color:var(--steel);margin-top:.25rem}
-
-/* Dojo blade */
-.blade-base{
-  position:absolute;
-  left:12%;right:12%;top:50%;
-  height:8px;
-  background:linear-gradient(to right, rgba(240,235,227,.08), rgba(240,235,227,.18), rgba(139,26,26,.18));
-  transform:rotate(-8deg);
-  border:1px solid rgba(240,235,227,.05);
-}
-.blade-piece{
-  position:absolute;
-  width:210px;
-  border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.76);
-  padding:1rem;
-  cursor:pointer;
-  transition:all .3s;
-  transform:translateZ(28px);
-}
-.blade-piece:nth-of-type(1){left:8%;top:13%}
-.blade-piece:nth-of-type(2){right:9%;top:18%}
-.blade-piece:nth-of-type(3){left:30%;bottom:12%}
-.blade-piece:hover,.blade-piece.selected{border-color:rgba(139,26,26,.52);background:rgba(139,26,26,.08);transform:translateY(-4px) translateZ(38px)}
-.blade-piece.selected{box-shadow:0 14px 32px rgba(0,0,0,.3)}
-.blade-piece-title{font-family:'Zen Antique',serif;font-size:1rem;margin-bottom:.35rem}
-.blade-piece-sub{font-family:'Space Mono',monospace;font-size:.45rem;text-transform:uppercase;letter-spacing:.1em;color:var(--steel);line-height:1.55}
-
-/* Arsenal */
-.loadout-slots{
-  position:absolute;
-  left:2rem;right:2rem;top:1.3rem;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:.65rem;
-}
-.loadout-slot{
-  border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.55);
-  min-height:54px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
   font-family:'Space Mono',monospace;
   font-size:.48rem;
   text-transform:uppercase;
   letter-spacing:.12em;
   color:var(--steel);
+  text-align:center;
+  padding:.7rem;
 }
-.loadout-slot.filled{color:var(--mist);border-color:rgba(139,26,26,.35);background:rgba(139,26,26,.06)}
-.arsenal-grid{
+.route-slot.filled{border-style:solid;color:var(--mist);background:rgba(139,26,26,.07)}
+
+/* Dojo */
+.dojo-grid{
   position:absolute;
-  left:2rem;right:2rem;bottom:2rem;top:6rem;
+  inset:1.4rem;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.8rem;
+}
+.blade-meter{
+  position:absolute;
+  left:10%;right:10%;bottom:1.2rem;height:10px;
+  background:rgba(240,235,227,.05);
+  border:1px solid var(--ghost-line);
+  transform:rotate(-4deg);
+}
+.blade-meter-fill{
+  height:100%;width:0%;
+  background:linear-gradient(to right,rgba(139,26,26,.65),var(--blood-glow));
+  transition:width .35s;
+}
+
+/* Arsenal */
+.style-grid{
+  position:absolute;
+  left:1.4rem;right:1.4rem;top:1.4rem;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.8rem;
+}
+.loadout-slots-v3{
+  position:absolute;
+  left:1.4rem;right:1.4rem;top:150px;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:.65rem;
+}
+.loadout-slot-v3{
+  min-height:54px;
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-family:'Space Mono',monospace;
+  font-size:.46rem;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  color:var(--steel);
+  padding:.5rem;
+}
+.loadout-slot-v3.filled{color:var(--mist);border-color:rgba(139,26,26,.35);background:rgba(139,26,26,.06)}
+.cap-grid-v3{
+  position:absolute;
+  left:1.4rem;right:1.4rem;bottom:1.4rem;top:225px;
   display:grid;
   grid-template-columns:repeat(5,1fr);
-  gap:.75rem;
+  gap:.7rem;
 }
-.arsenal-item{
-  border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.72);
+.cap-card{
   text-align:center;
-  padding:.9rem .7rem;
-  cursor:pointer;
-  transition:all .3s;
-  position:relative;
-  overflow:hidden;
-  transform:translateZ(20px);
+  padding:.85rem .6rem;
 }
-.arsenal-item::after{
-  content:'';
-  position:absolute;
-  left:0;right:0;bottom:0;height:2px;
-  background:var(--blood);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .3s;
-}
-.arsenal-item:hover,.arsenal-item.selected{border-color:rgba(139,26,26,.5);background:rgba(139,26,26,.08);transform:translateY(-4px) translateZ(32px)}
-.arsenal-item.selected::after{transform:scaleX(1)}
-.arsenal-kanji{font-family:'Noto Serif JP',serif;font-size:2rem;color:rgba(139,26,26,.4);margin-bottom:.6rem}
-.arsenal-name{font-family:'Zen Antique',serif;font-size:.93rem;line-height:1.25;margin-bottom:.65rem}
-.arsenal-tools{font-family:'Space Mono',monospace;font-size:.43rem;text-transform:uppercase;letter-spacing:.08em;color:var(--steel);line-height:1.55}
+.cap-kanji{font-family:'Noto Serif JP',serif;font-size:1.8rem;color:rgba(139,26,26,.4);margin-bottom:.5rem}
 
-/* Forge relic matching */
-.match-board{
+/* Forge */
+.forge-clues{
   position:absolute;
-  inset:1.5rem;
+  left:1.4rem;right:1.4rem;top:1.4rem;
   display:grid;
-  grid-template-columns:1fr .8fr;
-  gap:1rem;
+  grid-template-columns:repeat(3,1fr);
+  gap:.9rem;
 }
-.relic-column,.type-column{
+.forge-types{
+  position:absolute;
+  left:1.4rem;right:1.4rem;top:235px;
   display:grid;
-  gap:.75rem;
+  grid-template-columns:repeat(3,1fr);
+  gap:.9rem;
 }
-.match-relic,.match-type{
+.type-seal-game{
+  min-height:82px;
   border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.72);
-  padding:.9rem 1rem;
+  background:rgba(10,10,11,.65);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-family:'Space Mono',monospace;
+  font-size:.55rem;
+  text-transform:uppercase;
+  letter-spacing:.14em;
+  color:var(--mist);
   cursor:pointer;
-  transition:all .3s;
-  position:relative;
 }
-.match-relic:hover,.match-type:hover,.match-relic.selected,.match-type.selected{border-color:rgba(139,26,26,.5);background:rgba(139,26,26,.08)}
-.match-relic.matched,.match-type.matched{border-color:rgba(194,59,59,.42);background:rgba(139,26,26,.1)}
-.match-title{font-family:'Zen Antique',serif;font-size:1rem;margin-bottom:.3rem}
-.match-sub{font-family:'Space Mono',monospace;font-size:.45rem;text-transform:uppercase;letter-spacing:.1em;color:var(--steel);line-height:1.5}
-.match-type{display:flex;align-items:center;justify-content:center;text-align:center;font-family:'Space Mono',monospace;font-size:.55rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mist)}
-.mini-relics{
+.type-seal-game.selected,.type-seal-game.matched{border-color:rgba(139,26,26,.5);background:rgba(139,26,26,.08)}
+.side-relics-v3{
   position:absolute;
-  left:1.5rem;right:1.5rem;bottom:.55rem;
+  left:1.4rem;right:1.4rem;bottom:1.1rem;
   display:flex;
   flex-wrap:wrap;
   gap:.5rem;
 }
-.side-relic{
+.side-relic-v3{
   font-family:'Space Mono',monospace;
   font-size:.42rem;
   text-transform:uppercase;
@@ -529,169 +627,89 @@
   color:var(--steel);
   border:1px solid var(--ghost-line);
   background:rgba(10,10,11,.55);
-  padding:.45rem .55rem;
+  padding:.48rem .6rem;
   cursor:pointer;
 }
-.side-relic.unlocked{color:var(--mist);border-color:rgba(139,26,26,.4);background:rgba(139,26,26,.07)}
+.side-relic-v3.unlocked{color:var(--mist);border-color:rgba(139,26,26,.4);background:rgba(139,26,26,.07)}
 
-/* Scroll Chamber */
-.scroll-grid{
+/* Scrolls */
+.scroll-grid-v3{
   position:absolute;
-  inset:2rem;
+  inset:1.4rem;
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1rem;
+  grid-template-columns:repeat(5,1fr);
+  gap:.85rem;
   align-items:center;
 }
-.scroll-crystal{
-  min-height:200px;
-  border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.72);
+.scroll-card{
+  min-height:190px;
   display:flex;
   flex-direction:column;
   justify-content:center;
-  align-items:center;
   text-align:center;
-  cursor:pointer;
-  transition:all .3s;
-  position:relative;
 }
-.scroll-crystal::before{
+.scroll-card::before{
   content:'';
-  width:54px;height:86px;
+  width:50px;height:76px;
   border:1px solid rgba(139,26,26,.42);
   clip-path:polygon(50% 0,100% 24%,80% 100%,20% 100%,0 24%);
-  margin-bottom:1rem;
-  transition:all .3s;
+  margin:0 auto 1rem;
 }
-.scroll-crystal:hover,.scroll-crystal.decoded{border-color:rgba(139,26,26,.5);background:rgba(139,26,26,.08);transform:translateY(-5px)}
-.scroll-crystal.decoded::before{background:rgba(139,26,26,.23);box-shadow:0 0 22px rgba(139,26,26,.35)}
-.scroll-title{font-family:'Zen Antique',serif;font-size:1rem;margin-bottom:.35rem}
-.scroll-sub{font-family:'Space Mono',monospace;font-size:.44rem;text-transform:uppercase;letter-spacing:.1em;color:var(--steel)}
+.scroll-card.decoded::before{background:rgba(139,26,26,.23);box-shadow:0 0 22px rgba(139,26,26,.35)}
 
 /* Crossroads */
-.crossroads-grid{
+.cross-grid-v3{
   position:absolute;
-  inset:2rem;
+  inset:1.4rem;
   display:grid;
   grid-template-columns:repeat(4,1fr);
   gap:.85rem;
   align-items:center;
 }
-.crossroad-card{
+.cross-card{
   min-height:245px;
-  border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.72);
   padding:1.1rem;
-  cursor:pointer;
-  transition:all .3s;
-  position:relative;
-  overflow:hidden;
 }
-.crossroad-card::after{
-  content:'';
-  position:absolute;
-  left:0;right:0;bottom:0;height:2px;
-  background:var(--blood);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .3s;
-}
-.crossroad-card:hover,.crossroad-card.selected{border-color:rgba(139,26,26,.5);background:rgba(139,26,26,.08);transform:translateY(-5px)}
-.crossroad-card.selected::after{transform:scaleX(1)}
 .cross-kanji{font-family:'Noto Serif JP',serif;font-size:2.2rem;color:rgba(139,26,26,.4);margin-bottom:.9rem}
-.cross-title{font-family:'Zen Antique',serif;font-size:1rem;margin-bottom:.55rem}
-.cross-desc{font-size:.78rem;line-height:1.55;color:var(--mist);font-weight:300}
 
-/* Final profile */
-.result-panel{
+/* Final */
+.final-card-v3{
   max-width:980px;
   margin:0 auto;
-  min-height:100%;
-  display:flex;
-  align-items:center;
-}
-.profile-card{
-  width:100%;
   border:1px solid rgba(139,26,26,.32);
   background:linear-gradient(135deg, rgba(139,26,26,.08), transparent 48%), rgba(10,10,11,.82);
   padding:1.8rem;
-  position:relative;
 }
-.profile-top{
+.final-top-v3{
   display:grid;
   grid-template-columns:1fr auto;
   gap:1rem;
-  align-items:start;
   border-bottom:1px solid var(--ghost-line);
   padding-bottom:1.2rem;
   margin-bottom:1.2rem;
 }
-.profile-title{
+.final-title-v3{
   font-family:'Zen Antique',serif;
   font-size:clamp(2rem,4vw,3rem);
   margin-bottom:.45rem;
 }
-.profile-sub{
-  font-family:'Space Mono',monospace;
-  font-size:.52rem;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-  color:var(--blood-glow);
-}
-.profile-sync{
-  text-align:right;
-  font-family:'Space Mono',monospace;
-}
-.profile-sync-num{
-  font-size:2rem;
-  color:var(--blood-glow);
-}
-.profile-sync-rank{
-  font-size:.48rem;
-  text-transform:uppercase;
-  letter-spacing:.14em;
-  color:var(--mist);
-}
-.profile-grid{
+.final-sync-v3{text-align:right;font-family:'Space Mono',monospace}
+.final-sync-num-v3{font-size:2rem;color:var(--blood-glow)}
+.final-rank-v3{font-size:.48rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mist)}
+.final-grid-v3{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:1px;
   background:var(--ghost-line);
-  margin-bottom:1.3rem;
+  margin:1.3rem 0;
 }
-.profile-cell{
-  background:rgba(10,10,11,.86);
-  padding:1rem;
-}
-.profile-key{
-  font-family:'Space Mono',monospace;
-  font-size:.45rem;
-  text-transform:uppercase;
-  letter-spacing:.15em;
-  color:rgba(139,26,26,.5);
-  margin-bottom:.45rem;
-}
-.profile-value{
-  color:var(--mist);
-  line-height:1.65;
-  font-size:.86rem;
-  font-weight:300;
-}
-.profile-value strong{color:var(--paper);font-weight:500}
-.profile-summary{
-  color:var(--mist);
-  line-height:1.75;
-  font-size:.96rem;
-  margin-bottom:1.2rem;
-  font-weight:300;
-}
-.profile-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:.75rem;
-}
-.profile-actions a,.profile-actions button{
+.final-cell-v3{background:rgba(10,10,11,.86);padding:1rem}
+.final-key-v3{font-family:'Space Mono',monospace;font-size:.45rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(139,26,26,.5);margin-bottom:.45rem}
+.final-val-v3{color:var(--mist);line-height:1.65;font-size:.86rem;font-weight:300}
+.final-val-v3 strong{color:var(--paper);font-weight:500}
+.final-summary-v3{color:var(--mist);line-height:1.75;font-size:.96rem;font-weight:300}
+.final-actions-v3{display:flex;flex-wrap:wrap;gap:.75rem}
+.final-actions-v3 a,.final-actions-v3 button{
   font-family:'Space Mono',monospace;
   font-size:.52rem;
   text-transform:uppercase;
@@ -703,12 +721,12 @@
   padding:.8rem .95rem;
   cursor:pointer;
 }
-.profile-actions a:hover,.profile-actions button:hover{background:rgba(139,26,26,.1)}
+.final-actions-v3 a:hover,.final-actions-v3 button:hover{background:rgba(139,26,26,.1)}
 
-.quest-toast{
+.hub-toast{
   position:absolute;
   left:50%;
-  bottom:1.1rem;
+  bottom:1rem;
   transform:translateX(-50%);
   font-family:'Space Mono',monospace;
   font-size:.49rem;
@@ -723,31 +741,29 @@
   transition:opacity .3s, transform .3s;
   z-index:9;
 }
-.quest-toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+.hub-toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
 
-@media(max-width:1020px){
-  .quest-topbar{grid-template-columns:1fr;gap:.8rem}
-  .sync-wrap{width:100%}
-  .quest-layout{grid-template-columns:1fr}
-  .quest-panel{min-height:500px;transform:none}
-  .gate-grid,.project-emblems,.scroll-grid,.crossroads-grid{grid-template-columns:1fr 1fr}
-  .arsenal-grid{grid-template-columns:1fr 1fr}
-  .match-board{grid-template-columns:1fr}
+@media(max-width:1050px){
+  .hub-topbar{grid-template-columns:1fr;gap:.8rem}
+  .hub-sync{width:100%}
+  .hub-start,.chamber-layout{grid-template-columns:1fr}
+  .holo-panel,.chamber-panel{transform:none;min-height:560px}
+  .iso-board{transform:none;position:relative;left:auto;top:auto;width:auto;height:auto;display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1rem}
+  .iso-wrap{position:absolute;inset:1rem}
+  .iso-tile{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto}
+  .origin-clues,.dojo-grid,.style-grid,.cap-grid-v3,.forge-clues,.forge-types,.scroll-grid-v3,.cross-grid-v3{grid-template-columns:1fr 1fr}
 }
-@media(max-width:700px){
-  .animus-quest{padding:.5rem}
-  .quest-shell{height:calc(100vh - 1rem)}
-  .quest-stage{padding:1rem}
-  .fragment-bar{grid-template-columns:repeat(2,1fr)}
-  .quest-panel{min-height:620px}
-  .gate-grid,.scroll-grid,.crossroads-grid,.arsenal-grid{grid-template-columns:1fr}
-  .loadout-slots{grid-template-columns:1fr;position:relative;left:auto;right:auto;top:auto;margin:1rem}
-  .arsenal-grid{position:relative;left:auto;right:auto;bottom:auto;top:auto;margin:1rem}
-  .blade-piece{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto;margin:1rem}
-  .blade-base{display:none}
-  .profile-top,.profile-grid{grid-template-columns:1fr}
-  .profile-sync{text-align:left}
-  .match-board,.scroll-grid,.crossroads-grid,.gate-grid{position:relative;inset:auto;margin:1rem}
+@media(max-width:720px){
+  .animus-hub-game{padding:.5rem}
+  .hub-shell{height:calc(100vh - 1rem)}
+  .hub-screen{padding:1rem}
+  .hub-fragments{grid-template-columns:repeat(2,1fr)}
+  .holo-panel,.chamber-panel{min-height:720px}
+  .iso-board,.origin-clues,.route-slots,.dojo-grid,.style-grid,.cap-grid-v3,.forge-clues,.forge-types,.scroll-grid-v3,.cross-grid-v3,.final-grid-v3{grid-template-columns:1fr}
+  .loadout-slots-v3,.cap-grid-v3{position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:1rem;grid-template-columns:1fr}
+  .forge-clues,.forge-types,.scroll-grid-v3,.cross-grid-v3,.origin-clues,.route-slots,.dojo-grid,.style-grid{position:relative;inset:auto;margin:1rem}
+  .final-top-v3{grid-template-columns:1fr}
+  .final-sync-v3{text-align:left}
 }
 
 </style>
@@ -762,229 +778,277 @@
 </div>
 
 
-<div class="animus-quest" id="animusQuest" aria-hidden="true">
-  <div class="quest-shell">
-    <div class="quest-corner tl"></div><div class="quest-corner tr"></div><div class="quest-corner bl"></div><div class="quest-corner br"></div>
+<div class="animus-hub-game" id="animusHubGame" aria-hidden="true">
+  <div class="hub-shell">
+    <div class="hub-corner tl"></div><div class="hub-corner tr"></div><div class="hub-corner bl"></div><div class="hub-corner br"></div>
 
-    <div class="quest-topbar">
-      <div class="quest-status" id="questStatus">ANIMUS QUEST: STANDBY</div>
-      <div class="sync-wrap">
-        <div class="sync-label">Sync</div>
-        <div class="sync-track"><div class="sync-fill" id="syncFill"></div></div>
-        <div class="sync-score" id="syncScore">0%</div>
+    <div class="hub-topbar">
+      <div class="hub-status" id="hubStatus">ANIMUS HUB: STANDBY</div>
+      <div class="hub-sync">
+        <div class="hub-sync-label">Sync</div>
+        <div class="hub-sync-track"><div class="hub-sync-fill" id="hubSyncFill"></div></div>
+        <div class="hub-sync-score" id="hubSyncScore">0%</div>
       </div>
-      <button class="quest-exit" id="exitQuest" type="button">Exit</button>
+      <button type="button" class="hub-exit" id="exitHubGame">Exit</button>
     </div>
 
-    <div class="fragment-bar">
-      <div class="fragment" data-fragment="origin"><span></span>Origin</div>
-      <div class="fragment" data-fragment="dojo"><span></span>Dōjō</div>
-      <div class="fragment" data-fragment="arsenal"><span></span>Arsenal</div>
-      <div class="fragment" data-fragment="forge"><span></span>Forge</div>
-      <div class="fragment" data-fragment="scrolls"><span></span>Scrolls</div>
-      <div class="fragment" data-fragment="crossroads"><span></span>Path</div>
+    <div class="hub-fragments">
+      <div class="hub-frag" data-frag="origin"><span></span>Origin</div>
+      <div class="hub-frag" data-frag="dojo"><span></span>Dōjō</div>
+      <div class="hub-frag" data-frag="arsenal"><span></span>Arsenal</div>
+      <div class="hub-frag" data-frag="forge"><span></span>Forge</div>
+      <div class="hub-frag" data-frag="scrolls"><span></span>Scrolls</div>
+      <div class="hub-frag" data-frag="crossroads"><span></span>Path</div>
     </div>
 
-    <section class="quest-stage active" data-stage="0">
-      <div class="quest-layout">
-        <div class="quest-copy">
-          <div class="quest-kicker">Animus: The Ronin Archive</div>
-          <h2 class="quest-title">Recover the memory fragments.</h2>
-          <p class="quest-desc">Enter a short profile adventure. Complete six quests, recover fragments, build a sync score, and unlock a character-style profile summary of Sai.</p>
-          <div class="guide-box">
-            <div class="guide-label">Eagle Signal</div>
-            <div class="guide-text">This is not a navigation menu. It is a 2–3 minute interactive reconstruction of the person, training, tools, projects, and direction behind the portfolio.</div>
+    <section class="hub-screen active" data-screen="start">
+      <div class="hub-start">
+        <div>
+          <div class="hub-kicker">Animus: The Ronin Archive</div>
+          <h2 class="hub-title">Recover the profile through a memory hub.</h2>
+          <p class="hub-desc">This version is non-linear. Explore chambers, decode clues, recover fragments, raise synchronization, and unlock a route-based final profile. You do not need to know Sai beforehand — the archive teaches you as you play.</p>
+          <div class="hub-guide">
+            <div class="hub-guide-label">Eagle Signal</div>
+            <div class="hub-guide-text">Some chambers open immediately. Others unlock after enough fragments are recovered. Higher sync produces a more complete final reconstruction.</div>
           </div>
-          <button class="quest-action" id="startQuest" type="button">Open Quest Map <span>→</span></button>
+          <button type="button" class="hub-action" id="enterMemoryHub">Enter Memory Hub <span>→</span></button>
         </div>
-        <div class="quest-panel">
-          <div class="panel-scan"></div>
-          <div class="gate-grid">
-            <div class="gate-card selected"><div class="gate-title">Origin Gate</div><div class="gate-sub">Route memory</div></div>
-            <div class="gate-card selected"><div class="gate-title">The Dōjō</div><div class="gate-sub">Training blade</div></div>
-            <div class="gate-card selected"><div class="gate-title">The Forge</div><div class="gate-sub">Project relics</div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quest-stage" data-stage="1">
-      <div class="quest-layout">
-        <div class="quest-copy">
-          <div class="quest-kicker">Quest 01 — Origin Gate</div>
-          <h2 class="quest-title">Trace the route.</h2>
-          <p class="quest-desc">The archive is fragmented. Light the gates in order: Hyderabad → Palaiseau / Paris → Toulouse.</p>
-          <div class="guide-box"><div class="guide-label">Eagle Signal</div><div class="guide-text">A route is more than geography. It marks the move from mechanical systems into biomedical engineering and medical imaging.</div></div>
-          <button class="quest-action next-quest" type="button" disabled>Enter the Dōjō <span>→</span></button>
-        </div>
-        <div class="quest-panel">
-          <div class="panel-scan"></div>
-          <div class="route-line"></div>
-          <div class="route-node" data-order="1"><div class="route-dot"></div><div class="route-label">Hyderabad</div><div class="route-sub">Mechanical roots</div></div>
-          <div class="route-node" data-order="2"><div class="route-dot"></div><div class="route-label">Palaiseau / Paris</div><div class="route-sub">Biomedical training</div></div>
-          <div class="route-node" data-order="3"><div class="route-dot"></div><div class="route-label">Toulouse</div><div class="route-sub">Medical imaging PhD</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quest-stage" data-stage="2">
-      <div class="quest-layout">
-        <div class="quest-copy">
-          <div class="quest-kicker">Quest 02 — The Dōjō</div>
-          <h2 class="quest-title">Forge the training blade.</h2>
-          <p class="quest-desc">A blade is only as strong as its layers. Select all three training fragments to complete the blade.</p>
-          <div class="guide-box"><div class="guide-label">Eagle Signal</div><div class="guide-text">This profile is layered: mechanical foundations, biomedical systems, then imaging and radiophysics.</div></div>
-          <button class="quest-action next-quest" type="button" disabled>Open the Arsenal <span>→</span></button>
-        </div>
-        <div class="quest-panel">
-          <div class="panel-scan"></div>
-          <div class="blade-base"></div>
-          <div class="blade-piece"><div class="blade-piece-title">Mechanical Engineering</div><div class="blade-piece-sub">Mahindra University · fluids · design · systems</div></div>
-          <div class="blade-piece"><div class="blade-piece-title">Biomechanical & Biomedical Engineering</div><div class="blade-piece-sub">École Polytechnique · modelling · clinical problems</div></div>
-          <div class="blade-piece"><div class="blade-piece-title">Medical Imaging & Radiophysics</div><div class="blade-piece-sub">University of Toulouse · PET/CT · oncology · validation</div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quest-stage" data-stage="3">
-      <div class="quest-layout">
-        <div class="quest-copy">
-          <div class="quest-kicker">Quest 03 — The Arsenal</div>
-          <h2 class="quest-title">Equip the loadout.</h2>
-          <p class="quest-desc">Every mission needs a loadout. Choose any three capabilities. Your choices influence the final subclass.</p>
-          <div class="guide-box"><div class="guide-label">Eagle Signal</div><div class="guide-text">Pick what you care about most: modelling, design, experimentation, imaging, or systems.</div></div>
-          <button class="quest-action next-quest" type="button" disabled>Enter the Forge <span>→</span></button>
-        </div>
-        <div class="quest-panel">
-          <div class="panel-scan"></div>
-          <div class="loadout-slots"><div class="loadout-slot">Slot I</div><div class="loadout-slot">Slot II</div><div class="loadout-slot">Slot III</div></div>
-          <div class="arsenal-grid">
-            <div class="arsenal-item" data-cap="modelling"><div class="arsenal-kanji">算</div><div class="arsenal-name">Numerical Modelling</div><div class="arsenal-tools">COMSOL · MATLAB · Python</div></div>
-            <div class="arsenal-item" data-cap="design"><div class="arsenal-kanji">鍛</div><div class="arsenal-name">Product Design</div><div class="arsenal-tools">Fusion 360 · Cura · CAD</div></div>
-            <div class="arsenal-item" data-cap="experimental"><div class="arsenal-kanji">試</div><div class="arsenal-name">Experimental Method</div><div class="arsenal-tools">JASP · validation · data</div></div>
-            <div class="arsenal-item" data-cap="imaging"><div class="arsenal-kanji">診</div><div class="arsenal-name">Medical Imaging Analysis</div><div class="arsenal-tools">ImageJ · QC · clinical review</div></div>
-            <div class="arsenal-item" data-cap="systems"><div class="arsenal-kanji">海</div><div class="arsenal-name">AUV / Systems</div><div class="arsenal-tools">CFD · OpenCV · mission design</div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quest-stage" data-stage="4">
-      <div class="quest-layout">
-        <div class="quest-copy">
-          <div class="quest-kicker">Quest 04 — The Forge</div>
-          <h2 class="quest-title">Match the project relics.</h2>
-          <p class="quest-desc">Awaken the three flagship builds by matching each relic to its build type. Optional side relics add bonus sync.</p>
-          <div class="guide-box"><div class="guide-label">Eagle Signal</div><div class="guide-text">These are the project cores: validation system, synthetic PET toolset, and multimodal framework.</div></div>
-          <button class="quest-action next-quest" type="button" disabled>Open Scroll Chamber <span>→</span></button>
-        </div>
-        <div class="quest-panel">
-          <div class="panel-scan"></div>
-          <div class="match-board">
-            <div class="relic-column">
-              <div class="match-relic" data-match="design"><div class="match-title">3DynaPET</div><div class="match-sub">3D-printed Dynamic PET/CT validation system</div></div>
-              <div class="match-relic" data-match="toolset"><div class="match-title">MuPET</div><div class="match-sub">Multiphysics PET synthetic data generation</div></div>
-              <div class="match-relic" data-match="framework"><div class="match-title">CASSOULET</div><div class="match-sub">Ground truth multimodal imaging cohort framework</div></div>
-            </div>
-            <div class="type-column">
-              <div class="match-type" data-match="toolset">Toolset</div>
-              <div class="match-type" data-match="framework">Framework</div>
-              <div class="match-type" data-match="design">Design</div>
+        <div class="holo-panel">
+          <div class="holo-scan"></div>
+          <div class="iso-wrap">
+            <div class="iso-board">
+              <div class="iso-tile open origin"><div class="iso-title">Origin Gate</div><div class="iso-state">Open</div><div class="iso-clue">Decode the route.</div></div>
+              <div class="iso-tile open dojo"><div class="iso-title">The Dōjō</div><div class="iso-state">Open</div><div class="iso-clue">Recover training layers.</div></div>
+              <div class="iso-tile open arsenal"><div class="iso-title">The Arsenal</div><div class="iso-state">Open</div><div class="iso-clue">Choose your investigation style.</div></div>
+              <div class="iso-tile locked forge"><div class="iso-title">The Forge</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 2 fragments.</div></div>
+              <div class="iso-tile locked scrolls"><div class="iso-title">Scroll Chamber</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 3 fragments.</div></div>
+              <div class="iso-tile locked crossroads"><div class="iso-title">Crossroads</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 5 fragments.</div></div>
             </div>
           </div>
-          <div class="mini-relics">
-            <button type="button" class="side-relic">AUV Systems</button>
-            <button type="button" class="side-relic">RBC Drug Delivery</button>
-            <button type="button" class="side-relic">Flexible Electrodes</button>
-            <button type="button" class="side-relic">4D TEVAR</button>
-          </div>
         </div>
       </div>
     </section>
 
-    <section class="quest-stage" data-stage="5">
-      <div class="quest-layout">
-        <div class="quest-copy">
-          <div class="quest-kicker">Quest 05 — Scroll Chamber</div>
-          <h2 class="quest-title">Decode the research trace.</h2>
-          <p class="quest-desc">Work leaves traces. Scan the four output crystals to recover the scientific communication fragment.</p>
-          <div class="guide-box"><div class="guide-label">Eagle Signal</div><div class="guide-text">Publications, preprints, conference posters, and valorisation work turn research into visible output.</div></div>
-          <button class="quest-action next-quest" type="button" disabled>Reach the Crossroads <span>→</span></button>
-        </div>
-        <div class="quest-panel">
-          <div class="panel-scan"></div>
-          <div class="scroll-grid">
-            <div class="scroll-crystal"><div class="scroll-title">Publication</div><div class="scroll-sub">Peer-reviewed trace</div></div>
-            <div class="scroll-crystal"><div class="scroll-title">Preprint</div><div class="scroll-sub">Open research signal</div></div>
-            <div class="scroll-crystal"><div class="scroll-title">Conference</div><div class="scroll-sub">Technical communication</div></div>
-            <div class="scroll-crystal"><div class="scroll-title">Valorisation</div><div class="scroll-sub">Research-to-market trace</div></div>
+    <section class="hub-screen" data-screen="hub">
+      <div class="hub-start">
+        <div>
+          <div class="hub-kicker">Memory Hub</div>
+          <h2 class="hub-title">Choose your next chamber.</h2>
+          <p class="hub-desc">The route is yours. Decode enough fragments to open deeper chambers. Return to the hub after each quest.</p>
+          <div class="hub-guide">
+            <div class="hub-guide-label">Current objective</div>
+            <div class="hub-guide-text" id="hubObjective">Recover any two fragments to unlock the Forge.</div>
           </div>
+          <button type="button" class="hub-action" id="finishIfReady" disabled>Final Reconstruction Locked</button>
         </div>
-      </div>
-    </section>
-
-    <section class="quest-stage" data-stage="6">
-      <div class="quest-layout">
-        <div class="quest-copy">
-          <div class="quest-kicker">Quest 06 — The Crossroads</div>
-          <h2 class="quest-title">Choose the final route.</h2>
-          <p class="quest-desc">Your route changes the final class and profile summary. Choose the lens that matters to you.</p>
-          <div class="guide-box"><div class="guide-label">Eagle Signal</div><div class="guide-text">Different visitors read the same profile differently: clinic, MedTech, strategy, or research collaboration.</div></div>
-          <button class="quest-action next-quest" type="button" disabled>Reconstruct Profile <span>→</span></button>
-        </div>
-        <div class="quest-panel">
-          <div class="panel-scan"></div>
-          <div class="crossroads-grid">
-            <div class="crossroad-card" data-route="clinical"><div class="cross-kanji">臨</div><div class="cross-title">Clinical Translation</div><div class="cross-desc">Scanner-side validation, image QC, and clinical imaging workflows.</div></div>
-            <div class="crossroad-card" data-route="medtech"><div class="cross-kanji">医</div><div class="cross-title">MedTech / Deep Tech</div><div class="cross-desc">Prototypes, toolsets, frameworks, and product-facing R&D.</div></div>
-            <div class="crossroad-card" data-route="strategy"><div class="cross-kanji">策</div><div class="cross-title">Strategy / Ventures</div><div class="cross-desc">IP, valorisation, technical due diligence, and research-to-market thinking.</div></div>
-            <div class="crossroad-card" data-route="research"><div class="cross-kanji">研</div><div class="cross-title">Research Collaboration</div><div class="cross-desc">Simulation, medical imaging, validation, and translational research partnerships.</div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="quest-stage" data-stage="7">
-      <div class="result-panel">
-        <div class="profile-card">
-          <div class="profile-top">
-            <div>
-              <div class="quest-kicker">Sequence Complete</div>
-              <h2 class="profile-title">Profile Reconstructed</h2>
-              <div class="profile-sub">Sai Kiran Kumar Nalla</div>
-            </div>
-            <div class="profile-sync">
-              <div class="profile-sync-num" id="finalSync">0%</div>
-              <div class="profile-sync-rank" id="finalRank">Calculating</div>
+        <div class="holo-panel">
+          <div class="holo-scan"></div>
+          <div class="iso-wrap">
+            <div class="iso-board" id="hubBoard">
+              <div class="iso-tile origin" data-chamber="origin"><div class="iso-title">Origin Gate</div><div class="iso-state">Open</div><div class="iso-clue">Decode where the journey moves.</div></div>
+              <div class="iso-tile dojo" data-chamber="dojo"><div class="iso-title">The Dōjō</div><div class="iso-state">Open</div><div class="iso-clue">Find the real training layers.</div></div>
+              <div class="iso-tile arsenal" data-chamber="arsenal"><div class="iso-title">The Arsenal</div><div class="iso-state">Open</div><div class="iso-clue">Choose a lens and loadout.</div></div>
+              <div class="iso-tile forge" data-chamber="forge"><div class="iso-title">The Forge</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 2 fragments.</div></div>
+              <div class="iso-tile scrolls" data-chamber="scrolls"><div class="iso-title">Scroll Chamber</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 3 fragments.</div></div>
+              <div class="iso-tile crossroads" data-chamber="crossroads"><div class="iso-title">Crossroads</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 5 fragments.</div></div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
 
-          <p class="profile-summary" id="finalSummary"></p>
-
-          <div class="profile-grid">
-            <div class="profile-cell"><div class="profile-key">Class</div><div class="profile-value" id="finalClass"></div></div>
-            <div class="profile-cell"><div class="profile-key">Subclass</div><div class="profile-value" id="finalSubclass"></div></div>
-            <div class="profile-cell"><div class="profile-key">Origin</div><div class="profile-value">Hyderabad → Palaiseau / Paris → Toulouse</div></div>
-            <div class="profile-cell"><div class="profile-key">Training</div><div class="profile-value">Mechanical Engineering → Biomedical Engineering → Medical Imaging &amp; Radiophysics</div></div>
-            <div class="profile-cell"><div class="profile-key">Core Loadout</div><div class="profile-value" id="finalLoadout"></div></div>
-            <div class="profile-cell"><div class="profile-key">Signature Builds</div><div class="profile-value">3DynaPET · MuPET · CASSOULET</div></div>
-            <div class="profile-cell"><div class="profile-key">Research Trace</div><div class="profile-value">Publications · Preprints · Conference outputs · PET/CT validation · Clinical visualization</div></div>
-            <div class="profile-cell"><div class="profile-key">Bonus Relics</div><div class="profile-value" id="finalBonus">None recovered</div></div>
+    <section class="hub-screen" data-screen="origin">
+      <div class="chamber-layout">
+        <div class="chamber-copy">
+          <div class="hub-kicker">Origin Gate</div>
+          <h2 class="chamber-title">Decode the route, then place it.</h2>
+          <p class="chamber-desc">You do not need to know the cities. Click each encrypted memory first. The clues reveal the route.</p>
+          <div class="hub-guide"><div class="hub-guide-label">Quest rule</div><div class="hub-guide-text">Decode all three cards, then place them into the route slots in the order the profile evolved.</div></div>
+          <button type="button" class="hub-action complete-chamber" data-complete="origin" disabled>Recover Origin Fragment <span>→</span></button>
+          <button type="button" class="hub-action return-hub">Return to Hub</button>
+        </div>
+        <div class="chamber-panel">
+          <div class="holo-scan"></div>
+          <div class="origin-clues">
+            <div class="memory-card origin-card" data-place="hyderabad" data-order="1"><div class="card-title">Encrypted Node A</div><div class="card-sub">Mechanical roots · India</div><div class="card-reveal">Hyderabad — mechanical engineering, fluids, design, systems.</div></div>
+            <div class="memory-card origin-card" data-place="paris" data-order="2"><div class="card-title">Encrypted Node B</div><div class="card-sub">Biomedical training · France</div><div class="card-reveal">Palaiseau / Paris — biomedical engineering, biomechanics, clinical problems.</div></div>
+            <div class="memory-card origin-card" data-place="toulouse" data-order="3"><div class="card-title">Encrypted Node C</div><div class="card-sub">Oncology imaging hub</div><div class="card-reveal">Toulouse — PhD in medical imaging and radiophysics.</div></div>
           </div>
-
-          <div class="profile-actions">
-            <a href="projects.html">View Projects</a>
-            <a href="experience.html">View Experience</a>
-            <a href="papers.html">View Publications</a>
-            <a href="contact.html">Contact</a>
-            <a href="Assets/Sai_Nalla_CV.pdf" target="_blank">Download CV</a>
-            <button type="button" id="replayQuest">Replay Quest</button>
+          <div class="route-slots">
+            <div class="route-slot" data-slot="1">Route Slot I</div>
+            <div class="route-slot" data-slot="2">Route Slot II</div>
+            <div class="route-slot" data-slot="3">Route Slot III</div>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="quest-toast" id="questToast">Memory fragment recovered</div>
+    <section class="hub-screen" data-screen="dojo">
+      <div class="chamber-layout">
+        <div class="chamber-copy">
+          <div class="hub-kicker">The Dōjō</div>
+          <h2 class="chamber-title">Separate the true training layers.</h2>
+          <p class="chamber-desc">The archive mixes real and false fragments. Select the three true layers that forged the current profile.</p>
+          <div class="hub-guide"><div class="hub-guide-label">Clue</div><div class="hub-guide-text">Started with machines and flow, moved to body-scale engineering, now works in scanner physics and oncology.</div></div>
+          <button type="button" class="hub-action complete-chamber" data-complete="dojo" disabled>Recover Dōjō Fragment <span>→</span></button>
+          <button type="button" class="hub-action return-hub">Return to Hub</button>
+        </div>
+        <div class="chamber-panel">
+          <div class="holo-scan"></div>
+          <div class="dojo-grid">
+            <div class="memory-card dojo-card" data-correct="true"><div class="card-title">Mechanical Engineering</div><div class="card-sub">True layer</div></div>
+            <div class="memory-card dojo-card" data-correct="false"><div class="card-title">Architecture</div><div class="card-sub">Noise fragment</div></div>
+            <div class="memory-card dojo-card" data-correct="true"><div class="card-title">Biomechanical & Biomedical Engineering</div><div class="card-sub">True layer</div></div>
+            <div class="memory-card dojo-card" data-correct="false"><div class="card-title">Pure Finance</div><div class="card-sub">Noise fragment</div></div>
+            <div class="memory-card dojo-card" data-correct="true"><div class="card-title">Medical Imaging & Radiophysics</div><div class="card-sub">True layer</div></div>
+            <div class="memory-card dojo-card" data-correct="false"><div class="card-title">Civil Planning</div><div class="card-sub">Noise fragment</div></div>
+          </div>
+          <div class="blade-meter"><div class="blade-meter-fill" id="bladeFill"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hub-screen" data-screen="arsenal">
+      <div class="chamber-layout">
+        <div class="chamber-copy">
+          <div class="hub-kicker">The Arsenal</div>
+          <h2 class="chamber-title">Pick a lens, then calibrate the loadout.</h2>
+          <p class="chamber-desc">Your investigation style recommends capabilities, but you can modify the final three. This affects the final subclass.</p>
+          <div class="hub-guide"><div class="hub-guide-label">Quest rule</div><div class="hub-guide-text">Choose a visitor lens, then select exactly three capabilities.</div></div>
+          <button type="button" class="hub-action complete-chamber" data-complete="arsenal" disabled>Recover Arsenal Fragment <span>→</span></button>
+          <button type="button" class="hub-action return-hub">Return to Hub</button>
+        </div>
+        <div class="chamber-panel">
+          <div class="holo-scan"></div>
+          <div class="style-grid">
+            <div class="memory-card style-card" data-style="technical"><div class="card-title">Technical Depth</div><div class="card-sub">Modelling · imaging · systems</div></div>
+            <div class="memory-card style-card" data-style="clinical"><div class="card-title">Clinical Fit</div><div class="card-sub">Imaging · experimental · design</div></div>
+            <div class="memory-card style-card" data-style="venture"><div class="card-title">Venture Fit</div><div class="card-sub">Design · imaging · modelling</div></div>
+            <div class="memory-card style-card" data-style="research"><div class="card-title">Research Fit</div><div class="card-sub">Modelling · experimental · imaging</div></div>
+          </div>
+          <div class="loadout-slots-v3"><div class="loadout-slot-v3">Slot I</div><div class="loadout-slot-v3">Slot II</div><div class="loadout-slot-v3">Slot III</div></div>
+          <div class="cap-grid-v3">
+            <div class="memory-card cap-card" data-cap="modelling"><div class="cap-kanji">算</div><div class="card-title">Numerical Modelling</div><div class="card-sub">COMSOL · MATLAB · Python</div></div>
+            <div class="memory-card cap-card" data-cap="design"><div class="cap-kanji">鍛</div><div class="card-title">Product Design</div><div class="card-sub">Fusion 360 · Cura · CAD</div></div>
+            <div class="memory-card cap-card" data-cap="experimental"><div class="cap-kanji">試</div><div class="card-title">Experimental Method</div><div class="card-sub">JASP · validation · data</div></div>
+            <div class="memory-card cap-card" data-cap="imaging"><div class="cap-kanji">診</div><div class="card-title">Medical Imaging</div><div class="card-sub">ImageJ · QC · clinical review</div></div>
+            <div class="memory-card cap-card" data-cap="systems"><div class="cap-kanji">海</div><div class="card-title">AUV / Systems</div><div class="card-sub">CFD · OpenCV · mission design</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hub-screen" data-screen="forge">
+      <div class="chamber-layout">
+        <div class="chamber-copy">
+          <div class="hub-kicker">The Forge</div>
+          <h2 class="chamber-title">Identify the relics from clues.</h2>
+          <p class="chamber-desc">The project names are hidden until matched. Read the clue, select a relic, then choose its build type.</p>
+          <div class="hub-guide"><div class="hub-guide-label">Optional</div><div class="hub-guide-text">Side relics are not required. Recover them for bonus sync and a richer final profile.</div></div>
+          <button type="button" class="hub-action complete-chamber" data-complete="forge" disabled>Recover Forge Fragment <span>→</span></button>
+          <button type="button" class="hub-action return-hub">Return to Hub</button>
+        </div>
+        <div class="chamber-panel">
+          <div class="holo-scan"></div>
+          <div class="forge-clues">
+            <div class="memory-card forge-card" data-match="design" data-name="3DynaPET"><div class="card-title">Relic A</div><div class="card-sub">Turns printed structures into scanner validation systems.</div><div class="card-reveal">3DynaPET unlocked.</div></div>
+            <div class="memory-card forge-card" data-match="toolset" data-name="MuPET"><div class="card-title">Relic B</div><div class="card-sub">Generates PET-like worlds from physical transport laws.</div><div class="card-reveal">MuPET unlocked.</div></div>
+            <div class="memory-card forge-card" data-match="framework" data-name="CASSOULET"><div class="card-title">Relic C</div><div class="card-sub">Builds cohorts with known lesion ground truth.</div><div class="card-reveal">CASSOULET unlocked.</div></div>
+          </div>
+          <div class="forge-types">
+            <div class="type-seal-game" data-match="toolset">Toolset</div>
+            <div class="type-seal-game" data-match="framework">Framework</div>
+            <div class="type-seal-game" data-match="design">Design</div>
+          </div>
+          <div class="side-relics-v3">
+            <button type="button" class="side-relic-v3">AUV Systems</button>
+            <button type="button" class="side-relic-v3">RBC Drug Delivery</button>
+            <button type="button" class="side-relic-v3">Flexible Electrodes</button>
+            <button type="button" class="side-relic-v3">4D TEVAR</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hub-screen" data-screen="scrolls">
+      <div class="chamber-layout">
+        <div class="chamber-copy">
+          <div class="hub-kicker">Scroll Chamber</div>
+          <h2 class="chamber-title">Scan the research traces.</h2>
+          <p class="chamber-desc">Work becomes legible when it leaves traces. Decode at least three scrolls to recover this fragment.</p>
+          <button type="button" class="hub-action complete-chamber" data-complete="scrolls" disabled>Recover Scroll Fragment <span>→</span></button>
+          <button type="button" class="hub-action return-hub">Return to Hub</button>
+        </div>
+        <div class="chamber-panel">
+          <div class="holo-scan"></div>
+          <div class="scroll-grid-v3">
+            <div class="memory-card scroll-card"><div class="card-title">Publication</div><div class="card-sub">Peer-reviewed trace</div></div>
+            <div class="memory-card scroll-card"><div class="card-title">Preprint</div><div class="card-sub">Open research signal</div></div>
+            <div class="memory-card scroll-card"><div class="card-title">Conference</div><div class="card-sub">Technical communication</div></div>
+            <div class="memory-card scroll-card"><div class="card-title">Valorisation</div><div class="card-sub">IP · research-to-market</div></div>
+            <div class="memory-card scroll-card"><div class="card-title">Supervision</div><div class="card-sub">Teaching · mentorship</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hub-screen" data-screen="crossroads">
+      <div class="chamber-layout">
+        <div class="chamber-copy">
+          <div class="hub-kicker">The Crossroads</div>
+          <h2 class="chamber-title">Choose the lens for the final profile.</h2>
+          <p class="chamber-desc">The final class depends on your route. The subclass is shaped by the loadout you equipped.</p>
+          <button type="button" class="hub-action complete-chamber" data-complete="crossroads" disabled>Recover Path Fragment <span>→</span></button>
+          <button type="button" class="hub-action return-hub">Return to Hub</button>
+        </div>
+        <div class="chamber-panel">
+          <div class="holo-scan"></div>
+          <div class="cross-grid-v3">
+            <div class="memory-card cross-card" data-route="clinical"><div class="cross-kanji">臨</div><div class="card-title">Clinical Translation</div><div class="card-sub">Scanner-side validation · clinical workflows</div></div>
+            <div class="memory-card cross-card" data-route="medtech"><div class="cross-kanji">医</div><div class="card-title">MedTech / Deep Tech</div><div class="card-sub">Prototype · toolset · product-facing R&D</div></div>
+            <div class="memory-card cross-card" data-route="strategy"><div class="cross-kanji">策</div><div class="card-title">Strategy / Ventures</div><div class="card-sub">IP · valorisation · research-to-market</div></div>
+            <div class="memory-card cross-card" data-route="research"><div class="cross-kanji">研</div><div class="card-title">Research Collaboration</div><div class="card-sub">Simulation · imaging · validation systems</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hub-screen" data-screen="final">
+      <div class="final-card-v3">
+        <div class="final-top-v3">
+          <div>
+            <div class="hub-kicker">Sequence Complete</div>
+            <h2 class="final-title-v3">Profile Reconstructed</h2>
+            <div class="card-sub">Sai Kiran Kumar Nalla</div>
+          </div>
+          <div class="final-sync-v3">
+            <div class="final-sync-num-v3" id="finalSyncV3">0%</div>
+            <div class="final-rank-v3" id="finalRankV3">Calculating</div>
+          </div>
+        </div>
+        <p class="final-summary-v3" id="finalSummaryV3"></p>
+        <div class="final-grid-v3">
+          <div class="final-cell-v3"><div class="final-key-v3">Class</div><div class="final-val-v3" id="finalClassV3"></div></div>
+          <div class="final-cell-v3"><div class="final-key-v3">Subclass</div><div class="final-val-v3" id="finalSubclassV3"></div></div>
+          <div class="final-cell-v3"><div class="final-key-v3">Origin</div><div class="final-val-v3" id="finalOriginV3">Encrypted if sync is low</div></div>
+          <div class="final-cell-v3"><div class="final-key-v3">Training</div><div class="final-val-v3" id="finalTrainingV3">Encrypted if sync is low</div></div>
+          <div class="final-cell-v3"><div class="final-key-v3">Core Loadout</div><div class="final-val-v3" id="finalLoadoutV3"></div></div>
+          <div class="final-cell-v3"><div class="final-key-v3">Signature Builds</div><div class="final-val-v3" id="finalBuildsV3">Encrypted if sync is low</div></div>
+          <div class="final-cell-v3"><div class="final-key-v3">Research Trace</div><div class="final-val-v3" id="finalTraceV3">Encrypted if sync is low</div></div>
+          <div class="final-cell-v3"><div class="final-key-v3">Bonus Relics</div><div class="final-val-v3" id="finalBonusV3">None recovered</div></div>
+        </div>
+        <div class="final-actions-v3">
+          <a href="projects.html">View Projects</a>
+          <a href="experience.html">View Experience</a>
+          <a href="papers.html">View Publications</a>
+          <a href="contact.html">Contact</a>
+          <a href="Assets/Sai_Nalla_CV.pdf" target="_blank">Download CV</a>
+          <button type="button" id="replayHubGame">Replay Quest</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="hub-toast" id="hubToast">Memory updated</div>
   </div>
 </div>
 
@@ -1048,10 +1112,10 @@
     
     <div class="hero-btns">
       <a href="about.html" class="btn">Explore Portfolio<span class="arrow">→</span></a>
-      <button type="button" class="btn btn-game" id="playQuest"><span class="game-glyph">記</span>Play Animus Quest<span class="arrow">→</span></button>
+      <button type="button" class="btn btn-game" id="playHubGame"><span class="game-glyph">記</span>Play Animus Quest<span class="arrow">→</span></button>
       <a href="Assets/Sai_Nalla_CV.pdf" target="_blank" class="btn btn-cv"><span class="cv-glyph">伝</span>View CV<span class="arrow">→</span></a>
     </div>
-    <div class="hero-game-note">2–3 minute memory adventure · profile reconstruction · exit anytime</div>
+    <div class="hero-game-note">2–3 minute non-linear memory adventure · profile reconstruction · exit anytime</div>
   </div>
 </section>
 
@@ -1117,26 +1181,29 @@
 <script src="transitions.js"></script>
 
 <script>
-const quest = document.getElementById('animusQuest');
-const playQuest = document.getElementById('playQuest');
-const exitQuest = document.getElementById('exitQuest');
-const stages = [...document.querySelectorAll('.quest-stage')];
-const questStatus = document.getElementById('questStatus');
-const syncFill = document.getElementById('syncFill');
-const syncScore = document.getElementById('syncScore');
-const questToast = document.getElementById('questToast');
-const replayQuest = document.getElementById('replayQuest');
+const hubGame = document.getElementById('animusHubGame');
+const playHubGame = document.getElementById('playHubGame');
+const exitHubGame = document.getElementById('exitHubGame');
+const hubScreens = [...document.querySelectorAll('.hub-screen')];
+const hubStatus = document.getElementById('hubStatus');
+const hubSyncFill = document.getElementById('hubSyncFill');
+const hubSyncScore = document.getElementById('hubSyncScore');
+const hubToast = document.getElementById('hubToast');
+const hubObjective = document.getElementById('hubObjective');
+const finishIfReady = document.getElementById('finishIfReady');
 
-let stage = 0;
-let sync = 0;
-let routeStep = 1;
-let selectedRoute = '';
-let selectedCaps = [];
-let bonusRelics = [];
-let selectedRelic = null;
-let matchedCount = 0;
+let syncV3 = 0;
+let recovered = new Set();
+let selectedOriginCard = null;
+let routePlaced = [];
+let selectedCapsV3 = [];
+let selectedRouteV3 = '';
+let selectedForgeRelic = null;
+let forgeMatched = 0;
+let bonusRelicsV3 = [];
+let currentScreen = 'start';
 
-const capLabels = {
+const capLabelsV3 = {
   modelling:'Numerical Modelling',
   design:'Product Design',
   experimental:'Experimental Method',
@@ -1144,7 +1211,7 @@ const capLabels = {
   systems:'AUV / Systems Engineering'
 };
 
-const routeProfiles = {
+const routeProfilesV3 = {
   clinical:{
     className:'Clinical Translation Researcher',
     defaultSubclass:'Medical Imaging Systems Builder',
@@ -1167,231 +1234,322 @@ const routeProfiles = {
   }
 };
 
-function toast(msg){
-  questToast.textContent = msg;
-  questToast.classList.add('show');
-  setTimeout(() => questToast.classList.remove('show'), 1250);
+function toastV3(msg){
+  hubToast.textContent = msg;
+  hubToast.classList.add('show');
+  setTimeout(()=>hubToast.classList.remove('show'), 1250);
 }
-
-function setSync(value){
-  sync = Math.max(0, Math.min(100, value));
-  syncFill.style.width = sync + '%';
-  syncScore.textContent = sync + '%';
+function setSyncV3(val){
+  syncV3 = Math.max(0, Math.min(100, val));
+  hubSyncFill.style.width = syncV3 + '%';
+  hubSyncScore.textContent = syncV3 + '%';
 }
-
-function addSync(points, msg){
-  setSync(sync + points);
-  if(msg) toast(msg + ' · +' + points + ' sync');
+function addSyncV3(points, msg){
+  setSyncV3(syncV3 + points);
+  if(msg) toastV3(msg + ' · +' + points + ' sync');
 }
-
-function unlockFragment(name){
-  const el = document.querySelector(`.fragment[data-fragment="${name}"]`);
-  if(el && !el.classList.contains('unlocked')) el.classList.add('unlocked');
+function showScreen(name){
+  currentScreen = name;
+  hubScreens.forEach(s => s.classList.toggle('active', s.dataset.screen === name));
+  hubStatus.textContent = 'ANIMUS HUB: ' + name.toUpperCase();
+  if(name === 'hub') updateHubLocks();
 }
-
-function goStage(n){
-  stage = n;
-  stages.forEach(s => s.classList.toggle('active', Number(s.dataset.stage) === n));
-  const labels = ['Quest Map','Origin Gate','The Dōjō','The Arsenal','The Forge','Scroll Chamber','The Crossroads','Profile Complete'];
-  questStatus.textContent = 'ANIMUS QUEST: ' + labels[n];
+function unlockFragV3(name, points){
+  if(recovered.has(name)) return;
+  recovered.add(name);
+  const frag = document.querySelector(`.hub-frag[data-frag="${name}"]`);
+  if(frag) frag.classList.add('unlocked');
+  addSyncV3(points, name.toUpperCase() + ' fragment recovered');
+  updateHubLocks();
 }
-
-function resetQuest(){
-  stage = 0;
-  sync = 0;
-  routeStep = 1;
-  selectedRoute = '';
-  selectedCaps = [];
-  bonusRelics = [];
-  selectedRelic = null;
-  matchedCount = 0;
-  setSync(0);
-  document.querySelectorAll('.unlocked,.selected,.matched,.decoded').forEach(el => el.classList.remove('unlocked','selected','matched','decoded'));
-  document.querySelectorAll('.next-quest').forEach(btn => btn.disabled = true);
-  document.querySelectorAll('.loadout-slot').forEach((slot,i) => {
-    slot.textContent = 'Slot ' + ['I','II','III'][i];
-    slot.classList.remove('filled');
+function updateHubLocks(){
+  const count = recovered.size;
+  document.querySelectorAll('#hubBoard .iso-tile').forEach(tile => {
+    const chamber = tile.dataset.chamber;
+    let req = 0;
+    if(chamber === 'forge') req = 2;
+    if(chamber === 'scrolls') req = 3;
+    if(chamber === 'crossroads') req = 5;
+    const state = tile.querySelector('.iso-state');
+    tile.classList.remove('open','locked','recovered');
+    if(recovered.has(chamber)){
+      tile.classList.add('recovered');
+      state.textContent = 'Recovered';
+    } else if(count >= req){
+      tile.classList.add('open');
+      state.textContent = 'Open';
+    } else {
+      tile.classList.add('locked');
+      state.textContent = 'Locked';
+    }
   });
-  document.querySelectorAll('.project-emblem-desc').forEach(desc => desc.textContent = desc.textContent);
-  document.getElementById('finalBonus').textContent = 'None recovered';
-  goStage(0);
+  if(count >= 6){
+    hubObjective.textContent = 'All fragments recovered. Final reconstruction available.';
+    finishIfReady.disabled = false;
+    finishIfReady.textContent = 'Generate Final Reconstruction';
+  } else if(count >= 5){
+    hubObjective.textContent = 'Crossroads open. Choose your final route.';
+  } else if(count >= 3){
+    hubObjective.textContent = 'Scroll Chamber open. Decode the research trace.';
+  } else if(count >= 2){
+    hubObjective.textContent = 'Forge open. Identify flagship project relics.';
+  } else {
+    hubObjective.textContent = 'Recover any two fragments to unlock the Forge.';
+  }
 }
-
-function openQuest(){
-  quest.classList.add('open');
-  quest.setAttribute('aria-hidden','false');
+function resetHubGame(){
+  syncV3 = 0; recovered = new Set(); selectedOriginCard = null; routePlaced = []; selectedCapsV3 = [];
+  selectedRouteV3 = ''; selectedForgeRelic = null; forgeMatched = 0; bonusRelicsV3 = [];
+  setSyncV3(0);
+  document.querySelectorAll('.unlocked,.selected,.decoded,.placed,.filled,.matched,.recovered,.open,.locked').forEach(el=>{
+    if(!el.classList.contains('hub-screen')) el.classList.remove('unlocked','selected','decoded','placed','filled','matched','recovered','open','locked');
+  });
+  document.querySelectorAll('.complete-chamber').forEach(btn => btn.disabled = true);
+  document.querySelectorAll('.route-slot').forEach((slot,i)=>{slot.textContent='Route Slot ' + ['I','II','III'][i];slot.classList.remove('filled');});
+  document.getElementById('bladeFill').style.width = '0%';
+  document.querySelectorAll('.loadout-slot-v3').forEach((slot,i)=>{slot.textContent='Slot ' + ['I','II','III'][i];slot.classList.remove('filled');});
+  document.querySelectorAll('.forge-card .card-title').forEach((el,i)=> el.textContent = ['Relic A','Relic B','Relic C'][i]);
+  updateHubLocks();
+  showScreen('start');
+}
+function openHubGame(){
+  hubGame.classList.add('open');
+  hubGame.setAttribute('aria-hidden','false');
   document.body.style.overflow = 'hidden';
-  resetQuest();
+  resetHubGame();
 }
-function closeQuest(){
-  quest.classList.remove('open');
-  quest.setAttribute('aria-hidden','true');
+function closeHubGame(){
+  hubGame.classList.remove('open');
+  hubGame.setAttribute('aria-hidden','true');
   document.body.style.overflow = '';
 }
 
-playQuest.addEventListener('click', openQuest);
-exitQuest.addEventListener('click', closeQuest);
-document.addEventListener('keydown', e => {
-  if(e.key === 'Escape' && quest.classList.contains('open')) closeQuest();
-});
-document.getElementById('startQuest').addEventListener('click', () => goStage(1));
-replayQuest.addEventListener('click', resetQuest);
+playHubGame.addEventListener('click', openHubGame);
+exitHubGame.addEventListener('click', closeHubGame);
+document.getElementById('enterMemoryHub').addEventListener('click', ()=>showScreen('hub'));
+document.querySelectorAll('.return-hub').forEach(btn => btn.addEventListener('click', ()=>showScreen('hub')));
+document.getElementById('replayHubGame').addEventListener('click', resetHubGame);
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && hubGame.classList.contains('open')) closeHubGame(); });
 
-document.querySelectorAll('.next-quest').forEach(btn => {
-  btn.addEventListener('click', () => {
-    if(stage === 1){ unlockFragment('origin'); addSync(15,'Origin fragment recovered'); goStage(2); }
-    else if(stage === 2){ unlockFragment('dojo'); addSync(15,'Training fragment recovered'); goStage(3); }
-    else if(stage === 3){ unlockFragment('arsenal'); addSync(20,'Arsenal fragment recovered'); goStage(4); }
-    else if(stage === 4){ unlockFragment('forge'); addSync(20,'Project ecosystem recovered'); goStage(5); }
-    else if(stage === 5){ unlockFragment('scrolls'); addSync(15,'Research trace recovered'); goStage(6); }
-    else if(stage === 6){ unlockFragment('crossroads'); addSync(15,'Final path selected'); buildFinalProfile(); goStage(7); }
+document.querySelectorAll('#hubBoard .iso-tile').forEach(tile => {
+  tile.addEventListener('click', () => {
+    if(tile.classList.contains('locked')) { toastV3('Chamber locked — recover more fragments'); return; }
+    const chamber = tile.dataset.chamber;
+    if(recovered.has(chamber)) { toastV3('Fragment already recovered — you can revisit'); }
+    showScreen(chamber);
   });
 });
 
-/* Quest 1 */
-document.querySelectorAll('.route-node').forEach(node => {
-  node.addEventListener('click', () => {
-    const order = Number(node.dataset.order);
-    if(order === routeStep){
-      node.classList.add('unlocked');
-      routeStep++;
-      toast('Route gate synchronized');
-      if(routeStep > 3) document.querySelector('[data-stage="1"] .next-quest').disabled = false;
+/* Origin discovery */
+document.querySelectorAll('.origin-card').forEach(card => {
+  card.addEventListener('click', () => {
+    if(!card.classList.contains('decoded')){
+      card.classList.add('decoded');
+      toastV3('Location memory decoded');
+      return;
+    }
+    selectedOriginCard = card;
+    document.querySelectorAll('.origin-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+  });
+});
+document.querySelectorAll('.route-slot').forEach(slot => {
+  slot.addEventListener('click', () => {
+    if(!selectedOriginCard){ toastV3('Select a decoded location card first'); return; }
+    if(!selectedOriginCard.classList.contains('decoded')){ toastV3('Decode the card first'); return; }
+    const expected = Number(slot.dataset.slot);
+    const order = Number(selectedOriginCard.dataset.order);
+    if(order === expected){
+      slot.textContent = selectedOriginCard.querySelector('.card-reveal').textContent.split('—')[0].trim();
+      slot.classList.add('filled');
+      selectedOriginCard.classList.add('placed');
+      selectedOriginCard.classList.remove('selected');
+      selectedOriginCard = null;
+      routePlaced.push(order);
+      if(routePlaced.length >= 3) document.querySelector('[data-complete="origin"]').disabled = false;
+      toastV3('Route slot stabilized');
     } else {
-      toast('Route unstable — trace the path in order');
-      setSync(sync - 2);
+      toastV3('Route order unstable');
+      setSyncV3(syncV3 - 2);
     }
   });
 });
 
-/* Quest 2 */
-document.querySelectorAll('.blade-piece').forEach(piece => {
-  piece.addEventListener('click', () => {
-    piece.classList.add('selected');
-    const count = document.querySelectorAll('.blade-piece.selected').length;
-    toast(`${count}/3 blade layers recovered`);
-    if(count >= 3) document.querySelector('[data-stage="2"] .next-quest').disabled = false;
+/* Dōjō */
+document.querySelectorAll('.dojo-card').forEach(card => {
+  card.addEventListener('click', () => {
+    if(card.dataset.correct === 'true'){
+      card.classList.add('selected');
+      const count = document.querySelectorAll('.dojo-card.selected[data-correct="true"]').length;
+      document.getElementById('bladeFill').style.width = `${(count/3)*100}%`;
+      toastV3(`${count}/3 true layers recovered`);
+      if(count >= 3) document.querySelector('[data-complete="dojo"]').disabled = false;
+    } else {
+      card.classList.add('decoded');
+      toastV3('Noise fragment identified');
+      setSyncV3(syncV3 - 1);
+    }
   });
 });
 
-/* Quest 3 */
-function updateLoadout(){
-  const slots = document.querySelectorAll('.loadout-slot');
-  slots.forEach((slot,i) => {
-    if(selectedCaps[i]){
-      slot.textContent = capLabels[selectedCaps[i]];
+/* Arsenal */
+const styleRecommendations = {
+  technical:['modelling','imaging','systems'],
+  clinical:['imaging','experimental','design'],
+  venture:['design','imaging','modelling'],
+  research:['modelling','experimental','imaging']
+};
+function updateLoadoutV3(){
+  const slots = document.querySelectorAll('.loadout-slot-v3');
+  slots.forEach((slot,i)=>{
+    if(selectedCapsV3[i]){
+      slot.textContent = capLabelsV3[selectedCapsV3[i]];
       slot.classList.add('filled');
     } else {
       slot.textContent = 'Slot ' + ['I','II','III'][i];
       slot.classList.remove('filled');
     }
   });
-  document.querySelector('[data-stage="3"] .next-quest').disabled = selectedCaps.length < 3;
+  document.querySelector('[data-complete="arsenal"]').disabled = selectedCapsV3.length !== 3;
 }
-document.querySelectorAll('.arsenal-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const cap = item.dataset.cap;
-    if(item.classList.contains('selected')){
-      item.classList.remove('selected');
-      selectedCaps = selectedCaps.filter(c => c !== cap);
+function selectCapV3(cap){
+  const item = document.querySelector(`.cap-card[data-cap="${cap}"]`);
+  if(!item) return;
+  if(!selectedCapsV3.includes(cap)){
+    if(selectedCapsV3.length >= 3) return;
+    selectedCapsV3.push(cap);
+    item.classList.add('selected');
+  }
+}
+document.querySelectorAll('.style-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.style-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    document.querySelectorAll('.cap-card').forEach(c=>c.classList.remove('selected'));
+    selectedCapsV3 = [];
+    styleRecommendations[card.dataset.style].forEach(selectCapV3);
+    updateLoadoutV3();
+    toastV3('Recommended loadout calibrated');
+  });
+});
+document.querySelectorAll('.cap-card').forEach(card => {
+  card.addEventListener('click', () => {
+    const cap = card.dataset.cap;
+    if(card.classList.contains('selected')){
+      card.classList.remove('selected');
+      selectedCapsV3 = selectedCapsV3.filter(c=>c!==cap);
     } else {
-      if(selectedCaps.length >= 3){
-        toast('Loadout full — deselect one first');
-        return;
-      }
-      item.classList.add('selected');
-      selectedCaps.push(cap);
+      if(selectedCapsV3.length >= 3){ toastV3('Loadout full — deselect one first'); return; }
+      card.classList.add('selected');
+      selectedCapsV3.push(cap);
     }
-    updateLoadout();
+    updateLoadoutV3();
   });
 });
 
-/* Quest 4: match relics to types */
-document.querySelectorAll('.match-relic').forEach(relic => {
-  relic.addEventListener('click', () => {
-    if(relic.classList.contains('matched')) return;
-    document.querySelectorAll('.match-relic').forEach(r => r.classList.remove('selected'));
-    relic.classList.add('selected');
-    selectedRelic = relic;
+/* Forge */
+document.querySelectorAll('.forge-card').forEach(card => {
+  card.addEventListener('click', () => {
+    if(card.classList.contains('matched')) return;
+    selectedForgeRelic = card;
+    document.querySelectorAll('.forge-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
   });
 });
-document.querySelectorAll('.match-type').forEach(type => {
-  type.addEventListener('click', () => {
-    if(type.classList.contains('matched')) return;
-    if(!selectedRelic){
-      toast('Select a relic first');
-      return;
-    }
-    if(selectedRelic.dataset.match === type.dataset.match){
-      selectedRelic.classList.add('matched');
-      selectedRelic.classList.remove('selected');
-      type.classList.add('matched');
-      matchedCount++;
-      selectedRelic = null;
-      toast('Relic awakened');
-      if(matchedCount >= 3) document.querySelector('[data-stage="4"] .next-quest').disabled = false;
+document.querySelectorAll('.type-seal-game').forEach(seal => {
+  seal.addEventListener('click', () => {
+    if(seal.classList.contains('matched')) return;
+    if(!selectedForgeRelic){ toastV3('Select a relic clue first'); return; }
+    if(selectedForgeRelic.dataset.match === seal.dataset.match){
+      selectedForgeRelic.classList.add('matched','decoded');
+      selectedForgeRelic.classList.remove('selected');
+      selectedForgeRelic.querySelector('.card-title').textContent = selectedForgeRelic.dataset.name;
+      seal.classList.add('matched');
+      selectedForgeRelic = null;
+      forgeMatched++;
+      toastV3('Project relic awakened');
+      if(forgeMatched >= 3) document.querySelector('[data-complete="forge"]').disabled = false;
     } else {
-      toast('Mismatch — relic rejects the seal');
-      setSync(sync - 2);
+      toastV3('Wrong seal — relic rejects match');
+      setSyncV3(syncV3 - 2);
     }
   });
 });
-document.querySelectorAll('.side-relic').forEach(btn => {
+document.querySelectorAll('.side-relic-v3').forEach(btn => {
   btn.addEventListener('click', () => {
     if(btn.classList.contains('unlocked')) return;
     btn.classList.add('unlocked');
-    bonusRelics.push(btn.textContent.trim());
-    addSync(2,'Bonus relic recovered');
+    bonusRelicsV3.push(btn.textContent.trim());
+    addSyncV3(2,'Bonus relic recovered');
   });
 });
 
-/* Quest 5 */
-document.querySelectorAll('.scroll-crystal').forEach(crystal => {
-  crystal.addEventListener('click', () => {
-    crystal.classList.add('decoded');
-    const count = document.querySelectorAll('.scroll-crystal.decoded').length;
-    toast(`${count}/4 research traces decoded`);
-    if(count >= 4) document.querySelector('[data-stage="5"] .next-quest').disabled = false;
-  });
-});
-
-/* Quest 6 */
-document.querySelectorAll('.crossroad-card').forEach(card => {
+/* Scrolls */
+document.querySelectorAll('.scroll-card').forEach(card => {
   card.addEventListener('click', () => {
-    document.querySelectorAll('.crossroad-card').forEach(c => c.classList.remove('selected'));
-    card.classList.add('selected');
-    selectedRoute = card.dataset.route;
-    document.querySelector('[data-stage="6"] .next-quest').disabled = false;
-    toast(card.querySelector('.cross-title').textContent + ' route selected');
+    card.classList.add('decoded');
+    const count = document.querySelectorAll('.scroll-card.decoded').length;
+    toastV3(`${count}/5 research traces decoded`);
+    if(count >= 3) document.querySelector('[data-complete="scrolls"]').disabled = false;
   });
 });
 
-function getRank(score){
+/* Crossroads */
+document.querySelectorAll('.cross-card').forEach(card => {
+  card.addEventListener('click', () => {
+    document.querySelectorAll('.cross-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedRouteV3 = card.dataset.route;
+    document.querySelector('[data-complete="crossroads"]').disabled = false;
+    toastV3(card.querySelector('.card-title').textContent + ' route selected');
+  });
+});
+
+/* Complete chamber */
+document.querySelectorAll('.complete-chamber').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const chamber = btn.dataset.complete;
+    const points = {origin:15, dojo:15, arsenal:18, forge:20, scrolls:15, crossroads:15}[chamber] || 10;
+    unlockFragV3(chamber, points);
+    showScreen('hub');
+  });
+});
+
+finishIfReady.addEventListener('click', () => {
+  if(recovered.size >= 6){
+    buildFinalV3();
+    showScreen('final');
+  }
+});
+
+function rankV3(score){
   if(score >= 90) return 'Full Synchronization';
   if(score >= 70) return 'Stable Synchronization';
   if(score >= 50) return 'Partial Synchronization';
   return 'Fragmented Memory';
 }
-
-function getSubclass(profile){
-  const caps = selectedCaps.join('|');
-  if(selectedCaps.includes('imaging') && selectedCaps.includes('experimental')) return 'Validation Systems Specialist';
-  if(selectedCaps.includes('design') && selectedCaps.includes('imaging')) return 'Prototype-to-Clinic Builder';
-  if(selectedCaps.includes('modelling') && selectedCaps.includes('systems')) return 'Systems Modelling Engineer';
-  if(selectedCaps.includes('modelling') && selectedCaps.includes('imaging')) return 'Quantitative Imaging Builder';
+function subclassV3(profile){
+  if(selectedCapsV3.includes('imaging') && selectedCapsV3.includes('experimental')) return 'Validation Systems Specialist';
+  if(selectedCapsV3.includes('design') && selectedCapsV3.includes('imaging')) return 'Prototype-to-Clinic Builder';
+  if(selectedCapsV3.includes('modelling') && selectedCapsV3.includes('systems')) return 'Systems Modelling Engineer';
+  if(selectedCapsV3.includes('modelling') && selectedCapsV3.includes('imaging')) return 'Quantitative Imaging Builder';
   return profile.defaultSubclass;
 }
+function buildFinalV3(){
+  const profile = routeProfilesV3[selectedRouteV3] || routeProfilesV3.clinical;
+  const score = syncV3;
+  document.getElementById('finalSyncV3').textContent = score + '%';
+  document.getElementById('finalRankV3').textContent = rankV3(score);
+  document.getElementById('finalClassV3').innerHTML = '<strong>' + profile.className + '</strong>';
+  document.getElementById('finalSubclassV3').innerHTML = '<strong>' + subclassV3(profile) + '</strong>';
+  document.getElementById('finalSummaryV3').textContent = profile.summary;
+  document.getElementById('finalLoadoutV3').textContent = selectedCapsV3.map(c=>capLabelsV3[c]).join(' · ') || 'Not recovered';
+  document.getElementById('finalBonusV3').textContent = bonusRelicsV3.length ? bonusRelicsV3.join(' · ') : 'None recovered';
 
-function buildFinalProfile(){
-  const profile = routeProfiles[selectedRoute] || routeProfiles.clinical;
-  const subclass = getSubclass(profile);
-  document.getElementById('finalSync').textContent = sync + '%';
-  document.getElementById('finalRank').textContent = getRank(sync);
-  document.getElementById('finalClass').innerHTML = '<strong>' + profile.className + '</strong>';
-  document.getElementById('finalSubclass').innerHTML = '<strong>' + subclass + '</strong>';
-  document.getElementById('finalSummary').textContent = profile.summary;
-  document.getElementById('finalLoadout').textContent = selectedCaps.map(c => capLabels[c]).join(' · ') || 'Not selected';
-  document.getElementById('finalBonus').textContent = bonusRelics.length ? bonusRelics.join(' · ') : 'None recovered';
+  document.getElementById('finalOriginV3').textContent = score >= 50 ? 'Hyderabad → Palaiseau / Paris → Toulouse' : 'Partially encrypted';
+  document.getElementById('finalTrainingV3').textContent = score >= 60 ? 'Mechanical Engineering → Biomedical Engineering → Medical Imaging & Radiophysics' : 'Partially encrypted';
+  document.getElementById('finalBuildsV3').textContent = score >= 70 ? '3DynaPET · MuPET · CASSOULET' : 'Some project relics encrypted';
+  document.getElementById('finalTraceV3').textContent = score >= 85 ? 'Publications · Preprints · Conference outputs · Valorisation · Supervision' : 'Publications · Preprints · Conference outputs';
 }
 </script>
 
