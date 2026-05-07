@@ -1301,8 +1301,10 @@ function resetHubGame(){
   syncV3 = 0; recovered = new Set(); selectedOriginCard = null; routePlaced = []; selectedCapsV3 = [];
   selectedRouteV3 = ''; selectedForgeRelic = null; forgeMatched = 0; bonusRelicsV3 = [];
   setSyncV3(0);
-  document.querySelectorAll('.unlocked,.selected,.decoded,.placed,.filled,.matched,.recovered,.open,.locked').forEach(el=>{
-    if(!el.classList.contains('hub-screen')) el.classList.remove('unlocked','selected','decoded','placed','filled','matched','recovered','open','locked');
+  hubGame.querySelectorAll('.unlocked,.selected,.decoded,.placed,.filled,.matched,.recovered,.open,.locked').forEach(el=>{
+    if(!el.classList.contains('hub-screen') && !el.classList.contains('animus-hub-game')) {
+      el.classList.remove('unlocked','selected','decoded','placed','filled','matched','recovered','open','locked');
+    }
   });
   document.querySelectorAll('.complete-chamber').forEach(btn => btn.disabled = true);
   document.querySelectorAll('.route-slot').forEach((slot,i)=>{slot.textContent='Route Slot ' + ['I','II','III'][i];slot.classList.remove('filled');});
