@@ -423,6 +423,16 @@
   .path-track{grid-template-columns:repeat(3,1fr);row-gap:1.5rem}
   .path-track::before{display:none}
 }
+@media(max-width:720px){
+  .project-data-row{
+    grid-template-columns:1fr;
+    gap:.2rem;
+  }
+  .project-data-key{
+    white-space:normal;
+  }
+}
+
 @media(max-width:560px){
   .forge-dashboard{grid-template-columns:1fr}
   .archive-grid{grid-template-columns:1fr}
@@ -458,25 +468,29 @@
 }
 .project-data-row{
   display:grid;
-  grid-template-columns:104px 1fr;
-  gap:.75rem;
+  grid-template-columns:140px 1fr;
+  gap:.9rem;
+  align-items:start;
   padding:.55rem .65rem;
   border-bottom:1px solid var(--ghost-line);
 }
 .project-data-row:last-child{border-bottom:none}
 .project-data-key{
   font-family:'Space Mono',monospace;
-  font-size:.43rem;
+  font-size:.41rem;
   text-transform:uppercase;
-  letter-spacing:.16em;
+  letter-spacing:.14em;
   color:rgba(139,26,26,.48);
   white-space:nowrap;
+  line-height:1.5;
 }
 .project-data-value{
   font-size:.72rem;
   line-height:1.5;
   color:var(--mist);
   font-weight:300;
+  min-width:0;
+  overflow-wrap:anywhere;
 }
 .project-data-value strong{
   color:var(--paper);
