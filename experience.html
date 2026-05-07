@@ -127,6 +127,72 @@
 .acc-bullet { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.8rem; color: var(--mist); line-height: 1.6; font-weight: 300; }
 .acc-bullet-glyph { font-family: 'Noto Serif JP', serif; font-size: 0.45rem; color: var(--blood); opacity: 0.55; padding-top: 0.28rem; flex-shrink: 0; }
 
+
+/* ── TECHNICAL ARSENAL / TOOLKIT ───────────────────────────── */
+.toolkit-shell { margin: 0 0 4.5rem; }
+.toolkit-intro { display:grid; grid-template-columns: 1.1fr 0.9fr; gap:1.5rem; margin-bottom:1.5rem; }
+.toolkit-note, .domain-note { border:1px solid var(--ghost-line); background:linear-gradient(135deg, rgba(139,26,26,0.05), transparent 45%), var(--ghost); padding:1.6rem 1.8rem; position:relative; overflow:hidden; }
+.toolkit-note::after, .domain-note::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--blood); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
+.toolkit-note:hover::after, .domain-note:hover::after { transform:scaleX(1); }
+.toolkit-kicker { font-family:'Space Mono',monospace; font-size:0.52rem; text-transform:uppercase; letter-spacing:0.22em; color:var(--blood-glow); margin-bottom:0.6rem; }
+.toolkit-copy { font-size:0.86rem; color:var(--mist); line-height:1.8; font-weight:300; }
+.toolkit-copy strong { color:var(--paper); font-weight:500; }
+.toolkit-metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--ghost-line); border:1px solid var(--ghost-line); }
+.toolkit-metric { background:var(--ink); padding:1.6rem 1.2rem; text-align:center; position:relative; overflow:hidden; }
+.toolkit-metric::after { content:''; position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--blood); transform:scaleX(0); transform-origin:left; transition:transform 0.35s; }
+.toolkit-metric:hover::after { transform:scaleX(1); }
+.toolkit-metric-num { font-family:'Zen Antique',serif; font-size:2rem; color:var(--blood-glow); line-height:1; }
+.toolkit-metric-label { font-family:'Space Mono',monospace; font-size:0.48rem; color:var(--mist); letter-spacing:0.16em; text-transform:uppercase; margin-top:0.45rem; }
+.skill-category-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; margin-top:1.4rem; }
+.skill-category { border:1px solid var(--ghost-line); background:var(--ghost); padding:1.6rem; position:relative; overflow:hidden; transition:border-color 0.3s, background 0.3s; }
+.skill-category:hover { border-color:rgba(139,26,26,0.28); background:rgba(139,26,26,0.03); }
+.skill-category::before { content:''; position:absolute; top:0; left:0; width:3px; height:0; background:var(--blood); transition:height 0.4s; }
+.skill-category:hover::before { height:100%; }
+.skill-cat-head { display:flex; justify-content:space-between; gap:1rem; align-items:flex-start; margin-bottom:1.2rem; }
+.skill-cat-title { font-family:'Zen Antique',serif; font-size:1.04rem; color:var(--paper); }
+.skill-cat-jp { font-family:'Noto Serif JP',serif; font-size:1.6rem; line-height:1; color:rgba(139,26,26,0.25); }
+.skill-cat-sub { font-size:0.76rem; color:var(--steel); line-height:1.6; margin-top:0.25rem; font-weight:300; }
+.skill-stack { display:flex; flex-direction:column; gap:0.9rem; }
+.skill-row { display:grid; grid-template-columns:1fr auto; gap:0.8rem; align-items:center; }
+.skill-main { min-width:0; }
+.skill-top { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:0.35rem; }
+.skill-name { font-size:0.82rem; color:var(--mist); font-weight:500; }
+.skill-years { font-family:'Space Mono',monospace; font-size:0.5rem; color:var(--steel); white-space:nowrap; text-transform:uppercase; letter-spacing:0.08em; }
+.skill-bar { height:6px; border:1px solid var(--ghost-line); background:rgba(240,235,227,0.025); overflow:hidden; position:relative; }
+.skill-fill { display:block; height:100%; width:var(--level); background:linear-gradient(to right, rgba(139,26,26,0.55), var(--blood-glow)); box-shadow:0 0 12px rgba(139,26,26,0.18); }
+.skill-level { font-family:'Space Mono',monospace; font-size:0.48rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--blood-glow); min-width:74px; text-align:right; }
+.skill-tags { display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:1.1rem; }
+.skill-pill { font-family:'Space Mono',monospace; font-size:0.45rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--steel); border:1px solid var(--ghost-line); padding:0.24rem 0.5rem; }
+.competency-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--ghost-line); border:1px solid var(--ghost-line); margin-top:1.4rem; }
+.competency-card { background:var(--ink); padding:1.6rem; min-height:180px; position:relative; overflow:hidden; transition:background 0.3s; }
+.competency-card:hover { background:rgba(139,26,26,0.04); }
+.competency-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:var(--blood); transform:scaleX(0); transform-origin:left; transition:transform 0.4s; }
+.competency-card:hover::after { transform:scaleX(1); }
+.comp-kanji { font-family:'Noto Serif JP',serif; font-size:2rem; color:rgba(139,26,26,0.25); margin-bottom:0.5rem; }
+.comp-title { font-family:'Zen Antique',serif; font-size:0.95rem; color:var(--paper); margin-bottom:0.45rem; }
+.comp-desc { font-size:0.76rem; line-height:1.65; color:var(--mist); font-weight:300; }
+.comp-focus { display:flex; flex-wrap:wrap; gap:0.35rem; margin-top:0.9rem; }
+.comp-focus span { font-family:'Space Mono',monospace; font-size:0.43rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--steel); border:1px solid var(--ghost-line); padding:0.2rem 0.45rem; }
+.domain-band { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:1.4rem; }
+.domain-list { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--ghost-line); border:1px solid var(--ghost-line); }
+.domain-cell { background:var(--ink); padding:1.2rem; position:relative; overflow:hidden; }
+.domain-cell::after { content:''; position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--blood); transform:scaleX(0); transform-origin:left; transition:transform 0.35s; }
+.domain-cell:hover::after { transform:scaleX(1); }
+.domain-title { font-family:'Space Mono',monospace; font-size:0.55rem; color:var(--blood-glow); text-transform:uppercase; letter-spacing:0.14em; margin-bottom:0.45rem; }
+.domain-text { font-size:0.74rem; line-height:1.55; color:var(--mist); font-weight:300; }
+.level-key { display:flex; justify-content:flex-end; gap:1rem; margin-top:0.8rem; flex-wrap:wrap; }
+.level-key span { font-family:'Space Mono',monospace; font-size:0.48rem; color:var(--steel); text-transform:uppercase; letter-spacing:0.1em; }
+@media(max-width:980px){
+  .toolkit-intro, .skill-category-grid, .domain-band { grid-template-columns:1fr; }
+  .competency-grid { grid-template-columns:1fr 1fr; }
+}
+@media(max-width:680px){
+  .toolkit-metrics { grid-template-columns:1fr; }
+  .competency-grid, .domain-list { grid-template-columns:1fr; }
+  .skill-row { grid-template-columns:1fr; gap:0.3rem; }
+  .skill-level { text-align:left; }
+}
+
 /* ── VOLUNTEERING ──────────────────────────── */
 .vol-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--ghost-line); border: 1px solid var(--ghost-line); margin-bottom: 2rem; }
 @media(max-width:720px){ .vol-grid { grid-template-columns: 1fr 1fr; } }
@@ -200,6 +266,90 @@
       <div class="exp-stat"><div class="exp-stat-bg"></div><div class="exp-stat-num">4</div><div class="exp-stat-label">Institutions</div></div>
       <div class="exp-stat"><div class="exp-stat-bg"></div><div class="exp-stat-num">3</div><div class="exp-stat-label">Countries</div></div>
     </div>
+
+
+    <div class="exp-divider reveal">Technical Arsenal &amp; Field Competencies</div>
+
+    <section class="toolkit-shell stagger" id="technical-arsenal">
+      <div class="toolkit-intro">
+        <div class="toolkit-note">
+          <div class="toolkit-kicker">The Toolkit — now mapped to experience</div>
+          <p class="toolkit-copy">A visual skill matrix showing <strong>tool families</strong>, approximate <strong>years of use</strong>, and practical <strong>operating level</strong>. The levels are intentionally framed as portfolio signals, not certification claims.</p>
+        </div>
+        <div class="toolkit-metrics">
+          <div class="toolkit-metric"><div class="toolkit-metric-num">6+</div><div class="toolkit-metric-label">Years CAD / Prototype</div></div>
+          <div class="toolkit-metric"><div class="toolkit-metric-num">4+</div><div class="toolkit-metric-label">Years Simulation</div></div>
+          <div class="toolkit-metric"><div class="toolkit-metric-num">3+</div><div class="toolkit-metric-label">Years Imaging R&amp;D</div></div>
+        </div>
+      </div>
+
+      <div class="skill-category-grid">
+        <div class="skill-category">
+          <div class="skill-cat-head"><div><div class="skill-cat-title">Medical Imaging &amp; Simulation</div><div class="skill-cat-sub">Scanner-to-code workflows for PET/CT, image reconstruction, and phantom validation.</div></div><div class="skill-cat-jp">診</div></div>
+          <div class="skill-stack">
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">PET/CT Simulation &amp; Quantification</span><span class="skill-years">3+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:88%"></span></div></div><div class="skill-level">Advanced</div></div>
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">OSEM / BSREM Reconstruction Concepts</span><span class="skill-years">2+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:78%"></span></div></div><div class="skill-level">Strong</div></div>
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">Monte Carlo &amp; PETSTEP Workflows</span><span class="skill-years">2+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:76%"></span></div></div><div class="skill-level">Strong</div></div>
+          </div>
+          <div class="skill-tags"><span class="skill-pill">PET/CT</span><span class="skill-pill">Dynamic PET</span><span class="skill-pill">Phantoms</span><span class="skill-pill">Clinical Data</span></div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-cat-head"><div><div class="skill-cat-title">Programming &amp; Data Analysis</div><div class="skill-cat-sub">Analysis pipelines, automation scripts, image processing, and scientific computing.</div></div><div class="skill-cat-jp">算</div></div>
+          <div class="skill-stack">
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">MATLAB</span><span class="skill-years">5+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:86%"></span></div></div><div class="skill-level">Advanced</div></div>
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">Python</span><span class="skill-years">4+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:82%"></span></div></div><div class="skill-level">Advanced</div></div>
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">Image Processing &amp; Tracking</span><span class="skill-years">3+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:80%"></span></div></div><div class="skill-level">Strong</div></div>
+          </div>
+          <div class="skill-tags"><span class="skill-pill">Automation</span><span class="skill-pill">Data Analysis</span><span class="skill-pill">Scientific Computing</span><span class="skill-pill">Visualization</span></div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-cat-head"><div><div class="skill-cat-title">Engineering Design &amp; Prototyping</div><div class="skill-cat-sub">From CAD and rapid prototyping to physical test objects for clinical and R&amp;D validation.</div></div><div class="skill-cat-jp">鍛</div></div>
+          <div class="skill-stack">
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">CAD — SolidWorks / Fusion 360</span><span class="skill-years">6+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:84%"></span></div></div><div class="skill-level">Advanced</div></div>
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">3D Printing &amp; Phantom Design</span><span class="skill-years">4+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:86%"></span></div></div><div class="skill-level">Advanced</div></div>
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">Microscopy / Spectroscopy Support</span><span class="skill-years">2+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:68%"></span></div></div><div class="skill-level">Working</div></div>
+          </div>
+          <div class="skill-tags"><span class="skill-pill">Rapid Prototyping</span><span class="skill-pill">Clinical Benches</span><span class="skill-pill">Validation Objects</span><span class="skill-pill">Design Iteration</span></div>
+        </div>
+
+        <div class="skill-category">
+          <div class="skill-cat-head"><div><div class="skill-cat-title">Research, Strategy &amp; Translation</div><div class="skill-cat-sub">Scientific writing, IP pathways, tech transfer, market mapping, and cross-functional execution.</div></div><div class="skill-cat-jp">策</div></div>
+          <div class="skill-stack">
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">Scientific Writing &amp; Publications</span><span class="skill-years">4+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:84%"></span></div></div><div class="skill-level">Advanced</div></div>
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">IP Strategy / Technology Transfer</span><span class="skill-years">2+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:72%"></span></div></div><div class="skill-level">Strong</div></div>
+            <div class="skill-row"><div class="skill-main"><div class="skill-top"><span class="skill-name">Market Mapping &amp; Competitive Analysis</span><span class="skill-years">2+ yrs</span></div><div class="skill-bar"><span class="skill-fill" style="--level:70%"></span></div></div><div class="skill-level">Strong</div></div>
+          </div>
+          <div class="skill-tags"><span class="skill-pill">Clinical Translation</span><span class="skill-pill">Tech Transfer</span><span class="skill-pill">Proposals</span><span class="skill-pill">Stakeholders</span></div>
+        </div>
+      </div>
+
+      <div class="level-key"><span>Working = applied project use</span><span>Strong = independent execution</span><span>Advanced = repeated ownership</span></div>
+
+      <div class="exp-divider reveal" style="margin-top:3rem">Core Competencies</div>
+      <div class="competency-grid">
+        <div class="competency-card"><div class="comp-kanji">医</div><div class="comp-title">MedTech &amp; Healthcare</div><div class="comp-desc">Bridging clinical workflows, imaging data, prototypes, and hospital-facing validation.</div><div class="comp-focus"><span>PET/CT</span><span>Oncology</span><span>Clinical Needs</span></div></div>
+        <div class="competency-card"><div class="comp-kanji">研</div><div class="comp-title">Academic R&amp;D</div><div class="comp-desc">Turning open scientific questions into reproducible models, experiments, and publications.</div><div class="comp-focus"><span>Methods</span><span>Writing</span><span>Data</span></div></div>
+        <div class="competency-card"><div class="comp-kanji">創</div><div class="comp-title">Deep-Tech Startups</div><div class="comp-desc">Working across technical feasibility, prototype assessment, demos, and investor-facing communication.</div><div class="comp-focus"><span>Roadmap</span><span>Demos</span><span>Scale-up</span></div></div>
+        <div class="competency-card"><div class="comp-kanji">防</div><div class="comp-title">Defense / Dual-use Readiness</div><div class="comp-desc">Transferable strengths in simulation, sensing, reliability thinking, and mission-oriented engineering contexts.</div><div class="comp-focus"><span>Simulation</span><span>Sensing</span><span>Systems</span></div></div>
+        <div class="competency-card"><div class="comp-kanji">流</div><div class="comp-title">Biomechanics &amp; Fluid Systems</div><div class="comp-desc">Experience with CFD, embolism modelling, soft matter systems, and drug delivery carrier simulations.</div><div class="comp-focus"><span>CFD</span><span>4D MRI</span><span>Flow</span></div></div>
+        <div class="competency-card"><div class="comp-kanji">導</div><div class="comp-title">Leadership &amp; Collaboration</div><div class="comp-desc">Coordinating interns, club teams, collaborators, industrial partners, and multi-country academic environments.</div><div class="comp-focus"><span>Mentorship</span><span>Planning</span><span>Partners</span></div></div>
+      </div>
+
+      <div class="domain-band">
+        <div class="domain-note">
+          <div class="toolkit-kicker">Competency map</div>
+          <p class="toolkit-copy">This section is designed to read like a recruiter-friendly skill dashboard: tools first, then the industries where those tools can create value.</p>
+        </div>
+        <div class="domain-list">
+          <div class="domain-cell"><div class="domain-title">MedTech</div><div class="domain-text">Imaging, oncology, device-adjacent research, clinical translation.</div></div>
+          <div class="domain-cell"><div class="domain-title">Defense / Dual-use</div><div class="domain-text">Simulation, sensor-driven analysis, robust technical systems.</div></div>
+          <div class="domain-cell"><div class="domain-title">Life Sciences</div><div class="domain-text">Drug delivery, preclinical validation, soft matter systems.</div></div>
+          <div class="domain-cell"><div class="domain-title">Deep-Tech Venture</div><div class="domain-text">IP, market mapping, prototype-to-product narratives.</div></div>
+        </div>
+      </div>
+    </section>
 
     <div class="exp-divider reveal">Professional Positions — Click to expand</div>
 
