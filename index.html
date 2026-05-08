@@ -58,7 +58,7 @@
 
 
 /* ═══════════════════════════════════════════
-   ANIMUS HUB QUEST — NON-LINEAR MINI GAME
+   ANIMUS CONTRACT V2 — AC MISSION GAME
    ═══════════════════════════════════════════ */
 .hero-game-note{
   margin-top:1rem;
@@ -80,21 +80,21 @@
   color:var(--blood-glow);
 }
 
-.animus-hub-game{
+.animus-mission{
   position:fixed;
   inset:0;
   z-index:5000;
   display:none;
   background:
-    radial-gradient(circle at 50% 35%, rgba(139,26,26,.2), transparent 34%),
-    radial-gradient(circle at 82% 14%, rgba(194,59,59,.07), transparent 24%),
+    radial-gradient(circle at 50% 34%, rgba(139,26,26,.20), transparent 34%),
+    radial-gradient(circle at 80% 14%, rgba(194,59,59,.07), transparent 24%),
     linear-gradient(180deg, rgba(10,10,11,.985), rgba(10,10,11,1));
   color:var(--paper);
   padding:1.1rem;
   overflow:hidden;
 }
-.animus-hub-game.open{display:block}
-.animus-hub-game::before{
+.animus-mission.open{display:block}
+.animus-mission::before{
   content:'';
   position:absolute;
   inset:0;
@@ -104,25 +104,24 @@
   background-size:34px 34px;
   pointer-events:none;
 }
-.animus-hub-game::after{
+.animus-mission::after{
   content:'';
   position:absolute;
   left:0;right:0;top:0;height:1px;
   background:linear-gradient(to right, transparent, var(--blood), transparent);
-  animation:hubScan 5s ease-in-out infinite;
+  animation:missionScan 5s ease-in-out infinite;
   opacity:.55;
 }
-@keyframes hubScan{
+@keyframes missionScan{
   0%{top:0;opacity:.04}
   45%{opacity:.72}
   100%{top:100%;opacity:.04}
 }
-
-.hub-shell{
+.mission-shell{
   position:relative;
   z-index:2;
   height:calc(100vh - 2.2rem);
-  max-width:1240px;
+  max-width:1260px;
   margin:0 auto;
   border:1px solid rgba(240,235,227,.08);
   background:linear-gradient(135deg, rgba(139,26,26,.06), transparent 44%), rgba(10,10,11,.86);
@@ -131,7 +130,7 @@
   flex-direction:column;
   overflow:hidden;
 }
-.hub-corner{
+.mission-corner{
   position:absolute;
   width:18px;height:18px;
   border-style:solid;
@@ -139,12 +138,12 @@
   z-index:5;
   pointer-events:none;
 }
-.hub-corner.tl{top:12px;left:12px;border-width:1px 0 0 1px}
-.hub-corner.tr{top:12px;right:12px;border-width:1px 1px 0 0}
-.hub-corner.bl{bottom:12px;left:12px;border-width:0 0 1px 1px}
-.hub-corner.br{bottom:12px;right:12px;border-width:0 1px 1px 0}
+.mission-corner.tl{top:12px;left:12px;border-width:1px 0 0 1px}
+.mission-corner.tr{top:12px;right:12px;border-width:1px 1px 0 0}
+.mission-corner.bl{bottom:12px;left:12px;border-width:0 0 1px 1px}
+.mission-corner.br{bottom:12px;right:12px;border-width:0 1px 1px 0}
 
-.hub-topbar{
+.mission-topbar{
   flex:0 0 auto;
   display:grid;
   grid-template-columns:1fr auto auto;
@@ -154,42 +153,42 @@
   padding:1rem 1.4rem;
   border-bottom:1px solid var(--ghost-line);
 }
-.hub-status{
+.mission-status{
   font-family:'Space Mono',monospace;
   font-size:.52rem;
   text-transform:uppercase;
   letter-spacing:.18em;
   color:var(--blood-glow);
 }
-.hub-sync{
+.mission-sync{
   min-width:265px;
   display:flex;
   align-items:center;
   gap:.65rem;
 }
-.hub-sync-label{
+.mission-sync-label{
   font-family:'Space Mono',monospace;
   font-size:.48rem;
   text-transform:uppercase;
   letter-spacing:.14em;
   color:var(--steel);
 }
-.hub-sync-track{
+.mission-sync-track{
   flex:1;height:5px;background:rgba(240,235,227,.06);overflow:hidden;
 }
-.hub-sync-fill{
+.mission-sync-fill{
   height:100%;width:0%;
   background:linear-gradient(90deg,var(--blood),var(--blood-glow));
   transition:width .5s cubic-bezier(.2,.8,.2,1);
 }
-.hub-sync-score{
+.mission-sync-score{
   width:38px;
   text-align:right;
   font-family:'Space Mono',monospace;
   font-size:.52rem;
   color:var(--paper);
 }
-.hub-exit{
+.mission-exit{
   font-family:'Space Mono',monospace;
   font-size:.5rem;
   text-transform:uppercase;
@@ -200,9 +199,9 @@
   padding:.6rem .8rem;
   cursor:pointer;
 }
-.hub-exit:hover{color:var(--paper);border-color:rgba(139,26,26,.45);background:rgba(139,26,26,.08)}
+.mission-exit:hover{color:var(--paper);border-color:rgba(139,26,26,.45);background:rgba(139,26,26,.08)}
 
-.hub-fragments{
+.intel-strip{
   flex:0 0 auto;
   display:grid;
   grid-template-columns:repeat(6,1fr);
@@ -210,7 +209,7 @@
   background:var(--ghost-line);
   border-bottom:1px solid var(--ghost-line);
 }
-.hub-frag{
+.intel-frag{
   background:rgba(10,10,11,.86);
   padding:.65rem .5rem;
   display:flex;
@@ -219,34 +218,26 @@
   gap:.45rem;
   color:var(--steel);
   font-family:'Space Mono',monospace;
-  font-size:.44rem;
+  font-size:.43rem;
   text-transform:uppercase;
   letter-spacing:.1em;
   transition:all .3s;
 }
-.hub-frag span{
+.intel-frag span{
   width:8px;height:8px;border:1px solid rgba(139,26,26,.35);transform:rotate(45deg);
 }
-.hub-frag.unlocked{color:var(--mist);background:rgba(139,26,26,.055)}
-.hub-frag.unlocked span{background:var(--blood-glow);box-shadow:0 0 10px rgba(194,59,59,.45)}
+.intel-frag.complete{color:var(--mist);background:rgba(139,26,26,.055)}
+.intel-frag.complete span{background:var(--blood-glow);box-shadow:0 0 10px rgba(194,59,59,.45)}
 
-.hub-screen{
+.mission-screen{
   flex:1;
   display:none;
   overflow:auto;
   padding:2rem;
 }
-.hub-screen.active{display:block}
+.mission-screen.active{display:block}
 
-/* Start */
-.hub-start{
-  min-height:100%;
-  display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  gap:2.2rem;
-  align-items:center;
-}
-.hub-kicker{
+.mission-kicker{
   font-family:'Space Mono',monospace;
   font-size:.52rem;
   text-transform:uppercase;
@@ -254,41 +245,20 @@
   color:rgba(139,26,26,.65);
   margin-bottom:1rem;
 }
-.hub-title{
+.mission-title-main{
   font-family:'Zen Antique',serif;
   font-size:clamp(2.2rem,4vw,3.8rem);
   line-height:1.08;
   margin-bottom:1rem;
 }
-.hub-desc{
+.mission-desc{
   color:var(--mist);
   line-height:1.8;
   font-weight:300;
   font-size:.95rem;
-  max-width:540px;
+  max-width:570px;
 }
-.hub-guide{
-  margin-top:1.2rem;
-  border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.58);
-  padding:1rem;
-  max-width:540px;
-}
-.hub-guide-label{
-  font-family:'Space Mono',monospace;
-  font-size:.45rem;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-  color:var(--blood-glow);
-  margin-bottom:.45rem;
-}
-.hub-guide-text{
-  font-size:.8rem;
-  line-height:1.65;
-  color:var(--mist);
-  font-weight:300;
-}
-.hub-action{
+.mission-action{
   display:inline-flex;
   align-items:center;
   gap:.65rem;
@@ -304,11 +274,40 @@
   cursor:pointer;
   transition:all .3s;
 }
-.hub-action:hover{background:rgba(139,26,26,.1);transform:translateY(-2px)}
-.hub-action:disabled{opacity:.35;cursor:not-allowed;transform:none;background:transparent}
+.mission-action:hover{background:rgba(139,26,26,.1);transform:translateY(-2px)}
+.mission-action:disabled{opacity:.35;cursor:not-allowed;transform:none;background:transparent}
 
+.guide-box{
+  margin-top:1.2rem;
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.58);
+  padding:1rem;
+  max-width:570px;
+}
+.guide-label{
+  font-family:'Space Mono',monospace;
+  font-size:.45rem;
+  text-transform:uppercase;
+  letter-spacing:.16em;
+  color:var(--blood-glow);
+  margin-bottom:.45rem;
+}
+.guide-text{
+  font-size:.8rem;
+  line-height:1.65;
+  color:var(--mist);
+  font-weight:300;
+}
+
+.mission-grid{
+  min-height:100%;
+  display:grid;
+  grid-template-columns:.86fr 1.14fr;
+  gap:2rem;
+  align-items:center;
+}
 .holo-panel{
-  min-height:460px;
+  min-height:500px;
   border:1px solid var(--ghost-line);
   background:linear-gradient(135deg, rgba(139,26,26,.045), transparent 45%), rgba(240,235,227,.025);
   position:relative;
@@ -330,27 +329,105 @@
   position:absolute;
   left:0;right:0;top:0;height:1px;
   background:linear-gradient(to right,transparent,var(--blood),transparent);
-  animation:holoScan 3.8s ease-in-out infinite;
+  animation:holoScanV2 3.8s ease-in-out infinite;
   opacity:.55;
 }
-@keyframes holoScan{
+@keyframes holoScanV2{
   0%{top:0;opacity:.06}
   52%{opacity:.68}
   100%{top:100%;opacity:.06}
 }
 
-/* Isometric hub map */
-.iso-wrap{
+/* World map + Eagle Vision */
+.world-map{
   position:absolute;
   inset:1.5rem;
   perspective:1200px;
 }
-.iso-board{
+.map-plane{
+  position:absolute;
+  left:50%;
+  top:54%;
+  width:84%;
+  height:72%;
+  transform:translate(-50%,-50%) rotateX(58deg) rotateZ(-6deg);
+  transform-style:preserve-3d;
+  border:1px solid rgba(139,26,26,.24);
+  background:
+    radial-gradient(circle at 22% 54%, rgba(240,235,227,.08), transparent 2%),
+    radial-gradient(circle at 46% 38%, rgba(240,235,227,.08), transparent 2%),
+    radial-gradient(circle at 57% 44%, rgba(240,235,227,.08), transparent 2%),
+    radial-gradient(circle at 65% 36%, rgba(240,235,227,.08), transparent 2%),
+    linear-gradient(90deg, rgba(240,235,227,.035) 1px, transparent 1px),
+    linear-gradient(rgba(240,235,227,.035) 1px, transparent 1px),
+    rgba(10,10,11,.44);
+  background-size:auto,auto,auto,auto,44px 44px,44px 44px,auto;
+  box-shadow:0 35px 70px rgba(0,0,0,.45);
+}
+.eagle-pulse{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:0;
+  height:0;
+  border:1px solid rgba(194,59,59,.55);
+  border-radius:50%;
+  transform:translate(-50%,-50%) translateZ(10px);
+  opacity:0;
+}
+.eagle-active .eagle-pulse{
+  animation:eaglePulse 1.7s ease-out forwards;
+}
+@keyframes eaglePulse{
+  0%{width:0;height:0;opacity:.9}
+  100%{width:760px;height:760px;opacity:0}
+}
+.map-node{
+  position:absolute;
+  width:150px;
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.84);
+  padding:.8rem;
+  cursor:pointer;
+  transform:translateZ(32px);
+  transition:all .3s;
+  opacity:0;
+  pointer-events:none;
+}
+.eagle-active .map-node{
+  opacity:1;
+  pointer-events:auto;
+}
+.map-node:hover,.map-node.scanned{
+  transform:translateY(-6px) translateZ(58px);
+  border-color:rgba(139,26,26,.52);
+  background:rgba(139,26,26,.09);
+  box-shadow:0 22px 45px rgba(0,0,0,.42);
+}
+.map-node.hyderabad{left:20%;top:52%}
+.map-node.paris{left:43%;top:28%}
+.map-node.toulouse{left:54%;top:39%}
+.map-node.iuct{left:61%;top:45%}
+.map-node.hepta{left:51%;top:23%}
+.map-node.ladhyx{left:39%;top:33%}
+.map-node.manitty{left:48%;top:49%}
+.node-title{font-family:'Zen Antique',serif;font-size:.92rem;line-height:1.25}
+.node-code{font-family:'Space Mono',monospace;font-size:.42rem;text-transform:uppercase;letter-spacing:.1em;color:var(--steel);margin-top:.35rem;line-height:1.45}
+.node-reveal{display:none;color:var(--mist);font-size:.72rem;line-height:1.5;margin-top:.5rem}
+.map-node.scanned .node-reveal{display:block}
+
+/* Mission board */
+.board-wrap{
+  position:absolute;
+  inset:1.5rem;
+  perspective:1200px;
+}
+.board-plane{
   position:absolute;
   left:50%;
   top:51%;
-  width:78%;
-  height:72%;
+  width:80%;
+  height:74%;
   transform:translate(-50%,-50%) rotateX(58deg) rotateZ(-7deg);
   transform-style:preserve-3d;
   border:1px solid rgba(139,26,26,.24);
@@ -361,10 +438,10 @@
   background-size:44px 44px;
   box-shadow:0 35px 70px rgba(0,0,0,.45);
 }
-.iso-tile{
+.board-tile{
   position:absolute;
-  width:160px;
-  min-height:96px;
+  width:180px;
+  min-height:108px;
   border:1px solid var(--ghost-line);
   background:rgba(10,10,11,.82);
   padding:.85rem;
@@ -373,253 +450,140 @@
   transform-style:preserve-3d;
   transition:all .3s;
 }
-.iso-tile::after{
+.board-tile::after{
   content:'';
   position:absolute;
   inset:0;
   border-bottom:4px solid rgba(0,0,0,.35);
   pointer-events:none;
 }
-.iso-tile.open:hover{
-  transform:translateZ(54px) translateY(-8px);
+.board-tile.open:hover{
+  transform:translateZ(56px) translateY(-8px);
   border-color:rgba(139,26,26,.5);
   background:rgba(139,26,26,.09);
   box-shadow:0 22px 45px rgba(0,0,0,.42);
 }
-.iso-tile.locked{
-  opacity:.45;
-  cursor:not-allowed;
-  filter:grayscale(.35);
-}
-.iso-tile.recovered{
-  border-color:rgba(194,59,59,.4);
-  background:rgba(139,26,26,.08);
-}
-.iso-tile.origin{left:10%;top:12%}
-.iso-tile.dojo{right:12%;top:10%}
-.iso-tile.arsenal{left:38%;top:37%}
-.iso-tile.forge{left:12%;bottom:12%}
-.iso-tile.scrolls{right:13%;bottom:15%}
-.iso-tile.crossroads{left:39%;bottom:-2%}
-.iso-title{
-  font-family:'Zen Antique',serif;
-  font-size:.95rem;
-  line-height:1.25;
-}
-.iso-state{
-  font-family:'Space Mono',monospace;
-  font-size:.43rem;
-  text-transform:uppercase;
-  letter-spacing:.11em;
-  color:var(--blood-glow);
-  margin-top:.45rem;
-}
-.iso-clue{
-  font-size:.68rem;
-  line-height:1.45;
-  color:var(--steel);
-  margin-top:.5rem;
-}
+.board-tile.locked{opacity:.45;cursor:not-allowed;filter:grayscale(.35)}
+.board-tile.complete{border-color:rgba(194,59,59,.4);background:rgba(139,26,26,.08)}
+.board-tile.bureau{left:9%;top:12%}
+.board-tile.arsenal{right:11%;top:10%}
+.board-tile.builds{left:38%;top:38%}
+.board-tile.eavesdrop{left:10%;bottom:12%}
+.board-tile.lens{right:12%;bottom:15%}
+.board-title{font-family:'Zen Antique',serif;font-size:.95rem;line-height:1.25}
+.board-state{font-family:'Space Mono',monospace;font-size:.42rem;text-transform:uppercase;letter-spacing:.11em;color:var(--blood-glow);margin-top:.45rem}
+.board-clue{font-size:.68rem;line-height:1.45;color:var(--steel);margin-top:.5rem}
 
-/* Chamber layout */
-.chamber-layout{
-  min-height:100%;
-  display:grid;
-  grid-template-columns:.82fr 1.18fr;
-  gap:2rem;
-  align-items:center;
-}
-.chamber-copy{max-width:460px}
-.chamber-title{
-  font-family:'Zen Antique',serif;
-  font-size:clamp(2rem,3.8vw,3.4rem);
-  line-height:1.08;
-  margin-bottom:1rem;
-}
-.chamber-desc{
-  color:var(--mist);
-  line-height:1.8;
-  font-weight:300;
-  font-size:.94rem;
-}
-.chamber-panel{
-  min-height:500px;
-  border:1px solid var(--ghost-line);
-  background:linear-gradient(135deg, rgba(139,26,26,.045), transparent 45%), rgba(240,235,227,.025);
-  position:relative;
-  overflow:hidden;
-  transform:perspective(1100px) rotateX(4deg) rotateY(-2deg);
-  transform-style:preserve-3d;
-}
-.chamber-panel::before{
-  content:'';
+/* Cards */
+.evidence-grid{
   position:absolute;
-  inset:0;
-  background:
-    linear-gradient(90deg, rgba(240,235,227,.025) 1px, transparent 1px),
-    linear-gradient(rgba(240,235,227,.025) 1px, transparent 1px);
-  background-size:28px 28px;
-  pointer-events:none;
+  inset:1.4rem;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:1rem;
 }
-
-/* Shared cards */
-.memory-card{
+.evidence-grid.wide{grid-template-columns:repeat(4,1fr)}
+.evidence-card{
   border:1px solid var(--ghost-line);
   background:rgba(10,10,11,.75);
   padding:1rem;
   cursor:pointer;
   transition:all .3s;
   transform:translateZ(24px);
+  position:relative;
+  overflow:hidden;
 }
-.memory-card:hover,.memory-card.selected,.memory-card.decoded,.memory-card.placed{
+.evidence-card::after{
+  content:'';
+  position:absolute;
+  left:0;right:0;bottom:0;height:2px;
+  background:var(--blood);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .3s;
+}
+.evidence-card:hover,.evidence-card.scanned,.evidence-card.selected,.evidence-card.pinned{
   border-color:rgba(139,26,26,.52);
   background:rgba(139,26,26,.08);
   transform:translateY(-5px) translateZ(38px);
   box-shadow:0 18px 40px rgba(0,0,0,.32);
 }
-.card-title{font-family:'Zen Antique',serif;font-size:1rem;margin-bottom:.38rem;line-height:1.3}
-.card-sub{font-family:'Space Mono',monospace;font-size:.43rem;text-transform:uppercase;letter-spacing:.1em;color:var(--steel);line-height:1.55}
-.card-reveal{font-size:.78rem;line-height:1.55;color:var(--mist);margin-top:.55rem;display:none}
-.memory-card.decoded .card-reveal,.memory-card.placed .card-reveal,.memory-card.selected .card-reveal{display:block}
-
-/* Origin */
-.origin-clues{
-  position:absolute;
-  inset:1.4rem;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1rem;
-  align-content:start;
-}
-.route-slots{
+.evidence-card.scanned::after,.evidence-card.selected::after,.evidence-card.pinned::after{transform:scaleX(1)}
+.evidence-title{font-family:'Zen Antique',serif;font-size:1rem;margin-bottom:.42rem;line-height:1.3}
+.evidence-code{font-family:'Space Mono',monospace;font-size:.43rem;text-transform:uppercase;letter-spacing:.1em;color:var(--steel);line-height:1.55}
+.evidence-reveal{font-size:.78rem;line-height:1.55;color:var(--mist);margin-top:.65rem;display:none}
+.evidence-card.scanned .evidence-reveal,.evidence-card.selected .evidence-reveal,.evidence-card.pinned .evidence-reveal{display:block}
+.recon-strip{
   position:absolute;
   left:1.4rem;right:1.4rem;bottom:1.4rem;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:1rem;
-}
-.route-slot{
-  min-height:92px;
-  border:1px dashed rgba(139,26,26,.35);
-  background:rgba(10,10,11,.45);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
+  border:1px solid rgba(139,26,26,.25);
+  background:rgba(10,10,11,.76);
+  padding:1rem;
   font-family:'Space Mono',monospace;
   font-size:.48rem;
   text-transform:uppercase;
-  letter-spacing:.12em;
+  letter-spacing:.1em;
   color:var(--steel);
-  text-align:center;
-  padding:.7rem;
+  line-height:1.8;
 }
-.route-slot.filled{border-style:solid;color:var(--mist);background:rgba(139,26,26,.07)}
+.recon-strip.ready{color:var(--mist);background:rgba(139,26,26,.07)}
 
-/* Dojo */
-.dojo-grid{
+.pin-board{
   position:absolute;
-  inset:1.4rem;
+  left:1.4rem;right:1.4rem;bottom:1.4rem;
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:.8rem;
+  grid-template-columns:repeat(5,1fr);
+  gap:.5rem;
 }
-.blade-meter{
-  position:absolute;
-  left:10%;right:10%;bottom:1.2rem;height:10px;
-  background:rgba(240,235,227,.05);
-  border:1px solid var(--ghost-line);
-  transform:rotate(-4deg);
-}
-.blade-meter-fill{
-  height:100%;width:0%;
-  background:linear-gradient(to right,rgba(139,26,26,.65),var(--blood-glow));
-  transition:width .35s;
-}
-
-/* Arsenal */
-.style-grid{
-  position:absolute;
-  left:1.4rem;right:1.4rem;top:1.4rem;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:.8rem;
-}
-.loadout-slots-v3{
-  position:absolute;
-  left:1.4rem;right:1.4rem;top:150px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:.65rem;
-}
-.loadout-slot-v3{
-  min-height:54px;
-  border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.55);
+.pin-slot{
+  min-height:64px;
+  border:1px dashed rgba(139,26,26,.35);
+  background:rgba(10,10,11,.45);
+  padding:.5rem;
   display:flex;
   align-items:center;
   justify-content:center;
   text-align:center;
   font-family:'Space Mono',monospace;
-  font-size:.46rem;
+  font-size:.42rem;
   text-transform:uppercase;
-  letter-spacing:.1em;
+  letter-spacing:.09em;
+  color:var(--steel);
+}
+.pin-slot.filled{border-style:solid;color:var(--mist);background:rgba(139,26,26,.07)}
+
+.loadout-readout{
+  position:absolute;
+  left:1.4rem;right:1.4rem;bottom:1.4rem;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.7rem;
+}
+.loadout-slot{
+  min-height:58px;
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.56);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-family:'Space Mono',monospace;
+  font-size:.44rem;
+  text-transform:uppercase;
+  letter-spacing:.09em;
   color:var(--steel);
   padding:.5rem;
 }
-.loadout-slot-v3.filled{color:var(--mist);border-color:rgba(139,26,26,.35);background:rgba(139,26,26,.06)}
-.cap-grid-v3{
-  position:absolute;
-  left:1.4rem;right:1.4rem;bottom:1.4rem;top:225px;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:.7rem;
-}
-.cap-card{
-  text-align:center;
-  padding:.85rem .6rem;
-}
-.cap-kanji{font-family:'Noto Serif JP',serif;font-size:1.8rem;color:rgba(139,26,26,.4);margin-bottom:.5rem}
+.loadout-slot.filled{color:var(--mist);border-color:rgba(139,26,26,.35);background:rgba(139,26,26,.06)}
 
-/* Forge */
-.forge-clues{
-  position:absolute;
-  left:1.4rem;right:1.4rem;top:1.4rem;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:.9rem;
-}
-.forge-types{
-  position:absolute;
-  left:1.4rem;right:1.4rem;top:235px;
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:.9rem;
-}
-.type-seal-game{
-  min-height:82px;
-  border:1px solid var(--ghost-line);
-  background:rgba(10,10,11,.65);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  font-family:'Space Mono',monospace;
-  font-size:.55rem;
-  text-transform:uppercase;
-  letter-spacing:.14em;
-  color:var(--mist);
-  cursor:pointer;
-}
-.type-seal-game.selected,.type-seal-game.matched{border-color:rgba(139,26,26,.5);background:rgba(139,26,26,.08)}
-.side-relics-v3{
+.side-relics{
   position:absolute;
   left:1.4rem;right:1.4rem;bottom:1.1rem;
   display:flex;
   flex-wrap:wrap;
   gap:.5rem;
 }
-.side-relic-v3{
+.side-relic{
   font-family:'Space Mono',monospace;
   font-size:.42rem;
   text-transform:uppercase;
@@ -630,57 +594,16 @@
   padding:.48rem .6rem;
   cursor:pointer;
 }
-.side-relic-v3.unlocked{color:var(--mist);border-color:rgba(139,26,26,.4);background:rgba(139,26,26,.07)}
+.side-relic.scanned{color:var(--mist);border-color:rgba(139,26,26,.4);background:rgba(139,26,26,.07)}
 
-/* Scrolls */
-.scroll-grid-v3{
-  position:absolute;
-  inset:1.4rem;
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:.85rem;
-  align-items:center;
-}
-.scroll-card{
-  min-height:190px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  text-align:center;
-}
-.scroll-card::before{
-  content:'';
-  width:50px;height:76px;
-  border:1px solid rgba(139,26,26,.42);
-  clip-path:polygon(50% 0,100% 24%,80% 100%,20% 100%,0 24%);
-  margin:0 auto 1rem;
-}
-.scroll-card.decoded::before{background:rgba(139,26,26,.23);box-shadow:0 0 22px rgba(139,26,26,.35)}
-
-/* Crossroads */
-.cross-grid-v3{
-  position:absolute;
-  inset:1.4rem;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:.85rem;
-  align-items:center;
-}
-.cross-card{
-  min-height:245px;
-  padding:1.1rem;
-}
-.cross-kanji{font-family:'Noto Serif JP',serif;font-size:2.2rem;color:rgba(139,26,26,.4);margin-bottom:.9rem}
-
-/* Final */
-.final-card-v3{
-  max-width:980px;
+.final-dossier{
+  max-width:1000px;
   margin:0 auto;
   border:1px solid rgba(139,26,26,.32);
   background:linear-gradient(135deg, rgba(139,26,26,.08), transparent 48%), rgba(10,10,11,.82);
   padding:1.8rem;
 }
-.final-top-v3{
+.final-top{
   display:grid;
   grid-template-columns:1fr auto;
   gap:1rem;
@@ -688,28 +611,18 @@
   padding-bottom:1.2rem;
   margin-bottom:1.2rem;
 }
-.final-title-v3{
-  font-family:'Zen Antique',serif;
-  font-size:clamp(2rem,4vw,3rem);
-  margin-bottom:.45rem;
-}
-.final-sync-v3{text-align:right;font-family:'Space Mono',monospace}
-.final-sync-num-v3{font-size:2rem;color:var(--blood-glow)}
-.final-rank-v3{font-size:.48rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mist)}
-.final-grid-v3{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1px;
-  background:var(--ghost-line);
-  margin:1.3rem 0;
-}
-.final-cell-v3{background:rgba(10,10,11,.86);padding:1rem}
-.final-key-v3{font-family:'Space Mono',monospace;font-size:.45rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(139,26,26,.5);margin-bottom:.45rem}
-.final-val-v3{color:var(--mist);line-height:1.65;font-size:.86rem;font-weight:300}
-.final-val-v3 strong{color:var(--paper);font-weight:500}
-.final-summary-v3{color:var(--mist);line-height:1.75;font-size:.96rem;font-weight:300}
-.final-actions-v3{display:flex;flex-wrap:wrap;gap:.75rem}
-.final-actions-v3 a,.final-actions-v3 button{
+.final-title{font-family:'Zen Antique',serif;font-size:clamp(2rem,4vw,3rem);margin-bottom:.45rem}
+.final-sync{text-align:right;font-family:'Space Mono',monospace}
+.final-sync-num{font-size:2rem;color:var(--blood-glow)}
+.final-rank{font-size:.48rem;text-transform:uppercase;letter-spacing:.14em;color:var(--mist)}
+.final-summary{color:var(--mist);line-height:1.75;font-size:.96rem;font-weight:300;margin-bottom:1.3rem}
+.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ghost-line);margin:1.3rem 0}
+.final-cell{background:rgba(10,10,11,.86);padding:1rem}
+.final-key{font-family:'Space Mono',monospace;font-size:.45rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(139,26,26,.5);margin-bottom:.45rem}
+.final-val{color:var(--mist);line-height:1.65;font-size:.86rem;font-weight:300}
+.final-val strong{color:var(--paper);font-weight:500}
+.final-actions{display:flex;flex-wrap:wrap;gap:.75rem}
+.final-actions a,.final-actions button{
   font-family:'Space Mono',monospace;
   font-size:.52rem;
   text-transform:uppercase;
@@ -721,9 +634,9 @@
   padding:.8rem .95rem;
   cursor:pointer;
 }
-.final-actions-v3 a:hover,.final-actions-v3 button:hover{background:rgba(139,26,26,.1)}
+.final-actions a:hover,.final-actions button:hover{background:rgba(139,26,26,.1)}
 
-.hub-toast{
+.mission-toast{
   position:absolute;
   left:50%;
   bottom:1rem;
@@ -741,29 +654,28 @@
   transition:opacity .3s, transform .3s;
   z-index:9;
 }
-.hub-toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
+.mission-toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
 
 @media(max-width:1050px){
-  .hub-topbar{grid-template-columns:1fr;gap:.8rem}
-  .hub-sync{width:100%}
-  .hub-start,.chamber-layout{grid-template-columns:1fr}
-  .holo-panel,.chamber-panel{transform:none;min-height:560px}
-  .iso-board{transform:none;position:relative;left:auto;top:auto;width:auto;height:auto;display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1rem}
-  .iso-wrap{position:absolute;inset:1rem}
-  .iso-tile{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto}
-  .origin-clues,.dojo-grid,.style-grid,.cap-grid-v3,.forge-clues,.forge-types,.scroll-grid-v3,.cross-grid-v3{grid-template-columns:1fr 1fr}
+  .mission-topbar{grid-template-columns:1fr;gap:.8rem}
+  .mission-sync{width:100%}
+  .mission-grid{grid-template-columns:1fr}
+  .holo-panel{transform:none;min-height:620px}
+  .map-plane,.board-plane{transform:none;position:relative;left:auto;top:auto;width:auto;height:auto;display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:1rem}
+  .world-map,.board-wrap{position:absolute;inset:1rem}
+  .map-node,.board-tile{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto;opacity:1;pointer-events:auto}
+  .evidence-grid,.evidence-grid.wide{grid-template-columns:1fr 1fr}
 }
 @media(max-width:720px){
-  .animus-hub-game{padding:.5rem}
-  .hub-shell{height:calc(100vh - 1rem)}
-  .hub-screen{padding:1rem}
-  .hub-fragments{grid-template-columns:repeat(2,1fr)}
-  .holo-panel,.chamber-panel{min-height:720px}
-  .iso-board,.origin-clues,.route-slots,.dojo-grid,.style-grid,.cap-grid-v3,.forge-clues,.forge-types,.scroll-grid-v3,.cross-grid-v3,.final-grid-v3{grid-template-columns:1fr}
-  .loadout-slots-v3,.cap-grid-v3{position:relative;left:auto;right:auto;top:auto;bottom:auto;margin:1rem;grid-template-columns:1fr}
-  .forge-clues,.forge-types,.scroll-grid-v3,.cross-grid-v3,.origin-clues,.route-slots,.dojo-grid,.style-grid{position:relative;inset:auto;margin:1rem}
-  .final-top-v3{grid-template-columns:1fr}
-  .final-sync-v3{text-align:left}
+  .animus-mission{padding:.5rem}
+  .mission-shell{height:calc(100vh - 1rem)}
+  .mission-screen{padding:1rem}
+  .intel-strip{grid-template-columns:repeat(2,1fr)}
+  .holo-panel{min-height:790px}
+  .map-plane,.board-plane,.evidence-grid,.evidence-grid.wide,.final-grid,.loadout-readout,.pin-board{grid-template-columns:1fr}
+  .evidence-grid,.evidence-grid.wide,.recon-strip,.loadout-readout,.side-relics,.pin-board{position:relative;left:auto;right:auto;bottom:auto;top:auto;inset:auto;margin:1rem}
+  .final-top{grid-template-columns:1fr}
+  .final-sync{text-align:left}
 }
 
 </style>
@@ -778,277 +690,269 @@
 </div>
 
 
-<div class="animus-hub-game" id="animusHubGame" aria-hidden="true">
-  <div class="hub-shell">
-    <div class="hub-corner tl"></div><div class="hub-corner tr"></div><div class="hub-corner bl"></div><div class="hub-corner br"></div>
+<div class="animus-mission" id="animusMission" aria-hidden="true">
+  <div class="mission-shell">
+    <div class="mission-corner tl"></div><div class="mission-corner tr"></div><div class="mission-corner bl"></div><div class="mission-corner br"></div>
 
-    <div class="hub-topbar">
-      <div class="hub-status" id="hubStatus">ANIMUS HUB: STANDBY</div>
-      <div class="hub-sync">
-        <div class="hub-sync-label">Sync</div>
-        <div class="hub-sync-track"><div class="hub-sync-fill" id="hubSyncFill"></div></div>
-        <div class="hub-sync-score" id="hubSyncScore">0%</div>
+    <div class="mission-topbar">
+      <div class="mission-status" id="missionStatus">ANIMUS MISSION: STANDBY</div>
+      <div class="mission-sync">
+        <div class="mission-sync-label">Sync</div>
+        <div class="mission-sync-track"><div class="mission-sync-fill" id="missionSyncFill"></div></div>
+        <div class="mission-sync-score" id="missionSyncScore">0%</div>
       </div>
-      <button type="button" class="hub-exit" id="exitHubGame">Exit</button>
+      <button type="button" class="mission-exit" id="exitMission">Exit</button>
     </div>
 
-    <div class="hub-fragments">
-      <div class="hub-frag" data-frag="origin"><span></span>Origin</div>
-      <div class="hub-frag" data-frag="dojo"><span></span>Dōjō</div>
-      <div class="hub-frag" data-frag="arsenal"><span></span>Arsenal</div>
-      <div class="hub-frag" data-frag="forge"><span></span>Forge</div>
-      <div class="hub-frag" data-frag="scrolls"><span></span>Scrolls</div>
-      <div class="hub-frag" data-frag="crossroads"><span></span>Path</div>
+    <div class="intel-strip">
+      <div class="intel-frag" data-frag="network"><span></span>Network</div>
+      <div class="intel-frag" data-frag="bureau"><span></span>Bureau</div>
+      <div class="intel-frag" data-frag="arsenal"><span></span>Arsenal</div>
+      <div class="intel-frag" data-frag="viewpoint"><span></span>Builds</div>
+      <div class="intel-frag" data-frag="signals"><span></span>Signals</div>
+      <div class="intel-frag" data-frag="lens"><span></span>Lens</div>
     </div>
 
-    <section class="hub-screen active" data-screen="start">
-      <div class="hub-start">
+    <section class="mission-screen active" data-screen="briefing">
+      <div class="mission-grid">
         <div>
-          <div class="hub-kicker">Animus: The Ronin Archive</div>
-          <h2 class="hub-title">Recover the profile through a memory hub.</h2>
-          <p class="hub-desc">This version is non-linear. Explore chambers, decode clues, recover fragments, raise synchronization, and unlock a route-based final profile. You do not need to know Sai beforehand — the archive teaches you as you play.</p>
-          <div class="hub-guide">
-            <div class="hub-guide-label">Eagle Signal</div>
-            <div class="hub-guide-text">Some chambers open immediately. Others unlock after enough fragments are recovered. Higher sync produces a more complete final reconstruction.</div>
+          <div class="mission-kicker">Animus Mission Brief</div>
+          <h2 class="mission-title-main">Identify the researcher known as Sai Nalla.</h2>
+          <p class="mission-desc">This is an AC-style profile mission. Activate Eagle Vision, investigate the Bureau board, recover the arsenal, synchronize the build viewpoint, eavesdrop on motivation signals, then generate the final dossier.</p>
+          <div class="guide-box">
+            <div class="guide-label">Mission Rule</div>
+            <div class="guide-text">You do not need prior knowledge. Each mission reveals intel first. Your job is to scan, collect, and reconstruct the profile.</div>
           </div>
-          <button type="button" class="hub-action" id="enterMemoryHub">Enter Memory Hub <span>→</span></button>
+          <button type="button" class="mission-action" id="startEagleVision">Start: Activate Eagle Vision <span>→</span></button>
         </div>
-        <div class="holo-panel">
+        <div class="holo-panel eagle-world">
           <div class="holo-scan"></div>
-          <div class="iso-wrap">
-            <div class="iso-board">
-              <div class="iso-tile open origin"><div class="iso-title">Origin Gate</div><div class="iso-state">Open</div><div class="iso-clue">Decode the route.</div></div>
-              <div class="iso-tile open dojo"><div class="iso-title">The Dōjō</div><div class="iso-state">Open</div><div class="iso-clue">Recover training layers.</div></div>
-              <div class="iso-tile open arsenal"><div class="iso-title">The Arsenal</div><div class="iso-state">Open</div><div class="iso-clue">Choose your investigation style.</div></div>
-              <div class="iso-tile locked forge"><div class="iso-title">The Forge</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 2 fragments.</div></div>
-              <div class="iso-tile locked scrolls"><div class="iso-title">Scroll Chamber</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 3 fragments.</div></div>
-              <div class="iso-tile locked crossroads"><div class="iso-title">Crossroads</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 5 fragments.</div></div>
+          <div class="world-map">
+            <div class="map-plane">
+              <div class="eagle-pulse"></div>
+              <div class="map-node hyderabad"><div class="node-title">Coordinate 01</div><div class="node-code">Mechanical origin detected</div><div class="node-reveal">Hyderabad / Mahindra University — early engineering record.</div></div>
+              <div class="map-node paris"><div class="node-title">Coordinate 02</div><div class="node-code">Biomedical training detected</div><div class="node-reveal">Palaiseau / Paris — École Polytechnique and biomedical engineering.</div></div>
+              <div class="map-node toulouse"><div class="node-title">Coordinate 03</div><div class="node-code">Radiophysics research detected</div><div class="node-reveal">Toulouse — University of Toulouse and PET/CT radiophysics PhD.</div></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="hub-screen" data-screen="hub">
-      <div class="hub-start">
+    <section class="mission-screen" data-screen="network">
+      <div class="mission-grid">
         <div>
-          <div class="hub-kicker">Memory Hub</div>
-          <h2 class="hub-title">Choose your next chamber.</h2>
-          <p class="hub-desc">The route is yours. Decode enough fragments to open deeper chambers. Return to the hub after each quest.</p>
-          <div class="hub-guide">
-            <div class="hub-guide-label">Current objective</div>
-            <div class="hub-guide-text" id="hubObjective">Recover any two fragments to unlock the Forge.</div>
-          </div>
-          <button type="button" class="hub-action" id="finishIfReady" disabled>Final Reconstruction Locked</button>
+          <div class="mission-kicker">Mission 01 — Eagle Vision</div>
+          <h2 class="mission-title-main">Reveal the network.</h2>
+          <p class="mission-desc">Activate Eagle Vision to reveal locations, universities, labs, hospitals, and companies connected to the profile. Click glowing coordinates to scan them.</p>
+          <div class="guide-box"><div class="guide-label">Eagle Signal</div><div class="guide-text">This mission teaches the map of Sai’s path: where he trained, researched, and worked.</div></div>
+          <button type="button" class="mission-action" id="activateEagleVision">Activate Eagle Vision</button>
+          <button type="button" class="mission-action complete-mission" data-complete="network" disabled>Archive Network Intel <span>→</span></button>
         </div>
-        <div class="holo-panel">
+        <div class="holo-panel eagle-world" id="networkPanel">
           <div class="holo-scan"></div>
-          <div class="iso-wrap">
-            <div class="iso-board" id="hubBoard">
-              <div class="iso-tile origin" data-chamber="origin"><div class="iso-title">Origin Gate</div><div class="iso-state">Open</div><div class="iso-clue">Decode where the journey moves.</div></div>
-              <div class="iso-tile dojo" data-chamber="dojo"><div class="iso-title">The Dōjō</div><div class="iso-state">Open</div><div class="iso-clue">Find the real training layers.</div></div>
-              <div class="iso-tile arsenal" data-chamber="arsenal"><div class="iso-title">The Arsenal</div><div class="iso-state">Open</div><div class="iso-clue">Choose a lens and loadout.</div></div>
-              <div class="iso-tile forge" data-chamber="forge"><div class="iso-title">The Forge</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 2 fragments.</div></div>
-              <div class="iso-tile scrolls" data-chamber="scrolls"><div class="iso-title">Scroll Chamber</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 3 fragments.</div></div>
-              <div class="iso-tile crossroads" data-chamber="crossroads"><div class="iso-title">Crossroads</div><div class="iso-state">Locked</div><div class="iso-clue">Requires 5 fragments.</div></div>
+          <div class="world-map">
+            <div class="map-plane">
+              <div class="eagle-pulse"></div>
+              <div class="map-node hyderabad scan-network"><div class="node-title">Hyderabad</div><div class="node-code">Location · university</div><div class="node-reveal">Mahindra University — mechanical engineering roots, design, fluids, systems.</div></div>
+              <div class="map-node paris scan-network"><div class="node-title">Palaiseau / Paris</div><div class="node-code">University · lab network</div><div class="node-reveal">École Polytechnique and LadHyX — biomedical engineering, biomechanics, soft-matter experiments.</div></div>
+              <div class="map-node toulouse scan-network"><div class="node-title">Toulouse</div><div class="node-code">PhD · hospital ecosystem</div><div class="node-reveal">University of Toulouse and IUCT Oncopole — medical imaging, radiophysics, PET/CT validation.</div></div>
+              <div class="map-node iuct scan-network"><div class="node-title">IUCT Oncopole</div><div class="node-code">Clinical research partner</div><div class="node-reveal">Oncology imaging environment for translational PET/CT research.</div></div>
+              <div class="map-node hepta scan-network"><div class="node-title">Hepta Medical</div><div class="node-code">Company · startup R&D</div><div class="node-reveal">Cancer ablation visualization and product-facing MedTech work.</div></div>
+              <div class="map-node ladhyx scan-network"><div class="node-title">LadHyX</div><div class="node-code">Research lab</div><div class="node-reveal">Soft matter, experimental methods, and biomedical engineering research environment.</div></div>
+              <div class="map-node manitty scan-network"><div class="node-title">Manitty</div><div class="node-code">Company · design project</div><div class="node-reveal">Flexible dry electrode technologies and biomedical device assessment.</div></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="hub-screen" data-screen="origin">
-      <div class="chamber-layout">
-        <div class="chamber-copy">
-          <div class="hub-kicker">Origin Gate</div>
-          <h2 class="chamber-title">Decode the route, then place it.</h2>
-          <p class="chamber-desc">You do not need to know the cities. Click each encrypted memory first. The clues reveal the route.</p>
-          <div class="hub-guide"><div class="hub-guide-label">Quest rule</div><div class="hub-guide-text">Decode all three cards, then place them into the route slots in the order the profile evolved.</div></div>
-          <button type="button" class="hub-action complete-chamber" data-complete="origin" disabled>Recover Origin Fragment <span>→</span></button>
-          <button type="button" class="hub-action return-hub">Return to Hub</button>
+    <section class="mission-screen" data-screen="board">
+      <div class="mission-grid">
+        <div>
+          <div class="mission-kicker">Mission Board</div>
+          <h2 class="mission-title-main">Choose the next operation.</h2>
+          <p class="mission-desc">The network is revealed. Continue in any order. Some missions unlock after enough intel is archived.</p>
+          <div class="guide-box"><div class="guide-label">Current Objective</div><div class="guide-text" id="missionObjective">Complete the Bureau Investigation or recover the Arsenal to unlock the Viewpoint mission.</div></div>
+          <button type="button" class="mission-action" id="generateFinal" disabled>Final Dossier Locked</button>
         </div>
-        <div class="chamber-panel">
+        <div class="holo-panel">
           <div class="holo-scan"></div>
-          <div class="origin-clues">
-            <div class="memory-card origin-card" data-place="hyderabad" data-order="1"><div class="card-title">Encrypted Node A</div><div class="card-sub">Mechanical roots · India</div><div class="card-reveal">Hyderabad — mechanical engineering, fluids, design, systems.</div></div>
-            <div class="memory-card origin-card" data-place="paris" data-order="2"><div class="card-title">Encrypted Node B</div><div class="card-sub">Biomedical training · France</div><div class="card-reveal">Palaiseau / Paris — biomedical engineering, biomechanics, clinical problems.</div></div>
-            <div class="memory-card origin-card" data-place="toulouse" data-order="3"><div class="card-title">Encrypted Node C</div><div class="card-sub">Oncology imaging hub</div><div class="card-reveal">Toulouse — PhD in medical imaging and radiophysics.</div></div>
-          </div>
-          <div class="route-slots">
-            <div class="route-slot" data-slot="1">Route Slot I</div>
-            <div class="route-slot" data-slot="2">Route Slot II</div>
-            <div class="route-slot" data-slot="3">Route Slot III</div>
+          <div class="board-wrap">
+            <div class="board-plane" id="boardPlane">
+              <div class="board-tile bureau" data-mission="bureau"><div class="board-title">Bureau Investigation</div><div class="board-state">Open</div><div class="board-clue">Pin institutions into the dossier.</div></div>
+              <div class="board-tile arsenal" data-mission="arsenal"><div class="board-title">Pickpocket Arsenal</div><div class="board-state">Open</div><div class="board-clue">Recover tools and methods.</div></div>
+              <div class="board-tile builds" data-mission="viewpoint"><div class="board-title">Synchronize Viewpoint</div><div class="board-state">Locked</div><div class="board-clue">Requires 2 intel files.</div></div>
+              <div class="board-tile eavesdrop" data-mission="signals"><div class="board-title">Eavesdrop Signals</div><div class="board-state">Locked</div><div class="board-clue">Requires 3 intel files.</div></div>
+              <div class="board-tile lens" data-mission="lens"><div class="board-title">Final Intel Lens</div><div class="board-state">Locked</div><div class="board-clue">Requires 5 intel files.</div></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="hub-screen" data-screen="dojo">
-      <div class="chamber-layout">
-        <div class="chamber-copy">
-          <div class="hub-kicker">The Dōjō</div>
-          <h2 class="chamber-title">Separate the true training layers.</h2>
-          <p class="chamber-desc">The archive mixes real and false fragments. Select the three true layers that forged the current profile.</p>
-          <div class="hub-guide"><div class="hub-guide-label">Clue</div><div class="hub-guide-text">Started with machines and flow, moved to body-scale engineering, now works in scanner physics and oncology.</div></div>
-          <button type="button" class="hub-action complete-chamber" data-complete="dojo" disabled>Recover Dōjō Fragment <span>→</span></button>
-          <button type="button" class="hub-action return-hub">Return to Hub</button>
+    <section class="mission-screen" data-screen="bureau">
+      <div class="mission-grid">
+        <div>
+          <div class="mission-kicker">Mission 02 — Bureau Investigation</div>
+          <h2 class="mission-title-main">Build the institutional dossier.</h2>
+          <p class="mission-desc">Click files to pin them to the dossier board. The goal is not to guess — it is to understand how training, research, industry, and clinical environments connect.</p>
+          <button type="button" class="mission-action complete-mission" data-complete="bureau" disabled>Archive Bureau Intel <span>→</span></button>
+          <button type="button" class="mission-action return-board">Return to Mission Board</button>
         </div>
-        <div class="chamber-panel">
+        <div class="holo-panel">
           <div class="holo-scan"></div>
-          <div class="dojo-grid">
-            <div class="memory-card dojo-card" data-correct="true"><div class="card-title">Mechanical Engineering</div><div class="card-sub">True layer</div></div>
-            <div class="memory-card dojo-card" data-correct="false"><div class="card-title">Architecture</div><div class="card-sub">Noise fragment</div></div>
-            <div class="memory-card dojo-card" data-correct="true"><div class="card-title">Biomechanical & Biomedical Engineering</div><div class="card-sub">True layer</div></div>
-            <div class="memory-card dojo-card" data-correct="false"><div class="card-title">Pure Finance</div><div class="card-sub">Noise fragment</div></div>
-            <div class="memory-card dojo-card" data-correct="true"><div class="card-title">Medical Imaging & Radiophysics</div><div class="card-sub">True layer</div></div>
-            <div class="memory-card dojo-card" data-correct="false"><div class="card-title">Civil Planning</div><div class="card-sub">Noise fragment</div></div>
+          <div class="evidence-grid wide" style="bottom:120px;">
+            <div class="evidence-card bureau-file" data-pin="Training"><div class="evidence-title">Mahindra University</div><div class="evidence-code">Training</div><div class="evidence-reveal">Mechanical engineering foundation.</div></div>
+            <div class="evidence-card bureau-file" data-pin="Training"><div class="evidence-title">École Polytechnique</div><div class="evidence-code">Training / Research</div><div class="evidence-reveal">Biomedical engineering formation and research environment.</div></div>
+            <div class="evidence-card bureau-file" data-pin="Clinical"><div class="evidence-title">IUCT Oncopole</div><div class="evidence-code">Clinical research</div><div class="evidence-reveal">Oncology imaging and PET/CT validation ecosystem.</div></div>
+            <div class="evidence-card bureau-file" data-pin="Industry"><div class="evidence-title">Hepta Medical</div><div class="evidence-code">Industry R&D</div><div class="evidence-reveal">Cancer ablation visualization and startup-facing R&D.</div></div>
           </div>
-          <div class="blade-meter"><div class="blade-meter-fill" id="bladeFill"></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="hub-screen" data-screen="arsenal">
-      <div class="chamber-layout">
-        <div class="chamber-copy">
-          <div class="hub-kicker">The Arsenal</div>
-          <h2 class="chamber-title">Pick a lens, then calibrate the loadout.</h2>
-          <p class="chamber-desc">Your investigation style recommends capabilities, but you can modify the final three. This affects the final subclass.</p>
-          <div class="hub-guide"><div class="hub-guide-label">Quest rule</div><div class="hub-guide-text">Choose a visitor lens, then select exactly three capabilities.</div></div>
-          <button type="button" class="hub-action complete-chamber" data-complete="arsenal" disabled>Recover Arsenal Fragment <span>→</span></button>
-          <button type="button" class="hub-action return-hub">Return to Hub</button>
-        </div>
-        <div class="chamber-panel">
-          <div class="holo-scan"></div>
-          <div class="style-grid">
-            <div class="memory-card style-card" data-style="technical"><div class="card-title">Technical Depth</div><div class="card-sub">Modelling · imaging · systems</div></div>
-            <div class="memory-card style-card" data-style="clinical"><div class="card-title">Clinical Fit</div><div class="card-sub">Imaging · experimental · design</div></div>
-            <div class="memory-card style-card" data-style="venture"><div class="card-title">Venture Fit</div><div class="card-sub">Design · imaging · modelling</div></div>
-            <div class="memory-card style-card" data-style="research"><div class="card-title">Research Fit</div><div class="card-sub">Modelling · experimental · imaging</div></div>
-          </div>
-          <div class="loadout-slots-v3"><div class="loadout-slot-v3">Slot I</div><div class="loadout-slot-v3">Slot II</div><div class="loadout-slot-v3">Slot III</div></div>
-          <div class="cap-grid-v3">
-            <div class="memory-card cap-card" data-cap="modelling"><div class="cap-kanji">算</div><div class="card-title">Numerical Modelling</div><div class="card-sub">COMSOL · MATLAB · Python</div></div>
-            <div class="memory-card cap-card" data-cap="design"><div class="cap-kanji">鍛</div><div class="card-title">Product Design</div><div class="card-sub">Fusion 360 · Cura · CAD</div></div>
-            <div class="memory-card cap-card" data-cap="experimental"><div class="cap-kanji">試</div><div class="card-title">Experimental Method</div><div class="card-sub">JASP · validation · data</div></div>
-            <div class="memory-card cap-card" data-cap="imaging"><div class="cap-kanji">診</div><div class="card-title">Medical Imaging</div><div class="card-sub">ImageJ · QC · clinical review</div></div>
-            <div class="memory-card cap-card" data-cap="systems"><div class="cap-kanji">海</div><div class="card-title">AUV / Systems</div><div class="card-sub">CFD · OpenCV · mission design</div></div>
+          <div class="pin-board">
+            <div class="pin-slot">Training</div>
+            <div class="pin-slot">Research</div>
+            <div class="pin-slot">Clinical</div>
+            <div class="pin-slot">Industry</div>
+            <div class="pin-slot">Collaboration</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="hub-screen" data-screen="forge">
-      <div class="chamber-layout">
-        <div class="chamber-copy">
-          <div class="hub-kicker">The Forge</div>
-          <h2 class="chamber-title">Identify the relics from clues.</h2>
-          <p class="chamber-desc">The project names are hidden until matched. Read the clue, select a relic, then choose its build type.</p>
-          <div class="hub-guide"><div class="hub-guide-label">Optional</div><div class="hub-guide-text">Side relics are not required. Recover them for bonus sync and a richer final profile.</div></div>
-          <button type="button" class="hub-action complete-chamber" data-complete="forge" disabled>Recover Forge Fragment <span>→</span></button>
-          <button type="button" class="hub-action return-hub">Return to Hub</button>
+    <section class="mission-screen" data-screen="arsenal">
+      <div class="mission-grid">
+        <div>
+          <div class="mission-kicker">Mission 03 — Pickpocket Arsenal</div>
+          <h2 class="mission-title-main">Recover tools from the field.</h2>
+          <p class="mission-desc">Pickpocket the tool relics. Recover at least four to build the technical arsenal. The final subclass is influenced by what you collect.</p>
+          <button type="button" class="mission-action complete-mission" data-complete="arsenal" disabled>Archive Arsenal Intel <span>→</span></button>
+          <button type="button" class="mission-action return-board">Return to Mission Board</button>
         </div>
-        <div class="chamber-panel">
+        <div class="holo-panel">
           <div class="holo-scan"></div>
-          <div class="forge-clues">
-            <div class="memory-card forge-card" data-match="design" data-name="3DynaPET"><div class="card-title">Relic A</div><div class="card-sub">Turns printed structures into scanner validation systems.</div><div class="card-reveal">3DynaPET unlocked.</div></div>
-            <div class="memory-card forge-card" data-match="toolset" data-name="MuPET"><div class="card-title">Relic B</div><div class="card-sub">Generates PET-like worlds from physical transport laws.</div><div class="card-reveal">MuPET unlocked.</div></div>
-            <div class="memory-card forge-card" data-match="framework" data-name="CASSOULET"><div class="card-title">Relic C</div><div class="card-sub">Builds cohorts with known lesion ground truth.</div><div class="card-reveal">CASSOULET unlocked.</div></div>
+          <div class="evidence-grid wide" style="bottom:120px;">
+            <div class="evidence-card tool-card" data-tool="COMSOL"><div class="evidence-title">COMSOL</div><div class="evidence-code">Numerical modelling</div><div class="evidence-reveal">Multiphysics, CFD, transport modelling.</div></div>
+            <div class="evidence-card tool-card" data-tool="MATLAB"><div class="evidence-title">MATLAB</div><div class="evidence-code">Analysis / automation</div><div class="evidence-reveal">Image/data analysis pipelines.</div></div>
+            <div class="evidence-card tool-card" data-tool="Python"><div class="evidence-title">Python</div><div class="evidence-code">Tooling / data</div><div class="evidence-reveal">Research tools and synthetic data workflows.</div></div>
+            <div class="evidence-card tool-card" data-tool="Fusion 360"><div class="evidence-title">Fusion 360</div><div class="evidence-code">Product design</div><div class="evidence-reveal">CAD and prototype design.</div></div>
+            <div class="evidence-card tool-card" data-tool="ImageJ"><div class="evidence-title">ImageJ / Fiji</div><div class="evidence-code">Medical imaging</div><div class="evidence-reveal">Image analysis and quality control.</div></div>
+            <div class="evidence-card tool-card" data-tool="JASP"><div class="evidence-title">JASP</div><div class="evidence-code">Statistics</div><div class="evidence-reveal">Experimental and clinical data evaluation.</div></div>
+            <div class="evidence-card tool-card" data-tool="Cura"><div class="evidence-title">Ultimaker Cura</div><div class="evidence-code">3D printing</div><div class="evidence-reveal">Prototype and phantom fabrication workflow.</div></div>
+            <div class="evidence-card tool-card" data-tool="OpenCV"><div class="evidence-title">OpenCV</div><div class="evidence-code">AUV / systems</div><div class="evidence-reveal">Object recognition and systems engineering work.</div></div>
           </div>
-          <div class="forge-types">
-            <div class="type-seal-game" data-match="toolset">Toolset</div>
-            <div class="type-seal-game" data-match="framework">Framework</div>
-            <div class="type-seal-game" data-match="design">Design</div>
-          </div>
-          <div class="side-relics-v3">
-            <button type="button" class="side-relic-v3">AUV Systems</button>
-            <button type="button" class="side-relic-v3">RBC Drug Delivery</button>
-            <button type="button" class="side-relic-v3">Flexible Electrodes</button>
-            <button type="button" class="side-relic-v3">4D TEVAR</button>
+          <div class="loadout-readout">
+            <div class="loadout-slot">Tool I</div><div class="loadout-slot">Tool II</div><div class="loadout-slot">Tool III</div><div class="loadout-slot">Tool IV</div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="hub-screen" data-screen="scrolls">
-      <div class="chamber-layout">
-        <div class="chamber-copy">
-          <div class="hub-kicker">Scroll Chamber</div>
-          <h2 class="chamber-title">Scan the research traces.</h2>
-          <p class="chamber-desc">Work becomes legible when it leaves traces. Decode at least three scrolls to recover this fragment.</p>
-          <button type="button" class="hub-action complete-chamber" data-complete="scrolls" disabled>Recover Scroll Fragment <span>→</span></button>
-          <button type="button" class="hub-action return-hub">Return to Hub</button>
+    <section class="mission-screen" data-screen="viewpoint">
+      <div class="mission-grid">
+        <div>
+          <div class="mission-kicker">Mission 04 — Synchronize Viewpoint</div>
+          <h2 class="mission-title-main">Reveal the build landscape.</h2>
+          <p class="mission-desc">Click Synchronize Viewpoint. Project towers appear. Scan three flagship towers and optional side towers for bonus sync.</p>
+          <button type="button" class="mission-action" id="syncViewpoint">Synchronize Viewpoint</button>
+          <button type="button" class="mission-action complete-mission" data-complete="viewpoint" disabled>Archive Build Intel <span>→</span></button>
+          <button type="button" class="mission-action return-board">Return to Mission Board</button>
         </div>
-        <div class="chamber-panel">
+        <div class="holo-panel" id="viewpointPanel">
           <div class="holo-scan"></div>
-          <div class="scroll-grid-v3">
-            <div class="memory-card scroll-card"><div class="card-title">Publication</div><div class="card-sub">Peer-reviewed trace</div></div>
-            <div class="memory-card scroll-card"><div class="card-title">Preprint</div><div class="card-sub">Open research signal</div></div>
-            <div class="memory-card scroll-card"><div class="card-title">Conference</div><div class="card-sub">Technical communication</div></div>
-            <div class="memory-card scroll-card"><div class="card-title">Valorisation</div><div class="card-sub">IP · research-to-market</div></div>
-            <div class="memory-card scroll-card"><div class="card-title">Supervision</div><div class="card-sub">Teaching · mentorship</div></div>
+          <div class="evidence-grid" style="bottom:90px;">
+            <div class="evidence-card build-card"><div class="evidence-title">3DynaPET</div><div class="evidence-code">Physical validation system</div><div class="evidence-reveal">3D-printed Dynamic PET/CT validation system.</div></div>
+            <div class="evidence-card build-card"><div class="evidence-title">MuPET</div><div class="evidence-code">Synthetic data toolset</div><div class="evidence-reveal">Multiphysics PET synthetic data generation.</div></div>
+            <div class="evidence-card build-card"><div class="evidence-title">CASSOULET</div><div class="evidence-code">Ground-truth framework</div><div class="evidence-reveal">Multimodal imaging cohort framework with lesion ground truth.</div></div>
+          </div>
+          <div class="side-relics">
+            <button type="button" class="side-relic">Real-time Ablation Visualization</button>
+            <button type="button" class="side-relic">4D TEVAR</button>
+            <button type="button" class="side-relic">RBC Drug Delivery</button>
+            <button type="button" class="side-relic">AUV Systems</button>
+            <button type="button" class="side-relic">Flexible Electrodes</button>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="hub-screen" data-screen="crossroads">
-      <div class="chamber-layout">
-        <div class="chamber-copy">
-          <div class="hub-kicker">The Crossroads</div>
-          <h2 class="chamber-title">Choose the lens for the final profile.</h2>
-          <p class="chamber-desc">The final class depends on your route. The subclass is shaped by the loadout you equipped.</p>
-          <button type="button" class="hub-action complete-chamber" data-complete="crossroads" disabled>Recover Path Fragment <span>→</span></button>
-          <button type="button" class="hub-action return-hub">Return to Hub</button>
+    <section class="mission-screen" data-screen="signals">
+      <div class="mission-grid">
+        <div>
+          <div class="mission-kicker">Mission 05 — Eavesdrop</div>
+          <h2 class="mission-title-main">Decode personal-professional signals.</h2>
+          <p class="mission-desc">Eavesdrop on the signals to understand not just what Sai did, but why the path fits him.</p>
+          <button type="button" class="mission-action complete-mission" data-complete="signals" disabled>Archive Signal Intel <span>→</span></button>
+          <button type="button" class="mission-action return-board">Return to Mission Board</button>
         </div>
-        <div class="chamber-panel">
+        <div class="holo-panel">
           <div class="holo-scan"></div>
-          <div class="cross-grid-v3">
-            <div class="memory-card cross-card" data-route="clinical"><div class="cross-kanji">臨</div><div class="card-title">Clinical Translation</div><div class="card-sub">Scanner-side validation · clinical workflows</div></div>
-            <div class="memory-card cross-card" data-route="medtech"><div class="cross-kanji">医</div><div class="card-title">MedTech / Deep Tech</div><div class="card-sub">Prototype · toolset · product-facing R&D</div></div>
-            <div class="memory-card cross-card" data-route="strategy"><div class="cross-kanji">策</div><div class="card-title">Strategy / Ventures</div><div class="card-sub">IP · valorisation · research-to-market</div></div>
-            <div class="memory-card cross-card" data-route="research"><div class="cross-kanji">研</div><div class="card-title">Research Collaboration</div><div class="card-sub">Simulation · imaging · validation systems</div></div>
+          <div class="evidence-grid wide">
+            <div class="evidence-card signal-card"><div class="evidence-title">Clinic Signal</div><div class="evidence-code">Eavesdrop channel</div><div class="evidence-reveal">Motivation: build tools that survive real clinical workflows.</div></div>
+            <div class="evidence-card signal-card"><div class="evidence-title">Research Signal</div><div class="evidence-code">Eavesdrop channel</div><div class="evidence-reveal">Preference: ground-truth systems and validation over black-box analysis.</div></div>
+            <div class="evidence-card signal-card"><div class="evidence-title">Venture Signal</div><div class="evidence-code">Eavesdrop channel</div><div class="evidence-reveal">Interest: how research becomes products, IP, and strategy.</div></div>
+            <div class="evidence-card signal-card"><div class="evidence-title">Personal Signal</div><div class="evidence-code">Eavesdrop channel</div><div class="evidence-reveal">Operating style: curious, systems-oriented, independent, and comfortable between lab, clinic, and product contexts.</div></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="hub-screen" data-screen="final">
-      <div class="final-card-v3">
-        <div class="final-top-v3">
+    <section class="mission-screen" data-screen="lens">
+      <div class="mission-grid">
+        <div>
+          <div class="mission-kicker">Mission 06 — Final Intel Lens</div>
+          <h2 class="mission-title-main">Choose dossier perspective.</h2>
+          <p class="mission-desc">Choose the lens that matters to you. This changes the final class. Your recovered arsenal influences the subclass.</p>
+          <button type="button" class="mission-action complete-mission" data-complete="lens" disabled>Archive Lens Intel <span>→</span></button>
+          <button type="button" class="mission-action return-board">Return to Mission Board</button>
+        </div>
+        <div class="holo-panel">
+          <div class="holo-scan"></div>
+          <div class="evidence-grid wide">
+            <div class="evidence-card route-card" data-route="clinical"><div class="evidence-title">Clinical Translation</div><div class="evidence-code">Scanner-side validation · clinical workflows</div><div class="evidence-reveal">Class emphasizes clinical imaging translation.</div></div>
+            <div class="evidence-card route-card" data-route="medtech"><div class="evidence-title">MedTech / Deep Tech</div><div class="evidence-code">Prototype · toolset · product-facing R&D</div><div class="evidence-reveal">Class emphasizes healthcare technology building.</div></div>
+            <div class="evidence-card route-card" data-route="strategy"><div class="evidence-title">Strategy / Ventures</div><div class="evidence-code">IP · valorisation · research-to-market</div><div class="evidence-reveal">Class emphasizes translation strategy.</div></div>
+            <div class="evidence-card route-card" data-route="research"><div class="evidence-title">Research Collaboration</div><div class="evidence-code">Simulation · imaging · validation systems</div><div class="evidence-reveal">Class emphasizes collaborative research capability.</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mission-screen" data-screen="final">
+      <div class="final-dossier">
+        <div class="final-top">
           <div>
-            <div class="hub-kicker">Sequence Complete</div>
-            <h2 class="final-title-v3">Profile Reconstructed</h2>
-            <div class="card-sub">Sai Kiran Kumar Nalla</div>
+            <div class="mission-kicker">Dossier Complete</div>
+            <h2 class="final-title">Profile Reconstructed</h2>
+            <div class="evidence-code">Sai Kiran Kumar Nalla</div>
           </div>
-          <div class="final-sync-v3">
-            <div class="final-sync-num-v3" id="finalSyncV3">0%</div>
-            <div class="final-rank-v3" id="finalRankV3">Calculating</div>
+          <div class="final-sync">
+            <div class="final-sync-num" id="finalSyncMission">0%</div>
+            <div class="final-rank" id="finalRankMission">Calculating</div>
           </div>
         </div>
-        <p class="final-summary-v3" id="finalSummaryV3"></p>
-        <div class="final-grid-v3">
-          <div class="final-cell-v3"><div class="final-key-v3">Class</div><div class="final-val-v3" id="finalClassV3"></div></div>
-          <div class="final-cell-v3"><div class="final-key-v3">Subclass</div><div class="final-val-v3" id="finalSubclassV3"></div></div>
-          <div class="final-cell-v3"><div class="final-key-v3">Origin</div><div class="final-val-v3" id="finalOriginV3">Encrypted if sync is low</div></div>
-          <div class="final-cell-v3"><div class="final-key-v3">Training</div><div class="final-val-v3" id="finalTrainingV3">Encrypted if sync is low</div></div>
-          <div class="final-cell-v3"><div class="final-key-v3">Core Loadout</div><div class="final-val-v3" id="finalLoadoutV3"></div></div>
-          <div class="final-cell-v3"><div class="final-key-v3">Signature Builds</div><div class="final-val-v3" id="finalBuildsV3">Encrypted if sync is low</div></div>
-          <div class="final-cell-v3"><div class="final-key-v3">Research Trace</div><div class="final-val-v3" id="finalTraceV3">Encrypted if sync is low</div></div>
-          <div class="final-cell-v3"><div class="final-key-v3">Bonus Relics</div><div class="final-val-v3" id="finalBonusV3">None recovered</div></div>
+        <p class="final-summary" id="finalSummaryMission"></p>
+        <div class="final-grid">
+          <div class="final-cell"><div class="final-key">Class</div><div class="final-val" id="finalClassMission"></div></div>
+          <div class="final-cell"><div class="final-key">Subclass</div><div class="final-val" id="finalSubclassMission"></div></div>
+          <div class="final-cell"><div class="final-key">Network</div><div class="final-val" id="finalNetworkMission"></div></div>
+          <div class="final-cell"><div class="final-key">Institutional Arc</div><div class="final-val" id="finalBureauMission"></div></div>
+          <div class="final-cell"><div class="final-key">Recovered Arsenal</div><div class="final-val" id="finalArsenalMission"></div></div>
+          <div class="final-cell"><div class="final-key">Signature Builds</div><div class="final-val" id="finalBuildsMission"></div></div>
+          <div class="final-cell"><div class="final-key">Personal Signal</div><div class="final-val" id="finalSignalMission"></div></div>
+          <div class="final-cell"><div class="final-key">Optional Relics</div><div class="final-val" id="finalBonusMission">None recovered</div></div>
         </div>
-        <div class="final-actions-v3">
+        <div class="final-actions">
           <a href="projects.html">View Projects</a>
           <a href="experience.html">View Experience</a>
           <a href="papers.html">View Publications</a>
           <a href="contact.html">Contact</a>
           <a href="Assets/Sai_Nalla_CV.pdf" target="_blank">Download CV</a>
-          <button type="button" id="replayHubGame">Replay Quest</button>
+          <button type="button" id="replayMission">Replay Mission</button>
         </div>
       </div>
     </section>
 
-    <div class="hub-toast" id="hubToast">Memory updated</div>
+    <div class="mission-toast" id="missionToast">Intel recovered</div>
   </div>
 </div>
 
@@ -1112,10 +1016,10 @@
     
     <div class="hero-btns">
       <a href="about.html" class="btn">Explore Portfolio<span class="arrow">→</span></a>
-      <button type="button" class="btn btn-game" id="playHubGame"><span class="game-glyph">記</span>Play Animus Quest<span class="arrow">→</span></button>
+      <button type="button" class="btn btn-game" id="playMission"><span class="game-glyph">鷹</span>Play Animus Mission<span class="arrow">→</span></button>
       <a href="Assets/Sai_Nalla_CV.pdf" target="_blank" class="btn btn-cv"><span class="cv-glyph">伝</span>View CV<span class="arrow">→</span></a>
     </div>
-    <div class="hero-game-note">2–3 minute non-linear memory adventure · profile reconstruction · exit anytime</div>
+    <div class="hero-game-note">AC-style profile mission · Eagle Vision, Pickpocket, Viewpoint, Eavesdrop · exit anytime</div>
   </div>
 </section>
 
@@ -1181,37 +1085,25 @@
 <script src="transitions.js"></script>
 
 <script>
-const hubGame = document.getElementById('animusHubGame');
-const playHubGame = document.getElementById('playHubGame');
-const exitHubGame = document.getElementById('exitHubGame');
-const hubScreens = [...document.querySelectorAll('.hub-screen')];
-const hubStatus = document.getElementById('hubStatus');
-const hubSyncFill = document.getElementById('hubSyncFill');
-const hubSyncScore = document.getElementById('hubSyncScore');
-const hubToast = document.getElementById('hubToast');
-const hubObjective = document.getElementById('hubObjective');
-const finishIfReady = document.getElementById('finishIfReady');
+const mission = document.getElementById('animusMission');
+const playMission = document.getElementById('playMission');
+const exitMission = document.getElementById('exitMission');
+const missionScreens = [...document.querySelectorAll('.mission-screen')];
+const missionStatus = document.getElementById('missionStatus');
+const missionSyncFill = document.getElementById('missionSyncFill');
+const missionSyncScore = document.getElementById('missionSyncScore');
+const missionToast = document.getElementById('missionToast');
+const missionObjective = document.getElementById('missionObjective');
+const generateFinal = document.getElementById('generateFinal');
 
-let syncV3 = 0;
-let recovered = new Set();
-let selectedOriginCard = null;
-let routePlaced = [];
-let selectedCapsV3 = [];
-let selectedRouteV3 = '';
-let selectedForgeRelic = null;
-let forgeMatched = 0;
-let bonusRelicsV3 = [];
-let currentScreen = 'start';
+let missionSync = 0;
+let completeIntel = new Set();
+let recoveredTools = [];
+let bonusRelics = [];
+let selectedRoute = '';
+let viewpointActive = false;
 
-const capLabelsV3 = {
-  modelling:'Numerical Modelling',
-  design:'Product Design',
-  experimental:'Experimental Method',
-  imaging:'Medical Imaging Analysis',
-  systems:'AUV / Systems Engineering'
-};
-
-const routeProfilesV3 = {
+const routeProfiles = {
   clinical:{
     className:'Clinical Translation Researcher',
     defaultSubclass:'Medical Imaging Systems Builder',
@@ -1234,47 +1126,75 @@ const routeProfilesV3 = {
   }
 };
 
-function toastV3(msg){
-  hubToast.textContent = msg;
-  hubToast.classList.add('show');
-  setTimeout(()=>hubToast.classList.remove('show'), 1250);
+function toast(msg){
+  missionToast.textContent = msg;
+  missionToast.classList.add('show');
+  setTimeout(()=>missionToast.classList.remove('show'), 1250);
 }
-function setSyncV3(val){
-  syncV3 = Math.max(0, Math.min(100, val));
-  hubSyncFill.style.width = syncV3 + '%';
-  hubSyncScore.textContent = syncV3 + '%';
+function setSync(v){
+  missionSync = Math.max(0, Math.min(100, v));
+  missionSyncFill.style.width = missionSync + '%';
+  missionSyncScore.textContent = missionSync + '%';
 }
-function addSyncV3(points, msg){
-  setSyncV3(syncV3 + points);
-  if(msg) toastV3(msg + ' · +' + points + ' sync');
+function addSync(points, msg){
+  setSync(missionSync + points);
+  if(msg) toast(msg + ' · +' + points + ' sync');
 }
-function showScreen(name){
-  currentScreen = name;
-  hubScreens.forEach(s => s.classList.toggle('active', s.dataset.screen === name));
-  hubStatus.textContent = 'ANIMUS HUB: ' + name.toUpperCase();
-  if(name === 'hub') updateHubLocks();
+function showMissionScreen(name){
+  missionScreens.forEach(s => s.classList.toggle('active', s.dataset.screen === name));
+  missionStatus.textContent = 'ANIMUS MISSION: ' + name.toUpperCase();
+  if(name === 'board') updateBoard();
 }
-function unlockFragV3(name, points){
-  if(recovered.has(name)) return;
-  recovered.add(name);
-  const frag = document.querySelector(`.hub-frag[data-frag="${name}"]`);
-  if(frag) frag.classList.add('unlocked');
-  addSyncV3(points, name.toUpperCase() + ' fragment recovered');
-  updateHubLocks();
+function resetMission(){
+  missionSync = 0;
+  completeIntel = new Set();
+  recoveredTools = [];
+  bonusRelics = [];
+  selectedRoute = '';
+  viewpointActive = false;
+  setSync(0);
+  mission.querySelectorAll('.complete,.scanned,.selected,.pinned,.filled,.open,.locked,.ready,.eagle-active').forEach(el => {
+    if(!el.classList.contains('animus-mission')) el.classList.remove('complete','scanned','selected','pinned','filled','open','locked','ready','eagle-active');
+  });
+  mission.querySelectorAll('.complete-mission').forEach(btn => btn.disabled = true);
+  mission.querySelectorAll('.loadout-slot').forEach((slot,i)=>{slot.textContent = 'Tool ' + ['I','II','III','IV'][i]; slot.classList.remove('filled');});
+  mission.querySelectorAll('.pin-slot').forEach(slot=>{slot.classList.remove('filled');});
+  document.getElementById('generateFinal').disabled = true;
+  document.getElementById('generateFinal').textContent = 'Final Dossier Locked';
+  showMissionScreen('briefing');
 }
-function updateHubLocks(){
-  const count = recovered.size;
-  document.querySelectorAll('#hubBoard .iso-tile').forEach(tile => {
-    const chamber = tile.dataset.chamber;
+function openMission(){
+  mission.classList.add('open');
+  mission.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  resetMission();
+}
+function closeMission(){
+  mission.classList.remove('open');
+  mission.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+}
+
+playMission.addEventListener('click', openMission);
+exitMission.addEventListener('click', closeMission);
+document.getElementById('startEagleVision').addEventListener('click', () => showMissionScreen('network'));
+document.getElementById('replayMission').addEventListener('click', resetMission);
+document.querySelectorAll('.return-board').forEach(btn => btn.addEventListener('click', () => showMissionScreen('board')));
+document.addEventListener('keydown', e => { if(e.key === 'Escape' && mission.classList.contains('open')) closeMission(); });
+
+function updateBoard(){
+  const count = completeIntel.size;
+  document.querySelectorAll('#boardPlane .board-tile').forEach(tile => {
+    const m = tile.dataset.mission;
     let req = 0;
-    if(chamber === 'forge') req = 2;
-    if(chamber === 'scrolls') req = 3;
-    if(chamber === 'crossroads') req = 5;
-    const state = tile.querySelector('.iso-state');
-    tile.classList.remove('open','locked','recovered');
-    if(recovered.has(chamber)){
-      tile.classList.add('recovered');
-      state.textContent = 'Recovered';
+    if(m === 'viewpoint') req = 2;
+    if(m === 'signals') req = 3;
+    if(m === 'lens') req = 5;
+    const state = tile.querySelector('.board-state');
+    tile.classList.remove('open','locked','complete');
+    if(completeIntel.has(m)){
+      tile.classList.add('complete');
+      state.textContent = 'Complete';
     } else if(count >= req){
       tile.classList.add('open');
       state.textContent = 'Open';
@@ -1284,274 +1204,180 @@ function updateHubLocks(){
     }
   });
   if(count >= 6){
-    hubObjective.textContent = 'All fragments recovered. Final reconstruction available.';
-    finishIfReady.disabled = false;
-    finishIfReady.textContent = 'Generate Final Reconstruction';
+    missionObjective.textContent = 'All mission intel archived. Final dossier generation available.';
+    generateFinal.disabled = false;
+    generateFinal.textContent = 'Generate Final Dossier';
   } else if(count >= 5){
-    hubObjective.textContent = 'Crossroads open. Choose your final route.';
+    missionObjective.textContent = 'Final Intel Lens is open. Choose the dossier perspective.';
   } else if(count >= 3){
-    hubObjective.textContent = 'Scroll Chamber open. Decode the research trace.';
+    missionObjective.textContent = 'Eavesdrop Signals is open. Decode personal-professional motivation.';
   } else if(count >= 2){
-    hubObjective.textContent = 'Forge open. Identify flagship project relics.';
+    missionObjective.textContent = 'Synchronize Viewpoint is open. Reveal the build landscape.';
   } else {
-    hubObjective.textContent = 'Recover any two fragments to unlock the Forge.';
+    missionObjective.textContent = 'Complete the Bureau Investigation or recover the Arsenal to unlock the Viewpoint mission.';
   }
 }
-function resetHubGame(){
-  syncV3 = 0; recovered = new Set(); selectedOriginCard = null; routePlaced = []; selectedCapsV3 = [];
-  selectedRouteV3 = ''; selectedForgeRelic = null; forgeMatched = 0; bonusRelicsV3 = [];
-  setSyncV3(0);
-  hubGame.querySelectorAll('.unlocked,.selected,.decoded,.placed,.filled,.matched,.recovered,.open,.locked').forEach(el=>{
-    if(!el.classList.contains('hub-screen') && !el.classList.contains('animus-hub-game')) {
-      el.classList.remove('unlocked','selected','decoded','placed','filled','matched','recovered','open','locked');
-    }
-  });
-  document.querySelectorAll('.complete-chamber').forEach(btn => btn.disabled = true);
-  document.querySelectorAll('.route-slot').forEach((slot,i)=>{slot.textContent='Route Slot ' + ['I','II','III'][i];slot.classList.remove('filled');});
-  document.getElementById('bladeFill').style.width = '0%';
-  document.querySelectorAll('.loadout-slot-v3').forEach((slot,i)=>{slot.textContent='Slot ' + ['I','II','III'][i];slot.classList.remove('filled');});
-  document.querySelectorAll('.forge-card .card-title').forEach((el,i)=> el.textContent = ['Relic A','Relic B','Relic C'][i]);
-  updateHubLocks();
-  showScreen('start');
-}
-function openHubGame(){
-  hubGame.classList.add('open');
-  hubGame.setAttribute('aria-hidden','false');
-  document.body.style.overflow = 'hidden';
-  resetHubGame();
-}
-function closeHubGame(){
-  hubGame.classList.remove('open');
-  hubGame.setAttribute('aria-hidden','true');
-  document.body.style.overflow = '';
-}
-
-playHubGame.addEventListener('click', openHubGame);
-exitHubGame.addEventListener('click', closeHubGame);
-document.getElementById('enterMemoryHub').addEventListener('click', ()=>showScreen('hub'));
-document.querySelectorAll('.return-hub').forEach(btn => btn.addEventListener('click', ()=>showScreen('hub')));
-document.getElementById('replayHubGame').addEventListener('click', resetHubGame);
-document.addEventListener('keydown', e => { if(e.key === 'Escape' && hubGame.classList.contains('open')) closeHubGame(); });
-
-document.querySelectorAll('#hubBoard .iso-tile').forEach(tile => {
+document.querySelectorAll('#boardPlane .board-tile').forEach(tile => {
   tile.addEventListener('click', () => {
-    if(tile.classList.contains('locked')) { toastV3('Chamber locked — recover more fragments'); return; }
-    const chamber = tile.dataset.chamber;
-    if(recovered.has(chamber)) { toastV3('Fragment already recovered — you can revisit'); }
-    showScreen(chamber);
+    if(tile.classList.contains('locked')){ toast('Mission locked — recover more intel'); return; }
+    showMissionScreen(tile.dataset.mission);
   });
 });
 
-/* Origin discovery */
-document.querySelectorAll('.origin-card').forEach(card => {
-  card.addEventListener('click', () => {
-    if(!card.classList.contains('decoded')){
-      card.classList.add('decoded');
-      toastV3('Location memory decoded');
+function completeMission(name, points){
+  if(completeIntel.has(name)) return;
+  completeIntel.add(name);
+  const frag = document.querySelector(`.intel-frag[data-frag="${name}"]`);
+  if(frag) frag.classList.add('complete');
+  addSync(points, name.toUpperCase() + ' intel archived');
+  showMissionScreen('board');
+}
+document.querySelectorAll('.complete-mission').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const pts = {network:18,bureau:15,arsenal:18,viewpoint:20,signals:14,lens:15}[btn.dataset.complete] || 10;
+    completeMission(btn.dataset.complete, pts);
+  });
+});
+
+/* Eagle Vision network */
+document.getElementById('activateEagleVision').addEventListener('click', () => {
+  document.getElementById('networkPanel').classList.add('eagle-active');
+  toast('Eagle Vision activated');
+});
+document.querySelectorAll('.scan-network').forEach(node => {
+  node.addEventListener('click', () => {
+    if(!document.getElementById('networkPanel').classList.contains('eagle-active')){
+      toast('Activate Eagle Vision first');
       return;
     }
-    selectedOriginCard = card;
-    document.querySelectorAll('.origin-card').forEach(c=>c.classList.remove('selected'));
-    card.classList.add('selected');
-  });
-});
-document.querySelectorAll('.route-slot').forEach(slot => {
-  slot.addEventListener('click', () => {
-    if(!selectedOriginCard){ toastV3('Select a decoded location card first'); return; }
-    if(!selectedOriginCard.classList.contains('decoded')){ toastV3('Decode the card first'); return; }
-    const expected = Number(slot.dataset.slot);
-    const order = Number(selectedOriginCard.dataset.order);
-    if(order === expected){
-      slot.textContent = selectedOriginCard.querySelector('.card-reveal').textContent.split('—')[0].trim();
-      slot.classList.add('filled');
-      selectedOriginCard.classList.add('placed');
-      selectedOriginCard.classList.remove('selected');
-      selectedOriginCard = null;
-      routePlaced.push(order);
-      if(routePlaced.length >= 3) document.querySelector('[data-complete="origin"]').disabled = false;
-      toastV3('Route slot stabilized');
-    } else {
-      toastV3('Route order unstable');
-      setSyncV3(syncV3 - 2);
-    }
+    node.classList.add('scanned');
+    const count = document.querySelectorAll('.scan-network.scanned').length;
+    toast(`${count}/7 network coordinates scanned`);
+    if(count >= 5) document.querySelector('[data-complete="network"]').disabled = false;
   });
 });
 
-/* Dōjō */
-document.querySelectorAll('.dojo-card').forEach(card => {
-  card.addEventListener('click', () => {
-    if(card.dataset.correct === 'true'){
-      card.classList.add('selected');
-      const count = document.querySelectorAll('.dojo-card.selected[data-correct="true"]').length;
-      document.getElementById('bladeFill').style.width = `${(count/3)*100}%`;
-      toastV3(`${count}/3 true layers recovered`);
-      if(count >= 3) document.querySelector('[data-complete="dojo"]').disabled = false;
-    } else {
-      card.classList.add('decoded');
-      toastV3('Noise fragment identified');
-      setSyncV3(syncV3 - 1);
-    }
+/* Bureau investigation */
+document.querySelectorAll('.bureau-file').forEach(file => {
+  file.addEventListener('click', () => {
+    file.classList.add('pinned');
+    const pins = [...document.querySelectorAll('.bureau-file.pinned')].map(f=>f.dataset.pin);
+    document.querySelectorAll('.pin-slot').forEach(slot => {
+      const key = slot.textContent.trim();
+      if(pins.includes(key) || (key === 'Research' && pins.includes('Training')) || (key === 'Collaboration' && pins.length >= 3)){
+        slot.classList.add('filled');
+      }
+    });
+    const count = document.querySelectorAll('.bureau-file.pinned').length;
+    toast(`${count}/4 files pinned to dossier`);
+    if(count >= 4) document.querySelector('[data-complete="bureau"]').disabled = false;
   });
 });
 
-/* Arsenal */
-const styleRecommendations = {
-  technical:['modelling','imaging','systems'],
-  clinical:['imaging','experimental','design'],
-  venture:['design','imaging','modelling'],
-  research:['modelling','experimental','imaging']
-};
-function updateLoadoutV3(){
-  const slots = document.querySelectorAll('.loadout-slot-v3');
-  slots.forEach((slot,i)=>{
-    if(selectedCapsV3[i]){
-      slot.textContent = capLabelsV3[selectedCapsV3[i]];
-      slot.classList.add('filled');
-    } else {
-      slot.textContent = 'Slot ' + ['I','II','III'][i];
-      slot.classList.remove('filled');
-    }
-  });
-  document.querySelector('[data-complete="arsenal"]').disabled = selectedCapsV3.length !== 3;
-}
-function selectCapV3(cap){
-  const item = document.querySelector(`.cap-card[data-cap="${cap}"]`);
-  if(!item) return;
-  if(!selectedCapsV3.includes(cap)){
-    if(selectedCapsV3.length >= 3) return;
-    selectedCapsV3.push(cap);
-    item.classList.add('selected');
-  }
-}
-document.querySelectorAll('.style-card').forEach(card => {
+/* Pickpocket Arsenal */
+document.querySelectorAll('.tool-card').forEach(card => {
   card.addEventListener('click', () => {
-    document.querySelectorAll('.style-card').forEach(c=>c.classList.remove('selected'));
-    card.classList.add('selected');
-    document.querySelectorAll('.cap-card').forEach(c=>c.classList.remove('selected'));
-    selectedCapsV3 = [];
-    styleRecommendations[card.dataset.style].forEach(selectCapV3);
-    updateLoadoutV3();
-    toastV3('Recommended loadout calibrated');
-  });
-});
-document.querySelectorAll('.cap-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const cap = card.dataset.cap;
-    if(card.classList.contains('selected')){
-      card.classList.remove('selected');
-      selectedCapsV3 = selectedCapsV3.filter(c=>c!==cap);
-    } else {
-      if(selectedCapsV3.length >= 3){ toastV3('Loadout full — deselect one first'); return; }
-      card.classList.add('selected');
-      selectedCapsV3.push(cap);
+    if(card.classList.contains('scanned')) return;
+    card.classList.add('scanned');
+    recoveredTools.push(card.dataset.tool);
+    const slots = document.querySelectorAll('.loadout-slot');
+    for(const slot of slots){
+      if(!slot.classList.contains('filled')){
+        slot.textContent = card.dataset.tool;
+        slot.classList.add('filled');
+        break;
+      }
     }
-    updateLoadoutV3();
+    toast(`${recoveredTools.length}/4 minimum tools recovered`);
+    if(recoveredTools.length >= 4) document.querySelector('[data-complete="arsenal"]').disabled = false;
   });
 });
 
-/* Forge */
-document.querySelectorAll('.forge-card').forEach(card => {
+/* Viewpoint */
+document.getElementById('syncViewpoint').addEventListener('click', () => {
+  viewpointActive = true;
+  document.getElementById('viewpointPanel').classList.add('eagle-active');
+  toast('Viewpoint synchronized — towers revealed');
+});
+document.querySelectorAll('.build-card').forEach(card => {
   card.addEventListener('click', () => {
-    if(card.classList.contains('matched')) return;
-    selectedForgeRelic = card;
-    document.querySelectorAll('.forge-card').forEach(c=>c.classList.remove('selected'));
-    card.classList.add('selected');
+    if(!viewpointActive){ toast('Synchronize Viewpoint first'); return; }
+    card.classList.add('scanned');
+    const count = document.querySelectorAll('.build-card.scanned').length;
+    toast(`${count}/3 signature builds scanned`);
+    if(count >= 3) document.querySelector('[data-complete="viewpoint"]').disabled = false;
   });
 });
-document.querySelectorAll('.type-seal-game').forEach(seal => {
-  seal.addEventListener('click', () => {
-    if(seal.classList.contains('matched')) return;
-    if(!selectedForgeRelic){ toastV3('Select a relic clue first'); return; }
-    if(selectedForgeRelic.dataset.match === seal.dataset.match){
-      selectedForgeRelic.classList.add('matched','decoded');
-      selectedForgeRelic.classList.remove('selected');
-      selectedForgeRelic.querySelector('.card-title').textContent = selectedForgeRelic.dataset.name;
-      seal.classList.add('matched');
-      selectedForgeRelic = null;
-      forgeMatched++;
-      toastV3('Project relic awakened');
-      if(forgeMatched >= 3) document.querySelector('[data-complete="forge"]').disabled = false;
-    } else {
-      toastV3('Wrong seal — relic rejects match');
-      setSyncV3(syncV3 - 2);
-    }
-  });
-});
-document.querySelectorAll('.side-relic-v3').forEach(btn => {
+document.querySelectorAll('.side-relic').forEach(btn => {
   btn.addEventListener('click', () => {
-    if(btn.classList.contains('unlocked')) return;
-    btn.classList.add('unlocked');
-    bonusRelicsV3.push(btn.textContent.trim());
-    addSyncV3(2,'Bonus relic recovered');
+    if(btn.classList.contains('scanned')) return;
+    btn.classList.add('scanned');
+    bonusRelics.push(btn.textContent.trim());
+    addSync(2, 'Side tower scanned');
   });
 });
 
-/* Scrolls */
-document.querySelectorAll('.scroll-card').forEach(card => {
+/* Eavesdrop */
+document.querySelectorAll('.signal-card').forEach(card => {
   card.addEventListener('click', () => {
-    card.classList.add('decoded');
-    const count = document.querySelectorAll('.scroll-card.decoded').length;
-    toastV3(`${count}/5 research traces decoded`);
-    if(count >= 3) document.querySelector('[data-complete="scrolls"]').disabled = false;
+    card.classList.add('scanned');
+    const count = document.querySelectorAll('.signal-card.scanned').length;
+    toast(`${count}/4 signals decoded`);
+    if(count >= 3) document.querySelector('[data-complete="signals"]').disabled = false;
   });
 });
 
-/* Crossroads */
-document.querySelectorAll('.cross-card').forEach(card => {
+/* Lens */
+document.querySelectorAll('.route-card').forEach(card => {
   card.addEventListener('click', () => {
-    document.querySelectorAll('.cross-card').forEach(c=>c.classList.remove('selected'));
-    card.classList.add('selected');
-    selectedRouteV3 = card.dataset.route;
-    document.querySelector('[data-complete="crossroads"]').disabled = false;
-    toastV3(card.querySelector('.card-title').textContent + ' route selected');
+    document.querySelectorAll('.route-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected','scanned');
+    selectedRoute = card.dataset.route;
+    document.querySelector('[data-complete="lens"]').disabled = false;
+    toast(card.querySelector('.evidence-title').textContent + ' lens selected');
   });
 });
 
-/* Complete chamber */
-document.querySelectorAll('.complete-chamber').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const chamber = btn.dataset.complete;
-    const points = {origin:15, dojo:15, arsenal:18, forge:20, scrolls:15, crossroads:15}[chamber] || 10;
-    unlockFragV3(chamber, points);
-    showScreen('hub');
-  });
-});
-
-finishIfReady.addEventListener('click', () => {
-  if(recovered.size >= 6){
-    buildFinalV3();
-    showScreen('final');
+generateFinal.addEventListener('click', () => {
+  if(completeIntel.size >= 6){
+    buildFinalMission();
+    showMissionScreen('final');
   }
 });
 
-function rankV3(score){
+function rank(score){
   if(score >= 90) return 'Full Synchronization';
   if(score >= 70) return 'Stable Synchronization';
   if(score >= 50) return 'Partial Synchronization';
   return 'Fragmented Memory';
 }
-function subclassV3(profile){
-  if(selectedCapsV3.includes('imaging') && selectedCapsV3.includes('experimental')) return 'Validation Systems Specialist';
-  if(selectedCapsV3.includes('design') && selectedCapsV3.includes('imaging')) return 'Prototype-to-Clinic Builder';
-  if(selectedCapsV3.includes('modelling') && selectedCapsV3.includes('systems')) return 'Systems Modelling Engineer';
-  if(selectedCapsV3.includes('modelling') && selectedCapsV3.includes('imaging')) return 'Quantitative Imaging Builder';
-  return profile.defaultSubclass;
+const profiles = {
+  clinical:{className:'Clinical Translation Researcher',summary:'Sai is a medical imaging researcher building translational systems between scanner, code, and clinic — with emphasis on PET/CT validation, image quality, and clinical research workflows.'},
+  medtech:{className:'MedTech R&D Builder',summary:'Sai works at the intersection of clinical needs, computational modelling, and product-facing R&D — turning imaging, prototypes, and frameworks into usable healthcare technology systems.'},
+  strategy:{className:'Research-to-Market Strategist',summary:'Sai combines medical imaging R&D with IP awareness, valorisation, and startup-facing technical translation — connecting research, product framing, and venture strategy.'},
+  research:{className:'Computational Medical Imaging Researcher',summary:'Sai works across simulation, medical imaging, phantom validation, and translational research — building ground-truth systems and analytical tools for collaborative scientific work.'}
+};
+function subclass(){
+  const tools = recoveredTools.join('|');
+  if(tools.includes('ImageJ') && tools.includes('JASP')) return 'Validation Systems Specialist';
+  if(tools.includes('Fusion 360') && tools.includes('Cura')) return 'Prototype-to-Clinic Builder';
+  if(tools.includes('COMSOL') && tools.includes('OpenCV')) return 'Systems Modelling Engineer';
+  if(tools.includes('COMSOL') && tools.includes('Python')) return 'Quantitative Imaging Builder';
+  return 'Translational R&D Builder';
 }
-function buildFinalV3(){
-  const profile = routeProfilesV3[selectedRouteV3] || routeProfilesV3.clinical;
-  const score = syncV3;
-  document.getElementById('finalSyncV3').textContent = score + '%';
-  document.getElementById('finalRankV3').textContent = rankV3(score);
-  document.getElementById('finalClassV3').innerHTML = '<strong>' + profile.className + '</strong>';
-  document.getElementById('finalSubclassV3').innerHTML = '<strong>' + subclassV3(profile) + '</strong>';
-  document.getElementById('finalSummaryV3').textContent = profile.summary;
-  document.getElementById('finalLoadoutV3').textContent = selectedCapsV3.map(c=>capLabelsV3[c]).join(' · ') || 'Not recovered';
-  document.getElementById('finalBonusV3').textContent = bonusRelicsV3.length ? bonusRelicsV3.join(' · ') : 'None recovered';
-
-  document.getElementById('finalOriginV3').textContent = score >= 50 ? 'Hyderabad → Palaiseau / Paris → Toulouse' : 'Partially encrypted';
-  document.getElementById('finalTrainingV3').textContent = score >= 60 ? 'Mechanical Engineering → Biomedical Engineering → Medical Imaging & Radiophysics' : 'Partially encrypted';
-  document.getElementById('finalBuildsV3').textContent = score >= 70 ? '3DynaPET · MuPET · CASSOULET' : 'Some project relics encrypted';
-  document.getElementById('finalTraceV3').textContent = score >= 85 ? 'Publications · Preprints · Conference outputs · Valorisation · Supervision' : 'Publications · Preprints · Conference outputs';
+function buildFinalMission(){
+  const profile = profiles[selectedRoute] || profiles.clinical;
+  document.getElementById('finalSyncMission').textContent = missionSync + '%';
+  document.getElementById('finalRankMission').textContent = rank(missionSync);
+  document.getElementById('finalClassMission').innerHTML = '<strong>' + profile.className + '</strong>';
+  document.getElementById('finalSubclassMission').innerHTML = '<strong>' + subclass() + '</strong>';
+  document.getElementById('finalSummaryMission').textContent = profile.summary;
+  document.getElementById('finalNetworkMission').textContent = missionSync >= 50 ? 'Hyderabad · Palaiseau / Paris · Toulouse · IUCT Oncopole · École Polytechnique · Hepta Medical · LadHyX' : 'Partially encrypted';
+  document.getElementById('finalBureauMission').textContent = missionSync >= 60 ? 'Training → Research → Clinical ecosystem → Industry R&D → Collaboration network' : 'Partially encrypted';
+  document.getElementById('finalArsenalMission').textContent = recoveredTools.length ? recoveredTools.join(' · ') : 'Not recovered';
+  document.getElementById('finalBuildsMission').textContent = missionSync >= 70 ? '3DynaPET · MuPET · CASSOULET' : 'Some build records encrypted';
+  document.getElementById('finalSignalMission').textContent = missionSync >= 75 ? 'Systems thinker · translational builder · curious about clinical impact, deep-tech strategy, and research-to-market paths.' : 'Personal signal partially encrypted';
+  document.getElementById('finalBonusMission').textContent = bonusRelics.length ? bonusRelics.join(' · ') : 'None recovered';
 }
 </script>
 
