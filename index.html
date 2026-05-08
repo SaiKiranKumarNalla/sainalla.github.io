@@ -1099,5 +1099,150 @@ document.getElementById('ac2Final').addEventListener('click',()=>{buildFinal2();
 })();
 </script>
 
+
+<script>
+(function(){
+  function ready(fn){
+    if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function(){
+    var game = document.getElementById('ac2');
+    var fill = document.getElementById('ac2Fill');
+    var num = document.getElementById('ac2Num');
+    var status = document.getElementById('ac2Status');
+    var worldPanel = document.getElementById('ac2WorldPanel');
+    var indiaPanel = document.getElementById('ac2IndiaPanel');
+    var francePanel = document.getElementById('ac2FrancePanel');
+
+    function toast(msg){
+      var t = document.getElementById('toast2');
+      if(!t) return;
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function(){ t.classList.remove('show'); }, 1200);
+    }
+
+    function setSync(v){
+      if(fill) fill.style.width = v + '%';
+      if(num) num.textContent = v + '%';
+    }
+
+    function show(screenName){
+      document.querySelectorAll('.ac2-screen').forEach(function(s){
+        s.classList.toggle('active', s.getAttribute('data-screen') === screenName);
+      });
+      if(status) status.textContent = 'ANIMUS CODEX: ' + screenName.toUpperCase();
+    }
+
+    function openGame(e){
+      if(e) e.preventDefault();
+      if(!game) return;
+      game.classList.add('open');
+      game.setAttribute('aria-hidden','false');
+      document.body.style.overflow = 'hidden';
+      show('brief');
+    }
+
+    function closeGame(){
+      if(!game) return;
+      game.classList.remove('open');
+      game.setAttribute('aria-hidden','true');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('button, a').forEach(function(el){
+      var txt = (el.textContent || '').toLowerCase();
+      if(txt.includes('play animus')){
+        el.addEventListener('click', openGame);
+        el.disabled = false;
+        el.style.pointerEvents = 'auto';
+      }
+    });
+
+    var exit = document.getElementById('ac2Exit');
+    if(exit) exit.addEventListener('click', closeGame);
+
+    var open = document.getElementById('ac2Open');
+    if(open) open.addEventListener('click', function(e){
+      e.preventDefault();
+      show('world');
+    });
+
+    var sync = document.getElementById('ac2Sync');
+    if(sync) sync.addEventListener('click', function(e){
+      e.preventDefault();
+      if(worldPanel) worldPanel.classList.add('synced');
+      var frag = document.querySelector('[data-frag="world"]');
+      if(frag) frag.classList.add('done');
+      setSync(8);
+      var obj = document.getElementById('ac2Objective');
+      if(obj) obj.textContent = 'Region traces revealed. Select a glowing region trace.';
+      toast('World map synchronized');
+    });
+
+    document.querySelectorAll('.region-hot').forEach(function(h){
+      h.addEventListener('click', function(e){
+        e.preventDefault();
+        var region = h.getAttribute('data-region');
+        if(region === 'india') show('india');
+        if(region === 'france') show('france');
+      });
+    });
+
+    var eagleIndia = document.getElementById('ac2EagleIndia');
+    if(eagleIndia) eagleIndia.addEventListener('click', function(e){
+      e.preventDefault();
+      if(indiaPanel) indiaPanel.classList.add('eagle');
+      toast('Eagle Vision reveals city trace');
+    });
+
+    var eagleFrance = document.getElementById('ac2EagleFrance');
+    if(eagleFrance) eagleFrance.addEventListener('click', function(e){
+      e.preventDefault();
+      if(francePanel) francePanel.classList.add('eagle');
+      toast('Eagle Vision reveals city traces');
+    });
+
+    document.querySelectorAll('.backWorld').forEach(function(b){
+      b.addEventListener('click', function(e){
+        e.preventDefault();
+        show('world');
+      });
+    });
+
+    // Fallback city opener: if the original loadCity2 works, use it.
+    // If it does not, still opens the city screen and lets the user know.
+    document.querySelectorAll('.city-hot').forEach(function(h){
+      h.addEventListener('click', function(e){
+        e.preventDefault();
+        var city = h.getAttribute('data-city');
+        if(typeof loadCity2 === 'function'){
+          try { loadCity2(city); return; } catch(err) {}
+        }
+        var title = city === 'hyderabad' ? 'Hyderabad' : city === 'paris' ? 'Paris / Palaiseau' : 'Toulouse';
+        var t = document.getElementById('cityTitle2');
+        var k = document.getElementById('cityKicker2');
+        var intro = document.getElementById('cityIntro2');
+        if(t) t.textContent = title;
+        if(k) k.textContent = 'City Memory';
+        if(intro) intro.textContent = 'City opened. Main city mini-game loader needs review.';
+        show('city');
+      });
+    });
+
+    var finalBtn = document.getElementById('ac2Final');
+    if(finalBtn) finalBtn.addEventListener('click', function(e){
+      e.preventDefault();
+      if(typeof buildFinal2 === 'function'){
+        try { buildFinal2(); } catch(err) {}
+      }
+      show('final');
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
