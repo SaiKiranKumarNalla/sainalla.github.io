@@ -234,7 +234,7 @@
   z-index:1;
 }
 .dna-target::after{
-  content:'DROP / CLICK HERE';
+  content:'PLACE 3 FRAGMENTS HERE';
   position:absolute;
   left:50%;
   top:50%;
@@ -298,6 +298,70 @@
   .node-grid{grid-template-columns:repeat(3, minmax(42px, 1fr));}
   .path-node{height:40px}
   .dna-target{width:220px}
+}
+
+
+/* PATCH V6: DNA becomes rotate-fragment sequence */
+.dna-rotate-board{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:.75rem;
+  margin-top:.8rem;
+}
+.dna-rotor{
+  height:86px;
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.62);
+  cursor:pointer;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .25s ease;
+}
+.dna-rotor:hover{
+  border-color:rgba(139,26,26,.5);
+  background:rgba(139,26,26,.08);
+}
+.dna-rotor.locked{
+  border-color:rgba(194,59,59,.7);
+  background:rgba(139,26,26,.16);
+  box-shadow:0 0 18px rgba(194,59,59,.18);
+}
+.dna-frag-shape{
+  width:74px;
+  height:34px;
+  border-top:3px solid rgba(240,235,227,.68);
+  border-bottom:3px solid rgba(194,59,59,.62);
+  border-radius:50%;
+  transform:rotate(var(--rot, 0deg)) skewX(-16deg);
+  transition:transform .25s ease;
+}
+.dna-rotor::after{
+  content:attr(data-label);
+  position:absolute;
+  left:.45rem;
+  top:.35rem;
+  font-family:'Space Mono',monospace;
+  font-size:.38rem;
+  letter-spacing:.1em;
+  color:var(--steel);
+  text-transform:uppercase;
+}
+.dna-sequence-target{
+  margin-top:.85rem;
+  border:1px dashed rgba(194,59,59,.45);
+  padding:.7rem;
+  font-family:'Space Mono',monospace;
+  font-size:.45rem;
+  letter-spacing:.12em;
+  color:var(--steel);
+  text-transform:uppercase;
+  text-align:center;
+}
+.dna-sequence-target.ready{
+  color:var(--blood-glow);
+  background:rgba(139,26,26,.08);
 }
 
 </style>
@@ -501,9 +565,10 @@ function loadCity2(id){current2=id;const d=data2[id];cityGot2[id]=cityGot2[id]||
 function selectCodex2(c,node){if(node.classList.contains('done')){t2('Codex already recovered');return}document.querySelectorAll('.codex-node').forEach(n=>n.classList.remove('current'));node.classList.add('current');document.getElementById('avatar2').style.left=node.style.left;document.getElementById('avatar2').style.top=node.style.top;document.getElementById('miniTitle2').textContent='Codex '+c[0]+' Security';document.getElementById('miniText2').textContent='Follow the hint. Then press HIT to lock the recovered Codex.';renderMini2(c,node)}
 function hitGate(doneFn){const row=document.createElement('div');row.className='hit-row';const b=document.createElement('button');b.className='hit-btn';b.textContent='HIT / lock recovered Codex';b.onclick=()=>{b.disabled=true;doneFn()};row.appendChild(b);return row}
 
+
 function renderMini2(c,node){
   const type=c[1],area=document.getElementById('miniArea2');
-  area.innerHTML='<div class="mini-title">'+(type==='lock'?'Symbol lock':type==='dna'?'DNA assembly':'Security node bypass')+'</div>';
+  area.innerHTML='<div class="mini-title">'+(type==='lock'?'Symbol lock':type==='dna'?'DNA fragment sequence':'Security node bypass')+'</div>';
   let solved=false;
 
   const complete=()=>{
@@ -583,67 +648,43 @@ function renderMini2(c,node){
   if(type==='dna'){
     const hint=document.createElement('div');
     hint.className='hint';
-    hint.textContent='Assemble the visual DNA strand: drag each curved fragment into the dashed capsule. If drag fails, click a fragment, then click the capsule. No timer here.';
+    hint.textContent='Rotate all three DNA fragments until they align into the same direction. Click each fragment to rotate it. When all are aligned, press HIT.';
     area.appendChild(hint);
 
     const board=document.createElement('div');
-    board.className='dna-board';
-    board.innerHTML='<div class="dna-target" id="dnaTarget2"></div>';
-    let placed=0;
-    let selected=null;
-
-    const placePiece=(p)=>{
-      if(!p||p.classList.contains('done'))return;
-      p.classList.remove('selected');
-      p.classList.add('done');
-      p.draggable=false;
-      const slots=[
-        [78,78], [130,104], [182,78], [234,104]
-      ];
-      const s=slots[placed] || [120+placed*30,90];
-      p.style.left=s[0]+'px';
-      p.style.top=s[1]+'px';
-      placed++;
-      selected=null;
-      if(placed>=4){
+    board.className='dna-rotate-board';
+    const target=document.createElement('div');
+    target.className='dna-sequence-target';
+    target.textContent='Target: all fragments horizontal';
+    let states=[1,2,3];
+    const check=()=>{
+      if(states.every(v=>v===0)){
         solved=true;
-        board.querySelector('.dna-target').classList.add('ready');
+        target.classList.add('ready');
+        target.textContent='DNA sequence assembled — press HIT';
         hit.b.classList.add('locked-ready');
-        t2('DNA strand assembled — press HIT');
+        board.querySelectorAll('.dna-rotor').forEach(x=>x.classList.add('locked'));
+        t2('DNA sequence assembled — press HIT');
       }
     };
-
-    for(let i=0;i<4;i++){
-      const p=document.createElement('div');
-      p.className='dna-piece';
-      p.draggable=true;
-      p.style.left=(18+i*88)+'px';
-      p.style.top=(22+(i%2)*118)+'px';
-      p.dataset.id=i;
-      p.ondragstart=e=>{
-        selected=p;
-        e.dataTransfer.setData('text/plain',i);
+    states.forEach((s,i)=>{
+      const cell=document.createElement('div');
+      cell.className='dna-rotor';
+      cell.dataset.label='fragment '+(i+1);
+      const shape=document.createElement('div');
+      shape.className='dna-frag-shape';
+      shape.style.setProperty('--rot',(s*45)+'deg');
+      cell.onclick=()=>{
+        if(solved)return;
+        states[i]=(states[i]+1)%4;
+        shape.style.setProperty('--rot',(states[i]*45)+'deg');
+        check();
       };
-      p.onclick=()=>{
-        if(p.classList.contains('done'))return;
-        if(selected)selected.classList.remove('selected');
-        selected=p;
-        p.classList.add('selected');
-        t2('Fragment selected — click capsule');
-      };
-      board.appendChild(p);
-    }
-
-    const target=board.querySelector('.dna-target');
-    target.ondragover=e=>e.preventDefault();
-    target.ondrop=e=>{
-      e.preventDefault();
-      const id=e.dataTransfer.getData('text/plain');
-      placePiece(board.querySelector('[data-id="'+id+'"]'));
-    };
-    target.onclick=()=>placePiece(selected);
-
+      cell.appendChild(shape);
+      board.appendChild(cell);
+    });
     area.appendChild(board);
+    area.appendChild(target);
     const hit=addHit();
     area.appendChild(hit.row);
   }
