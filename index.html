@@ -364,6 +364,361 @@
   background:rgba(139,26,26,.08);
 }
 
+
+/* PATCH V7: 3 codex/city + unstable exit + synchronization DNA map */
+.sync-dna-board{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1rem;
+}
+.dna-strand-panel{
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.56);
+  padding:1rem;
+  position:relative;
+  overflow:hidden;
+}
+.dna-strand-title{
+  font-family:'Space Mono',monospace;
+  font-size:.48rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--blood-glow);
+  margin-bottom:.8rem;
+}
+.dna-strand{
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+  min-height:76px;
+  flex-wrap:wrap;
+}
+.dna-base{
+  width:58px;
+  height:32px;
+  border:1px solid rgba(240,235,227,.12);
+  border-radius:20px;
+  background:rgba(240,235,227,.035);
+  position:relative;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.dna-base::before{
+  content:'';
+  position:absolute;
+  left:9px;
+  right:9px;
+  top:13px;
+  height:2px;
+  background:rgba(240,235,227,.22);
+  transform:rotate(-12deg);
+}
+.dna-base.active{
+  border-color:rgba(194,59,59,.68);
+  background:rgba(139,26,26,.18);
+  box-shadow:0 0 18px rgba(194,59,59,.18);
+}
+.dna-base.imperfect{
+  border-style:dashed;
+  opacity:.72;
+}
+.dna-base.locked{
+  transform:translateY(-3px);
+}
+.sync-map-summary{
+  min-height:118px;
+  border:1px solid rgba(139,26,26,.28);
+  background:rgba(139,26,26,.055);
+  padding:1rem;
+  color:var(--mist);
+  line-height:1.65;
+  font-size:.86rem;
+}
+.sync-map-summary strong{
+  color:var(--paper);
+  font-weight:500;
+}
+.sync-map-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.75rem;
+  margin-top:1rem;
+}
+.unstable-note{
+  margin-top:.75rem;
+  font-family:'Space Mono',monospace;
+  font-size:.44rem;
+  letter-spacing:.12em;
+  color:var(--steel);
+  text-transform:uppercase;
+}
+.codex-exit.unstable-ready,
+.ac2-exit.unstable-ready{
+  border-color:rgba(194,59,59,.55);
+  color:var(--paper);
+  background:rgba(139,26,26,.08);
+}
+
+
+/* PATCH V8: nine unique Codex games + optional imperfect personal sync */
+.codex-type-tag{
+  font-family:'Space Mono',monospace;
+  font-size:.38rem;
+  letter-spacing:.1em;
+  color:var(--steel);
+  text-transform:uppercase;
+  margin-top:.22rem;
+}
+.circuit-board{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:.5rem;
+  max-width:360px;
+}
+.circuit-tile{
+  height:56px;
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.62);
+  color:var(--mist);
+  font-family:'Space Mono',monospace;
+  cursor:pointer;
+  position:relative;
+  transition:all .2s ease;
+}
+.circuit-tile::before{
+  content:'';
+  position:absolute;
+  left:12px;
+  right:12px;
+  top:50%;
+  height:3px;
+  background:rgba(240,235,227,.45);
+  transform:translateY(-50%) rotate(var(--rot,0deg));
+  border-radius:3px;
+}
+.circuit-tile::after{
+  content:'';
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  background:rgba(194,59,59,.65);
+}
+.circuit-tile.locked{
+  border-color:rgba(194,59,59,.7);
+  background:rgba(139,26,26,.14);
+}
+.balance-rig{
+  max-width:420px;
+}
+.balance-beam{
+  height:10px;
+  background:rgba(240,235,227,.18);
+  border:1px solid var(--ghost-line);
+  transform-origin:center;
+  transform:rotate(var(--tilt,0deg));
+  margin:2rem 1rem 1.1rem;
+  transition:transform .25s ease;
+}
+.balance-controls{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:.75rem;
+}
+.balance-controls label{
+  display:grid;
+  grid-template-columns:90px 1fr 34px;
+  gap:.65rem;
+  align-items:center;
+  font-family:'Space Mono',monospace;
+  font-size:.45rem;
+  letter-spacing:.1em;
+  color:var(--steel);
+  text-transform:uppercase;
+}
+.balance-controls input{accent-color:#8b1a1a}
+.glyph-seq{
+  display:flex;
+  gap:.55rem;
+  flex-wrap:wrap;
+}
+.glyph-pad{
+  width:64px;
+  height:64px;
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.62);
+  color:var(--paper);
+  font-family:'Zen Antique',serif;
+  font-size:1.35rem;
+  cursor:pointer;
+}
+.glyph-pad.flash,.glyph-pad.done{
+  border-color:rgba(194,59,59,.75);
+  background:rgba(139,26,26,.22);
+  box-shadow:0 0 18px rgba(194,59,59,.22);
+}
+.lens-stage{
+  height:190px;
+  border:1px solid rgba(240,235,227,.08);
+  position:relative;
+  overflow:hidden;
+  background:radial-gradient(circle at 50% 50%, rgba(240,235,227,.12), transparent 22%), rgba(10,10,11,.5);
+}
+.lens-signal{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:92px;
+  height:92px;
+  transform:translate(-50%,-50%);
+  border:2px solid rgba(194,59,59,.45);
+  border-radius:50%;
+  filter:blur(var(--blur,7px));
+  opacity:.75;
+}
+.lens-slider{
+  width:100%;
+  margin-top:1rem;
+  accent-color:#8b1a1a;
+}
+.stealth-map{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:.55rem;
+  max-width:380px;
+}
+.stealth-step{
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.62);
+  color:var(--mist);
+  font-family:'Space Mono',monospace;
+  font-size:.48rem;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  padding:.7rem;
+  cursor:pointer;
+}
+.stealth-step.done{
+  border-color:rgba(194,59,59,.7);
+  background:rgba(139,26,26,.14);
+  color:var(--paper);
+}
+.scanner-rings{
+  height:200px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+}
+.scan-ring{
+  position:absolute;
+  border:2px solid rgba(240,235,227,.18);
+  border-top-color:rgba(194,59,59,.75);
+  border-radius:50%;
+  cursor:pointer;
+  transform:rotate(var(--rot,0deg));
+  transition:transform .25s ease,border-color .25s ease;
+}
+.scan-ring.locked{border-color:rgba(194,59,59,.68);box-shadow:0 0 16px rgba(194,59,59,.18)}
+.scan-ring.r1{width:150px;height:150px}.scan-ring.r2{width:105px;height:105px}.scan-ring.r3{width:60px;height:60px}
+.lesion-field{
+  height:210px;
+  border:1px solid rgba(240,235,227,.08);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(240,235,227,.10), transparent 4%),
+    radial-gradient(circle at 70% 60%, rgba(240,235,227,.08), transparent 5%),
+    radial-gradient(circle at 45% 76%, rgba(240,235,227,.07), transparent 4%),
+    rgba(10,10,11,.62);
+  position:relative;
+  overflow:hidden;
+  cursor:crosshair;
+}
+.lesion-field.eagle{
+  background:
+    radial-gradient(circle at var(--lx,63%) var(--ly,42%), rgba(194,59,59,.5), transparent 5%),
+    radial-gradient(circle at 20% 30%, rgba(240,235,227,.10), transparent 4%),
+    radial-gradient(circle at 70% 60%, rgba(240,235,227,.08), transparent 5%),
+    rgba(10,10,11,.62);
+}
+.lesion-target{
+  position:absolute;
+  left:63%;
+  top:42%;
+  width:34px;
+  height:34px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+}
+.eagle-btn{
+  border:1px solid rgba(139,26,26,.45);
+  background:rgba(139,26,26,.08);
+  color:var(--paper);
+  font-family:'Space Mono',monospace;
+  font-size:.48rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.55rem .7rem;
+  cursor:pointer;
+  margin-bottom:.65rem;
+}
+.stack-list{
+  display:flex;
+  flex-direction:column;
+  gap:.55rem;
+  max-width:420px;
+}
+.stack-item{
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.62);
+  color:var(--mist);
+  padding:.72rem;
+  font-family:'Space Mono',monospace;
+  font-size:.48rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  cursor:pointer;
+}
+.stack-item.selected,.stack-item.done{
+  border-color:rgba(194,59,59,.7);
+  background:rgba(139,26,26,.14);
+  color:var(--paper);
+}
+.optional-distortion{
+  margin-top:1rem;
+  border:1px dashed rgba(194,59,59,.35);
+  background:rgba(139,26,26,.045);
+  padding:1rem;
+}
+.personal-choice-grid{
+  display:flex;
+  flex-wrap:wrap;
+  gap:.55rem;
+}
+.personal-choice{
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.62);
+  color:var(--mist);
+  font-family:'Space Mono',monospace;
+  font-size:.46rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  padding:.62rem .7rem;
+  cursor:pointer;
+}
+.personal-choice.done{
+  border-color:rgba(194,59,59,.7);
+  background:rgba(139,26,26,.14);
+  color:var(--paper);
+}
+.dna-base.personal{
+  border-color:rgba(194,59,59,.35);
+  border-style:dashed;
+  background:rgba(139,26,26,.08);
+}
+
 </style>
 </head>
 <body>
@@ -381,7 +736,7 @@
     <div class="ac2-top"><div class="ac2-status" id="ac2Status">ANIMUS CODEX: STANDBY</div><div class="ac2-sync"><span>Sync</span><div class="ac2-track"><div class="ac2-fill" id="ac2Fill"></div></div><div class="ac2-num" id="ac2Num">0%</div></div><button class="ac2-exit" id="ac2Exit">Exit</button></div>
     <div class="ac2-strip"><div class="ac2-frag" data-frag="world"><i></i>World</div><div class="ac2-frag" data-frag="hyderabad"><i></i>Hyderabad</div><div class="ac2-frag" data-frag="paris"><i></i>Paris</div><div class="ac2-frag" data-frag="toulouse"><i></i>Toulouse</div><div class="ac2-frag" data-frag="side"><i></i>Side Codex</div><div class="ac2-frag" data-frag="signal"><i></i>Signal</div></div>
 
-    <section class="ac2-screen active" data-screen="brief"><div class="ac2-layout"><div><div class="ac2-kicker">Animus Memory Sequence</div><h2 class="ac2-title">Recover the Codex route.</h2><p class="ac2-copy">Synchronize the real map, reveal regions, enter cities, and recover Codex fragments. Each Codex has one clear visual lock: symbol lock, DNA assembly, or node bypass.</p><div class="ac2-box"><div class="ac2-label">Game Rule</div><div class="ac2-small">Every mini-game has a hint. Intel stays hidden until the city is synchronized.</div></div><button class="ac2-btn" id="ac2Open">Open Real Map →</button></div><div class="map-panel"><div class="world-map-bg"></div><div class="map-grid"></div></div></div></section>
+    <section class="ac2-screen active" data-screen="brief"><div class="ac2-layout"><div><div class="ac2-kicker">Animus Memory Sequence</div><h2 class="ac2-title">Recover the Codex route.</h2><p class="ac2-copy">Synchronize the real map, reveal regions, enter cities, and recover Codex fragments. Across the route, nine Codex locks are unique: engineering, training, and imaging each use different mechanics.</p><div class="ac2-box"><div class="ac2-label">Game Rule</div><div class="ac2-small">Every mini-game has a hint. Intel stays hidden until the city is synchronized.</div></div><button class="ac2-btn" id="ac2Open">Open Real Map →</button></div><div class="map-panel"><div class="world-map-bg"></div><div class="map-grid"></div></div></div></section>
 
     <section class="ac2-screen" data-screen="world"><div class="ac2-layout"><div><div class="ac2-kicker">World Map</div><h2 class="ac2-title">Synchronize viewpoint.</h2><p class="ac2-copy">The map is dark until synchronized. After sync, two region traces appear closer to the real locations.</p><div class="ac2-box"><div class="ac2-label">Current Objective</div><div class="ac2-small" id="ac2Objective">Synchronize viewpoint to reveal regions.</div></div><button class="ac2-btn" id="ac2Sync">Synchronize Viewpoint</button><button class="ac2-btn" id="ac2Final" disabled>Final Dossier Locked</button></div><div class="map-panel" id="ac2WorldPanel"><div class="world-map-bg"></div><div class="map-grid"></div><div class="hot region-hot r-a" data-region="india"></div><div class="hot region-hot r-b" data-region="france"></div><div class="map-label la">Region Trace A</div><div class="map-label lb">Region Trace B</div></div></div></section>
 
@@ -404,6 +759,9 @@
     <section class="ac2-screen" data-screen="city"><div class="ac2-layout"><div><div class="ac2-kicker" id="cityKicker2">City Memory</div><h2 class="ac2-title" id="cityTitle2">Encrypted City</h2><p class="ac2-copy" id="cityIntro2">Recover all required Codex fragments. Intel reveal stays locked until completion.</p><button class="ac2-btn" id="completeCity2" disabled>Synchronize City Memory →</button><button class="ac2-btn" id="returnRegion2">Return to Region</button></div><div class="map-panel"><div class="city-panel"><div class="city-map" id="cityMap2"><svg viewBox="0 0 800 520"><path class="road" d="M50 430 Q220 280 390 335 T740 180"/><path class="road" d="M130 80 L260 230 L210 430"/><path class="road" d="M500 60 L430 250 L570 470"/><rect class="building" x="100" y="120" width="80" height="60"/><rect class="building" x="350" y="95" width="100" height="70"/><rect class="building" x="560" y="320" width="120" height="80"/></svg><div class="avatar" id="avatar2"></div></div><div class="game-log"><h3 id="miniTitle2">Select a Codex</h3><p id="miniText2">Pick a Codex fragment. A visual lock will open.</p><div class="mini-area" id="miniArea2"><div class="mini-title">Codex locked</div></div><div class="progress-text" id="cityProgress2">0 / 0 required Codex recovered</div><div id="cityReveal2"></div></div></div></div></div></section>
 
     <section class="ac2-screen" data-screen="signal"><div class="ac2-layout"><div><div class="ac2-kicker">Optional Signal</div><h2 class="ac2-title">Eavesdrop the signal.</h2><p class="ac2-copy">Recover three encrypted signal channels.</p><button class="ac2-btn" id="completeSignal2" disabled>Synchronize Signal →</button><button class="ac2-btn backWorld">Return to World Map</button></div><div class="map-panel"><div class="city-panel"><div class="city-map" id="signalMap2"><svg viewBox="0 0 800 520"><path class="road" d="M80 410 Q260 150 420 280 T720 110"/></svg><div class="avatar" style="left:8%;top:78%"></div></div><div class="game-log"><h3>Signal Codex</h3><p>Recover at least three channels.</p><div class="mini-area" id="signalArea2"></div><div class="progress-text" id="signalProgress2">0 / 3 recovered</div></div></div></div></div></section>
+
+
+    <section class="ac2-screen" data-screen="syncmap"><div class="ac2-layout"><div><div class="ac2-kicker">Synchronization Map</div><h2 class="ac2-title">Recovered DNA strand.</h2><p class="ac2-copy">Each completed city activates part of the memory strand. Click a DNA base to inspect the recovered summary. Imperfect bases mean the memory is useful but not fully synchronized.</p><div class="unstable-note">You can exit from here with unstable synchronization, or continue to recover more cities.</div><button class="ac2-btn" id="syncMapWorld">Return to World Map</button><button class="ac2-btn" id="syncMapDossier">Generate Current Dossier</button></div><div class="map-panel"><div class="city-panel"><div class="city-map"><div class="sync-dna-board"><div class="dna-strand-panel"><div class="dna-strand-title">Memory DNA Strand</div><div class="dna-strand" id="memoryDnaStrand"></div></div><div class="sync-map-summary" id="syncMapSummary">Click an activated DNA base to inspect recovered memory.</div><div class="sync-map-actions"><button class="ac2-btn" id="syncMapExit">Exit With Current Sync</button></div></div></div><div class="game-log"><h3>Sync Ledger</h3><p id="syncLedgerText">No city memory synchronized yet.</p><div class="progress-text" id="syncLedgerProgress">0 / 3 core city memories recovered</div></div></div></div></div></section>
 
     <section class="ac2-screen" data-screen="final"><div class="final-dossier"><div class="final-top"><div><div class="ac2-kicker">Dossier Complete</div><h2 class="final-title">Profile Reconstructed</h2><div class="node-code">Sai Kiran Kumar Nalla</div></div><div class="final-sync"><div class="final-sync-num" id="finalSync2">0%</div><div class="final-rank" id="finalRank2">Calculating</div></div></div><p class="final-summary" id="finalSummary2"></p><div class="final-grid"><div class="final-cell"><div class="final-key">Class</div><div class="final-val"><strong>Computational Medical Imaging Researcher</strong></div></div><div class="final-cell"><div class="final-key">Subclass</div><div class="final-val" id="finalSubclass2"></div></div><div class="final-cell"><div class="final-key">Route</div><div class="final-val">Hyderabad → Paris / Palaiseau → Toulouse</div></div><div class="final-cell"><div class="final-key">Core Memories</div><div class="final-val">Mechanical Engineering · Biomedical Engineering · Medical Imaging & Radiophysics</div></div><div class="final-cell"><div class="final-key">Build Intel</div><div class="final-val">3DynaPET · MuPET · CASSOULET</div></div><div class="final-cell"><div class="final-key">Side Codex</div><div class="final-val" id="finalSide2"></div></div><div class="final-cell"><div class="final-key">Personal Signal</div><div class="final-val" id="finalSignal2"></div></div><div class="final-cell"><div class="final-key">Best Next Step</div><div class="final-val">Projects · Experience · Publications · Contact</div></div></div><div class="final-actions"><a href="projects.html">View Projects</a><a href="experience.html">View Experience</a><a href="papers.html">View Publications</a><a href="contact.html">Contact</a><a href="Assets/Sai_Nalla_CV.pdf" target="_blank">Download CV</a><button type="button" id="replay2">Replay</button></div></div></section>
     <div class="ac2-toast" id="toast2">Codex updated</div>
@@ -473,7 +831,7 @@
       <button type="button" class="btn btn-game" id="playAC2"><span class="game-glyph">鷹</span>Play Animus Codex<span class="arrow">→</span></button>
       <a href="Assets/Sai_Nalla_CV.pdf" target="_blank" class="btn btn-cv"><span class="cv-glyph">伝</span>View CV<span class="arrow">→</span></a>
     </div>
-    <div class="hero-game-note">Real map · corrected traces · symbol lock · DNA assembly · node bypass</div>
+    <div class="hero-game-note">Real map · 9 unique Codex games · sync DNA map · optional imperfect memories</div>
   </div>
 </section>
 
@@ -540,203 +898,135 @@
 
 <script>
 const g2=document.getElementById('ac2'),play2=document.getElementById('playAC2'),exit2=document.getElementById('ac2Exit'),screens2=[...document.querySelectorAll('.ac2-screen')],status2=document.getElementById('ac2Status'),fill2=document.getElementById('ac2Fill'),num2=document.getElementById('ac2Num'),toast2=document.getElementById('toast2');
-let sync2=0,world2=false,ind2=false,fr2=false,done2=new Set(),current2=null,side2=[],signal2=false,cityGot2={};
+let sync2=0,world2=false,ind2=false,fr2=false,done2=new Set(),current2=null,side2=[],signal2=false,cityGot2={},personal2=new Set();
 const data2={
- hyderabad:{region:'india',frag:'hyderabad',title:'Hyderabad',kicker:'City Memory: The First Forge',points:16,intel:'Mechanical engineering roots, early design/build mindset, and AUV systems-thinking seed recovered.',codex:[['I','lock'],['II','dna'],['III','nodes']]},
- paris:{region:'france',frag:'paris',title:'Paris / Palaiseau',kicker:'City Memory: The Dōjō',points:16,intel:'Biomedical engineering formation, École Polytechnique / Palaiseau, lab research, and simulation bridge recovered.',codex:[['I','lock'],['II','dna'],['III','nodes'],['IV','lock','optional']]},
- toulouse:{region:'france',frag:'toulouse',title:'Toulouse',kicker:'City Memory: The Scanner Shrine',points:22,intel:'Medical imaging and radiophysics PhD, IUCT Oncopole, PET/CT validation, 3DynaPET, MuPET, and CASSOULET recovered.',codex:[['I','lock'],['II','nodes'],['III','dna'],['IV','lock'],['V','nodes','optional']]}
-};
+ hyderabad:{region:'india',frag:'hyderabad',title:'Hyderabad',kicker:'City Memory: The First Forge',points:16,intel:'Mechanical engineering roots, early design/build mindset, and AUV systems-thinking seed recovered.',codex:[['I','symbol'],['II','circuit'],['III','balance']]},
+ paris:{region:'france',frag:'paris',title:'Paris / Palaiseau',kicker:'City Memory: The Dōjō',points:16,intel:'Biomedical engineering formation, École Polytechnique / Palaiseau, lab research, and simulation bridge recovered.',codex:[['I','glyph'],['II','lens'],['III','stealth']]},
+ toulouse:{region:'france',frag:'toulouse',title:'Toulouse',kicker:'City Memory: The Scanner Shrine',points:22,intel:'Medical imaging and radiophysics PhD, IUCT Oncopole, PET/CT validation, 3DynaPET, MuPET, and CASSOULET recovered.',codex:[['I','scanner'],['II','lesion'],['III','stack']]}
+}
 function t2(m){toast2.textContent=m;toast2.classList.add('show');setTimeout(()=>toast2.classList.remove('show'),1200)}
 function setSync2(v){sync2=Math.max(0,Math.min(100,v));fill2.style.width=sync2+'%';num2.textContent=sync2+'%'}
-function addSync2(p,m){setSync2(sync2+p);t2(m+' · +'+p+' sync')}
+function addSync2(p,m){setSync2(sync2+p);updateExitState2();t2(m+' · +'+p+' sync')}
 function screen2(n){screens2.forEach(s=>s.classList.toggle('active',s.dataset.screen===n));status2.textContent='ANIMUS CODEX: '+n.toUpperCase();if(n==='world')updateObj2()}
-function open2(){g2.classList.add('open');g2.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';reset2()}
-function close2(){g2.classList.remove('open');g2.setAttribute('aria-hidden','true');document.body.style.overflow=''}
-function reset2(){sync2=0;world2=false;ind2=false;fr2=false;done2=new Set();current2=null;side2=[];signal2=false;cityGot2={};setSync2(0);g2.querySelectorAll('.done,.synced,.eagle').forEach(e=>e.classList.remove('done','synced','eagle'));document.querySelectorAll('.ac2-frag').forEach(f=>f.classList.remove('done'));document.getElementById('ac2Final').disabled=true;document.getElementById('ac2Final').textContent='Final Dossier Locked';let b=document.getElementById('signalShortcut2');if(b)b.remove();screen2('brief')}
-play2.addEventListener('click',open2);exit2.addEventListener('click',close2);document.addEventListener('keydown',e=>{if(e.key==='Escape'&&g2.classList.contains('open'))close2()});document.getElementById('replay2').addEventListener('click',reset2);
-document.getElementById('ac2Open').addEventListener('click',()=>screen2('world'));
-document.getElementById('ac2Sync').addEventListener('click',()=>{world2=true;document.getElementById('ac2WorldPanel').classList.add('synced');if(!done2.has('world')){done2.add('world');document.querySelector('[data-frag="world"]').classList.add('done');addSync2(8,'World map synchronized')}updateObj2()});
-document.querySelectorAll('.region-hot').forEach(h=>h.addEventListener('click',()=>{if(!world2){t2('Synchronize viewpoint first');return}screen2(h.dataset.region)}));
-document.getElementById('ac2EagleIndia').addEventListener('click',()=>{ind2=true;document.getElementById('ac2IndiaPanel').classList.add('eagle');t2('Eagle Vision reveals city trace')});
-document.getElementById('ac2EagleFrance').addEventListener('click',()=>{fr2=true;document.getElementById('ac2FrancePanel').classList.add('eagle');t2('Eagle Vision reveals city traces')});
-document.querySelectorAll('.city-hot').forEach(h=>h.addEventListener('click',()=>{if(h.dataset.city==='hyderabad'&&!ind2){t2('Activate Eagle Vision first');return}if(h.dataset.city!=='hyderabad'&&!fr2){t2('Activate Eagle Vision first');return}loadCity2(h.dataset.city)}));
-document.querySelectorAll('.backWorld').forEach(b=>b.addEventListener('click',()=>screen2('world')));
-function loadCity2(id){current2=id;const d=data2[id];cityGot2[id]=cityGot2[id]||new Set();document.getElementById('cityKicker2').textContent=d.kicker;document.getElementById('cityTitle2').textContent=d.title;document.getElementById('cityIntro2').textContent='Recover encrypted Codex fragments. The final reveal unlocks after required Codex are recovered.';document.getElementById('completeCity2').disabled=true;document.getElementById('cityReveal2').innerHTML='';const map=document.getElementById('cityMap2');map.querySelectorAll('.codex-node').forEach(n=>n.remove());const pos=[[18,25],[58,20],[35,60],[70,62],[10,66]];[...d.codex].sort(()=>Math.random()-.5).forEach((c,i)=>{const n=document.createElement('div');n.className='codex-node';n.style.left=pos[i][0]+'%';n.style.top=pos[i][1]+'%';n.dataset.codex=c[0];n.innerHTML='<b>Codex '+c[0]+'</b><span>'+(c[2]==='optional'?'Optional encrypted':'Encrypted')+'</span>';if(cityGot2[id].has(c[0]))n.classList.add('done');n.onclick=()=>selectCodex2(c,n);map.appendChild(n)});document.getElementById('avatar2').style.left='8%';document.getElementById('avatar2').style.top='78%';document.getElementById('miniTitle2').textContent='Select a Codex';document.getElementById('miniText2').textContent='Pick a Codex fragment. A visual lock will open.';document.getElementById('miniArea2').innerHTML='<div class="mini-title">Codex locked</div>';updateCity2();screen2('city')}
-function selectCodex2(c,node){if(node.classList.contains('done')){t2('Codex already recovered');return}document.querySelectorAll('.codex-node').forEach(n=>n.classList.remove('current'));node.classList.add('current');document.getElementById('avatar2').style.left=node.style.left;document.getElementById('avatar2').style.top=node.style.top;document.getElementById('miniTitle2').textContent='Codex '+c[0]+' Security';document.getElementById('miniText2').textContent='Follow the hint. Then press HIT to lock the recovered Codex.';renderMini2(c,node)}
-function hitGate(doneFn){const row=document.createElement('div');row.className='hit-row';const b=document.createElement('button');b.className='hit-btn';b.textContent='HIT / lock recovered Codex';b.onclick=()=>{b.disabled=true;doneFn()};row.appendChild(b);return row}
 
-
-function renderMini2(c,node){
-  const type=c[1],area=document.getElementById('miniArea2');
-  area.innerHTML='<div class="mini-title">'+(type==='lock'?'Symbol lock':type==='dna'?'DNA fragment sequence':'Security node bypass')+'</div>';
-  let solved=false;
-
-  const complete=()=>{
-    if(!solved){t2('Solve the lock first, then HIT');return;}
-    node.classList.add('done');
-    cityGot2[current2].add(c[0]);
-    document.getElementById('miniText2').textContent='Codex recovered. Contents remain encrypted until city sync.';
-    t2('Codex '+c[0]+' recovered');
-    updateCity2();
-  };
-
-  const addHit=(label='HIT / lock recovered Codex')=>{
-    const row=document.createElement('div');
-    row.className='hit-row';
-    const b=document.createElement('button');
-    b.className='hit-btn';
-    b.textContent=label;
-    b.onclick=()=>{ if(solved){b.disabled=true; complete();} else {t2('Security not cleared yet');} };
-    row.appendChild(b);
-    return {row,b};
-  };
-
-  if(type==='lock'){
-    let time=45;
-    const timer=document.createElement('div');
-    timer.className='timer safe';
-    timer.textContent='Timer: '+time+'s';
-    area.appendChild(timer);
-
-    const hint=document.createElement('div');
-    hint.className='hint';
-    hint.textContent='Click each ring until every symbol is 鷹. You have 45 seconds. When all four match, press HIT.';
-    area.appendChild(hint);
-
-    const wrap=document.createElement('div');
-    wrap.className='symbol-lock';
-    let states=[0,1,2,3], symbols=['鷹','影','刃','浪'];
-    states.forEach((s,i)=>{
-      const w=document.createElement('div');
-      w.className='lock-wheel';
-      w.textContent=symbols[s];
-      w.onclick=()=>{
-        if(solved)return;
-        states[i]=(states[i]+1)%symbols.length;
-        w.textContent=symbols[states[i]];
-        w.style.transform='rotate('+(states[i]*90)+'deg)';
-        if(states.every(x=>x===0)){
-          solved=true;
-          wrap.querySelectorAll('.lock-wheel').forEach(x=>x.classList.add('locked'));
-          hit.b.classList.add('locked-ready');
-          t2('Symbol lock aligned — press HIT');
-        }
-      };
-      wrap.appendChild(w);
-    });
-    area.appendChild(wrap);
-    const hit=addHit();
-    area.appendChild(hit.row);
-
-    const int=setInterval(()=>{
-      if(!document.body.contains(area)||!area.isConnected||solved){clearInterval(int);return}
-      time--;
-      timer.textContent='Timer: '+time+'s';
-      if(time<=0){
-        time=45;
-        states=[0,1,2,3];
-        wrap.querySelectorAll('.lock-wheel').forEach((w,i)=>{
-          w.textContent=symbols[states[i]];
-          w.classList.remove('locked');
-          w.style.transform='rotate(0deg)';
-        });
-        t2('Timer expired — symbol lock reset');
+function coreCount2(){return ['hyderabad','paris','toulouse'].filter(x=>done2.has(x)).length}
+function canExitUnstable2(){return sync2>0}
+function updateExitState2(){
+  if(canExitUnstable2()) exit2.classList.add('unstable-ready');
+  else exit2.classList.remove('unstable-ready');
+}
+function buildSyncMap2(){
+  const strand=document.getElementById('memoryDnaStrand');
+  const summary=document.getElementById('syncMapSummary');
+  const ledger=document.getElementById('syncLedgerText');
+  const progress=document.getElementById('syncLedgerProgress');
+  if(!strand)return;
+  strand.innerHTML='';
+  const cities=[
+    {id:'hyderabad',label:'HYD',title:'Hyderabad',txt:'Mechanical engineering roots, early design/build mindset, and AUV systems-thinking seed.'},
+    {id:'paris',label:'PAR',title:'Paris / Palaiseau',txt:'Biomedical engineering formation, École Polytechnique / Palaiseau, lab research, and simulation bridge.'},
+    {id:'toulouse',label:'TLS',title:'Toulouse',txt:'Medical imaging and radiophysics PhD, IUCT Oncopole, PET/CT validation, 3DynaPET, MuPET, and CASSOULET.'}
+  ];
+  cities.forEach((c,idx)=>{
+    for(let i=0;i<3;i++){
+      const b=document.createElement('div');
+      b.className='dna-base';
+      b.title=c.title+' base '+(i+1);
+      if(done2.has(c.id)){
+        b.classList.add('active','locked');
+        b.onclick=()=>{summary.innerHTML='<strong>'+c.title+'</strong><br>'+c.txt+'<br><br><span style="font-family:Space Mono,monospace;font-size:.72em;text-transform:uppercase;letter-spacing:.12em;color:var(--steel)">Core sync: stable</span>'};
+      }else{
+        b.onclick=()=>{summary.textContent='This memory segment is still encrypted. Return to the map and complete the city Codex.'};
       }
-    },1000);
+      strand.appendChild(b);
+    }
+    if(done2.has(c.id)){
+      const p=document.createElement('div');
+      p.className='dna-base personal '+(personal2.has(c.id)?'active locked imperfect':'');
+      p.title='Optional personal distortion — '+c.title;
+      p.onclick=()=>runPersonalDistortion2(c.id,c.title);
+      strand.appendChild(p);
+    }
+  });
+  const recovered=coreCount2();
+  ledger.textContent=recovered ? 'Recovered: '+cities.filter(c=>done2.has(c.id)).map(c=>c.title).join(' · ') : 'No city memory synchronized yet.';
+  progress.textContent=recovered+' / 3 core city memories recovered · '+personal2.size+' optional personal distortions recovered';
+  summary.textContent='Click an activated core DNA base for professional memory. Click a dashed side-branch for optional imperfect personal sync.';
+}
+function runPersonalDistortion2(id,title){
+  const summary=document.getElementById('syncMapSummary');
+  if(personal2.has(id)){
+    summary.innerHTML='<strong>'+title+' personal distortion</strong><br>Already recovered. This side-branch remains intentionally imperfect: personal memory is subjective, not a certification claim.';
+    return;
   }
-
-  if(type==='dna'){
-    const hint=document.createElement('div');
-    hint.className='hint';
-    hint.textContent='Rotate all three DNA fragments until they align into the same direction. Click each fragment to rotate it. When all are aligned, press HIT.';
-    area.appendChild(hint);
-
-    const board=document.createElement('div');
-    board.className='dna-rotate-board';
-    const target=document.createElement('div');
-    target.className='dna-sequence-target';
-    target.textContent='Target: all fragments horizontal';
-    let states=[1,2,3];
-    const check=()=>{
-      if(states.every(v=>v===0)){
-        solved=true;
-        target.classList.add('ready');
-        target.textContent='DNA sequence assembled — press HIT';
-        hit.b.classList.add('locked-ready');
-        board.querySelectorAll('.dna-rotor').forEach(x=>x.classList.add('locked'));
-        t2('DNA sequence assembled — press HIT');
+  summary.innerHTML='<div class="optional-distortion"><strong>'+title+' optional distortion</strong><br><br>Choose three fragments that feel closest to the human layer behind the work.<br><br><div class="personal-choice-grid" id="personalChoiceGrid"></div></div>';
+  const choices=['curiosity','discipline','solitude','travel','uncertainty','craft','games','people','ambition'];
+  const grid=document.getElementById('personalChoiceGrid');
+  let count=0;
+  choices.forEach(ch=>{
+    const b=document.createElement('button');
+    b.className='personal-choice';
+    b.textContent=ch;
+    b.onclick=()=>{
+      if(b.classList.contains('done'))return;
+      b.classList.add('done');
+      count++;
+      if(count>=3){
+        personal2.add(id);
+        document.querySelector('[data-frag="side"]').classList.add('done');
+        side2.push(title+' personal distortion');
+        addSync2(4,'Imperfect personal sync recovered');
+        buildSyncMap2();
+        document.getElementById('syncMapSummary').innerHTML='<strong>'+title+' personal distortion recovered</strong><br>Personal side-branch added as imperfect sync.';
       }
     };
-    states.forEach((s,i)=>{
-      const cell=document.createElement('div');
-      cell.className='dna-rotor';
-      cell.dataset.label='fragment '+(i+1);
-      const shape=document.createElement('div');
-      shape.className='dna-frag-shape';
-      shape.style.setProperty('--rot',(s*45)+'deg');
-      cell.onclick=()=>{
-        if(solved)return;
-        states[i]=(states[i]+1)%4;
-        shape.style.setProperty('--rot',(states[i]*45)+'deg');
-        check();
-      };
-      cell.appendChild(shape);
-      board.appendChild(cell);
-    });
-    area.appendChild(board);
-    area.appendChild(target);
-    const hit=addHit();
-    area.appendChild(hit.row);
+    grid.appendChild(b);
+  });
+}
+function updateObj2(){
+  const core=done2.has('hyderabad')&&done2.has('paris')&&done2.has('toulouse'),obj=document.getElementById('ac2Objective');
+  if(!world2)obj.textContent='Synchronize viewpoint to reveal regions.';
+  else if(!done2.has('hyderabad'))obj.textContent='Enter Region Trace A and recover the city Codex.';
+  else if(!done2.has('paris')||!done2.has('toulouse'))obj.textContent='Enter Region Trace B and recover remaining city Codex memories.';
+  else obj.textContent='Core Codex route complete. Optional: eavesdrop signal or generate final dossier.';
+  document.getElementById('ac2Final').disabled=!canExitUnstable2();
+  document.getElementById('ac2Final').textContent=core?'Generate Final Dossier':(canExitUnstable2()?'Generate Unstable Dossier':'Final Dossier Locked');
+  if(canExitUnstable2()&&!document.getElementById('syncShortcut2')){
+    let s=document.createElement('button');
+    s.id='syncShortcut2';
+    s.className='ac2-btn';
+    s.textContent='View Sync Map';
+    s.onclick=()=>{buildSyncMap2();screen2('syncmap')};
+    document.querySelector('[data-screen="world"] .ac2-layout>div').appendChild(s);
   }
-
-  if(type==='nodes'){
-    const hint=document.createElement('div');
-    hint.className='hint';
-    hint.textContent='Bypass security: click 5 safe nodes. Three hidden mines reset the path. Safe nodes stay lit. Press HIT after 5 safe nodes.';
-    area.appendChild(hint);
-
-    const grid=document.createElement('div');
-    grid.className='node-grid';
-    let safeCount=0;
-    const mines=new Set();
-    while(mines.size<3){ mines.add(Math.floor(Math.random()*16)); }
-
-    for(let i=0;i<16;i++){
-      const n=document.createElement('button');
-      n.className='path-node';
-      n.onclick=()=>{
-        if(solved)return;
-        if(mines.has(i)){
-          safeCount=0;
-          grid.querySelectorAll('.path-node').forEach(x=>x.classList.remove('safe'));
-          n.classList.add('mine');
-          setTimeout(()=>n.classList.remove('mine'),500);
-          t2('Mine node hit — path reset');
-        }else if(!n.classList.contains('safe')){
-          n.classList.add('safe');
-          safeCount++;
-          if(safeCount>=5){
-            solved=true;
-            hit.b.classList.add('locked-ready');
-            t2('Security route bypassed — press HIT');
-          }
-        }
-      };
-      grid.appendChild(n);
-    }
-    area.appendChild(grid);
-    const hit=addHit();
-    area.appendChild(hit.row);
+  if(core&&!document.getElementById('signalShortcut2')){
+    let b=document.createElement('button');
+    b.id='signalShortcut2';
+    b.className='ac2-btn';
+    b.textContent='Eavesdrop Signal';
+    b.onclick=loadSignal2;
+    document.querySelector('[data-screen="world"] .ac2-layout>div').appendChild(b);
   }
 }
-
-function updateCity2(){const d=data2[current2],required=d.codex.filter(x=>x[2]!=='optional').map(x=>x[0]),got=cityGot2[current2]||new Set(),count=required.filter(x=>got.has(x)).length;document.getElementById('cityProgress2').textContent=count+' / '+required.length+' required Codex recovered';if(count>=required.length){document.getElementById('completeCity2').disabled=false;document.getElementById('cityReveal2').innerHTML='<div class="reveal-box">City reveal ready. Synchronize city memory to unlock recovered intel.</div>'}}
-document.getElementById('returnRegion2').addEventListener('click',()=>screen2(data2[current2].region));
-document.getElementById('completeCity2').addEventListener('click',()=>{const d=data2[current2],got=cityGot2[current2]||new Set();if(!done2.has(current2)){done2.add(current2);document.querySelector('[data-frag="'+d.frag+'"]').classList.add('done');let opt=d.codex.filter(x=>x[2]==='optional'&&got.has(x[0])).length;if(opt){side2.push(d.title+' optional Codex');document.querySelector('[data-frag="side"]').classList.add('done');addSync2(5,'Optional Codex recovered')}addSync2(d.points,d.title+' synchronized');alert(d.title+' memory synchronized:\\n\\n'+d.intel)}screen2(d.region);updateObj2()});
-function updateObj2(){const core=done2.has('hyderabad')&&done2.has('paris')&&done2.has('toulouse'),obj=document.getElementById('ac2Objective');if(!world2)obj.textContent='Synchronize viewpoint to reveal regions.';else if(!done2.has('hyderabad'))obj.textContent='Enter Region Trace A and recover the city Codex.';else if(!done2.has('paris')||!done2.has('toulouse'))obj.textContent='Enter Region Trace B and recover both city Codex memories.';else obj.textContent='Core Codex route complete. Optional: eavesdrop signal or generate final dossier.';document.getElementById('ac2Final').disabled=!core;document.getElementById('ac2Final').textContent=core?'Generate Final Dossier':'Final Dossier Locked';if(core&&!document.getElementById('signalShortcut2')){let b=document.createElement('button');b.id='signalShortcut2';b.className='ac2-btn';b.textContent='Eavesdrop Signal';b.onclick=loadSignal2;document.querySelector('[data-screen="world"] .ac2-layout>div').appendChild(b)}}
 function loadSignal2(){screen2('signal');const area=document.getElementById('signalArea2');area.innerHTML='<div class="hint">Click any three signal locks to recover the personal layer.</div>';let recovered=0;['Clinic','Research','Venture','Personal'].forEach((x,i)=>{let b=document.createElement('button');b.className='dna-piece';b.style.position='relative';b.style.left='auto';b.style.top='auto';b.textContent=x;b.onclick=()=>{if(b.classList.contains('done'))return;b.classList.add('done');recovered++;document.getElementById('signalProgress2').textContent=recovered+' / 3 recovered';if(recovered>=3)document.getElementById('completeSignal2').disabled=false};area.appendChild(b)})}
+
+document.getElementById('syncMapWorld').addEventListener('click',()=>screen2('world'));
+document.getElementById('syncMapDossier').addEventListener('click',()=>{buildFinal2();screen2('final')});
+document.getElementById('syncMapExit').addEventListener('click',()=>close2());
+
 document.getElementById('completeSignal2').addEventListener('click',()=>{if(!signal2){signal2=true;document.querySelector('[data-frag="signal"]').classList.add('done');addSync2(12,'Personal signal synchronized')}screen2('world')});
-document.getElementById('ac2Final').addEventListener('click',()=>{document.getElementById('finalSync2').textContent=sync2+'%';document.getElementById('finalRank2').textContent=sync2>=80?'Full Synchronization':sync2>=60?'Stable Synchronization':'Partial Synchronization';document.getElementById('finalSubclass2').innerHTML='<strong>'+(signal2?'Clinical Translation & Deep-Tech Strategy Builder':side2.length?'Translational MedTech Systems Builder':'PET/CT Validation Systems Builder')+'</strong>';document.getElementById('finalSummary2').textContent='Sai’s route reconstructs as an India-to-France engineering and medical imaging trajectory: mechanical systems roots, biomedical engineering formation, and PET/CT radiophysics research focused on validation, synthetic data, and translational tools.';document.getElementById('finalSide2').textContent=side2.length?side2.join(' · '):'None recovered';document.getElementById('finalSignal2').textContent=signal2?'Systems thinker · translational builder · clinical utility · validation · research-to-market paths.':'Optional signal not recovered';screen2('final')});
+function buildFinal2(){
+  const recovered=coreCount2();
+  document.getElementById('finalSync2').textContent=sync2+'%';
+  document.getElementById('finalRank2').textContent=sync2>=80?'Full Synchronization':sync2>=45?'Stable Synchronization':'Unstable Synchronization';
+  document.getElementById('finalSubclass2').innerHTML='<strong>'+(personal2.size>=2?'Professional Core + Imperfect Human Signal':recovered<3?'Partial Memory Reconstruction':'PET/CT Validation Systems Builder')+'</strong>';
+  document.getElementById('finalSummary2').textContent=recovered<3
+    ? 'The dossier is incomplete but usable: the recovered memory strand shows part of Sai’s India-to-France engineering and medical imaging route. Continue the Codex map for fuller synchronization.'
+    : 'Sai’s professional core reconstructs as an India-to-France engineering and medical imaging trajectory: mechanical systems roots, biomedical engineering formation, and PET/CT radiophysics research focused on validation, synthetic data, and translational tools.';
+  document.getElementById('finalSide2').textContent=personal2.size?Array.from(personal2).map(x=>data2[x]?.title||x).join(' · ')+' imperfect personal side-branch(es)':'None recovered';
+  document.getElementById('finalSignal2').textContent=signal2?'Systems thinker · translational builder · clinical utility · validation · research-to-market paths.':(personal2.size?'Personal layer partially recovered through imperfect side-branches.':'Optional signal not recovered');
+}
+document.getElementById('ac2Final').addEventListener('click',()=>{buildFinal2();screen2('final')});
 </script>
 
 </body>
