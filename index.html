@@ -109,6 +109,86 @@
 @media(max-width:1050px){.ac2-top{grid-template-columns:1fr}.ac2-layout{grid-template-columns:1fr}.map-panel{transform:none}.city-panel{grid-template-columns:1fr}.city-map{min-height:430px}}
 @media(max-width:720px){.ac2{padding:.5rem}.ac2-shell{height:calc(100vh - 1rem)}.ac2-screen{padding:1rem}.ac2-strip{grid-template-columns:repeat(2,1fr)}.map-panel{min-height:780px}.final-grid{grid-template-columns:1fr}.final-top{grid-template-columns:1fr}.final-sync{text-align:left}}
 
+
+/* PATCH: country zoom maps + corrected city positions */
+.country-zoom-svg{
+  position:absolute;
+  inset:1rem;
+  width:calc(100% - 2rem);
+  height:calc(100% - 2rem);
+  opacity:.68;
+  filter:drop-shadow(0 0 14px rgba(139,26,26,.18));
+  pointer-events:none;
+}
+.country-land{
+  fill:rgba(240,235,227,.13);
+  stroke:rgba(240,235,227,.34);
+  stroke-width:1.4;
+}
+.country-border{
+  fill:none;
+  stroke:rgba(10,10,11,.45);
+  stroke-width:.7;
+}
+.country-map-title{
+  position:absolute;
+  left:1.5rem;
+  top:1.35rem;
+  font-family:'Space Mono',monospace;
+  font-size:.48rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:rgba(194,59,59,.75);
+}
+#ac2IndiaPanel .world-map-bg,
+#ac2FrancePanel .world-map-bg{
+  opacity:.16;
+  filter:grayscale(1) invert(1) brightness(.25) contrast(1.2);
+}
+#ac2IndiaPanel .c-hyd{left:52%;top:55%}
+#ac2IndiaPanel .lh{left:47%;top:48%}
+#ac2FrancePanel .c-paris{left:49%;top:33%}
+#ac2FrancePanel .c-toulouse{left:43%;top:60%}
+#ac2FrancePanel .lp{left:43%;top:26%}
+#ac2FrancePanel .lt{left:36%;top:53%}
+.region-focus-note{
+  position:absolute;
+  right:1.45rem;
+  bottom:1.25rem;
+  max-width:260px;
+  font-family:'Space Mono',monospace;
+  font-size:.42rem;
+  line-height:1.55;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--steel);
+  border:1px solid var(--ghost-line);
+  background:rgba(10,10,11,.72);
+  padding:.65rem;
+}
+.dna-piece{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.dna-piece::after{
+  content:'';
+  width:44px;
+  height:18px;
+  border-top:2px solid rgba(240,235,227,.55);
+  border-bottom:2px solid rgba(194,59,59,.45);
+  border-radius:50%;
+  transform:skewX(-18deg);
+}
+.dna-piece.selected{
+  outline:2px solid rgba(194,59,59,.75);
+  box-shadow:0 0 18px rgba(194,59,59,.25);
+}
+.dna-target.ready{
+  background:rgba(139,26,26,.08);
+  box-shadow:inset 0 0 18px rgba(194,59,59,.18);
+}
+
 </style>
 </head>
 <body>
@@ -130,9 +210,21 @@
 
     <section class="ac2-screen" data-screen="world"><div class="ac2-layout"><div><div class="ac2-kicker">World Map</div><h2 class="ac2-title">Synchronize viewpoint.</h2><p class="ac2-copy">The map is dark until synchronized. After sync, two region traces appear closer to the real locations.</p><div class="ac2-box"><div class="ac2-label">Current Objective</div><div class="ac2-small" id="ac2Objective">Synchronize viewpoint to reveal regions.</div></div><button class="ac2-btn" id="ac2Sync">Synchronize Viewpoint</button><button class="ac2-btn" id="ac2Final" disabled>Final Dossier Locked</button></div><div class="map-panel" id="ac2WorldPanel"><div class="world-map-bg"></div><div class="map-grid"></div><div class="hot region-hot r-a" data-region="india"></div><div class="hot region-hot r-b" data-region="france"></div><div class="map-label la">Region Trace A</div><div class="map-label lb">Region Trace B</div></div></div></section>
 
-    <section class="ac2-screen" data-screen="india"><div class="ac2-layout"><div><div class="ac2-kicker">Region Trace A</div><h2 class="ac2-title">Activate Eagle Vision.</h2><p class="ac2-copy">Reveal the hidden city trace.</p><button class="ac2-btn" id="ac2EagleIndia">Activate Eagle Vision</button><button class="ac2-btn backWorld">Return to World Map</button></div><div class="map-panel" id="ac2IndiaPanel"><div class="world-map-bg"></div><div class="map-grid"></div><div class="hot city-hot c-hyd" data-city="hyderabad"></div><div class="map-label lh">City Trace</div></div></div></section>
+    <section class="ac2-screen" data-screen="india"><div class="ac2-layout"><div><div class="ac2-kicker">Region Trace A</div><h2 class="ac2-title">Activate Eagle Vision.</h2><p class="ac2-copy">Reveal the hidden city trace.</p><button class="ac2-btn" id="ac2EagleIndia">Activate Eagle Vision</button><button class="ac2-btn backWorld">Return to World Map</button></div><div class="map-panel" id="ac2IndiaPanel"><div class="world-map-bg"></div><div class="map-grid"></div><svg class="country-zoom-svg" viewBox="0 0 600 520" aria-hidden="true">
+  <path class="country-land" d="M286 55 L340 82 L384 128 L430 173 L456 230 L438 290 L397 344 L368 410 L318 480 L268 420 L223 377 L190 319 L169 262 L188 205 L206 145 L248 102 Z"/>
+  <path class="country-border" d="M250 100 L272 170 L238 232 L280 295 L260 365 L318 480"/>
+  <path class="country-border" d="M205 145 L270 170 L340 82"/>
+  <path class="country-border" d="M280 295 L360 285 L438 290"/>
+</svg><div class="country-map-title">Region Trace A — zoomed country memory</div><div class="region-focus-note">Eagle Vision now zooms into the region. Select the city trace inside the country map.</div><div class="hot city-hot c-hyd" data-city="hyderabad"></div><div class="map-label lh">City Trace</div></div></div></section>
 
-    <section class="ac2-screen" data-screen="france"><div class="ac2-layout"><div><div class="ac2-kicker">Region Trace B</div><h2 class="ac2-title">Activate Eagle Vision.</h2><p class="ac2-copy">Reveal two city traces. Paris includes Palaiseau.</p><button class="ac2-btn" id="ac2EagleFrance">Activate Eagle Vision</button><button class="ac2-btn backWorld">Return to World Map</button></div><div class="map-panel" id="ac2FrancePanel"><div class="world-map-bg"></div><div class="map-grid"></div><div class="hot city-hot c-paris" data-city="paris"></div><div class="hot city-hot c-toulouse" data-city="toulouse"></div><div class="map-label lp">City Trace</div><div class="map-label lt">City Trace</div></div></div></section>
+    <section class="ac2-screen" data-screen="france"><div class="ac2-layout"><div><div class="ac2-kicker">Region Trace B</div><h2 class="ac2-title">Activate Eagle Vision.</h2><p class="ac2-copy">Reveal two city traces. Paris includes Palaiseau.</p><button class="ac2-btn" id="ac2EagleFrance">Activate Eagle Vision</button><button class="ac2-btn backWorld">Return to World Map</button></div><div class="map-panel" id="ac2FrancePanel"><div class="world-map-bg"></div><div class="map-grid"></div><svg class="country-zoom-svg" viewBox="0 0 600 520" aria-hidden="true">
+  <path class="country-land" d="M235 90 L315 58 L388 88 L430 150 L405 235 L446 306 L386 380 L304 420 L220 386 L172 310 L190 236 L150 170 Z"/>
+  <path class="country-border" d="M235 90 L264 150 L220 226 L260 306 L220 386"/>
+  <path class="country-border" d="M264 150 L340 150 L405 235"/>
+  <path class="country-border" d="M260 306 L340 315 L386 380"/>
+  <circle cx="300" cy="148" r="10" fill="rgba(194,59,59,.35)" stroke="rgba(194,59,59,.75)"/>
+  <circle cx="250" cy="330" r="10" fill="rgba(194,59,59,.35)" stroke="rgba(194,59,59,.75)"/>
+</svg><div class="country-map-title">Region Trace B — zoomed country memory</div><div class="region-focus-note">Paris / Palaiseau is one northern city memory. Toulouse is the southern city memory.</div><div class="hot city-hot c-paris" data-city="paris"></div><div class="hot city-hot c-toulouse" data-city="toulouse"></div><div class="map-label lp">City Trace</div><div class="map-label lt">City Trace</div></div></div></section>
 
     <section class="ac2-screen" data-screen="city"><div class="ac2-layout"><div><div class="ac2-kicker" id="cityKicker2">City Memory</div><h2 class="ac2-title" id="cityTitle2">Encrypted City</h2><p class="ac2-copy" id="cityIntro2">Recover all required Codex fragments. Intel reveal stays locked until completion.</p><button class="ac2-btn" id="completeCity2" disabled>Synchronize City Memory →</button><button class="ac2-btn" id="returnRegion2">Return to Region</button></div><div class="map-panel"><div class="city-panel"><div class="city-map" id="cityMap2"><svg viewBox="0 0 800 520"><path class="road" d="M50 430 Q220 280 390 335 T740 180"/><path class="road" d="M130 80 L260 230 L210 430"/><path class="road" d="M500 60 L430 250 L570 470"/><rect class="building" x="100" y="120" width="80" height="60"/><rect class="building" x="350" y="95" width="100" height="70"/><rect class="building" x="560" y="320" width="120" height="80"/></svg><div class="avatar" id="avatar2"></div></div><div class="game-log"><h3 id="miniTitle2">Select a Codex</h3><p id="miniText2">Pick a Codex fragment. A visual lock will open.</p><div class="mini-area" id="miniArea2"><div class="mini-title">Codex locked</div></div><div class="progress-text" id="cityProgress2">0 / 0 required Codex recovered</div><div id="cityReveal2"></div></div></div></div></div></section>
 
@@ -299,7 +391,7 @@ function selectCodex2(c,node){if(node.classList.contains('done')){t2('Codex alre
 function hitGate(doneFn){const row=document.createElement('div');row.className='hit-row';const b=document.createElement('button');b.className='hit-btn';b.textContent='HIT / lock recovered Codex';b.onclick=()=>{b.disabled=true;doneFn()};row.appendChild(b);return row}
 function renderMini2(c,node){const type=c[1],area=document.getElementById('miniArea2');area.innerHTML='<div class="mini-title">'+(type==='lock'?'Symbol lock':type==='dna'?'DNA assembly':'Security node bypass')+'</div>';let solved=false;const complete=()=>{if(!solved)return;node.classList.add('done');cityGot2[current2].add(c[0]);document.getElementById('miniText2').textContent='Codex recovered. Contents remain encrypted until city sync.';t2('Codex '+c[0]+' recovered');updateCity2()};
  if(type==='lock'){let time=30;const timer=document.createElement('div');timer.className='timer';timer.textContent='Timer: '+time+'s';area.appendChild(timer);area.innerHTML+='<div class="hint">Click each ring until all symbols match the target: 鷹. Then press HIT. Timer resets rings if it reaches zero.</div>';const wrap=document.createElement('div');wrap.className='symbol-lock';let states=[0,1,2,3],symbols=['鷹','影','刃','浪'];states.forEach((s,i)=>{const w=document.createElement('div');w.className='lock-wheel';w.textContent=symbols[s];w.onclick=()=>{states[i]=(states[i]+1)%symbols.length;w.textContent=symbols[states[i]];w.style.transform='rotate('+(states[i]*90)+'deg)';if(states.every(x=>x===0)){solved=true;wrap.querySelectorAll('.lock-wheel').forEach(x=>x.classList.add('locked'));t2('Symbol lock aligned')}};wrap.appendChild(w)});area.appendChild(wrap);area.appendChild(hitGate(complete));const int=setInterval(()=>{if(!document.body.contains(area)||solved){clearInterval(int);return}time--;timer.textContent='Timer: '+time+'s';if(time<=0){time=30;states=[0,1,2,3];wrap.querySelectorAll('.lock-wheel').forEach((w,i)=>{w.textContent=symbols[states[i]];w.classList.remove('locked');w.style.transform='rotate(0deg)'});t2('Timer expired — lock reset')}},1000)}
- if(type==='dna'){area.innerHTML+='<div class="hint">Drag each curved DNA fragment into the central dashed capsule. When all fragments are inside, press HIT.</div>';const board=document.createElement('div');board.className='dna-board';board.innerHTML='<div class="dna-target"></div>';let placed=0;for(let i=0;i<4;i++){const p=document.createElement('div');p.className='dna-piece';p.draggable=true;p.style.left=(20+i*80)+'px';p.style.top=(20+(i%2)*100)+'px';p.ondragstart=e=>e.dataTransfer.setData('id',i);p.dataset.id=i;board.appendChild(p)}board.ondragover=e=>e.preventDefault();board.ondrop=e=>{const id=e.dataTransfer.getData('id'),p=board.querySelector('[data-id="'+id+'"]');if(!p.classList.contains('done')){p.classList.add('done');p.style.left=(285+placed*25)+'px';p.style.top=(75+(placed%2)*20)+'px';placed++;if(placed>=4){solved=true;t2('DNA strand assembled')}}};area.appendChild(board);area.appendChild(hitGate(complete))}
+ if(type==='dna'){area.innerHTML+='<div class="hint">Drag each DNA fragment into the dashed capsule. If drag does not work on your browser, click a fragment and then click the capsule. When all four fragments are inside, press HIT.</div>';const board=document.createElement('div');board.className='dna-board';board.innerHTML='<div class="dna-target" id="dnaTarget2"></div>';let placed=0;let selected=null;const placePiece=(p)=>{if(!p||p.classList.contains('done'))return;p.classList.remove('selected');p.classList.add('done');p.style.left=(285+placed*25)+'px';p.style.top=(75+(placed%2)*20)+'px';placed++;if(placed>=4){solved=true;board.querySelector('.dna-target').classList.add('ready');t2('DNA strand assembled')}};for(let i=0;i<4;i++){const p=document.createElement('div');p.className='dna-piece';p.draggable=true;p.style.left=(20+i*88)+'px';p.style.top=(20+(i%2)*104)+'px';p.dataset.id=i;p.ondragstart=e=>{selected=p;e.dataTransfer.setData('text/plain',i)};p.onclick=()=>{if(p.classList.contains('done'))return;if(selected)selected.classList.remove('selected');selected=p;p.classList.add('selected');t2('DNA fragment selected — click the capsule')};board.appendChild(p)}const target=board.querySelector('.dna-target');target.ondragover=e=>e.preventDefault();target.ondrop=e=>{e.preventDefault();const id=e.dataTransfer.getData('text/plain');placePiece(board.querySelector('[data-id="'+id+'"]'))};target.onclick=()=>placePiece(selected);area.appendChild(board);area.appendChild(hitGate(complete))}
  if(type==='nodes'){area.innerHTML+='<div class="hint">Bypass security by connecting 5 safe nodes. Some nodes are mines and reset the path. Press HIT after 5 safe nodes.</div>';const grid=document.createElement('div');grid.className='node-grid';let safeCount=0;const mines=new Set([Math.floor(Math.random()*20),Math.floor(Math.random()*20),Math.floor(Math.random()*20)]);for(let i=0;i<20;i++){const n=document.createElement('button');n.className='path-node';n.onclick=()=>{if(mines.has(i)){safeCount=0;grid.querySelectorAll('.path-node').forEach(x=>x.classList.remove('safe'));n.classList.add('mine');setTimeout(()=>n.classList.remove('mine'),500);t2('Mine node hit — path reset')}else if(!n.classList.contains('safe')){n.classList.add('safe');safeCount++;if(safeCount>=5){solved=true;t2('Security route bypassed')}}};grid.appendChild(n)}area.appendChild(grid);area.appendChild(hitGate(complete))}
 }
 function updateCity2(){const d=data2[current2],required=d.codex.filter(x=>x[2]!=='optional').map(x=>x[0]),got=cityGot2[current2]||new Set(),count=required.filter(x=>got.has(x)).length;document.getElementById('cityProgress2').textContent=count+' / '+required.length+' required Codex recovered';if(count>=required.length){document.getElementById('completeCity2').disabled=false;document.getElementById('cityReveal2').innerHTML='<div class="reveal-box">City reveal ready. Synchronize city memory to unlock recovered intel.</div>'}}
