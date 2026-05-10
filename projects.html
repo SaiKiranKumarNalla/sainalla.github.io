@@ -559,6 +559,7 @@
     <a href="projects.html" class="active">Projects</a>
     <a href="papers.html">Publications</a>
     <a href="contact.html">Reach Out</a>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><span class="icon-moon">🌙</span><span class="icon-sun">☀️</span></button>
   </div>
 </nav>
 
@@ -1058,7 +1059,10 @@
   <div class="footer-text">鍛冶場 — The Forge</div>
 </footer>
 
+<script src="theme.js"></script>
 <script src="transitions.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="kage.js"></script>
 <script>
 const forgeFilters = document.querySelectorAll('.forge-filter');
 const artifactCards = document.querySelectorAll('.artifact-card');
