@@ -1,17 +1,26 @@
 // ── Theme Toggle ──
-// Reads/saves preference in localStorage, applies to <html> data-theme attribute
-(function () {
-  const saved = localStorage.getItem('sai-theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
+(function(){
+  // Apply saved theme immediately (before render)
+  var s=localStorage.getItem('sai-theme');
+  if(s)document.documentElement.setAttribute('data-theme',s);
 
-  document.addEventListener('DOMContentLoaded', function () {
-    const btn = document.getElementById('themeToggle');
-    if (!btn) return;
-    btn.addEventListener('click', function () {
-      const current = document.documentElement.getAttribute('data-theme');
-      const next = current === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('sai-theme', next);
-    });
+  function toggle(){
+    var c=document.documentElement.getAttribute('data-theme');
+    var n=(c==='light')?'dark':'light';
+    document.documentElement.setAttribute('data-theme',n);
+    localStorage.setItem('sai-theme',n);
+  }
+
+  document.addEventListener('DOMContentLoaded',function(){
+    var b=document.getElementById('themeToggle');
+    if(b) b.addEventListener('click',toggle);
+  });
+
+  // Keyboard fallback: Ctrl+Shift+T toggles theme
+  document.addEventListener('keydown',function(e){
+    if(e.ctrlKey && e.shiftKey && e.key==='T'){
+      e.preventDefault();
+      toggle();
+    }
   });
 })();
