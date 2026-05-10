@@ -22,7 +22,8 @@
 }
 
 /* ── LIGHT THEME ──────────────────────────────── */
-[data-theme="light"] {
+/* html prefix ensures higher specificity than :root */
+html[data-theme="light"] {
   --ink: #f0ebe3;
   --paper: #1a1a1c;
   --blood: #8b1a1a;
@@ -33,32 +34,101 @@
   --smoke: #e8e3db;
   --ash: #ddd8d0;
   --ghost: rgba(26,26,28,0.04);
-  --ghost-line: rgba(26,26,28,0.08);
-  --kanji-opacity: 0.05;
+  --ghost-line: rgba(26,26,28,0.1);
+  --kanji-opacity: 0.04;
 }
-[data-theme="light"] body { background: #f0ebe3; color: #1a1a1c; }
-[data-theme="light"] nav { background: rgba(240,235,227,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-[data-theme="light"] .nav-brand svg rect { fill: #f0ebe3; }
-[data-theme="light"] .hero-name .stroke { -webkit-text-stroke-color: #1a1a1c; }
-[data-theme="light"] footer { background: #e8e3db; }
-[data-theme="light"] .bg-kanji { color: rgba(26,26,28,0.04); }
-[data-theme="light"] .bg-katana path, [data-theme="light"] .bg-katana-dual path { fill: #1a1a1c; opacity: 0.04; }
-[data-theme="light"] .ac-transition { background: #f0ebe3; }
-[data-theme="light"] .intro-stat, [data-theme="light"] .exp-stat,
-[data-theme="light"] .forge-stat, [data-theme="light"] .p-stat { background: #e8e3db; }
-[data-theme="light"] .acc-header { background: #e8e3db; }
-[data-theme="light"] .acc-item.open .acc-header { background: rgba(139,26,26,0.06); }
-[data-theme="light"] .acc-content { background: linear-gradient(135deg, rgba(139,26,26,0.04) 0%, transparent 28%), #f5f0e8; }
-[data-theme="light"] .edu-card, [data-theme="light"] .paper-card,
-[data-theme="light"] .persona-card, [data-theme="light"] .skill-card,
-[data-theme="light"] .extra-card, [data-theme="light"] .blog-card,
-[data-theme="light"] .contact-card { background: rgba(26,26,28,0.03); }
-[data-theme="light"] .vol-card { background: #e8e3db; }
-[data-theme="light"] .hover-map, [data-theme="light"] .radar-section { background: rgba(26,26,28,0.02); }
-[data-theme="light"] .map-core, [data-theme="light"] .map-node,
-[data-theme="light"] .map-popup { background: rgba(240,235,227,0.95); }
-[data-theme="light"] .quote-strip-item { color: #4a4540; }
 
+html[data-theme="light"] body {
+  background: #f0ebe3;
+  color: #1a1a1c;
+}
+
+/* Nav — clearly distinct in light mode */
+html[data-theme="light"] nav {
+  background: rgba(220,214,204,0.95);
+  border-bottom: 1px solid rgba(26,26,28,0.1);
+  backdrop-filter: blur(12px);
+}
+html[data-theme="light"] .nav-links a { color: #3a3530; }
+html[data-theme="light"] .nav-links a:hover,
+html[data-theme="light"] .nav-links a.active { color: #8b1a1a; }
+html[data-theme="light"] .nav-mark { color: #1a1a1c; }
+html[data-theme="light"] .nav-mark span { color: #8b1a1a; }
+html[data-theme="light"] .nav-brand svg rect { fill: #f0ebe3; }
+
+/* Hero */
+html[data-theme="light"] .hero-name { color: #1a1a1c; }
+html[data-theme="light"] .hero-name .stroke { -webkit-text-stroke-color: #1a1a1c; color: transparent; }
+html[data-theme="light"] .hero-title { color: #4a4540; }
+html[data-theme="light"] .hero-desc { color: #5a554e; }
+html[data-theme="light"] .hero-name-pre { color: rgba(139,26,26,0.5); }
+
+/* Buttons */
+html[data-theme="light"] .btn { border-color: rgba(26,26,28,0.15); color: #1a1a1c; }
+html[data-theme="light"] .btn:hover { border-color: rgba(139,26,26,0.4); }
+
+/* Background elements */
+html[data-theme="light"] .bg-kanji { color: rgba(26,26,28,0.03); }
+html[data-theme="light"] .bg-katana path,
+html[data-theme="light"] .bg-katana-dual path { fill: #1a1a1c; opacity: 0.03; }
+html[data-theme="light"] .v-accent { background: rgba(139,26,26,0.08); }
+
+/* Sections */
+html[data-theme="light"] .bg-smoke { background: #e8e3db; }
+html[data-theme="light"] .content-section { background: transparent; }
+html[data-theme="light"] .page-hero { border-bottom-color: rgba(26,26,28,0.08); }
+html[data-theme="light"] .page-tag { color: #5a554e; }
+html[data-theme="light"] .page-title { color: #1a1a1c; }
+html[data-theme="light"] .page-subtitle { color: #5a554e; }
+html[data-theme="light"] .page-title-jp { color: rgba(139,26,26,0.4); }
+html[data-theme="light"] .section-title { color: #1a1a1c; }
+html[data-theme="light"] .section-num { color: rgba(139,26,26,0.35); }
+html[data-theme="light"] .section-line { background: rgba(26,26,28,0.1); }
+
+/* Cards */
+html[data-theme="light"] .intro-stat, html[data-theme="light"] .exp-stat,
+html[data-theme="light"] .forge-stat, html[data-theme="light"] .p-stat,
+html[data-theme="light"] .stat { background: #e8e3db; }
+html[data-theme="light"] .edu-card, html[data-theme="light"] .paper-card,
+html[data-theme="light"] .persona-card, html[data-theme="light"] .skill-card,
+html[data-theme="light"] .extra-card, html[data-theme="light"] .blog-card,
+html[data-theme="light"] .contact-card { background: rgba(26,26,28,0.03); }
+html[data-theme="light"] .vol-card { background: #e8e3db; }
+html[data-theme="light"] .nav-card { background: transparent; border-color: rgba(26,26,28,0.08); }
+html[data-theme="light"] .nav-card-label { color: #1a1a1c; }
+
+/* Accordion */
+html[data-theme="light"] .acc-header { background: #ebe6de; }
+html[data-theme="light"] .acc-item.open .acc-header { background: rgba(139,26,26,0.06); }
+html[data-theme="light"] .acc-content { background: linear-gradient(135deg, rgba(139,26,26,0.04) 0%, transparent 28%), #f5f0e8; }
+html[data-theme="light"] .acc-role { color: #1a1a1c; }
+
+/* Maps & radar */
+html[data-theme="light"] .hover-map, html[data-theme="light"] .radar-section { background: rgba(26,26,28,0.02); }
+html[data-theme="light"] .map-core, html[data-theme="light"] .map-node,
+html[data-theme="light"] .map-popup { background: rgba(240,235,227,0.95); }
+
+/* Quote strip */
+html[data-theme="light"] .quote-strip { background: #e8e3db; border-color: rgba(26,26,28,0.08); }
+html[data-theme="light"] .quote-strip-item { color: #5a554e; }
+
+/* Footer */
+html[data-theme="light"] footer { background: #e0dbd3; }
+html[data-theme="light"] .footer-text { color: #5a554e; }
+
+/* AC Transition */
+html[data-theme="light"] .ac-transition { background: #f0ebe3; }
+
+/* Forge / projects */
+html[data-theme="light"] .artifact-card { background: rgba(26,26,28,0.02); }
+html[data-theme="light"] .forge-path { background: rgba(26,26,28,0.02); }
+html[data-theme="light"] .artifact-title { color: #1a1a1c; }
+
+/* Intro */
+html[data-theme="light"] .intro-strip { background: #e8e3db; }
+html[data-theme="light"] .intro-text strong { color: #1a1a1c; }
+
+/* Smooth transitions */
 body, nav, footer, .content-section, .bg-smoke,
 .intro-strip, .nav-card, .stat, .acc-header, .acc-content,
 .edu-card, .paper-card, .persona-card, .skill-card,
@@ -78,13 +148,14 @@ body, nav, footer, .content-section, .bg-smoke,
   transition: all 0.3s;
   margin-left: 0.8rem;
   flex-shrink: 0;
-  padding: 0;
-  line-height: 1;
+  padding: 0; line-height: 1;
 }
 .theme-toggle:hover { border-color: rgba(139,26,26,0.4); color: var(--paper); }
 .theme-toggle .icon-sun { display: none; }
-[data-theme="light"] .theme-toggle .icon-moon { display: none; }
-[data-theme="light"] .theme-toggle .icon-sun { display: inline; }
+html[data-theme="light"] .theme-toggle { border-color: rgba(26,26,28,0.2); color: #3a3530; }
+html[data-theme="light"] .theme-toggle:hover { border-color: #8b1a1a; color: #1a1a1c; }
+html[data-theme="light"] .theme-toggle .icon-moon { display: none; }
+html[data-theme="light"] .theme-toggle .icon-sun { display: inline; }
 
 html { scroll-behavior: smooth; }
 
