@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-var PROXY_URL='https://kage-proxy.YOUR_SUBDOMAIN.workers.dev';
+var PROXY_URL='https://kage-proxy.sainalla82.workers.dev';
 
 var P={
 name:'Sai Kiran Kumar Nalla',title:'Medical Imaging Researcher & PhD Candidate',
