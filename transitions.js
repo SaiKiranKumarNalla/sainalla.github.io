@@ -7,7 +7,8 @@ const PAGE_TRANSITIONS = {
   'education.html':  { text: 'Synchronizing Viewpoint...',   sub: 'MAP UPDATED',              kanji: '道場' },
   'projects.html':   { text: 'Eagle Vision Activated...',    sub: 'TARGETS REVEALED',         kanji: '鍛' },
   'papers.html':     { text: 'Opening the Codex...',         sub: 'DATA ACQUIRED',            kanji: '刀' },
-  'contact.html':    { text: 'Entering the Bureau...',       sub: 'THE BROTHERHOOD AWAITS',   kanji: '縁' }
+  'contact.html':    { text: 'Entering the Bureau...',       sub: 'THE BROTHERHOOD AWAITS',   kanji: '縁' },
+  'story.html':      { text: 'Opening the Sealed Archive...',sub: 'PREVIEW ACCESS GRANTED',    kanji: '物語' }
 };
 
 const GLITCH_CHARS = '█▓▒░╗╔╚╝┃━╋┣┫▌▐▀▄';
