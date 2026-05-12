@@ -54,6 +54,53 @@
 .abstract-text{font-size:0.85rem;line-height:1.85;color:var(--mist);font-weight:300}
 .abstract-loading{font-family:'Space Mono',monospace;font-size:0.6rem;color:var(--steel);letter-spacing:0.1em}
 
+
+/* ── RESEARCH PRESENCE / METRICS ── */
+.research-presence{position:relative;margin-top:0}
+.metrics-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-bottom:1.5rem;flex-wrap:wrap}
+.metrics-kicker{font-family:'Space Mono',monospace;font-size:.58rem;text-transform:uppercase;letter-spacing:.22em;color:var(--blood-glow);margin-bottom:.55rem}
+.metrics-title{font-family:'Zen Antique',serif;font-size:clamp(1.6rem,3vw,2.5rem);line-height:1.15}
+.metrics-note{max-width:560px;color:var(--mist);font-size:.86rem;line-height:1.7;font-weight:300}
+.metrics-note strong{color:var(--paper);font-weight:500}
+.metrics-grid{display:grid;grid-template-columns:1.05fr 1fr 1fr;gap:1.2rem;margin:1.2rem 0 1.6rem}
+.metric-card{border:1px solid var(--ghost-line);background:linear-gradient(135deg,rgba(139,26,26,.06),transparent 48%),var(--ghost);padding:1.6rem;position:relative;overflow:hidden;min-height:260px;display:flex;flex-direction:column;justify-content:space-between;transition:all .35s}
+.metric-card:hover{border-color:rgba(139,26,26,.38);background:rgba(139,26,26,.045);transform:translateY(-3px)}
+.metric-card::after{content:'';position:absolute;right:-38px;bottom:-38px;width:110px;height:110px;border:1px solid rgba(139,26,26,.22);transform:rotate(45deg)}
+.metric-source{font-family:'Space Mono',monospace;font-size:.54rem;text-transform:uppercase;letter-spacing:.16em;color:var(--blood-glow);margin-bottom:.7rem}
+.metric-card h3{font-family:'Zen Antique',serif;font-size:1.25rem;margin-bottom:.3rem}
+.metric-id{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--steel);letter-spacing:.04em;margin-bottom:1rem}
+.metric-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:.75rem;margin:1rem 0}
+.metric-stat{border:1px solid rgba(240,235,227,.07);background:rgba(240,235,227,.03);padding:.8rem}
+.metric-num{font-family:'Zen Antique',serif;font-size:2rem;color:var(--paper);line-height:1}
+.metric-label{font-family:'Space Mono',monospace;font-size:.48rem;text-transform:uppercase;letter-spacing:.12em;color:var(--steel);margin-top:.35rem}
+.metric-row{display:flex;justify-content:space-between;gap:1rem;border-top:1px solid var(--ghost-line);padding:.65rem 0;font-size:.82rem;color:var(--mist)}
+.metric-row:first-of-type{border-top:none}
+.metric-row b{color:var(--paper);font-weight:500}
+.metric-actions{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1rem;position:relative;z-index:1}
+.metric-link{font-family:'Space Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;color:var(--blood-glow);text-decoration:none;border:1px solid rgba(139,26,26,.35);padding:.65rem .85rem;transition:all .25s;background:rgba(139,26,26,.05)}
+.metric-link:hover{color:var(--paper);border-color:rgba(194,59,59,.65);background:rgba(139,26,26,.14)}
+.metric-small{font-family:'Space Mono',monospace;font-size:.5rem;text-transform:uppercase;letter-spacing:.12em;color:var(--steel);margin-top:.8rem}
+.metrics-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-bottom:2.5rem}
+.breakdown-card{border:1px solid var(--ghost-line);background:var(--ghost);padding:1.4rem}
+.breakdown-card h3{font-family:'Zen Antique',serif;font-size:1.05rem;margin-bottom:.8rem}
+.breakdown-list{display:grid;gap:.65rem}
+.breakdown-item{display:grid;grid-template-columns:130px 1fr auto;align-items:center;gap:.8rem;font-size:.78rem;color:var(--mist)}
+.breakdown-bar{height:6px;background:rgba(240,235,227,.06);overflow:hidden}
+.breakdown-fill{height:100%;background:linear-gradient(to right,var(--blood),var(--blood-glow));width:0%}
+.breakdown-value{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--paper)}
+html[data-theme="light"] .metrics-note,
+html[data-theme="light"] .metric-row,
+html[data-theme="light"] .breakdown-item{color:#4a4540!important}
+html[data-theme="light"] .metric-card,
+html[data-theme="light"] .breakdown-card,
+html[data-theme="light"] .metric-stat{background:rgba(26,26,28,.035)!important;border-color:rgba(26,26,28,.12)!important}
+html[data-theme="light"] .metric-card h3,
+html[data-theme="light"] .metric-num,
+html[data-theme="light"] .metric-row b,
+html[data-theme="light"] .breakdown-value{color:#1a1a1c!important}
+@media(max-width:1050px){.metrics-grid{grid-template-columns:1fr}.metrics-breakdown{grid-template-columns:1fr}}
+@media(max-width:600px){.metric-stats{grid-template-columns:1fr 1fr}.breakdown-item{grid-template-columns:1fr}.breakdown-value{text-align:left}}
+
 /* ── BLOG / OPINIONS SECTION ── */
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem}
 
@@ -113,6 +160,27 @@
   <div class="arsenal-katana">
     <svg width="500" height="30" viewBox="0 0 500 30" opacity="0.1"><path d="M5 18Q12 16 28 15L460 11Q485 10 497 7L499 6Q500 5.5 499 5L460 6L28 10Q12 11 5 14Z" fill="#f0ebe3"/><path d="M2 17Q4 15 5 18L5 14Q4 12 2 14Z" fill="#c4bfb6"/><rect x="26" y="8" width="6" height="12" rx="1" fill="none" stroke="#f0ebe3" stroke-width="0.6"/><line x1="29" y1="8" x2="29" y2="20" stroke="#8b1a1a" stroke-width="0.3"/></svg>
   </div>
+
+
+  <section class="research-presence reveal" aria-labelledby="researchPresenceTitle">
+    <div class="metrics-head">
+      <div>
+        <div class="metrics-kicker">Research Presence</div>
+        <h2 class="metrics-title" id="researchPresenceTitle">Scholar profiles &amp; impact signals</h2>
+      </div>
+      <p class="metrics-note">
+        A compact view of verified academic identity and manually updated research metrics from Google Scholar, ResearchGate, and ORCID.
+        <strong>Metrics are a snapshot, not a live feed.</strong>
+      </p>
+    </div>
+
+    <div class="metrics-grid" id="researchMetricsGrid" aria-live="polite">
+      <div class="metric-card"><div class="metric-source">Loading</div><h3>Synchronizing metrics...</h3></div>
+    </div>
+
+    <div class="metrics-breakdown" id="researchMetricsBreakdown"></div>
+  </section>
+
 
   <div class="papers-grid stagger">
 
@@ -291,6 +359,7 @@
 <script src="transitions.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="kage.js"></script>
+<script src="research-metrics.js"></script>
 <script>
 // Abstract accordion: fetch from txt file, cache, toggle
 const abstractCache = {};
@@ -343,3 +412,4 @@ document.querySelectorAll('.abstract-toggle').forEach(btn => {
 </script>
 </body>
 </html>
+
