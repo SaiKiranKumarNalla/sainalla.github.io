@@ -121,7 +121,7 @@
 .cover-art:hover{transform:translateY(-3px);border-color:rgba(194,59,59,.55);box-shadow:0 18px 42px rgba(0,0,0,.42)}
 .cover-art img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.92) contrast(1.04);transition:transform .35s,filter .35s}
 .cover-art:hover img{transform:scale(1.045);filter:saturate(1.08) contrast(1.08)}
-.cover-art span{position:absolute;left:0;right:0;bottom:0;padding:.55rem .45rem;background:linear-gradient(to top,rgba(0,0,0,.82),rgba(0,0,0,.08));font-family:'Space Mono',monospace;font-size:.48rem;text-transform:uppercase;letter-spacing:.1em;text-align:center;color:rgba(240,235,227,.86)}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
 html[data-theme="light"] .cover-art{border-color:rgba(26,26,28,.14)!important;background:rgba(26,26,28,.04)!important}
 .beyond-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.8rem}
 .beyond-btn{font-family:'Space Mono',monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.12em;text-decoration:none;color:var(--blood-glow);border:1px solid rgba(139,26,26,.35);padding:.65rem .85rem;background:rgba(139,26,26,.05);transition:all .25s}
@@ -371,19 +371,19 @@ html[data-theme="light"] .cover-slot{background:rgba(26,26,28,.035)!important;bo
       <div class="cover-shelf" aria-label="PS4 and gaming cover shelf">
         <a class="cover-art" href="#" aria-label="Ghost of Tsushima cover">
           <img src="Assets/covers/GOT.png.webp" alt="Ghost of Tsushima cover">
-          <span>Ghost of Tsushima</span>
+          <span class="sr-only">Ghost of Tsushima</span>
         </a>
         <a class="cover-art" href="#" aria-label="Detroit: Become Human cover">
           <img src="Assets/covers/detroit.jpeg" alt="Detroit: Become Human cover">
-          <span>Detroit</span>
+          <span class="sr-only">Detroit: Become Human</span>
         </a>
         <a class="cover-art" href="#" aria-label="Cricket 26 cover">
           <img src="Assets/covers/cricket26.png" alt="Cricket 26 cover">
-          <span>Cricket 26</span>
+          <span class="sr-only">Cricket 26</span>
         </a>
-        <a class="cover-art" href="#" aria-label="Assetto Corsa EVO cover">
-          <img src="Assets/covers/ACET.png.avif" alt="Assetto Corsa EVO cover">
-          <span>Assetto Corsa</span>
+        <a class="cover-art" href="#" aria-label="Assassin’s Creed Ezio Collection cover">
+          <img src="Assets/covers/ACET.png.avif" alt="Assassin’s Creed Ezio Collection cover">
+          <span class="sr-only">Assassin’s Creed</span>
         </a>
       </div>
       <div class="beyond-note">Selected gaming shelf</div>
