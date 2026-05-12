@@ -188,43 +188,6 @@ async function send(text){
   }
 
 
-  if(/(30|thirty).*(second|sec).*pitch|professional pitch|quick pitch/i.test(clean)){
-    hist.push({role:'user',content:text});
-    hist.push({role:'assistant',content:page==='recruiter.html'
-      ? 'Sai is a Medical Imaging PhD candidate who combines imaging validation, simulation, 3D printing, medical-device thinking, and research translation. His strongest signal is that he does not only analyze problems; he builds validation workflows, publishes the evidence, and communicates it clearly to technical and stakeholder audiences.'
-      : 'Sensei Sai works where medical imaging, devices, simulation, and 3D printing meet real-world validation. His edge is simple: he can frame the question, build the method, test the result, and explain why it matters.'});
-    render();
-    return;
-  }
-
-  if(/best fit|what roles|opportunities|hire|suited for|fit for/i.test(clean)){
-    hist.push({role:'user',content:text});
-    hist.push({role:'assistant',content:page==='recruiter.html'
-      ? 'Sai is best suited for medical imaging, medtech R&D, medical-device validation, life-sciences strategy, translational research, and healthcare/deep-tech roles. The evidence is his mix of imaging research, 3D-printed validation tools, simulation work, startup exposure, tech-transfer experience, and publications.'
-      : 'Sensei Sai fits best where research has to become something usable: medtech R&D, imaging validation, healthcare ventures, life-sciences strategy, and translational deep-tech. The proof is in his projects, papers, and startup/tech-transfer path.'});
-    render();
-    return;
-  }
-
-  if(/explain.*project|key project|case stud|3dynapet|cassoulet|mupet|hepta/i.test(clean)){
-    hist.push({role:'user',content:text});
-    hist.push({role:'assistant',content:page==='recruiter.html'
-      ? 'The strongest project arc is: 3DynaPET creates physical ground truth for imaging/device validation; CASSOULET and MuPET explore synthetic ground truth for explainable AI and algorithm testing; Hepta shows translation by turning model outputs into stakeholder-facing visual tools.'
-      : 'The project path is a blade with three edges: 3DynaPET for physical validation, CASSOULET/MuPET for synthetic ground truth and explainable AI, and Hepta for turning technical models into usable medtech communication.'});
-    render();
-    return;
-  }
-
-  if(/publication|paper|preprint|poster|proof|research output/i.test(clean)){
-    hist.push({role:'user',content:text});
-    hist.push({role:'assistant',content:page==='recruiter.html'
-      ? 'Sai’s publications prove a complete work cycle: define a validation problem, build the method, test it, and communicate it. The body of work spans 3D-printed PET/CT validation, synthetic PET data, quantitative ground truth, conference presentation, and biomechanical flow modelling.'
-      : 'Sensei Sai’s papers are not just academic marks; they show a pattern: problem framing, model building, validation, and communication. The trail runs through imaging phantoms, synthetic data, ground truth, conference work, and biomechanics.'});
-    render();
-    return;
-  }
-
-
   if(page==='recruiter.html' && /^(kage|who are you|what are you|tell me about kage|tell me about yourself|who is kage)$/i.test(clean)){
     hist.push({role:'user',content:text});
     hist.push({role:'assistant',content:'I am the site assistant for Sai’s Recruiter Mode. I can help summarize his fit, explain the case studies, point you to publications, or help you find the CV and contact links.'});
@@ -964,7 +927,7 @@ function init(){
       },3500);
     }
 
-    console.log('Kage v11 loaded — AI notice and reliable navigation enabled');
+    console.log('Kage v12 loaded — AI answers enabled for quick prompts');
   }catch(e){
     console.error('Kage:',e);
   }
