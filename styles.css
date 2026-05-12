@@ -1510,3 +1510,362 @@ body:not(.leaping) footer {
 body:not(.leaping) .page-content {
   animation-fill-mode: none !important;
 }
+
+/* ═══════════════════════════════════════════
+   LARGE SCREEN READABILITY + CTA CONTRAST PATCH
+   Paste at the VERY BOTTOM of styles.css
+   ═══════════════════════════════════════════ */
+
+/* Stronger global contrast variables */
+:root {
+  --blood-readable: #b83232;
+  --blood-readable-bright: #f05252;
+  --text-readable: rgba(240, 235, 227, 0.86);
+  --text-muted-readable: rgba(240, 235, 227, 0.68);
+  --panel-readable: rgba(240, 235, 227, 0.055);
+  --panel-line-readable: rgba(240, 235, 227, 0.13);
+}
+
+/* Prevent content from becoming too wide on large workstation screens */
+.page-content,
+.content-section,
+.page-hero,
+.quote-banner,
+.katana-divider,
+footer {
+  max-width: 1720px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Keep nav full-width, but constrain its contents visually */
+nav {
+  padding-left: clamp(1.5rem, 3vw, 4.5rem);
+  padding-right: clamp(1.5rem, 3vw, 4.5rem);
+}
+
+/* Improve general readability */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+p,
+li,
+.exp-desc,
+.page-subtitle,
+.quote-text,
+.footer-text {
+  color: var(--text-readable);
+}
+
+/* Muted text should not become invisible on large monitors */
+.page-subtitle,
+.exp-date,
+.stat-label,
+.footer-text,
+.mono,
+.nav-card-sub,
+.paper-journal,
+.edu-note,
+.contact-desc,
+.persona-desc,
+.skill-items {
+  color: var(--text-muted-readable);
+}
+
+/* Stronger section/card boundaries */
+.card,
+.stat,
+.edu-card,
+.paper-card,
+.persona-card,
+.skill-card,
+.extra-card,
+.blog-card,
+.contact-card,
+.artifact-card,
+.vol-card,
+.nav-card,
+.acc-header,
+.acc-content {
+  border-color: var(--panel-line-readable);
+  background-color: var(--panel-readable);
+}
+
+/* Stronger hover state for cards */
+.card:hover,
+.edu-card:hover,
+.paper-card:hover,
+.persona-card:hover,
+.skill-card:hover,
+.extra-card:hover,
+.blog-card:hover,
+.contact-card:hover,
+.artifact-card:hover,
+.vol-card:hover,
+.nav-card:hover {
+  border-color: rgba(184, 50, 50, 0.45);
+  background-color: rgba(139, 26, 26, 0.075);
+}
+
+/* Main CTA/button visibility fix */
+.btn,
+button,
+.story-btn,
+.forge-filter,
+.paper-link {
+  border-color: rgba(184, 50, 50, 0.75);
+  color: #f8eee8;
+  background: rgba(139, 26, 26, 0.08);
+}
+
+/* Fill animation should be more visible */
+.btn::before {
+  background: linear-gradient(90deg, #8b1a1a, #b83232);
+}
+
+/* Button hover should pop on large screens */
+.btn:hover,
+button:hover,
+.story-btn:hover,
+.forge-filter:hover,
+.forge-filter.active,
+.paper-link:hover {
+  border-color: var(--blood-readable-bright);
+  color: #fff7f0;
+  background: rgba(184, 50, 50, 0.18);
+  box-shadow: 0 0 28px rgba(184, 50, 50, 0.22);
+}
+
+/* Important CTAs should never look faint */
+.btn-primary,
+.btn.primary,
+.hero-cta,
+.nav-cta,
+a[href*="recruiter"],
+a[href*="contact"] {
+  border-color: rgba(240, 82, 82, 0.85);
+}
+
+/* Red accent visibility */
+.page-tag,
+.section-num,
+.quote-source,
+.exp-org,
+.edu-school,
+.paper-link,
+.stat-num,
+.nav-mark span {
+  color: var(--blood-readable-bright);
+}
+
+/* Better nav readability */
+.nav-links a {
+  color: rgba(240, 235, 227, 0.72);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #fff4ec;
+}
+
+.nav-links a::after {
+  background: var(--blood-readable-bright);
+}
+
+/* Large monitor tuning */
+@media (min-width: 1500px) {
+  body {
+    font-size: 17px;
+  }
+
+  .content-section {
+    padding-left: clamp(4rem, 5vw, 7rem);
+    padding-right: clamp(4rem, 5vw, 7rem);
+  }
+
+  .page-hero {
+    padding-left: clamp(4rem, 5vw, 7rem);
+    padding-right: clamp(4rem, 5vw, 7rem);
+  }
+
+  .page-title {
+    font-size: clamp(3.2rem, 5vw, 6rem);
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 2.2vw, 2.6rem);
+  }
+
+  .btn {
+    font-size: 0.72rem;
+    padding: 0.95rem 2.15rem;
+    border-width: 1.25px;
+  }
+
+  .nav-links a {
+    font-size: 0.68rem;
+  }
+
+  .card,
+  .stat,
+  .edu-card,
+  .paper-card,
+  .persona-card,
+  .skill-card,
+  .extra-card,
+  .blog-card,
+  .contact-card,
+  .artifact-card,
+  .vol-card {
+    border-width: 1.25px;
+  }
+}
+
+/* Ultra-wide monitor safety */
+@media (min-width: 1900px) {
+  .page-content,
+  .content-section,
+  .page-hero,
+  .quote-banner,
+  footer {
+    max-width: 1680px;
+  }
+
+  .grid-2 {
+    gap: 4.5rem;
+  }
+
+  .grid-3 {
+    gap: 2rem;
+  }
+
+  .stats-row {
+    gap: 2rem;
+  }
+
+  .nav-grid {
+    max-width: 1680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bg-kanji {
+    opacity: 0.82;
+  }
+}
+
+/* Better focus visibility */
+:focus-visible {
+  outline: 2px solid var(--blood-readable-bright);
+  outline-offset: 4px;
+}
+
+/* Improve selection contrast */
+::selection {
+  background: rgba(184, 50, 50, 0.42);
+  color: #fff7f0;
+}
+
+/* ═══════════════════════════════════════════
+   LIGHT MODE LARGE SCREEN READABILITY PATCH
+   ═══════════════════════════════════════════ */
+
+html[data-theme="light"] {
+  --blood-readable: #9a2222;
+  --blood-readable-bright: #b83232;
+  --text-readable: #3a3530;
+  --text-muted-readable: #5f5750;
+  --panel-readable: rgba(26, 26, 28, 0.045);
+  --panel-line-readable: rgba(26, 26, 28, 0.16);
+}
+
+html[data-theme="light"] p,
+html[data-theme="light"] li,
+html[data-theme="light"] .exp-desc,
+html[data-theme="light"] .page-subtitle,
+html[data-theme="light"] .quote-text,
+html[data-theme="light"] .footer-text {
+  color: var(--text-readable) !important;
+}
+
+html[data-theme="light"] .page-subtitle,
+html[data-theme="light"] .exp-date,
+html[data-theme="light"] .stat-label,
+html[data-theme="light"] .footer-text,
+html[data-theme="light"] .mono,
+html[data-theme="light"] .nav-card-sub,
+html[data-theme="light"] .paper-journal,
+html[data-theme="light"] .edu-note,
+html[data-theme="light"] .contact-desc,
+html[data-theme="light"] .persona-desc,
+html[data-theme="light"] .skill-items {
+  color: var(--text-muted-readable) !important;
+}
+
+/* Light mode buttons should be visible, not pale */
+html[data-theme="light"] .btn,
+html[data-theme="light"] button,
+html[data-theme="light"] .story-btn,
+html[data-theme="light"] .forge-filter,
+html[data-theme="light"] .paper-link {
+  color: #1a1a1c !important;
+  border-color: rgba(154, 34, 34, 0.65) !important;
+  background: rgba(139, 26, 26, 0.055) !important;
+}
+
+html[data-theme="light"] .btn:hover,
+html[data-theme="light"] button:hover,
+html[data-theme="light"] .story-btn:hover,
+html[data-theme="light"] .forge-filter:hover,
+html[data-theme="light"] .forge-filter.active,
+html[data-theme="light"] .paper-link:hover {
+  color: #8b1a1a !important;
+  border-color: rgba(154, 34, 34, 0.9) !important;
+  background: rgba(139, 26, 26, 0.11) !important;
+  box-shadow: 0 0 22px rgba(139, 26, 26, 0.14) !important;
+}
+
+html[data-theme="light"] .card,
+html[data-theme="light"] .stat,
+html[data-theme="light"] .edu-card,
+html[data-theme="light"] .paper-card,
+html[data-theme="light"] .persona-card,
+html[data-theme="light"] .skill-card,
+html[data-theme="light"] .extra-card,
+html[data-theme="light"] .blog-card,
+html[data-theme="light"] .contact-card,
+html[data-theme="light"] .artifact-card,
+html[data-theme="light"] .vol-card,
+html[data-theme="light"] .nav-card,
+html[data-theme="light"] .acc-header,
+html[data-theme="light"] .acc-content {
+  border-color: var(--panel-line-readable) !important;
+  background-color: var(--panel-readable) !important;
+}
+
+html[data-theme="light"] .page-tag,
+html[data-theme="light"] .section-num,
+html[data-theme="light"] .quote-source,
+html[data-theme="light"] .exp-org,
+html[data-theme="light"] .edu-school,
+html[data-theme="light"] .paper-link,
+html[data-theme="light"] .stat-num,
+html[data-theme="light"] .nav-mark span {
+  color: var(--blood-readable) !important;
+}
+
+/* Do not let global button styles damage Kage panel buttons */
+.kp button,
+.kp .kp-act,
+.kp .kp-snd,
+.kp .kp-x,
+.kp-rep button {
+  box-shadow: none;
+}
+
+/* Kage buttons still get their own styling */
+.kp .kp-act:hover {
+  box-shadow: none;
+}
