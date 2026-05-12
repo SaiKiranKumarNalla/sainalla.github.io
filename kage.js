@@ -110,13 +110,43 @@ async function send(text){
     return;
   }
 
-  if(/(recruiter|hiring manager|talent|recruiting|quick professional|3-minute|3 minute|professional summary|recruiter mode)/i.test(clean) && page!=='recruiter.html'){
+
+  if(/(30|thirty).*(second|sec).*pitch|professional pitch|quick pitch/i.test(clean)){
     hist.push({role:'user',content:text});
-    hist.push({role:'assistant',content:'Recruiter Mode is the fastest professional overview of Sai’s work evidence, case studies, research pipeline, publications, tools, experience, availability, CV, and contact details. Would you like me to open it?'});
-    kageRecruiterOffered=true;
+    hist.push({role:'assistant',content:page==='recruiter.html'
+      ? 'Sai is a Medical Imaging PhD candidate who combines imaging validation, simulation, 3D printing, medical-device thinking, and research translation. His strongest signal is that he does not only analyze problems; he builds validation workflows, publishes the evidence, and communicates it clearly to technical and stakeholder audiences.'
+      : 'Sensei Sai works where medical imaging, devices, simulation, and 3D printing meet real-world validation. His edge is simple: he can frame the question, build the method, test the result, and explain why it matters.'});
     render();
     return;
   }
+
+  if(/best fit|what roles|opportunities|hire|suited for|fit for/i.test(clean)){
+    hist.push({role:'user',content:text});
+    hist.push({role:'assistant',content:page==='recruiter.html'
+      ? 'Sai is best suited for medical imaging, medtech R&D, medical-device validation, life-sciences strategy, translational research, and healthcare/deep-tech roles. The evidence is his mix of imaging research, 3D-printed validation tools, simulation work, startup exposure, tech-transfer experience, and publications.'
+      : 'Sensei Sai fits best where research has to become something usable: medtech R&D, imaging validation, healthcare ventures, life-sciences strategy, and translational deep-tech. The proof is in his projects, papers, and startup/tech-transfer path.'});
+    render();
+    return;
+  }
+
+  if(/explain.*project|key project|case stud|3dynapet|cassoulet|mupet|hepta/i.test(clean)){
+    hist.push({role:'user',content:text});
+    hist.push({role:'assistant',content:page==='recruiter.html'
+      ? 'The strongest project arc is: 3DynaPET creates physical ground truth for imaging/device validation; CASSOULET and MuPET explore synthetic ground truth for explainable AI and algorithm testing; Hepta shows translation by turning model outputs into stakeholder-facing visual tools.'
+      : 'The project path is a blade with three edges: 3DynaPET for physical validation, CASSOULET/MuPET for synthetic ground truth and explainable AI, and Hepta for turning technical models into usable medtech communication.'});
+    render();
+    return;
+  }
+
+  if(/publication|paper|preprint|poster|proof|research output/i.test(clean)){
+    hist.push({role:'user',content:text});
+    hist.push({role:'assistant',content:page==='recruiter.html'
+      ? 'Sai’s publications prove a complete work cycle: define a validation problem, build the method, test it, and communicate it. The body of work spans 3D-printed PET/CT validation, synthetic PET data, quantitative ground truth, conference presentation, and biomechanical flow modelling.'
+      : 'Sensei Sai’s papers are not just academic marks; they show a pattern: problem framing, model building, validation, and communication. The trail runs through imaging phantoms, synthetic data, ground truth, conference work, and biomechanics.'});
+    render();
+    return;
+  }
+
 
   if(page==='recruiter.html' && /^(kage|who are you|what are you|tell me about kage|tell me about yourself|who is kage)$/i.test(clean)){
     hist.push({role:'user',content:text});
@@ -248,7 +278,7 @@ function welcome(){
   if(curPage()==='recruiter.html'){
     var t=vc>1
       ?'Welcome back. I can help you review Sai’s case studies, publications, CV, availability, or contact options.'
-      :'Hello. I can help you navigate Sai’s Recruiter Mode: case studies, research pipeline, tools, publications, experience, CV, and contact details.';
+      :'Hello. Ask me for Sai’s 30-second pitch, strongest role fit, project evidence, publications summary, CV, or contact details.';
     hist.push({role:'assistant',content:t});
     render();
     return;
@@ -264,8 +294,8 @@ function welcome(){
         :'The day is bright.';
 
   var t=vc>1
-    ? g+' You return. Are you recruiting, collaborating, or simply wandering Sensei Sai’s path?'
-    : g+' I am Kage — the Shadow of this website. Are you a recruiter, a collaborator, or just visiting? I can guide you through Sensei Sai’s work, or let you explore freely.';
+    ? g+' You return. Ask me about Sensei Sai’s fit, projects, publications, research, or the best path through this website.'
+    : g+' I am Kage — Ask me about Sensei Sai’s work, projects, publications, role fit, or research story. I can answer first, then guide you if a page helps.';
 
   hist.push({role:'assistant',content:t});
   render();
@@ -315,6 +345,29 @@ html[data-theme="light"] .kp-act{color:#4a4540!important;background:rgba(26,26,2
 }
 
 function dom(){
+  var recruiterMode=curPage()==='recruiter.html';
+
+  var mainActions=
+      '<button class="kp-act" data-q="I am a recruiter. Give me the 3-minute professional overview and suggest the most relevant sections.">Recruiter</button>'+
+      '<button class="kp-act" data-q="I am just visiting. Help me explore the site.">Visitor</button>'+
+      '<button class="kp-act" data-q="Tell me about Sai">About Sai</button>'+
+      '<button class="kp-act" data-q="Tell me about Kage">Kage</button>'+
+      '<button class="kp-act" data-q="How can I contact Sai?">Contact</button>'+
+      '<button class="kp-act" data-q="I found an issue on this page">Report</button>';
+
+  var recruiterActions=
+      '<button class="kp-act" data-q="Give me a 30-second professional pitch about Sai.">30-sec Pitch</button>'+
+      '<button class="kp-act" data-q="What roles or opportunities is Sai best suited for, and why?">Best Fit</button>'+
+      '<button class="kp-act" data-q="Explain Sai’s key projects like case studies, not a list.">Projects</button>'+
+      '<button class="kp-act" data-q="Summarize Sai’s publications and what they prove.">Publications</button>'+
+      '<button class="kp-act" data-q="Open Recruiter Mode.">Recruiter Mode</button>'+
+      '<button class="kp-act" data-q="How can I contact Sai?">Contact</button>';
+
+  var actionButtons=recruiterMode?recruiterActions:mainActions;
+  var inputPlaceholder=recruiterMode
+    ? 'Ask Kage about Sai, projects, fit, publications...'
+    : 'Ask Kage anything...';
+
   var w=document.createElement('div');
   w.className='kage-wrap';
   w.id='kageWrap';
@@ -333,12 +386,7 @@ function dom(){
     '</div>'+
     '<div class="kp-msgs" id="kMsgs"></div>'+
     '<div class="kp-acts" id="kActs">'+
-      '<button class="kp-act" data-q="I am a recruiter. Give me the 3-minute professional overview and suggest the most relevant sections.">Recruiter</button>'+
-      '<button class="kp-act" data-q="I am just visiting. Help me explore the site.">Visitor</button>'+
-      '<button class="kp-act" data-q="Tell me about Sai">About Sai</button>'+
-      '<button class="kp-act" data-q="Tell me about Kage">Kage</button>'+
-      '<button class="kp-act" data-q="How can I contact Sai?">Contact</button>'+
-      '<button class="kp-act" data-q="I found an issue on this page">Report</button>'+
+      actionButtons+
     '</div>'+
     '<div class="kp-con" id="kCon">'+
       '<a href="mailto:'+P.email+'">✉ '+P.email+'</a>'+
@@ -350,7 +398,7 @@ function dom(){
       '<button id="kRepS">Send</button>'+
     '</div>'+
     '<div class="kp-iw">'+
-      '<input class="kp-in" id="kIn" placeholder="Ask Kage anything..." autocomplete="off">'+
+      '<input class="kp-in" id="kIn" placeholder="'+inputPlaceholder+'" autocomplete="off">'+
       '<button class="kp-snd" id="kSnd">➜</button>'+
     '</div>';
 
@@ -832,7 +880,7 @@ function init(){
       },3500);
     }
 
-    console.log('Kage v8 loaded — hidden page flow enabled');
+    console.log('Kage v9 loaded — Ask Kage intelligence enabled');
   }catch(e){
     console.error('Kage:',e);
   }
