@@ -137,6 +137,11 @@ html[data-theme="light"] .cover-slot{background:rgba(26,26,28,.035)!important;bo
 @media(max-width:850px){.beyond-grid{grid-template-columns:1fr}.cover-shelf{grid-template-columns:repeat(2,1fr)}}
 
 
+
+
+/* about semi-professional pass */
+.about-intro p{font-size:1rem;line-height:1.82}.about-quick{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-top:1.3rem}.about-chip{border:1px solid var(--ghost-line);background:linear-gradient(135deg,rgba(139,26,26,.06),transparent 45%),var(--ghost);padding:1rem}.about-chip b{display:block;font-family:'Zen Antique',serif;font-size:1.02rem;margin-bottom:.35rem}.about-chip span{display:block;color:var(--mist);font-size:.82rem;line-height:1.55}.compass-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.compass-card{border:1px solid var(--ghost-line);background:linear-gradient(135deg,rgba(139,26,26,.065),transparent 44%),var(--ghost);padding:1.4rem;min-height:220px;transition:.3s;position:relative;overflow:hidden}.compass-card:hover{transform:translateY(-3px);border-color:rgba(139,26,26,.34)}.compass-card:after{content:'';position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--blood);transform:scaleX(0);transform-origin:left;transition:.3s}.compass-card:hover:after{transform:scaleX(1)}.compass-icon{font-family:'Noto Serif JP',serif;font-size:2.2rem;color:rgba(139,26,26,.35);line-height:1;margin-bottom:.8rem}.compass-card h3{font-family:'Zen Antique',serif;font-size:1.05rem;margin-bottom:.55rem}.compass-card p{font-size:.84rem;line-height:1.7;color:var(--mist);font-weight:300}.journey-section{max-width:920px}.journey-text{line-height:1.72}.professional-bridge{border:1px solid rgba(139,26,26,.28);background:linear-gradient(135deg,rgba(139,26,26,.1),transparent 48%),var(--ghost);padding:2rem;margin-top:2rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem}.professional-bridge h3{font-family:'Zen Antique',serif;font-size:1.35rem;margin-bottom:.45rem}.professional-bridge p{color:var(--mist);line-height:1.65;font-weight:300;max-width:700px}.professional-bridge .btn{flex-shrink:0}@media(max-width:900px){.about-quick,.compass-grid{grid-template-columns:1fr 1fr}.professional-bridge{flex-direction:column;align-items:flex-start}}@media(max-width:560px){.about-quick,.compass-grid{grid-template-columns:1fr}}
+
 </style>
 </head>
 <body>
@@ -173,7 +178,7 @@ html[data-theme="light"] .cover-slot{background:rgba(26,26,28,.035)!important;bo
   <div class="page-tag reveal">The Ronin</div>
   <div class="page-title-jp reveal">浪人 — ろうにん</div>
   <h1 class="page-title reveal">01 — About</h1>
-  <p class="page-subtitle reveal">The Masterless Warrior — Bound to no lord, loyal only to the craft</p>
+  <p class="page-subtitle reveal">A semi-professional portrait — research, travel, fiction, systems, and the person behind the CV</p>
 </section>
 
 <!-- ── WHO I AM ── -->
@@ -185,9 +190,15 @@ html[data-theme="light"] .cover-slot{background:rgba(26,26,28,.035)!important;bo
   </div>
   <div class="grid-2">
     <div class="about-intro reveal">
-      <p>I'm <strong>Sai</strong> — a researcher, builder, and someone who's genuinely happiest when working at the edge of what they understand. I grew up in <strong>Hyderabad</strong>, studied mechanical engineering, and then moved to France on a scholarship to pursue biomedical engineering at <strong>École Polytechnique</strong>. Now I'm finishing a PhD in medical imaging at the <strong>IUCT Oncopole</strong> in Toulouse.</p>
-      <p>I'm the kind of person who reads VC fund reports for fun, stays up late debugging MATLAB code, and still finds time to get lost in Assassin's Creed or Ghost of Tsushima. I think in systems — whether that's the physics of a PET scanner, the structure of a startup pitch, or the flow of a well-designed user interface.</p>
-      <p>I'm not someone who fits neatly into one box. I've worked in hospitals, startups, and research labs. I've built 3D-printed phantoms, written predictive models for cancer treatment devices, and drafted IP strategy documents. I'm equally comfortable presenting to surgeons as I am to investors.</p>
+      <p>I'm <strong>Sai</strong> — a researcher by training, a builder by habit, and a storyteller when the lab lights are off. I grew up in <strong>Hyderabad</strong>, moved to France on a scholarship, and now live in Toulouse while finishing a PhD in medical imaging.</p>
+      <p>I like work that has texture: a PET scanner that needs a better validation method, a startup idea that needs a clearer story, a game world that feels alive, or a recipe that somehow turns into a small engineering problem.</p>
+      <p>This page is the human version of the portfolio. The professional proof is here, but so are the things that shape how I think: travel, fiction, games, cricket, cooking, Japanese culture, and an obsession with turning messy ideas into systems.</p>
+      <div class="about-quick">
+        <div class="about-chip"><b>Currently</b><span>PhD candidate in medical imaging, Toulouse.</span></div>
+        <div class="about-chip"><b>Outside work</b><span>Fiction, PS4 games, cooking, cricket, travel.</span></div>
+        <div class="about-chip"><b>Thinking style</b><span>Systems, prototypes, questions, stories.</span></div>
+        <div class="about-chip"><b>Next chapter</b><span>Medtech, strategy, ventures, translational roles.</span></div>
+      </div>
     </div>
     <div>
       <div class="stats-row stagger" style="grid-template-columns:1fr 1fr">
@@ -202,8 +213,23 @@ html[data-theme="light"] .cover-slot{background:rgba(26,26,28,.035)!important;bo
   </div>
 </section>
 
-<!-- ── THE JOURNEY ── -->
+<!-- ── PERSONAL COMPASS ── -->
 <section class="content-section bg-smoke">
+  <div class="section-header reveal">
+    <span class="section-num">羅</span>
+    <h2 class="section-title">Personal Compass</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="compass-grid stagger">
+    <article class="compass-card"><div class="compass-icon">匠</div><h3>Builder</h3><p>I like making the first version real: a simulation, a dashboard, a phantom, a story outline, a visual tool. Thinking becomes clearer once something exists.</p></article>
+    <article class="compass-card"><div class="compass-icon">旅</div><h3>Explorer</h3><p>Travel changed how I work. New cities, languages, and food keep reminding me that context matters as much as expertise.</p></article>
+    <article class="compass-card"><div class="compass-icon">物</div><h3>Storyteller</h3><p>Fiction and games taught me pacing, atmosphere, stakes, and worldbuilding — useful even when explaining research.</p></article>
+    <article class="compass-card"><div class="compass-icon">策</div><h3>Strategist</h3><p>I enjoy the bridge between technical truth and real decisions: markets, IP, adoption, clinical value, and why something should exist.</p></article>
+  </div>
+</section>
+
+<!-- ── THE JOURNEY ── -->
+<section class="content-section">
   <div class="section-header reveal">
     <span class="section-num">旅</span>
     <h2 class="section-title">The Journey</h2>
@@ -215,29 +241,39 @@ html[data-theme="light"] .cover-slot{background:rgba(26,26,28,.035)!important;bo
         <div class="journey-era">2016 — 2020</div>
         <div class="journey-era-kanji">始</div>
       </div>
-      <div class="journey-text">It started with a curiosity about how things move — fluids, forces, pressure waves. At <strong>Mahindra University</strong>, I studied mechanical engineering but quickly drifted toward biomechanics. I ended up simulating blood flow and gas embolism in arteries, which became my first journal publication. I also led an autonomous underwater vehicle team, which taught me more about leadership than any textbook could.</div>
+      <div class="journey-text">It started with movement — fluids, forces, pressure waves. At <strong>Mahindra University</strong>, mechanical engineering pulled me toward biomechanics, arterial flow simulation, my first journal publication, and an autonomous underwater vehicle team that taught me leadership the hard way.</div>
     </div>
     <div class="journey-chapter">
       <div>
         <div class="journey-era">2021 — 2023</div>
         <div class="journey-era-kanji">修</div>
       </div>
-      <div class="journey-text">France changed everything. <strong>École Polytechnique</strong> threw me into a world of soft matter physics, drug delivery research, and deep-tech startup culture. I worked simultaneously at <strong>Manitty</strong> (a startup making polymer electrodes), at a hospital shadowing cardiologists and 3D-printing surgical benches, and at <strong>Hepta Medical</strong> — where I built predictive models for a cancer treatment device and translated R&D into investor-facing demos. That's when I realized I wanted to sit at the intersection of research and strategy.</div>
+      <div class="journey-text">France widened the map. At <strong>École Polytechnique</strong>, I moved through soft matter, drug delivery, hospital shadowing, 3D-printed surgical benches, and startup work. <strong>Hepta Medical</strong> showed me how research becomes a product story — and why I like the space between science and strategy.</div>
     </div>
     <div class="journey-chapter">
       <div>
         <div class="journey-era">2023 — Now</div>
         <div class="journey-era-kanji">博</div>
       </div>
-      <div class="journey-text">My PhD is about making PET/CT imaging more honest — building simulation tools and physical phantoms that test whether scanners and algorithms actually measure what they claim to. I work with <strong>GE Healthcare</strong>, collaborate across institutions, and manage the full lifecycle of research: from MATLAB code to 3D printing to clinical validation to writing papers. I've published 6 papers, including preprints under review for peer-reviewed journals. Defense is scheduled for <strong>September 2026</strong>.</div>
+      <div class="journey-text">My PhD is about making PET/CT imaging more honest: simulations and physical phantoms that test whether scanners and algorithms measure what they claim to. It is code, 3D printing, validation, collaboration with <strong>GE Healthcare</strong>, and papers — with defense planned for <strong>September 2026</strong>.</div>
     </div>
     <div class="journey-chapter">
       <div>
         <div class="journey-era">What's Next</div>
         <div class="journey-era-kanji">先</div>
       </div>
-      <div class="journey-text">I'm drawn to where deep-tech research meets strategic decision-making — <strong>healthcare ventures, life sciences consulting, biotech VC</strong>, or any role where technical depth meets business thinking. I completed the <strong>McKinsey Forward Program</strong>, built a VC education framework from scratch, and I'm actively exploring opportunities in Paris, London, Amsterdam, and Berlin.</div>
+      <div class="journey-text">Next, I am drawn to roles where technical depth meets decisions: <strong>healthcare ventures, life-sciences strategy, medtech, biotech VC, or translational deep-tech</strong>. I am exploring opportunities in Paris, London, Amsterdam, and Berlin.</div>
     </div>
+  </div>
+</section>
+
+<section class="content-section bg-smoke">
+  <div class="professional-bridge reveal">
+    <div>
+      <h3>Need the professional version?</h3>
+      <p>Recruiter Mode is the fast, proof-first view: best-fit roles, case studies, publications, CV, and contact without the personal archive.</p>
+    </div>
+    <a class="btn" href="recruiter.html">Open Recruiter Mode</a>
   </div>
 </section>
 

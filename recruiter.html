@@ -434,6 +434,15 @@ section{padding:7rem 6vw;position:relative}
 .pub:hover{transform:translateY(-6px);border-color:rgba(179,34,34,.55);box-shadow:0 20px 60px rgba(179,34,34,.12)}
 .pub .open-link{font-family:"Space Mono",monospace;color:var(--red2);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;margin-top:1rem}
 
+
+
+/* recruiter simplification pass */
+.decision-bar{position:sticky;top:74px;z-index:42;display:flex;align-items:center;justify-content:center;gap:.75rem;flex-wrap:wrap;padding:.72rem 1rem;background:rgba(7,7,10,.88);border-top:1px solid var(--line);border-bottom:1px solid var(--line);backdrop-filter:blur(16px)}
+.decision-pill{font-family:"Space Mono",monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border:1px solid rgba(244,238,232,.1);background:rgba(244,238,232,.035);padding:.55rem .7rem;border-radius:999px}.decision-pill strong{color:var(--ink)}.decision-pill.action{color:var(--ink);border-color:rgba(179,34,34,.5);background:rgba(179,34,34,.14)}
+.pitch-roles{padding-top:3.5rem}.pitch-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:1rem;align-items:stretch}.pitch-card,.role-card,.proof-card{border:1px solid var(--line);background:linear-gradient(145deg,rgba(179,34,34,.11),rgba(244,238,232,.035));border-radius:24px;padding:1.35rem}.pitch-card h2{font-family:'Zen Antique',serif;font-size:clamp(2rem,4vw,3.4rem);line-height:.95;letter-spacing:-.07em;margin:.35rem 0 1rem}.pitch-card p{color:#ded6d2;font-weight:750;line-height:1.5}.pitch-meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem}.pitch-meta span{font-family:"Space Mono",monospace;font-size:.56rem;text-transform:uppercase;letter-spacing:.1em;color:var(--red2);border:1px solid rgba(179,34,34,.28);padding:.45rem .55rem;border-radius:999px}.roles-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}.role-card{border-radius:18px;padding:1rem}.role-card b{display:block;font-size:1rem;margin-bottom:.3rem}.role-card span{display:block;color:#cfc7c3;font-weight:700;line-height:1.4;font-size:.86rem}.role-card small{display:block;font-family:"Space Mono",monospace;color:var(--red2);font-size:.54rem;text-transform:uppercase;letter-spacing:.1em;margin-top:.55rem}.case-card details{margin-top:.9rem;border-top:1px solid rgba(244,238,232,.08);padding-top:.75rem}.case-card summary{cursor:pointer;font-family:"Space Mono",monospace;font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--red2);list-style:none}.case-card summary::-webkit-details-marker{display:none}.case-card summary:after{content:' +';color:var(--muted)}.case-card details[open] summary:after{content:' –'}.proof-pack{display:grid;grid-template-columns:.85fr 1.15fr;gap:1rem;align-items:stretch}.proof-card{display:flex;flex-direction:column;gap:.45rem}.proof-card b{font-size:1.05rem}.proof-card span{color:#cfc7c3;font-weight:700;line-height:1.45}.proof-actions{display:grid;grid-template-columns:repeat(5,1fr);gap:.7rem}.proof-action{border:1px solid var(--line);background:rgba(244,238,232,.04);border-radius:18px;padding:1rem;text-align:center;transition:.25s}.proof-action:hover{transform:translateY(-4px);border-color:rgba(179,34,34,.5);background:rgba(179,34,34,.09)}.proof-action i{display:block;font-style:normal;font-size:1.6rem;margin-bottom:.35rem}.proof-action b{display:block;font-size:.84rem}.proof-action span{font-family:"Space Mono",monospace;font-size:.52rem;color:var(--muted);text-transform:uppercase;letter-spacing:.09em}.lite-note{max-width:760px;margin:0 auto 2rem;text-align:center;color:var(--muted);font-weight:700;line-height:1.55}
+@media(max-width:900px){.decision-bar{top:0}.pitch-grid,.proof-pack{grid-template-columns:1fr}.roles-grid,.proof-actions{grid-template-columns:1fr 1fr}.links{display:flex!important;overflow:auto;max-width:100%;gap:.9rem}.links a{white-space:nowrap}.rnav{overflow:hidden}.case-card{min-height:0!important}}
+@media(max-width:560px){.roles-grid,.proof-actions{grid-template-columns:1fr}.decision-bar{justify-content:flex-start;overflow:auto;flex-wrap:nowrap}.decision-pill{white-space:nowrap}.hero h1{font-size:3.3rem}}
+
 </style>
 </head>
 <body>
@@ -442,6 +451,7 @@ section{padding:7rem 6vw;position:relative}
   <div class="links">
     <a href="index.html">Main Site</a>
     <a href="#overview">Overview</a>
+    <a href="#best-fit">Best Fit</a>
     <a href="#scan">3-Min Scan</a>
     <a href="#case-studies">Case Studies</a>
     <a href="#pipeline">Pipeline</a>
@@ -451,6 +461,14 @@ section{padding:7rem 6vw;position:relative}
     <a href="#contact" class="nav-cta">Contact / CV</a>
   </div>
 </nav>
+
+<div class="decision-bar" aria-label="Recruiter quick decision bar">
+  <span class="decision-pill"><strong>Available</strong> Sept 2026</span>
+  <span class="decision-pill"><strong>Open to</strong> Paris · London · Amsterdam · Berlin</span>
+  <a class="decision-pill action" href="Assets/Sai_Nalla_CV.pdf" target="_blank" rel="noopener">CV</a>
+  <a class="decision-pill action" href="mailto:sainalla82@gmail.com">Email</a>
+  <a class="decision-pill action" href="https://www.linkedin.com/in/sai-kiran-kumar-nalla" target="_blank" rel="noopener">LinkedIn</a>
+</div>
 
 <header class="hero" id="overview">
   <div>
@@ -483,6 +501,26 @@ section{padding:7rem 6vw;position:relative}
     </div>
   </aside>
 </header>
+
+<section class="pitch-roles" id="best-fit">
+  <div class="pitch-grid">
+    <article class="pitch-card">
+      <div class="kicker" style="text-align:left;margin-bottom:.4rem">30-second pitch</div>
+      <h2>Research depth, builder speed, translation instinct.</h2>
+      <p>Sai is a medical imaging PhD candidate working across PET/CT validation, simulation, 3D-printed phantoms, and medtech translation. He brings technical depth, prototype-building ability, and startup/strategy exposure — useful for teams that need someone who can understand the science and explain why it matters.</p>
+      <div class="pitch-meta"><span>Medical imaging</span><span>Medtech</span><span>Validation</span><span>Strategy</span></div>
+    </article>
+    <div>
+      <div class="kicker" style="text-align:left;margin-bottom:.8rem">Best-fit roles</div>
+      <div class="roles-grid">
+        <article class="role-card"><b>MedTech / Life Sciences Strategy</b><span>Technical fluency plus market, IP, and stakeholder translation exposure.</span><small>Proof: Hepta · TTT · recruiter scan</small></article>
+        <article class="role-card"><b>Clinical AI / Imaging Product</b><span>Ground-truth validation mindset for explainable medical-imaging AI.</span><small>Proof: 3DynaPET · CASSOULET</small></article>
+        <article class="role-card"><b>Imaging Research Scientist</b><span>PET/CT, phantoms, simulation, quantitative validation, publications.</span><small>Proof: Publications · pipeline</small></article>
+        <article class="role-card"><b>Healthcare Venture / Analyst</b><span>Deep-tech curiosity, medtech exposure, VC training, scientific communication.</span><small>Proof: toolkit · experience</small></article>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section>
   <div class="snapshot">
@@ -560,17 +598,20 @@ section{padding:7rem 6vw;position:relative}
 <section id="case-studies">
   <div class="kicker">Portfolio evidence</div>
   <h2 class="title">Case Studies</h2>
+  <p class="lite-note">Skimmable by default: each card shows the decision question first. Open details only if you want the methods and outputs.</p>
   <div class="case-grid">
     <article class="case-card" style="--rot:-1.1deg">
       <div class="case-visual" data-glyph="▦"></div>
       <h3>3DynaPET</h3>
       <div class="case-summary"><b>Question</b><span>How can we create trustworthy ground-truth data to validate imaging systems and future AI models before they influence clinical decisions?</span></div>
+      <details><summary>Expand details</summary>
       <div class="case-list">
         <div class="case-line"><b>Context</b><span>AI in medical imaging needs explainable benchmarks, not only black-box performance scores.</span></div>
         <div class="case-line"><b>Process</b><span>Built a physical phantom workflow where uptake, geometry, and acquisition conditions can be controlled.</span></div>
         <div class="case-line"><b>Methods</b><span>3D printing, dynamic imaging, MATLAB analysis, quantitative validation, reproducible protocols.</span></div>
         <div class="case-line"><b>Output</b><span>An AI-ready validation artifact that helps compare algorithms against known physical truth.</span></div>
       </div>
+      </details>
       <div class="chips"><span class="chip">#explainable-AI</span><span class="chip">#ground-truth</span><span class="chip">#clinical-validation</span></div>
     </article>
 
@@ -578,12 +619,14 @@ section{padding:7rem 6vw;position:relative}
       <div class="case-visual" data-glyph="◎"></div>
       <h3>CASSOULET / MuPET</h3>
       <div class="case-summary"><b>Question</b><span>How can synthetic medical-imaging data be generated with known truth so AI models can be tested, explained, and trusted?</span></div>
+      <details><summary>Expand details</summary>
       <div class="case-list">
         <div class="case-line"><b>Context</b><span>Clinical datasets are limited, noisy, and often lack precise lesion-level truth for AI evaluation.</span></div>
         <div class="case-line"><b>Process</b><span>Modelled controlled lesion cohorts using simulation and physics-inspired transport behaviour.</span></div>
         <div class="case-line"><b>Methods</b><span>Monte Carlo logic, MATLAB/Python workflows, synthetic data generation, imaging physics.</span></div>
         <div class="case-line"><b>Output</b><span>A framework direction for explainable AI benchmarking with interpretable synthetic ground truth.</span></div>
       </div>
+      </details>
       <div class="chips"><span class="chip">#explainable-AI</span><span class="chip">#synthetic-data</span><span class="chip">#model-validation</span></div>
     </article>
 
@@ -591,12 +634,14 @@ section{padding:7rem 6vw;position:relative}
       <div class="case-visual" data-glyph="◫"></div>
       <h3>Hepta Visualization Tool</h3>
       <div class="case-summary"><b>Question</b><span>How can predictive cancer-treatment models be made understandable for clinicians, investors, and product teams?</span></div>
+      <details><summary>Expand details</summary>
       <div class="case-list">
         <div class="case-line"><b>Context</b><span>Model value depends on clear interpretation.</span></div>
         <div class="case-line"><b>Process</b><span>Translated CT/MRI-derived outputs into visual demos.</span></div>
         <div class="case-line"><b>Tools</b><span>Medical imaging, model outputs, visualization, presentation design.</span></div>
         <div class="case-line"><b>Output</b><span>Stakeholder-facing product artifact for startup R&D.</span></div>
       </div>
+      </details>
       <div class="chips"><span class="chip">#stakeholder-communication</span><span class="chip">#medtech</span><span class="chip">#visualization</span></div>
     </article>
   </div>
@@ -790,6 +835,22 @@ section{padding:7rem 6vw;position:relative}
     <article class="lang-tab"><div class="flag">🇮🇳</div><b>Hindi</b><span>Fluent</span></article>
     <article class="lang-tab"><div class="flag">🇮🇳</div><b>Telugu</b><span>Native</span></article>
     <article class="lang-tab"><div class="flag">🇫🇷</div><b>French</b><span>B2</span></article>
+  </div>
+</section>
+
+
+<section id="proof-pack">
+  <div class="kicker">Decision shortcuts</div>
+  <h2 class="title">Proof Pack</h2>
+  <div class="proof-pack">
+    <article class="proof-card"><b>Everything a recruiter usually needs, in one place.</b><span>Use this section to quickly open the strongest evidence: case studies, publications, CV, GitHub, and contact. The main website remains available if you want the personal/creative side too.</span></article>
+    <div class="proof-actions">
+      <a class="proof-action" href="#case-studies"><i>▦</i><b>Case studies</b><span>work evidence</span></a>
+      <a class="proof-action" href="#proof"><i>書</i><b>Publications</b><span>research proof</span></a>
+      <a class="proof-action" href="Assets/Sai_Nalla_CV.pdf" target="_blank" rel="noopener"><i>履</i><b>CV</b><span>download</span></a>
+      <a class="proof-action" href="https://github.com/Sainalla82" target="_blank" rel="noopener"><i>⌘</i><b>GitHub</b><span>code/work</span></a>
+      <a class="proof-action" href="mailto:sainalla82@gmail.com"><i>✉</i><b>Contact</b><span>email Sai</span></a>
+    </div>
   </div>
 </section>
 
