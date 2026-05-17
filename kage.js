@@ -802,6 +802,7 @@ function tourCss(){
 .kage-tour-actions{display:flex;justify-content:space-between;gap:8px}\
 .kage-tour-actions button{border:1px solid rgba(240,235,227,.10);background:rgba(240,235,227,.045);color:#f0ebe3;padding:9px 11px;border-radius:999px;cursor:pointer;font-family:monospace;font-size:9px;text-transform:uppercase;letter-spacing:.1em}\
 .kage-tour-actions .primary{border-color:rgba(194,59,59,.45);background:rgba(139,26,26,.18)}\
+.kage-tour-auto{font-family:monospace;font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#c23b3b;align-self:center;opacity:.82}\
 .kage-tour-highlight{outline:2px solid rgba(194,59,59,.82)!important;outline-offset:8px!important;box-shadow:0 0 0 9999px rgba(0,0,0,.34),0 0 40px rgba(194,59,59,.22)!important;position:relative;z-index:20}\
 html[data-theme="light"] .kage-choice-card,html[data-theme="light"] .kage-tour-card{background:linear-gradient(180deg,rgba(248,245,239,.98),rgba(240,235,227,.98))!important;color:#1a1a1c!important}\
 html[data-theme="light"] .kage-choice-title,html[data-theme="light"] .kage-tour-title{color:#1a1a1c!important}\
@@ -853,89 +854,144 @@ function makeTourCard(){
     card=document.createElement('div');
     card.id='kageTourCard';
     card.className='kage-tour-card';
-    card.innerHTML='<div class="kage-tour-head"><div class="kage-tour-avatar"><canvas id="kTourCanvas"></canvas></div><div><div class="kage-tour-step" id="kTourStep"></div><div class="kage-tour-title" id="kTourTitle"></div></div></div><div class="kage-tour-text" id="kTourText"></div><div class="kage-tour-actions"><button id="kTourSkip">End</button><span style="flex:1"></span><button id="kTourPrev">Back</button><button class="primary" id="kTourNext">Next</button></div>';
+    card.innerHTML='<div class="kage-tour-head"><div class="kage-tour-avatar"><canvas id="kTourCanvas"></canvas></div><div><div class="kage-tour-step" id="kTourStep"></div><div class="kage-tour-title" id="kTourTitle"></div></div></div><div class="kage-tour-text" id="kTourText"></div><div class="kage-tour-actions"><button id="kTourSkip">End tour</button><span style="flex:1"></span><span id="kTourAuto" class="kage-tour-auto">Auto-advancing</span></div>';
     document.body.appendChild(card);
     setTimeout(function(){ mountTourKage('guardian'); },80);
   }
   return card;
 }
-function finishTourMessage(kind){
+function showKageTourFinal(kind){
+  var w=document.getElementById('kageWrap');
+  if(w){
+    w.style.display='';
+    w.classList.add('visible');
+  }
+  if(window.__kageBot3D&&window.__kageBot3D.setState) window.__kageBot3D.setState('guardian');
   openPanel();
   if(hist.length===0) welcome();
   hist.push({role:'assistant',content:(kind==='main'?'Main site tour complete. ':'Recruiter tour complete. ')+'I will be here if you need help — click me at the bottom-right, or summon me with Cmd + K / Ctrl + K.'});
   render();
-  if(window.__kageBot3D&&window.__kageBot3D.setState) window.__kageBot3D.setState('guardian');
+  var bubble=document.getElementById('kageTourFinalBubble');
+  if(!bubble){
+    bubble=document.createElement('div');
+    bubble.id='kageTourFinalBubble';
+    bubble.style.cssText='position:fixed;right:110px;bottom:34px;z-index:1210;max-width:310px;padding:13px 15px;border-radius:18px;border:1px solid rgba(194,59,59,.42);background:rgba(12,12,15,.96);color:#f0ebe3;box-shadow:0 18px 60px rgba(0,0,0,.45);font-size:13px;line-height:1.45';
+    document.body.appendChild(bubble);
+  }
+  bubble.textContent='I will be here if you need help — click me at the bottom-right, or summon me with Cmd + K / Ctrl + K.';
+  setTimeout(function(){ if(bubble&&bubble.parentNode) bubble.parentNode.removeChild(bubble); },8500);
+}
+function finishTourMessage(kind){
+  showKageTourFinal(kind);
+}
+function clearTourHighlight(){
+  document.querySelectorAll('.kage-tour-highlight').forEach(function(x){x.classList.remove('kage-tour-highlight');});
+}
+function findTourElement(sel){
+  var parts=String(sel||'').split(',');
+  for(var j=0;j<parts.length;j++){
+    var el=document.querySelector(parts[j].trim());
+    if(el) return el;
+  }
+  return null;
+}
+function runAutoTour(kind,steps,storageKey,indexKey,delay){
+  delay=delay||10000;
+  var idx=parseInt(sessionStorage.getItem(indexKey)||'0',10);
+  if(idx<0)idx=0;
+  if(idx>=steps.length)idx=steps.length-1;
+  var step=steps[idx];
+  if(curPage()!==step.page){
+    window.location.href=step.page+'#tour';
+    return;
+  }
+  var card=makeTourCard();
+  var timer=null;
+  function end(){
+    if(timer) clearTimeout(timer);
+    clearTourHighlight();
+    card.classList.remove('show');
+    sessionStorage.removeItem(storageKey);
+    sessionStorage.removeItem(indexKey);
+    finishTourMessage(kind);
+  }
+  function advance(){
+    if(idx<steps.length-1){
+      idx++;
+      sessionStorage.setItem(indexKey,String(idx));
+      var next=steps[idx];
+      if(next.page!==curPage()) window.location.href=next.page+'#tour';
+      else show();
+    }else end();
+  }
+  function show(){
+    if(timer) clearTimeout(timer);
+    clearTourHighlight();
+    step=steps[idx];
+    var el=findTourElement(step.sel);
+    if(el){
+      el.classList.add('kage-tour-highlight');
+      el.scrollIntoView({behavior:'smooth',block:'center'});
+    }
+    document.getElementById('kTourStep').textContent=(kind==='main'?'Main site tour':'Recruiter tour')+' — '+(idx+1)+' / '+steps.length;
+    document.getElementById('kTourTitle').textContent=step.title;
+    document.getElementById('kTourText').textContent=step.text;
+    var auto=document.getElementById('kTourAuto');
+    if(auto) auto.textContent=idx===steps.length-1?'Finishing soon':'Next in '+Math.round(delay/1000)+'s';
+    card.classList.add('show');
+    var pose=step.pose || (idx===0?'bow':(idx===steps.length-1?'guardian':'scout'));
+    setTourKageState(pose);
+    if(window.__kageBot3D&&window.__kageBot3D.setState) window.__kageBot3D.setState(pose);
+    document.getElementById('kTourSkip').onclick=end;
+    timer=setTimeout(advance,delay);
+  }
+  show();
 }
 function startMainSiteTour(){
   tourCss();
+  sessionStorage.setItem('kage-main-tour-active','1');
   var steps=[
-    {page:'index.html', sel:'.home-hero,.hero-center', title:'Home', text:'This is the opening gate: Sai’s identity, portfolio entry points, and the choice between recruiter path and creative site.'},
-    {page:'about.html', sel:'.page-hero,.about-intro', title:'About Sai', text:'This page gives the human story: background, interests, travel, fiction, and the personal thread behind the research.'},
-    {page:'experience.html', sel:'.exp-page,.accordion-list,.page-hero', title:'Experience', text:'Here I show the professional path: research roles, consulting, technology transfer, and applied work.'},
-    {page:'education.html', sel:'.edu-card,.page-hero', title:'Education', text:'This is the training ground: biomedical engineering, mechanical engineering, and the PhD path into medical imaging.'},
-    {page:'projects.html', sel:'.forge-shell,.featured-grid,.archive-grid', title:'Projects', text:'This is the proof through builds: imaging validation, simulation, 3D printing, visualization, and research tools.'},
-    {page:'papers.html', sel:'.papers-grid,.research-presence,.page-hero', title:'Publications', text:'This is the evidence shelf: papers, abstracts, metrics, and research credibility.'},
-    {page:'story.html', sel:'.story-hero,.cinema', title:'Story', text:'This is the creative side: fiction previews and atmosphere beyond the professional archive.'},
-    {page:'kage.html', sel:'#kage3dMount,.kage-viewer,.kage-console', title:'Kage', text:'This is my hidden page: expression controls, full console, and the samurai assistant persona.'},
-    {page:'contact.html', sel:'.contact-hero,.contact-grid', title:'Contact', text:'This is the final path: email, LinkedIn, GitHub, and direct contact.'}
+    {page:'index.html', sel:'.home-hero,.hero-center', title:'Home gate', text:'This is the opening gate: Sai’s identity, primary calls to action, and the choice between recruiter path and creative portfolio.', pose:'bow'},
+    {page:'index.html', sel:'.intro-strip,.intro-inner', title:'Quick introduction', text:'Here the site gives a short human-readable introduction before visitors choose what to explore next.', pose:'guardian'},
+    {page:'index.html', sel:'.nav-grid', title:'Portfolio map', text:'These cards are the main site routes: profile, experience, education, projects, publications, and contact.', pose:'scout'},
+    {page:'about.html', sel:'.page-hero', title:'About Sai', text:'The About page starts with the personal identity and the story behind the work.', pose:'bow'},
+    {page:'about.html', sel:'.about-intro,.personal-stats', title:'Personal profile', text:'This section gives the human context: background, personality, interests, and quick personal stats.', pose:'guardian'},
+    {page:'about.html', sel:'.travel-map-wrap,.travel-cta', title:'Travel and creative side', text:'The map, travel prompt, and fiction shelf show the broader creative and exploratory side of the portfolio.', pose:'scout'},
+    {page:'experience.html', sel:'.page-hero', title:'Experience', text:'The Experience page frames the professional path through research, consulting, and technology transfer.', pose:'bow'},
+    {page:'experience.html', sel:'.accordion-list,.exp-stats', title:'Experience records', text:'These accordions are the detailed work records: roles, missions, tools, and highlights.', pose:'scout'},
+    {page:'experience.html', sel:'.hover-map,.map-section', title:'Technical arsenal', text:'This map shows the technical toolset and how Sai combines imaging, simulation, analysis, and communication.', pose:'shadow'},
+    {page:'education.html', sel:'.page-hero', title:'Education', text:'The Education page is the training ground: engineering, biomedical specialization, and PhD formation.', pose:'bow'},
+    {page:'education.html', sel:'.edu-card,.extra-section', title:'Education cards', text:'These cards summarize degrees, institutions, scholarships, and additional training.', pose:'guardian'},
+    {page:'projects.html', sel:'.page-hero', title:'Projects', text:'The Projects page is the forge: practical evidence through research builds and tools.', pose:'bow'},
+    {page:'projects.html', sel:'.featured-grid,.forge-dashboard', title:'Featured builds', text:'Featured projects show the strongest examples of medical imaging validation, simulation, and applied research.', pose:'scout'},
+    {page:'projects.html', sel:'.archive-grid,.forge-path', title:'Project archive', text:'The archive expands the range of work: technical systems, visualizations, and research prototypes.', pose:'shadow'},
+    {page:'papers.html', sel:'.page-hero,.research-presence', title:'Publications', text:'The Publications page is the proof layer: research presence, papers, and metrics.', pose:'bow'},
+    {page:'papers.html', sel:'.papers-grid', title:'Paper scrolls', text:'The paper cards let visitors inspect abstracts and publication status without leaving the site.', pose:'scout'},
+    {page:'story.html', sel:'.story-hero', title:'Story shelf', text:'The Story page shows the creative writing side, with a cinematic locked preview.', pose:'smirk'},
+    {page:'story.html', sel:'.cinema,.screen', title:'Story preview', text:'This area is the reading/viewing frame for fiction previews and atmosphere.', pose:'shadow'},
+    {page:'kage.html', sel:'#kage3dMount,.kage-viewer', title:'Kage render', text:'This is my hidden page: the full v43 render with expressions and states.', pose:'guardian'},
+    {page:'kage.html', sel:'.kage-console,#kageConsole', title:'Ask Kage console', text:'This is the larger console for deeper questions, recruiter help, creative ideas, and site guidance.', pose:'speaking'},
+    {page:'contact.html', sel:'.contact-hero', title:'Contact', text:'The contact page is the final path for reaching Sai directly.', pose:'bow'},
+    {page:'contact.html', sel:'.contact-grid', title:'Contact links', text:'These cards provide email, LinkedIn, GitHub, and other contact paths.', pose:'guardian'}
   ];
-  var idx=parseInt(sessionStorage.getItem('kage-main-tour-index')||'0',10);
-  if(idx<0) idx=0; if(idx>=steps.length) idx=steps.length-1;
-  var current=curPage();
-  var st=steps[idx];
-  if(current!==st.page){ window.location.href=st.page+'#tour'; return; }
-  var card=makeTourCard();
-  function clear(){ document.querySelectorAll('.kage-tour-highlight').forEach(function(x){x.classList.remove('kage-tour-highlight');}); }
-  function show(){
-    clear();
-    st=steps[idx];
-    var el=document.querySelector(st.sel);
-    if(el){ el.classList.add('kage-tour-highlight'); el.scrollIntoView({behavior:'smooth',block:'center'}); }
-    document.getElementById('kTourStep').textContent='Main tour — Step '+(idx+1)+' of '+steps.length;
-    document.getElementById('kTourTitle').textContent=st.title;
-    document.getElementById('kTourText').textContent=st.text;
-    document.getElementById('kTourPrev').style.visibility=idx===0?'hidden':'visible';
-    document.getElementById('kTourNext').textContent=idx===steps.length-1?'Finish':'Next page';
-    card.classList.add('show');
-    var pose=idx===0?'bow':(idx===steps.length-1?'guardian':'scout');
-    setTourKageState(pose);
-    if(window.__kageBot3D&&window.__kageBot3D.setState) window.__kageBot3D.setState(pose);
-  }
-  function end(){ clear(); card.classList.remove('show'); sessionStorage.removeItem('kage-main-tour-index'); finishTourMessage('main'); }
-  document.getElementById('kTourSkip').onclick=end;
-  document.getElementById('kTourPrev').onclick=function(){ if(idx>0){ idx--; sessionStorage.setItem('kage-main-tour-index',String(idx)); window.location.href=steps[idx].page+'#tour'; } };
-  document.getElementById('kTourNext').onclick=function(){ if(idx<steps.length-1){ idx++; sessionStorage.setItem('kage-main-tour-index',String(idx)); window.location.href=steps[idx].page+'#tour'; } else end(); };
-  show();
+  runAutoTour('main',steps,'kage-main-tour-active','kage-main-tour-index',10000);
 }
 function startRecruiterGuidedTour(){
   tourCss();
+  sessionStorage.setItem('kage-start-recruiter-tour','1');
+  var page='recruiter.html';
   var steps=[
-    {sel:'#overview', title:'Overview', text:'This opening section is the fast professional read: Sai’s identity, availability, target locations, and primary recruiter actions.'},
-    {sel:'#quick-overview', title:'3-minute profile', text:'This section gives a quick professional snapshot for recruiters who want the full profile without exploring every page.'},
-    {sel:'#why', title:'Best-fit roles', text:'Here you can frame Sai for medtech, life-sciences strategy, healthcare ventures, imaging validation, and deep-tech roles.'},
-    {sel:'#case-studies', title:'Evidence through case studies', text:'These cards translate projects into proof: problem, method, result, and why the work matters.'},
-    {sel:'#proof', title:'Publications and proof', text:'This is the evidence layer: publications, research outputs, and credibility signals.'},
-    {sel:'#contact', title:'Contact path', text:'This is where recruiters can reach Sai, download/review the CV, and move from browsing to conversation.'}
+    {page:page, sel:'#overview,.hero', title:'Recruiter overview', text:'This opening section is the fast professional read: identity, availability, target locations, and the main recruiter actions.', pose:'bow'},
+    {page:page, sel:'#overview .hero-actions,.hero-actions', title:'30-second pitch', text:'The first action area is for the shortest recruiter read: what Sai does, where he fits, and why the profile matters.', pose:'speaking'},
+    {page:page, sel:'#quick-overview,.snapshot', title:'3-minute profile', text:'This section gives a complete snapshot without needing to browse the whole creative site.', pose:'guardian'},
+    {page:page, sel:'#why,.why-grid', title:'Best-fit roles', text:'Here the profile is framed for medtech, life-sciences strategy, healthcare ventures, imaging validation, and deep-tech roles.', pose:'scout'},
+    {page:page, sel:'#case-studies,.case-grid', title:'Case studies', text:'These cards translate projects into evidence: problem, method, result, and relevance.', pose:'shadow'},
+    {page:page, sel:'#pipeline,.pipeline', title:'Research pipeline', text:'This section shows how the research pipeline connects validation, phantoms, simulation, AI benchmarking, and clinical translation.', pose:'thinking'},
+    {page:page, sel:'#proof,.proof,.publications,.pubs', title:'Proof layer', text:'This area is for publication evidence, research outputs, and credibility signals.', pose:'scout'},
+    {page:page, sel:'#toolkit,.toolkit,.skills', title:'Builder toolkit', text:'The toolkit summarizes methods and skills: coding, imaging, simulation, 3D printing, analysis, and communication.', pose:'guardian'},
+    {page:page, sel:'#contact,.contact,.contact-grid,.footer-cta', title:'Contact and CV', text:'This is where recruiters can review the CV/contact path and move from browsing to conversation.', pose:'bow'}
   ];
-  var i=0, card=makeTourCard();
-  function clear(){ document.querySelectorAll('.kage-tour-highlight').forEach(function(x){x.classList.remove('kage-tour-highlight');}); }
-  function show(){
-    clear();
-    var st=steps[i], el=document.querySelector(st.sel);
-    if(el){ el.classList.add('kage-tour-highlight'); el.scrollIntoView({behavior:'smooth',block:'center'}); }
-    document.getElementById('kTourStep').textContent='Step '+(i+1)+' of '+steps.length;
-    document.getElementById('kTourTitle').textContent=st.title;
-    document.getElementById('kTourText').textContent=st.text;
-    document.getElementById('kTourPrev').style.visibility=i===0?'hidden':'visible';
-    document.getElementById('kTourNext').textContent=i===steps.length-1?'Finish':'Next';
-    card.classList.add('show');
-    var pose=i===0?'bow':(i===steps.length-1?'guardian':'scout'); if(window.__kageBot3D&&window.__kageBot3D.setState) window.__kageBot3D.setState(pose); setTourKageState(pose);
-  }
-  function end(){ clear(); card.classList.remove('show'); sessionStorage.removeItem('kage-start-recruiter-tour'); finishTourMessage('recruiter'); }
-  document.getElementById('kTourSkip').onclick=end;
-  document.getElementById('kTourPrev').onclick=function(){ if(i>0){i--;show();} };
-  document.getElementById('kTourNext').onclick=function(){ if(i<steps.length-1){i++;show();} else end(); };
-  show();
+  runAutoTour('recruiter',steps,'kage-start-recruiter-tour','kage-recruiter-tour-index',10000);
 }
 
 function init(){
