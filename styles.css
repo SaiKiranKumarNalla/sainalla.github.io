@@ -1877,3 +1877,27 @@ html[data-theme="light"] .nav-mark span {
 .kage-console .kc-msg,.kc-msg{font-size:0.86rem;line-height:1.55}
 .kage-console .kc-messages,#kageConsoleMessages{max-height:520px;overflow-y:auto}
 @media(max-width:760px){.kp{width:calc(100vw - 104px)!important;right:90px!important}.recruiter-kage .kp{width:calc(100vw - 104px)!important}}
+
+/* Dynamic atmosphere layer: shader field, reveal motion, cursor/card glow */
+body{position:relative;isolation:isolate}
+body::before{content:"";position:fixed;inset:-20%;z-index:-3;pointer-events:none;background:
+  radial-gradient(circle at 18% 18%,rgba(139,26,26,.24),transparent 24rem),
+  radial-gradient(circle at 78% 8%,rgba(160,56,42,.16),transparent 28rem),
+  radial-gradient(circle at 50% 92%,rgba(88,38,95,.12),transparent 28rem),
+  linear-gradient(115deg,rgba(255,255,255,.035),transparent 36%,rgba(139,26,26,.08) 58%,transparent 78%);
+filter:blur(4px) saturate(1.1);animation:shaderDrift 24s ease-in-out infinite alternate;}
+body::after{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;opacity:.28;background-image:
+  linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+  radial-gradient(circle at 50% 50%,rgba(255,255,255,.05),transparent 1px);
+background-size:46px 46px,46px 46px,5px 5px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),rgba(0,0,0,.2) 72%,transparent);animation:gridFloat 18s linear infinite;}
+@keyframes shaderDrift{0%{transform:translate3d(-2%,0,0) rotate(0deg) scale(1)}100%{transform:translate3d(2%,-2%,0) rotate(4deg) scale(1.06)}}
+@keyframes gridFloat{to{background-position:46px 46px,46px 46px,12px 18px}}
+.dynamic-cursor-glow{position:fixed;left:0;top:0;width:34rem;height:34rem;margin:-17rem 0 0 -17rem;z-index:-1;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(179,34,34,.16),rgba(179,34,34,.05) 34%,transparent 68%);filter:blur(8px);mix-blend-mode:screen;opacity:.85}
+.dyn-reveal{opacity:0;transform:translate3d(0,26px,0) scale(.985);filter:blur(8px);transition:opacity .75s ease,transform .75s cubic-bezier(.2,.8,.2,1),filter .75s ease;transition-delay:var(--reveal-delay,0ms)}
+.dyn-reveal.is-visible{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
+.dyn-card{position:relative;overflow:hidden;transform-style:preserve-3d;transition:transform .28s ease,border-color .28s ease,box-shadow .28s ease;background-blend-mode:screen}
+.dyn-card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .28s ease;background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.13),rgba(179,34,34,.09) 32%,transparent 64%)}
+.dyn-card:hover{transform:translateY(-5px);box-shadow:0 24px 70px rgba(0,0,0,.34),0 0 34px rgba(139,26,26,.13)}
+.dyn-card:hover::after{opacity:1}
+@media(prefers-reduced-motion:reduce){body::before,body::after{animation:none}.dyn-reveal{opacity:1;transform:none;filter:none;transition:none}.dyn-card,.dyn-card:hover{transform:none}.dynamic-cursor-glow{display:none}}
