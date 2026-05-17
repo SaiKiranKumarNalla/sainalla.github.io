@@ -436,35 +436,22 @@ function render(){
   var c=document.getElementById('kMsgs');
   if(!c)return;
 
-  /* Important: do not create a new Three.js renderer for every chat bubble.
-     Re-rendering old messages used to leave many RAF loops/WebGL contexts alive,
-     which made the real Kage shrink, stretch, or disappear after a few messages.
-     Chat bubbles now use a lightweight animated CSS mini-Kage; the live 3D Kage
-     remains in the header and bottom-right widget. */
+  /* One consistent Kage only: live 3D in the header and live 3D at bottom-right.
+     Message-by-message Kage avatars were visually different and made the chat crowded. */
   c.innerHTML='';
 
   hist.forEach(function(m){
     var d=document.createElement('div');
-    d.className='kp-msg '+(m.role==='user'?'user':'kage');
-    if(m.role!=='user' && m.role!=='system'){
-      var row=document.createElement('div'); row.className='kp-row kage-row';
-      var bubble=document.createElement('div'); bubble.className=d.className; bubble.textContent=m.content;
-      row.appendChild(makeMiniKageAvatar(window.__kageBotState||kageTimeState()));
-      row.appendChild(bubble);
-      c.appendChild(row);
-    }else{
-      d.textContent=m.content; c.appendChild(d);
-    }
+    d.className='kp-msg '+(m.role==='user'?'user':(m.role==='system'?'system':'kage'));
+    d.textContent=m.content;
+    c.appendChild(d);
   });
 
   if(typing){
-    var tr=document.createElement('div'); tr.className='kp-row kage-row';
-    tr.appendChild(makeMiniKageAvatar('thinking'));
     var t=document.createElement('div');
     t.className='kp-typing';
     t.textContent='Kage is thinking';
-    tr.appendChild(t);
-    c.appendChild(tr);
+    c.appendChild(t);
   }
 
   c.scrollTop=c.scrollHeight;
@@ -508,7 +495,7 @@ function css(){
 .kage-stage{background:radial-gradient(circle at 50% 70%,rgba(139,26,26,.18),transparent 62%);border-radius:22px}\
 .kage-fallback{width:100%;height:100%;display:grid;place-items:center;font-family:serif;font-size:44px;color:#c23b3b;border:1px solid rgba(194,59,59,.22);border-radius:22px;background:rgba(139,26,26,.10)}\
 .kage-stage::after{content:"";position:absolute;left:18px;right:18px;bottom:7px;height:12px;border:1px solid rgba(139,26,26,.22);transform:rotate(45deg);background:rgba(139,26,26,.04);z-index:-1}\
-.kp-head-avatar{width:54px;height:66px;flex:0 0 54px;margin:-18px 0 -18px -6px;position:relative;filter:drop-shadow(0 12px 18px rgba(0,0,0,.35))}\
+.kp-head-avatar{width:46px;height:56px;flex:0 0 46px;margin:-13px 0 -13px -4px;position:relative;filter:drop-shadow(0 10px 14px rgba(0,0,0,.32))}\
 .kp-head-avatar canvas{display:block;width:100%!important;height:100%!important}\
 .kp-row{display:flex;align-items:flex-end;gap:8px;max-width:98%;align-self:flex-start;animation:mIn .25s ease}\
 .kp-row .kp-msg{margin:0;max-width:calc(100% - 72px)}\
@@ -524,33 +511,34 @@ function css(){
 .km-sword:before{content:"";position:absolute;left:-5px;top:5px;width:14px;height:4px;background:#19161a;border-radius:4px}.km-shadow{position:absolute;left:18px;right:18px;bottom:0;height:6px;border:1px solid rgba(139,26,26,.25);transform:rotate(45deg);background:rgba(139,26,26,.05)}\
 .kp-mini-thinking .km-eye,.kp-mini-listening .km-eye{height:4px}.kp-mini-speaking .km-mouth{height:5px;width:10px}.kp-mini-error .km-eye,.kp-mini-alert .km-eye{background:#8b0505;box-shadow:0 0 9px rgba(255,42,42,.7)}.kp-mini-sleep .km-eye{height:2px;border-radius:999px;top:12px}.kp-mini-sleep .km-mouth{width:6px}.kp-mini-meditating .km-eye{height:2px;border-radius:999px;top:12px}.kp-mini-shadow .km-eye{background:#8b0505;box-shadow:0 0 10px rgba(255,42,42,.9)}.kp-mini-scout{transform:translateY(0) rotate(-2deg)}.kp-mini-bow{transform:rotate(5deg)}\
 @keyframes kmBreathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}\
-.kp{position:absolute;bottom:0;right:124px;left:auto;width:390px;max-height:560px;border:1px solid rgba(139,26,26,.28);background:linear-gradient(180deg,rgba(14,13,15,.98),rgba(8,8,10,.98));backdrop-filter:blur(18px);display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateX(-14px) scale(.97);transform-origin:bottom right;transition:all .28s ease;pointer-events:none;overflow:hidden;border-radius:18px;box-shadow:0 28px 90px rgba(0,0,0,.52),0 0 0 1px rgba(240,235,227,.025) inset}\
-.recruiter-kage .kp{width:430px;max-height:620px}\
+.kp{position:absolute;bottom:0;right:124px;left:auto;width:350px;max-height:500px;border:1px solid rgba(139,26,26,.28);background:linear-gradient(180deg,rgba(14,13,15,.98),rgba(8,8,10,.98));backdrop-filter:blur(18px);display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateX(-14px) scale(.97);transform-origin:bottom right;transition:all .28s ease;pointer-events:none;overflow:hidden;border-radius:18px;box-shadow:0 28px 90px rgba(0,0,0,.52),0 0 0 1px rgba(240,235,227,.025) inset}\
+.recruiter-kage .kp{width:380px;max-height:520px}\
 .kp.open{opacity:1;visibility:visible;transform:translateX(0) scale(1);pointer-events:auto}\
-.kp-hd{display:flex;align-items:center;justify-content:space-between;padding:13px 15px 10px;border-bottom:1px solid rgba(240,235,227,.07);flex-shrink:0;background:linear-gradient(90deg,rgba(139,26,26,.12),transparent 65%)}\
+.kp-hd{display:flex;align-items:center;justify-content:space-between;padding:11px 13px 9px;border-bottom:1px solid rgba(240,235,227,.07);flex-shrink:0;background:linear-gradient(90deg,rgba(139,26,26,.12),transparent 65%)}\
 .kp-id{display:flex;align-items:center;gap:9px}.kp-id b{font-family:serif;font-size:1.25rem;color:rgba(194,59,59,.52);line-height:1}.kp-id span{font-family:serif;font-size:.95rem;color:#f0ebe3;letter-spacing:.01em}\
 .kp-st{font-family:monospace;font-size:8px;text-transform:uppercase;letter-spacing:1.4px;color:#c23b3b;display:flex;align-items:center;gap:5px}\
 .kp-st::before{content:"";width:5px;height:5px;background:#c23b3b;border-radius:50%;box-shadow:0 0 12px rgba(194,59,59,.65);animation:kPulse 2s infinite}@keyframes kPulse{0%,100%{opacity:.35}50%{opacity:1}}\
 .kp-x{background:rgba(240,235,227,.035);border:1px solid rgba(240,235,227,.055);color:#746d66;cursor:pointer;font-size:13px;padding:4px 7px;border-radius:9px;transition:all .2s}.kp-x:hover{color:#f0ebe3;border-color:rgba(194,59,59,.35);background:rgba(139,26,26,.13)}\
-.kp-note{margin:10px 12px 0;padding:9px 11px;border:1px solid rgba(240,235,227,.065);border-radius:13px;font-size:10.5px;line-height:1.45;color:#a9a19a;background:rgba(240,235,227,.035);flex-shrink:0}\
-.kp-msgs{flex:1;overflow-y:auto;padding:12px 12px 10px;display:flex;flex-direction:column;gap:9px;min-height:210px;max-height:370px;scrollbar-width:thin;scrollbar-color:rgba(240,235,227,.18) transparent}\
-.recruiter-kage .kp-msgs{max-height:440px;min-height:250px}\
+.kp-note{margin:8px 10px 0;padding:8px 10px;border:1px solid rgba(240,235,227,.065);border-radius:12px;font-size:10px;line-height:1.38;color:#a9a19a;background:rgba(240,235,227,.035);flex-shrink:0}\
+.kp-msgs{flex:1;overflow-y:auto;padding:10px 10px 9px;display:flex;flex-direction:column;gap:7px;min-height:150px;max-height:280px;scrollbar-width:thin;scrollbar-color:rgba(240,235,227,.18) transparent}\
+.recruiter-kage .kp-msgs{max-height:300px;min-height:170px}\
 .kp-msgs::-webkit-scrollbar{width:6px}.kp-msgs::-webkit-scrollbar-track{background:transparent}.kp-msgs::-webkit-scrollbar-thumb{background:rgba(240,235,227,.16);border-radius:999px}.kp-msgs::-webkit-scrollbar-thumb:hover{background:rgba(240,235,227,.26)}\
-.kp-msg{max-width:92%;padding:11px 13px;font-size:13px;line-height:1.62;animation:mIn .25s ease;white-space:pre-wrap;word-break:break-word}@keyframes mIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}\
+.kp-msg{max-width:88%;padding:9px 11px;font-size:11.5px;line-height:1.48;animation:mIn .25s ease;white-space:pre-wrap;word-break:break-word}@keyframes mIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}\
 .kp-msg.kage{align-self:flex-start;background:rgba(240,235,227,.06);border:1px solid rgba(240,235,227,.09);color:#e5ded7;border-radius:5px 15px 15px 15px;box-shadow:0 12px 28px rgba(0,0,0,.18)}\
 .kp-msg.user{align-self:flex-end;background:rgba(139,26,26,.2);border:1px solid rgba(194,59,59,.32);color:#fff4ee;border-radius:15px 5px 15px 15px}\
-.kp-typing{align-self:flex-start;margin-left:4px;padding:8px 12px;color:rgba(194,59,59,.78);font-size:11px;font-style:italic}\
-.kp-acts{display:flex;gap:6px;padding:9px 12px 7px;border-top:1px solid rgba(240,235,227,.055);flex-shrink:0;flex-wrap:wrap;background:rgba(240,235,227,.018)}\
-.kp-act{font-family:monospace;font-size:8.5px;text-transform:uppercase;letter-spacing:.55px;color:#d4cec6;background:rgba(240,235,227,.055);border:1px solid rgba(240,235,227,.075);padding:6px 9px;cursor:pointer;transition:all .2s;border-radius:999px}\
+.kp-msg.system{align-self:center;max-width:72%;font-size:10px;color:#8f8780;background:rgba(240,235,227,.035);border:1px solid rgba(240,235,227,.055);border-radius:999px;padding:6px 10px}\
+.kp-typing{align-self:flex-start;margin-left:4px;padding:7px 10px;color:rgba(194,59,59,.78);font-size:10.5px;font-style:italic}\
+.kp-acts{display:flex;gap:5px;padding:8px 10px 6px;border-top:1px solid rgba(240,235,227,.055);flex-shrink:0;flex-wrap:wrap;background:rgba(240,235,227,.018)}\
+.kp-act{font-family:monospace;font-size:8px;text-transform:uppercase;letter-spacing:.5px;color:#d4cec6;background:rgba(240,235,227,.055);border:1px solid rgba(240,235,227,.075);padding:5px 8px;cursor:pointer;transition:all .2s;border-radius:999px}\
 .kp-act:hover{border-color:rgba(194,59,59,.45);color:#fff;background:rgba(139,26,26,.16);transform:translateY(-1px)}\
 .kp-con{display:none;margin:0 12px 8px;padding:8px 10px;border:1px solid rgba(240,235,227,.065);border-radius:12px;background:rgba(240,235,227,.03)}.kp-con.show{display:block}\
 .kp-con a{display:block;font-size:12px;color:#e05252;text-decoration:none;padding:4px 0}.kp-con a:hover{color:#fff}\
 .kp-rep{display:none;margin:0 12px 8px;padding:8px;border:1px solid rgba(240,235,227,.065);border-radius:12px;background:rgba(240,235,227,.03)}.kp-rep.show{display:flex;gap:6px}\
 .kp-rep input{flex:1;background:rgba(8,8,10,.42);border:1px solid rgba(240,235,227,.08);color:#f0ebe3;font-size:12px;padding:8px 10px;outline:0;border-radius:9px}\
 .kp-rep button{font-family:monospace;font-size:8px;text-transform:uppercase;background:rgba(139,26,26,.18);border:1px solid rgba(194,59,59,.35);color:#e05252;padding:8px 10px;cursor:pointer;border-radius:9px}\
-.kp-iw{display:flex;margin:0 12px 12px;border:1px solid rgba(240,235,227,.085);border-radius:14px;background:rgba(240,235,227,.035);flex-shrink:0;overflow:hidden}\
-.kp-in{flex:1;background:0;border:0;color:#f0ebe3;font-size:12.5px;padding:12px 12px;outline:0;font-family:inherit}.kp-in::placeholder{color:#7d756e}\
-.kp-quick,.kp-snd{background:rgba(139,26,26,.12);border:0;border-left:1px solid rgba(240,235,227,.075);color:#c23b3b;cursor:pointer;padding:10px 11px;font-size:14px;transition:all .2s}.kp-quick:hover,.kp-snd:hover{color:#fff;background:rgba(139,26,26,.28)}.kp-quick.active{color:#fff;background:rgba(139,26,26,.32);box-shadow:0 0 16px rgba(194,59,59,.18) inset}\
+.kp-iw{display:flex;margin:0 10px 10px;border:1px solid rgba(240,235,227,.085);border-radius:14px;background:rgba(240,235,227,.035);flex-shrink:0;overflow:hidden}\
+.kp-in{flex:1;background:0;border:0;color:#f0ebe3;font-size:11.5px;padding:10px 10px;outline:0;font-family:inherit}.kp-in::placeholder{color:#7d756e}\
+.kp-quick,.kp-snd{background:rgba(139,26,26,.12);border:0;border-left:1px solid rgba(240,235,227,.075);color:#c23b3b;cursor:pointer;padding:9px 10px;font-size:13px;transition:all .2s}.kp-quick:hover,.kp-snd:hover{color:#fff;background:rgba(139,26,26,.28)}.kp-quick.active{color:#fff;background:rgba(139,26,26,.32);box-shadow:0 0 16px rgba(194,59,59,.18) inset}\
 html[data-theme="light"] .kp{background:linear-gradient(180deg,rgba(248,245,239,.98),rgba(240,235,227,.98))!important;border-color:rgba(26,26,28,.11)!important;box-shadow:0 28px 80px rgba(0,0,0,.18)!important}\
 html[data-theme="light"] .kp-hd{background:linear-gradient(90deg,rgba(139,26,26,.07),transparent 65%)!important;border-bottom-color:rgba(26,26,28,.08)!important}\
 html[data-theme="light"] .kp-id span{color:#1a1a1c!important}\

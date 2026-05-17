@@ -1869,3 +1869,11 @@ html[data-theme="light"] .nav-mark span {
 .kp .kp-act:hover {
   box-shadow: none;
 }
+
+
+/* Kage chat cleanup: keep one consistent live 3D Kage and compact chat UI */
+.kc-row .kc-mini,.kp-row .kp-mini{display:none!important}
+.kc-row,.kp-row{display:block!important}
+.kage-console .kc-msg,.kc-msg{font-size:0.86rem;line-height:1.55}
+.kage-console .kc-messages,#kageConsoleMessages{max-height:520px;overflow-y:auto}
+@media(max-width:760px){.kp{width:calc(100vw - 104px)!important;right:90px!important}.recruiter-kage .kp{width:calc(100vw - 104px)!important}}
