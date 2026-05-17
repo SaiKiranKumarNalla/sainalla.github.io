@@ -768,8 +768,20 @@ function build3D(el){
     setTimeout(mount,80);
   }
   mount();
-  el.addEventListener('mouseenter',function(){ if(!isOpen) setKageBotState('guardian'); });
+  el.addEventListener('mouseenter',function(){ if(!isOpen) setKageBotState('guardian'); if(window.__kageBot3D&&window.__kageBot3D.setLook) window.__kageBot3D.setLook('center'); });
   el.addEventListener('mouseleave',function(){ if(!isOpen&&!typing) setKageBotState(kageTimeState()); });
+  var lastScrollY=window.scrollY||0, scrollTimer=null, lastScrollAt=0;
+  window.addEventListener('scroll',function(){
+    if(isOpen||typing||sessionStorage.getItem('kage-main-tour-active')||sessionStorage.getItem('kage-recruiter-tour-active')) return;
+    var y=window.scrollY||0, now=Date.now(), dy=y-lastScrollY; lastScrollY=y;
+    if(now-lastScrollAt<180) return; lastScrollAt=now;
+    var fast=Math.abs(dy)>180;
+    var state=fast?'alert':'scout';
+    setKageBotState(state);
+    if(window.__kageBot3D&&window.__kageBot3D.setLook) window.__kageBot3D.setLook(dy>0?'right':'left');
+    if(scrollTimer) clearTimeout(scrollTimer);
+    scrollTimer=setTimeout(function(){ if(!isOpen&&!typing){ setKageBotState(kageTimeState()); if(window.__kageBot3D&&window.__kageBot3D.setLook) window.__kageBot3D.setLook('center'); } },1200);
+  },{passive:true});
   setInterval(function(){
     var a=document.getElementById('ac2');
     var w=document.getElementById('kageWrap');
@@ -942,6 +954,8 @@ function runAutoTour(kind,steps,storageKey,indexKey,delay){
     var pose=step.pose || (idx===0?'bow':(idx===steps.length-1?'guardian':'scout'));
     setTourKageState(pose);
     if(window.__kageBot3D&&window.__kageBot3D.setState) window.__kageBot3D.setState(pose);
+    if(window.__kageBot3D&&window.__kageBot3D.setLook) window.__kageBot3D.setLook(idx%2?'left':'right');
+    if(tourKageInst&&tourKageInst.setLook) tourKageInst.setLook(idx%2?'left':'right');
     document.getElementById('kTourSkip').onclick=end;
     timer=setTimeout(advance,delay);
   }
