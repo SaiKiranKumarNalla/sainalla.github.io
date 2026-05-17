@@ -908,7 +908,7 @@ function findTourElement(sel){
   return null;
 }
 function runAutoTour(kind,steps,storageKey,indexKey,delay){
-  delay=delay||10000;
+  delay=delay||2000;
   var idx=parseInt(sessionStorage.getItem(indexKey)||'0',10);
   if(idx<0)idx=0;
   if(idx>=steps.length)idx=steps.length-1;
@@ -949,7 +949,7 @@ function runAutoTour(kind,steps,storageKey,indexKey,delay){
     document.getElementById('kTourTitle').textContent=step.title;
     document.getElementById('kTourText').textContent=step.text;
     var auto=document.getElementById('kTourAuto');
-    if(auto) auto.textContent=idx===steps.length-1?'Finishing soon':'Next in '+Math.round(delay/1000)+'s';
+    if(auto) auto.textContent=idx===steps.length-1?'Finishing':'Auto tour';
     card.classList.add('show');
     var pose=step.pose || (idx===0?'bow':(idx===steps.length-1?'guardian':'scout'));
     setTourKageState(pose);
@@ -988,7 +988,7 @@ function startMainSiteTour(){
     {page:'contact.html', sel:'.contact-hero', title:'Contact', text:'The contact page is the final path for reaching Sai directly.', pose:'bow'},
     {page:'contact.html', sel:'.contact-grid', title:'Contact links', text:'These cards provide email, LinkedIn, GitHub, and other contact paths.', pose:'guardian'}
   ];
-  runAutoTour('main',steps,'kage-main-tour-active','kage-main-tour-index',10000);
+  runAutoTour('main',steps,'kage-main-tour-active','kage-main-tour-index',2000);
 }
 function startRecruiterGuidedTour(){
   tourCss();
@@ -1005,7 +1005,7 @@ function startRecruiterGuidedTour(){
     {page:page, sel:'#toolkit,.toolkit,.skills', title:'Builder toolkit', text:'The toolkit summarizes methods and skills: coding, imaging, simulation, 3D printing, analysis, and communication.', pose:'guardian'},
     {page:page, sel:'#contact,.contact,.contact-grid,.footer-cta', title:'Contact and CV', text:'This is where recruiters can review the CV/contact path and move from browsing to conversation.', pose:'bow'}
   ];
-  runAutoTour('recruiter',steps,'kage-start-recruiter-tour','kage-recruiter-tour-index',10000);
+  runAutoTour('recruiter',steps,'kage-start-recruiter-tour','kage-recruiter-tour-index',2000);
 }
 
 function init(){
