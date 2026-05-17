@@ -422,11 +422,25 @@ function doAction(a){
   }
 }
 
+function makeMiniKageAvatar(state){
+  state=state||window.__kageBotState||kageTimeState();
+  var av=document.createElement('div');
+  av.className='kp-mini kp-mini-'+state;
+  av.setAttribute('aria-hidden','true');
+  av.innerHTML='<span class="km-hat"></span><span class="km-head"><i class="km-eye l"></i><i class="km-eye r"></i><i class="km-mouth"></i></span><span class="km-body"></span><span class="km-sash"></span><span class="km-sword"></span><span class="km-shadow"></span>';
+  return av;
+}
+
 function render(){
   if(window.__kageBot3D && !typing){ setKageBotState(window.__kageBotState || kageTimeState()); }
   var c=document.getElementById('kMsgs');
   if(!c)return;
 
+  /* Important: do not create a new Three.js renderer for every chat bubble.
+     Re-rendering old messages used to leave many RAF loops/WebGL contexts alive,
+     which made the real Kage shrink, stretch, or disappear after a few messages.
+     Chat bubbles now use a lightweight animated CSS mini-Kage; the live 3D Kage
+     remains in the header and bottom-right widget. */
   c.innerHTML='';
 
   hist.forEach(function(m){
@@ -434,20 +448,23 @@ function render(){
     d.className='kp-msg '+(m.role==='user'?'user':'kage');
     if(m.role!=='user' && m.role!=='system'){
       var row=document.createElement('div'); row.className='kp-row kage-row';
-      var av=document.createElement('div'); av.className='kp-mini'; var cv=document.createElement('canvas'); av.appendChild(cv);
       var bubble=document.createElement('div'); bubble.className=d.className; bubble.textContent=m.content;
-      row.appendChild(av); row.appendChild(bubble); c.appendChild(row);
-      setTimeout(function(canvas,state){ return function(){ if(window.KageV43&&window.KageV43.create){ var inst=window.KageV43.create(canvas,{mini:true}); inst.setState(state||'guardian'); } }; }(cv, window.__kageBotState||kageTimeState()),0);
+      row.appendChild(makeMiniKageAvatar(window.__kageBotState||kageTimeState()));
+      row.appendChild(bubble);
+      c.appendChild(row);
     }else{
       d.textContent=m.content; c.appendChild(d);
     }
   });
 
   if(typing){
+    var tr=document.createElement('div'); tr.className='kp-row kage-row';
+    tr.appendChild(makeMiniKageAvatar('thinking'));
     var t=document.createElement('div');
     t.className='kp-typing';
     t.textContent='Kage is thinking';
-    c.appendChild(t);
+    tr.appendChild(t);
+    c.appendChild(tr);
   }
 
   c.scrollTop=c.scrollHeight;
@@ -495,8 +512,18 @@ function css(){
 .kp-head-avatar canvas{display:block;width:100%!important;height:100%!important}\
 .kp-row{display:flex;align-items:flex-end;gap:8px;max-width:98%;align-self:flex-start;animation:mIn .25s ease}\
 .kp-row .kp-msg{margin:0;max-width:calc(100% - 72px)}\
-.kp-mini{width:64px;height:78px;flex:0 0 64px;position:relative;filter:drop-shadow(0 12px 16px rgba(0,0,0,.28))}\
-.kp-mini canvas{display:block;width:100%!important;height:100%!important}\
+.kp-mini{width:62px;height:78px;flex:0 0 62px;position:relative;filter:drop-shadow(0 12px 16px rgba(0,0,0,.30));animation:kmBreathe 2.8s ease-in-out infinite;align-self:flex-end;margin-bottom:2px}\
+.km-hat{position:absolute;left:50%;top:4px;width:56px;height:20px;transform:translateX(-50%);background:linear-gradient(90deg,#8b713d,#efe0a3,#8b713d);clip-path:polygon(50% 0,100% 82%,0 82%)}\
+.km-hat:after{content:"";position:absolute;left:50%;top:-4px;width:8px;height:8px;background:#c23b3b;transform:translateX(-50%);clip-path:polygon(50% 0,100% 100%,0 100%)}\
+.km-head{position:absolute;left:50%;top:22px;width:26px;height:26px;transform:translateX(-50%);background:#c58b68;border-radius:6px 6px 8px 8px;box-shadow:inset -5px -4px 0 rgba(80,38,30,.18)}\
+.km-eye{position:absolute;top:9px;width:4px;height:6px;border-radius:50%;background:#080405;box-shadow:0 0 5px rgba(255,60,60,.38)}.km-eye.l{left:7px}.km-eye.r{right:7px}\
+.km-mouth{position:absolute;left:50%;bottom:5px;width:9px;height:2px;background:#2e080b;border-radius:999px;transform:translateX(-50%)}\
+.km-body{position:absolute;left:50%;top:49px;width:31px;height:27px;transform:translateX(-50%);background:#111728;border-radius:7px 7px 3px 3px;box-shadow:inset 0 -7px 0 rgba(3,4,8,.55)}\
+.km-sash{position:absolute;left:21px;top:61px;width:24px;height:4px;background:#b92d32;transform:rotate(-14deg);border-radius:3px}\
+.km-sword{position:absolute;left:11px;top:45px;width:5px;height:35px;background:#f0ebe3;border-radius:4px;transform:rotate(-16deg);box-shadow:0 0 9px rgba(240,235,227,.22)}\
+.km-sword:before{content:"";position:absolute;left:-5px;top:5px;width:14px;height:4px;background:#19161a;border-radius:4px}.km-shadow{position:absolute;left:18px;right:18px;bottom:0;height:6px;border:1px solid rgba(139,26,26,.25);transform:rotate(45deg);background:rgba(139,26,26,.05)}\
+.kp-mini-thinking .km-eye,.kp-mini-listening .km-eye{height:4px}.kp-mini-speaking .km-mouth{height:5px;width:10px}.kp-mini-error .km-eye,.kp-mini-alert .km-eye{background:#8b0505;box-shadow:0 0 9px rgba(255,42,42,.7)}.kp-mini-sleep .km-eye{height:2px;border-radius:999px;top:12px}.kp-mini-sleep .km-mouth{width:6px}.kp-mini-meditating .km-eye{height:2px;border-radius:999px;top:12px}.kp-mini-shadow .km-eye{background:#8b0505;box-shadow:0 0 10px rgba(255,42,42,.9)}.kp-mini-scout{transform:translateY(0) rotate(-2deg)}.kp-mini-bow{transform:rotate(5deg)}\
+@keyframes kmBreathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}\
 .kp{position:absolute;bottom:0;right:124px;left:auto;width:390px;max-height:560px;border:1px solid rgba(139,26,26,.28);background:linear-gradient(180deg,rgba(14,13,15,.98),rgba(8,8,10,.98));backdrop-filter:blur(18px);display:flex;flex-direction:column;opacity:0;visibility:hidden;transform:translateX(-14px) scale(.97);transform-origin:bottom right;transition:all .28s ease;pointer-events:none;overflow:hidden;border-radius:18px;box-shadow:0 28px 90px rgba(0,0,0,.52),0 0 0 1px rgba(240,235,227,.025) inset}\
 .recruiter-kage .kp{width:430px;max-height:620px}\
 .kp.open{opacity:1;visibility:visible;transform:translateX(0) scale(1);pointer-events:auto}\
